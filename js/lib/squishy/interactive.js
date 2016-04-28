@@ -129,8 +129,12 @@ Module(function M() { M.Import(
 
     M.Class(function C() {
       C.Super(LayoutItem);
-      C.Init(function TabbedPane(target){
-        LayoutItem.call(this,'div',null,'pane');
+      C.Init(function TabbedPane(args){
+        var args=args!==undefined?args:{};
+        var target=args.target!==undefined?args.target:null;
+        var callback=args.callback!==undefined?args.callback:null;
+        LayoutItem.call(this,'div',null,null);
+        this.addClass("pane");
         this.header=new LayoutItem('div','header-bar');
         this.tabset=new TabSet('');
         this.header.add(this.tabset);
@@ -144,7 +148,7 @@ Module(function M() { M.Import(
         var target = target || this;
 
         this.tabs={};
-
+        this.callback=callback?callback:function(){};
         this.callbacks={};
         this.panes={};
         this.activepane=null;
@@ -191,6 +195,7 @@ Module(function M() { M.Import(
 
         var callback=this.callbacks[name] || function() { };
         callback();
+        this.callback();
         this.resize();
       });
       C.Def(function resize() {

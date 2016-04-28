@@ -1,104 +1,282 @@
 /*
+Building a Squishy Application:
+The Meta Tutorial
 
-    Squishy Scaffold App
+Chapter 2: Structuring Code
+Section 1: Imports and Modules
+The file and URI structure of a Squishy app consists of multiple file or resource types:
 
+    1. 1. Directories Or Modules
+      Hierarchical structures of groups of files in the file system are referred to as
+      directories;  the corresponding groups of code in the programming language are referred
+      to as Modules.
 
-*/
+      To convert a directory into a code module, insert a file called "index.js."
+      Then, convert it into a source module by wrapping it in the Module command:
 
-
-/*
-
-This is the importer for CKEDITOR.
-Note that CKEDITOR is not loading with dependencies,
-so there is a possible race condition bug
-if something tries to use tinymce before it's done loading.
-
-
-*/
-/*
-  the callback function here will never fire because ckeditor does not implement squishy (strict) modules.
-  a future squishy release will allow loading requirejs modules which will be compatible,
-  but less introspective than squishy modules.  The general solution to this is to only have
-   CKEDITOR called on events fired after pageload.
-   */
-Import("/learnapp/js/lib/ckeditor/ckeditor.js",function(e) { });
-
-
-/*
-Module declaration.  Use this around the relevant portion of definition code for the module.
-Now, M is the module definition.  So subsequent "descriptors" in the callback function refer to it.
 */
 Module(function M() {
+/*
+      As the name implies, the index.js contains a javascript-rendition of the
+      directory index ("dir" or "ls") command for that directory.
+      This file you are reading is an example of an index.js.
+      Define the other files in the module using the Index command:
 
-  /*
-Multiple import statement.
-The following import statement will not fire its callback until
-all of the named dependencies are loaded and completed;
-then the callback is given arguments representing the imported modules
-in order.
+*/
+      M.Index(
+        "page",
+        "user"
+      );
+/*
+
+      Here, we list the files and subdirectories in this directory which should be available for
+      inspection by the public.  It does not prevent unlisted files from being read, but will only
+      list those files that are published in the list.
+
+
+*/
+
+/*
+
+      Note 1.1:
+        Within the module definition, the module is referred to by the callback's name (in this case M)
+        When nesting definitions, the typical practice is to use M, M2, M3, etc.
+
+
+*/
+
+/*
+
+      It can also include any other code relevant to the directory or app as a whole.
+      There will be additional code examples below.
+
+    Other files may be contained in Directories and abstracted as Modules:
+
+    1.2. Static Data
+      The static components of the squishy app.
+
+      1.2.1.   HTML markup files.
+        The most common example is the entry point for a Squishy app, /index.html.
+        Web servers generally serve index.html first as the resource available in a directory,
+        so the URI "/" will point to "/index.html".  So, the application loader and some static content
+        can be loaded in the index.html file.  The basic Squishy application module is loaded
+        as the first script tag, and the application's main module (this file) is loaded as the second.
+
+        The usual practice is to provide the "search engine-friendly" homepage content within the
+        static content of the HTML served, which is the content that spiders read.
+
+        One other common practice to improve spider accessibility and caching is to use a
+        URL rewriting scheme to convert keywords in the URL into useful
+        URI-Encoded GET parameters for the index, for example:
+
+          /books/book1/page1          becomes     /index.html?action=books&book=1&page=1
+
+        These GET parameters can be read easily in the Local and Server modules.
+
+        The most basic example of the index.html for an application is found in the root directory
+        of this app.  A very basic app can include just a basic index.html and the appropriate JS
+        source to make the app work.
+
+      1.2.2.  Image Data
+      1.2.3. Styling (CSS)
+      1.2.4.  Data files
+
+
+    1.3. Server Modules / Endpoints / CGI
+        Server source are executable files running on the server that run on the server,
+        upon remote access to a URI.  For Javascript, these files use the .jss extension.
+        in other cases they have a corresponding file extension (.php, .pl, .py).
+        They may have a URI determined by a URL Rewriting scheme;  for example:
+
+          /login         becomes      /index.jss?action=login
+
+        The most common application for server modules is when user division is required,
+        and typically uses POST parameters to provide login and database manipulation.
+
+        @TODO: provide sample database application
+
+    1.4. Local Modules
+        Browser-runnable source code.  Generally written in .js code, but, in theory,
+        could be anything that can be downloaded and executed at the browser side.
+        The code is generally download and run through once, however usually in practice
+        the code will contain procedural definitions for later event-driven execution.
+        Squishy provides a standard way to structure these procedural definitions in
+        the module;  these methods are illustrated in sections 2 and 3.
+
+
+Any of these files can be "Imported" in a squishy module by wrapping applicable code in an Import
+statement.  All of the code wrapped inside of an Import will have available the files specified
+to the import statement by its first parameter, which is a list of resources separated by spaces.
+
 */
   M.Import(
-    "squishy/DOM "+
-    "squishy/basic "+
-    "squishy/interactive "+
-    "squishy/form "+
-    "/js/lib/squishy_ext/Request "+  /* Set the absolute path here to match your system */
+    "squishy",
+    "squishy/DOM",
+    "squishy/basic",
+    "squishy/interactive",
+    "squishy/form",
     "squishy/layout",
-    function(DOM, basic, interactive,form,Request,layout) {
+/*
 
-      //shorthand refer to Request.Request as Req
-      var Req=Request.Request;
+Once all of the files listed have loaded and run, they will be passed in order to the code inside the Import.
+
+*/
+     function(squishy,DOM, basic, interactive,form,layout) {
+/*
+
+You can also use Import to just load files by calling it without referencing the containing Module.
+This is required in some cases:
+  - if the module in question is not a compatible Squishy module,
+  - if the imported file is a static file
+  - where one would cause a circular dependency,
+  - or in procedural definitions which will not be concurrently executed.
+
+*/
+       Import("/js/lib/ckeditor/ckeditor",function(cke) { console.debug("?????"); console.debug(cke); });
+       Import("/js/lib/esprima/esprima",function(acorn) { console.debug("!!!!!"); console.debug(acorn); });
+
+/* this includes several default stylesheets
+*/
+       Import("/css/ui.css");
+       Import("/css/default.css");
+
+/*
+
+Section 2: Defining the Module
+
+2.1 The Def Statement
+The most basic way to define the contents of the Module, is via Def statements:
+
+*/
+     var title=M.Def("title","The Meta Tutorial");
+/*
+  Note 2.1:  Here "title" is being declared in this scope with "var"
+  so the defined object is also available in this code block as "title".
+*/
+
+/*
+
+You can define any value as a member of this file's resulting module object, including other objects,
+and functions:
+
+*/
+
+       M.Def("update",function() {
+
+         /* @TODO: give some content here */
+
+       });
+/*
+
+2.2 Creating new objects
+Squishy provides several libraries of objects to be defined in building an application.
+These are found in DOM, basic, interactive, and several other libraries which wrap HTML5
+DOM Elements.  The first is the Frame found in the DOM module, which wraps
+the javascript window object and is the lowest level DOM object:
+
+*/
+       var Window=new DOM.Frame();
+/*
+To build out the application,
+you can add additional new items just as you would in writing HTML pages,
+except instead of defining HTML/XML markup you are writing function calls:
+
+*/
+
+      var Title=M.Def("Title", new DOM.Tag({type:"title","content":title}));
+      Window.head.add(Title);
 
 
-      var Title="Moby Dick";
-      /* in this example, these values will be added to the "app" importable module: */
-      /* this way you only have to declare these once for the app */
-      M.Def("Title",Title);
+/*
+  Note 2.2:  The result of this code is an addition of the equivalent HTML to the <head>:
+  <title>The Meta Tutorial</title>
+
+*/
+
+/*
+  There are many available components to be created this way.  You can add directly to the
+  document body by using Window.add.
+*/
+       var Header=new DOM.Tag({type:"h1","content":title});
+
+/*
+  the basic library includes many default tags representing typical HTML Elements:
+*/
+       console.debug({M:M});
+       var Content=new basic.Div({cls:"Content"});
+       var Tagline=new basic.Span();
+       Content.add(Tagline);
+       Window.add(Content);
+
+/*
+  You can also add text or set the content of the node directly:
+*/
+       Tagline.add("Welcome to the Meta Tutorial!");
+       var Location=new basic.Link({cls:"location",url:window.location.pathname});
+       Location.content("Location: "+window.location.pathname);
+
+/*
+
+  You can explore the available components in depth by browsing the squishy and squishy_ext libs
+  by continuing this tutorial.
+
+*/
+
+/*
+  2.3 Accessing Remote Resources
+    Using remote resources as data sources is critical to building dynamic applications.
+    Remote resources include data files stored in the same directory as this file as well as
+    cloud APIs, devices, or any other server.
+
+    We will be using this file and the default Squishy libraries as remote resources to
+    build a self-documentation feature.  This is done using the Request library loaded above.
+
+*/
+    Import("/js/lib/squishy_ext/Request",
+           "/js/lib/esprima/esprima",
+           "/js/lib/escodegen/escodegen.js",
+           function(Request,esprima,escodegen) {
+       var Req=Request.Request;
+       /*
+       Note 2.3: Var Req is used here to create a shorthand to the Request.Request class.
+       */
+
+       var URLVars=Window.getUrlVars();
+       var page="/js/app/index.js";
+       if(URLVars.page!==undefined) {
+         page=URLVars.page;
+       }
+             console.debug({page:page});
+
+/*
+    The constructor for Request takes two strings describing the request and response types
+    of the resource.
+
+    Requests and responses can be URI-encoded (ex, ?arg1=val1&arg2=val2), JSON encoded, or TEXT
+    In this case we will request the fulltext of this file.  Requests are defined in the same way
+    as imports, but with a specific way to handle the results:
+*/
+
+       new Req("URI","TEXT").Get(page,{
+         /*
+           Note 2.4:  If there were GET or POST arguments for this request, they would be listed here.
+         */
+       },function(samplepage) {
+
+         var parsed=esprima.parse(samplepage,{comment:true,attachComment:true,range:true,loc:true});
+         console.debug({escodegen:escodegen})
+
+         console.debug({parsed:parsed});
+
+         window.escodegen.generate(parsed);
+         function parseroutput(values) {
+           values.forEach(function(val) {
 
 
-      //init a new wrapper for the global window (Frame default)
-      var Window=new DOM.Frame();
-
-      //TabbedPane is a good general purpose app layout.
-      var Main=new interactive.TabbedPane();
-      M.Def("Main",Main); //now submodules can refer to the main window tabs as app.Main
-      M.Def("Window",Window);
-
-      Main.header.addClass("mainmenu");
-
-
-      //this is mainly for debugging:  global-scope variables should not be used in production
-      MainWindow=Main;
-
-
-      //Typical process:  make some new Panes to be added to Main
-      Main.Page=new basic.Pane("page","Page");
-      Main.Home=new basic.Pane("home","Home");
-
-      new Req("URI","JSON").Get("/sample.json",{},function(samplepage) {
-        var UserInfo=new basic.Div("UserInfo");
-        UserInfo.add(new basic.Span(samplepage.user.username,"username"));
-        Main.Home.contents.add(UserInfo);
-        Main.addTab("user","Home",Main.Home,"home");
-
-        //Separate non-blocking import statement here because Page imports this file.
-        Import("app/page",function(page) {
-          Main.Page.contents.add(new page.Page(samplepage.page.text))
-          Main.addTab("page1","Page",Main.Page);
-        });
-      });
-
-
-      Main.resize=function resize() {
-        /*
-      overloading the default behavior of the tabbedpane resize
-      */
-        var w=this.element.parentNode.offsetWidth;
-        if(w<640) { //collapse processes for a narrow window
-        }
-      }
-
-      Window.add(Main);
-      Window.add(Main.header);
+           });
+         }
+       });
     });
+
+});
 });

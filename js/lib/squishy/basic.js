@@ -34,12 +34,15 @@ M.Import('squishy/DOM', function (DOM) {
     });
 		var Link=M.Class(function C() {
 			C.Super(LayoutItem);
-			C.Init(function Link(url,content,id,cls) {
-				content=content || url;
-				if(content=='') content='&nbsp;';
-				LayoutItem.call(this,'a',id,cls,{href:url});
-				this.url=url;
-				this.content(content);
+			C.Init(function Link() {
+        with(Link.kwargs({url:"",content:null,id:null,cls:null}) ) {
+          content=content || url;
+          if(content=='') content='&nbsp;';
+
+          LayoutItem.call(this,'a',id,cls,{href:url});
+          this.url=url;
+          this.content(content);
+        }
 			});
 		});
 		M.Class(function C() {

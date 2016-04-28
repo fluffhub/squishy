@@ -1,10 +1,46 @@
 "use strict"
-//var Squishy=document.currentScript;
+  //var Squishy=document.currentScript;
+
+Function.prototype.kwargs=function kwargs(args) {
+  /* if args length >=1,
+        if the last arg is an obj,
+            use last arg as **kwargs
+            and use n-1 args as *args
+        otherwise
+            use n args as *args
+  */
+
+  this._kwargs={};
+  var AL=this.arguments.length;
+  for (var argname in args) {
+    this._kwargs[argname]=args[argname];
+  }
+  if(AL>0) {
+    var argnames=Object.keys(args);
+    if(typeof(this.arguments[AL-1]!==null&&this.arguments[AL-1])=="object"&&this.arguments[AL-1].constructor==Object) {
+      var kwargs=this.arguments[AL-1];
+      AL=AL-1;
+
+      for(var argname in kwargs) {
+        this._kwargs[argname]=kwargs[argname];
+      }
+    }
+    if(AL>0) {
+     /* *args remain to be added */
+      for(var i=0;i<AL;i++) {
+        this._kwargs[argnames[i]]=this.arguments[i];
+      }
+    }
+  }
+  return this._kwargs;
+
+}
+
 function getCurrentScript() {
   if(document.currentScript)
     return document.currentScript;
   else {
-   /* if(getCurrentScript.scripts&&getCurrentScript.scripts.length) { }
+    if(getCurrentScript.scripts&&getCurrentScript.scripts.length) { }
     else {
       var me=document.scripts[document.scripts.length-1]
       getCurrentScript.scripts=[me];
@@ -18,10 +54,7 @@ function getCurrentScript() {
         getCurrentScript.scripts.push(script);
         return script;
       }
-    }*/
-      var scripts=document.getElementsByTagName('script');
-      element=scripts[scripts.length-1];
-
+    }
   }
 }
 var Squishy=getCurrentScript();
@@ -42,7 +75,7 @@ function extend(destination,source) {
     throw new Exception('Using an invalid source value, "'+source+'"');
   }
 };
-var Module=function Module() {
+function Module() {
   if(this instanceof Module) {
     var filename=arguments[0];
     Object.defineProperties(this,{
@@ -75,14 +108,7 @@ var Module=function Module() {
 
 
     var element;
-    /* this switch is for IE9-11 and Safari compatibility */
-/*    if(document.currentScript)
-      element=document.currentScript;
-    else {
-      var scripts=document.getElementsByTagName('script');
-      element=scripts[scripts.length-1];
-    }*/
-element=getCurrentScript();
+    element=getCurrentScript();
     if(element) {
       var src=element.getAttribute('src');
 
@@ -149,15 +175,19 @@ element=getCurrentScript();
 };
 Module.Template={
   Def:function Def() {
+    var result;
     if(typeof(arguments[0])=='function') {
       //include the module's path in the function
       arguments[0].src=this.filename+'#'+arguments[0].name;
-      this[arguments[0].name]=arguments[0];
+      result=this[arguments[0].name]=arguments[0];
     } else {
       if(arguments.length==2) {
-        this[arguments[0]]=arguments[1];
+        result=this[arguments[0]]=arguments[1];
       }
     }
+
+    return result;
+
   },
   Index:function Modules() {
     //pre-define sub-module(s) of the module.
@@ -175,11 +205,18 @@ Module.Template={
       this[k]=NM;
     }
   },
-  Import:function Import(path,callback2) {
+  Import:function Import(paths,callback2) {
     if(typeof this.waiting=='number') {} else this.waiting=0;
+    var args=Array.prototype.slice.call(arguments);
+    if(args.length>2) {
+     callback2=args.slice(-1)[0];
+      paths=args.slice(0,-1);
+    }
+    if(paths instanceof String) paths=[paths];
+    if(callback2 instanceof Function) {} else { paths.push(callback2); }
     this.waiting++;
     var M=this;
-    window.Import(path,function() {
+    window.Import(paths,function() {
       callback2.apply(M,arguments);
       M.waiting--;
       if(M.waiting==0 ){
@@ -198,13 +235,18 @@ Module.Template={
     //  }
   }
 };
-function Import(path,callback,err) {
+function Import(path,callback) {
+
   var that;
+  var args1=Array.prototype.slice.call(arguments);
+  var callback;
+
   var callback=callback || function () { };
   if(this instanceof Import) {
     that=this;
 
     //check if relative path or uri
+    if(typeof(path)=="string") {
     var r = new RegExp('^(?:[a-z]+:)?//', 'i');
     var absolute=false;
     if (r.test(path)||path[0]=='/' ){
@@ -245,6 +287,17 @@ function Import(path,callback,err) {
       }
     }
     if(ft=='css') { // TODO add a link rel="stylesheet"
+      var exists=document.querySelector('link[href="'+path+'"]');
+      var element;
+      if(exists)
+        element=exists;
+      else {
+        element=document.createElement("link");
+        element.setAttribute("rel","stylesheet");
+        element.setAttribute("href",path);
+        document.head.appendChild(element);
+      }
+
     }
     else if(ft=='jpg'||ft=='gif'||ft=='svg'||ft=='png') {//create img tag behind the scenes
     }
@@ -265,12 +318,15 @@ function Import(path,callback,err) {
       if(script) {
         //script.parent=parent;
         if(script.failed) {
-          err(script);
+          if(callback.error) callback.error(script);
+          else throw new Exception(script);
         } else {
           if(script.dependencies) script.dependencies[script.dependencies.length]=callback;
           else script.dependencies=[callback];
-          if(script.errors) script.errors[script.errors.length]=err;
-          else script.errors=[err];
+          if(callback.error) {
+          if(script.errors) script.errors[script.errors.length]=callback.error;
+          else script.errors=[callback.error];
+          }
           // if the script ran already, re-run this dependency only
           //with script.Module as agrment
           if(script.ran&&!callback.ran) {
@@ -289,12 +345,16 @@ function Import(path,callback,err) {
       }
       else  {
         var script=document.createElement('script');
+        script.errors=[function err(v) { console.debug("script load error: ");console.debug(v); }];
         Object.defineProperty(this,'element',{value:script});
         var waiting=0;
         if(parent && vn in parent.Module) script.Module=parent.Module[vn];
         else script.Module=new window.Module(path);
         script.dependencies=[callback];
-        script.errors=[err];
+        if(callback.error) {
+          if(script.errors&&script.errors.length) script.errors.push(callback.error);
+          else script.errors=[callback.error];
+        }
         script.parent=parent;
         script.finish=function() {
           //for (var i=script.dependencies.length-1;i>=0;i--) {
@@ -331,14 +391,23 @@ function Import(path,callback,err) {
         //     return script.Module;
       }
     }
+    } else {
+      callback(path);
+      callback.ran=true;
+    }
   }
   else {
     var paths;
+    if(args1.length<=2) {
     if(path instanceof Array) {
       paths=path;
     }
     if(typeof path=='string') {
       paths=path.split(' ')
+    }
+    } else {
+       callback=args1.slice(-1)[0];
+      paths=args1.slice(0,-1);
     }
     that=[];
     var n=paths.length;
@@ -356,6 +425,7 @@ function Import(path,callback,err) {
         }
       });
     });
+
   }
   return that;
 }
@@ -416,15 +486,7 @@ function Class(def,fun) {
   }
   if(name=='Unnamed' && fun.name) name=fun.name;
 
-  var currentScript;
-  /* this switch is for IE9-11 and Safari compatibility */
-  /*if(document.currentScript)
-    currentScript=document.currentScript;
-  else {
-    var scripts=document.getElementsByTagName('script');
-    currentScript=scripts[scripts.length-1];
-  }*/
-  currentScript=getCurrentScript();
+  var currentScript=getCurrentScript();
   if(currentScript.Module) {
     fun.src=currentScript.Module.filename+"#"+name;
   }
@@ -454,3 +516,78 @@ Module(function M() {
     'form'
   );
 });
+
+var define=Module.define=function define(n,r,F){ /* F = function (require, exports, */
+  Module(function M() {
+    var name,dep,fun;
+
+    console.debug("defining:");
+      console.debug(n);
+    console.debug(r);
+    console.debug(F);
+    var exported={},returned;
+    if(typeof(n)=="string") { name=n;   }
+    else if(n instanceof Function) {
+      //common JS wrapping
+      //the result of this function
+      // becomes the value of the thing
+      fun=n;
+
+    } else if(n instanceof Array)  dep=n;
+    if(r instanceof Function)  fun=r;
+    else if (r instanceof Array)  dep=r;
+    if(F instanceof Function) fun=F;
+
+
+    var script=getCurrentScript();
+    function load(rets,exps) {
+      if(rets) {
+        script.Module=rets;
+      } else {
+        Object.keys(exps).forEach(function(exp) {
+          M.Def(exp,exps[exp]);
+        });
+      }
+    }
+    if(dep&&dep.length&&dep.length>0) {
+      for(var i=0;i<dep.length;i++) {
+        if(dep[i]=="exports") {
+          //dep.splice(i,1,M.Self);
+
+          console.debug({dep:dep});
+          dep[i]=M.Self.filename
+        }
+      }
+      console.debug({dep:dep})
+      Import(dep,function() {
+        var imports=Array.prototype.slice.call(arguments);
+        var req=function(v) {
+          for (var i=0;i<r.length;i++) {
+            if(r[i]==v) {
+              return imports[i];
+            }
+          }
+        }
+        if(fun&&fun instanceof Function) {
+          returned=fun.apply(this,imports);
+          load(returned,exported);
+
+
+        }
+    });
+    } else {
+      if(fun&&fun instanceof Function) {
+        var req=function(v) {}
+        returned=fun.call(this,req,exported);
+        load(returned, exported);
+      }
+    }
+
+
+
+
+  });
+
+
+}
+define.amd={};

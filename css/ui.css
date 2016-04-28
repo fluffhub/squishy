@@ -4,7 +4,9 @@ body { width:100%;height:100%;margin:0;overflow:hidden; }
 input,select,textarea { }
 td input { width:98%; margin:0;}
 a,.tab,.button,.collapsible>h3 { cursor:pointer; }
-
+.left { float:left; }
+.right { float:right; }
+.content { width:1000px }
 .GridLayout>* { position:absolute;overflow:hidden; }
 .hidden { display:none; }
 .invisible { opacity:0; }

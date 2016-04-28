@@ -134,29 +134,13 @@ M.Import('squishy/events',function(events) {
     C.Init(function LocalDB(def) {
       if(this instanceof LocalDB) {
         var LDB=this;
-        Object.defineProperty(this,'dependencies',{
-          configurable:false,
-          writable:true,
-          value:[]
-        });
-        Object.defineProperty(this,'version',{
-          configurable:false,
-          writable:true,
-          value:1
-        });
-        Object.defineProperty(this,'name',{
-          configurable:false,
-          writable:true,
-          value:"Unnamed"
-        });
-        Object.defineProperty(this,'upgrades',{
-          configurable:false,writable:true,value:[]
-        });
-        Object.defineProperty(this,'element',{
-          configurable:false,writable:true,value:null
-        });
-        Object.defineProperty(this,'state',{
-          configurable:false,writable:true,value:"new"
+        Object.defineProperties(this,{
+          dependencies:{configurable:false,writable:true,value:[]},
+          version:{configurable:false,writable:true,value:1},
+          name:{configurable:false,writable:true,value:"Unnamed"},
+          upgrades:{configurable:false,writable:true,value:[] },
+          element:{configurable:false,writable:true,value:null},
+          state:{configurable:false,writable:true,value:"new"}
         });
         LocalDB.Template={
           Name:function(name) {
@@ -167,11 +151,8 @@ M.Import('squishy/events',function(events) {
 
             var Mdl=new LocalModel(mdef);
 
-            //FUCK: this is spaghetti code?
-            Object.defineProperty(Mdl,"IDB",{enumerable:false,
-                                             writable:false,
-                                             configurable:false,
-                                             value:LDB});
+            // @FUCK: this is spaghetti code?
+            Object.defineProperty(Mdl,"IDB",{enumerable:false,writable:false,configurable:false,value:LDB});
 
             LDB.upgrades[LDB.upgrades.length]=function(e) {
               console.debug('upgrading');
