@@ -521,10 +521,8 @@ var define=Module.define=function define(n,r,F){ /* F = function (require, expor
   Module(function M() {
     var name,dep,fun;
 
-    console.debug("defining:");
-      console.debug(n);
-    console.debug(r);
-    console.debug(F);
+    console.debug({define:{n:n,r:r,F:F}});
+
     var exported={},returned;
     if(typeof(n)=="string") { name=n;   }
     else if(n instanceof Function) {

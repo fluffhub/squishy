@@ -494,3 +494,21 @@ background-color:#efbb55;
 
     overflow-y: hidden;
 }
+
+
+
+.Comments,.code {
+ white-space:nowrap;
+}
+
+.Comments {
+  position:absolute;right:0;
+}
+.code {
+ font-family:fixed;
+  font-size:0.8em;
+
+}
+.code>div {
+
+}

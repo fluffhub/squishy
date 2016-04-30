@@ -203,7 +203,7 @@ except instead of defining HTML/XML markup you are writing function calls:
   the basic library includes many default tags representing typical HTML Elements:
 */
        console.debug({M:M});
-       var Content=new basic.Div({cls:"Content"});
+       var Content=new basic.Div("Content");
        var Tagline=new basic.Span();
        Content.add(Tagline);
        Window.add(Content);
@@ -229,17 +229,18 @@ except instead of defining HTML/XML markup you are writing function calls:
     cloud APIs, devices, or any other server.
 
     We will be using this file and the default Squishy libraries as remote resources to
-    build a self-documentation feature.  This is done using the Request library loaded above.
+    build a self-documentation feature.  This is done using the Request library loaded above and the Import command.
 
 */
     Import("/js/lib/squishy_ext/Request",
            "/js/lib/esprima/esprima",
-           "/js/lib/escodegen/escodegen.js",
-           function(Request,esprima,escodegen) {
+            "/js/lib/escodegen/escodegen.squishy.js",
+           function(Request,esprima,ESCG) {
        var Req=Request.Request;
        /*
        Note 2.3: Var Req is used here to create a shorthand to the Request.Request class.
        */
+        var escodegen=ESCG.escodegen;
 
        var URLVars=Window.getUrlVars();
        var page="/js/app/index.js";
@@ -248,7 +249,7 @@ except instead of defining HTML/XML markup you are writing function calls:
        }
              console.debug({page:page});
 
-/*
+/*  To grab the plain text content of the file without importing the contents, use the Request module.
     The constructor for Request takes two strings describing the request and response types
     of the resource.
 
@@ -264,19 +265,45 @@ except instead of defining HTML/XML markup you are writing function calls:
        },function(samplepage) {
 
          var parsed=esprima.parse(samplepage,{comment:true,attachComment:true,range:true,loc:true});
-         console.debug({escodegen:escodegen})
 
-         console.debug({parsed:parsed});
-
-         window.escodegen.generate(parsed);
-         function parseroutput(values) {
-           values.forEach(function(val) {
+         var comments=parsed.comments;
+         var code=escodegen.generate(parsed);
 
 
+
+         var lines = code.split("\n");
+         var Comments=new basic.Div("comments");
+
+         Content.add(Comments);
+         console.debug({lines:lines, comments:comments, parsed:parsed});
+
+         comments.forEach(function(comment) {
+           var Comment=new basic.Div("Comment");
+           Comments.add(Comment);
+           var lns=comment.value.split("\n");
+           lns.forEach(function (ln) {
+             var Ln=new basic.Div();
+             Comment.add(Ln);
+             Ln.content(ln);
            });
-         }
+
+         });
+
+
+        // escodegen.generate(parsed);
+         var Lines=new basic.Div("code");
+         Content.add(Lines);
+
+         lines.forEach(function (line) {
+           var Line=new basic.Div();
+           Line.content(line);
+           Lines.add(Line);
+         });
+
+
        });
+           });
     });
 
 });
-});
+
