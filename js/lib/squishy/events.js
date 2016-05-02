@@ -32,7 +32,7 @@ Module(function M() {
 		});
     C.Def(function enable() {
       if(!this.enabled) {
-    	this.target.addEventListener(this.type,this.handler);
+    	this.target.addEventListener(this.type,this.handler,this.capture);
       this.enabled=true;
       }
 		});
@@ -56,7 +56,7 @@ Module(function M() {
         });
       }
     });
-		C.Def(function addEvent(name,typenames,handler,target,overwrite) {
+		C.Def(function addEvent(name,typenames,handler,target,overwrite,capture) {
 			if(this.events==null) {
 				this.events={};
 			}
@@ -66,6 +66,7 @@ Module(function M() {
         for (var n in es) {
             var handler=es[n];
             handler.disable();
+
             delete es[n];
         }
       }
@@ -78,6 +79,7 @@ Module(function M() {
 			for (var i in types) {
 				type=types[i];
 				E=new Handler(type,handler,target,this);
+        E.capture=capture;
 				this.events[name].push(E);
 			}
 		});

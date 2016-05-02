@@ -2,11 +2,11 @@
 /*
 Because this module is self contained, with its own usage of define and intended export object,
 we can add these two lines (and corresponding "})" at the end of the file)
-(and make a minor adjustment to the code below which assumes that the global scope passed to the file is actually the global scope, see line 80)
+(and make a minor adjustment to the code below which had assumed that the global scope passed to the file is actually the global scope, see line 80)
 
 
 Now this will load by the command Import("/escodegen/escodegen.squishy.js",function(ESCG) {
-var escodegen=ESCG;
+var escodegen=ESCG.escodegen;
 
 
 });

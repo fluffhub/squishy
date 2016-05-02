@@ -93,7 +93,12 @@ function Module() {
                 var M=this;
                 window.Import(this.filename,function(loaded) {
                   M.loaded=true;
-                  callback(loaded)
+
+
+
+                  extend(M,loaded);
+
+                  callback(M);
                 });
               },
              }
