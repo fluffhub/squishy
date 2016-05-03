@@ -241,7 +241,6 @@ Module.Template={
   }
 };
 function Import(path,callback) {
-
   var that;
   var args1=Array.prototype.slice.call(arguments);
   var callback;
@@ -259,12 +258,16 @@ function Import(path,callback) {
       var parser = document.createElement('a');
       parser.href = path;
       path=parser.pathname;
+      console.debug(path);
       absolute=true;
     } else {
 
-      //the path is relative to an index.js, given a data-root by module call
+      //the path is relative, either:
+      //     to an index.js, given a data-root by module call, or
+      //     to the base url of the page
 
     }
+
     var ps=path.split('/');
     var fn=ps.slice(-1)[0];
     var fns=fn.split('.');
@@ -281,14 +284,19 @@ function Import(path,callback) {
     var parent=null;
     if(!absolute) {
       parent=document.querySelector('script[data-name=\''+dirname+'\']');
-      if(parent) {
+      if(parent!=null) {
         //if(path[0]!='/') path='/'+path;
         if(ps.length==1) path=parent.root+'/'+ps[0];
         else path = parent.root+'/'+ps.slice(1).join('/');
       }
       else {
-        //try to load the index of parent?
-        //fallback to actual relative path, no parent index found
+        //this is provided as a relative path (to the document root)
+
+        var parser = document.createElement('a');
+        parser.href = path;
+        path=parser.pathname;
+        console.debug("path! "+path);
+
       }
     }
     if(ft=='css') { // TODO add a link rel="stylesheet"

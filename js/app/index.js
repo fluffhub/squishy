@@ -132,13 +132,12 @@ This is required in some cases:
   - or in procedural definitions which will not be concurrently executed.
 
 */
-       Import("/js/lib/ckeditor/ckeditor",function(cke) { console.debug("?????"); console.debug(cke); });
-       Import("/js/lib/esprima/esprima",function(acorn) { console.debug("!!!!!"); console.debug(acorn); });
+       Import("js/lib/ckeditor/ckeditor",function(cke) { console.debug("?????"); console.debug(cke); });
 
 /* this includes several default stylesheets
 */
-       Import("/css/ui.css");
-       Import("/css/default.css");
+       Import("css/ui.css");
+       Import("css/default.css");
 
 /*
 
@@ -237,11 +236,11 @@ except instead of defining HTML/XML markup you are writing function calls:
     build a self-documentation feature.  This is done using the Request library loaded above and the Import command.
 
 */
-    Import("/js/lib/squishy_ext/Request",
-           "/js/lib/squishy/events",
-           "/js/lib/esprima/esprima",
-            "/js/lib/escodegen/escodegen.squishy.js",
-           "/js/lib/estraverse/estraverse",
+    Import("js/lib/squishy_ext/Request",
+           "squishy/events",
+           "js/lib/esprima/esprima",
+            "js/lib/escodegen/escodegen.squishy.js",
+           "js/lib/estraverse/estraverse",
            function(Request,event,esprima,ESCG,esv) {
              var Req=Request.Request;
        /*
@@ -251,7 +250,7 @@ except instead of defining HTML/XML markup you are writing function calls:
              window.escodegen=escodegen;
              var estraverse=esv;
              var URLVars=Window.getUrlVars();
-             var page="/js/app/index.js";
+             var page="js/app/index.js";
              if(URLVars.page!==undefined) {
                page=URLVars.page;
              }
@@ -308,8 +307,8 @@ except instead of defining HTML/XML markup you are writing function calls:
                    var item=new basic.Div("codeblock "+node.name);
                    item.add(new basic.Div("{"));
                    return item;
-                 },leave:function() {
-                   cursor.add(new basic.Div("}"));
+                 },leave:function(n,p,c) {
+                   c.add(new basic.Div("}"));
                  }},
                  ExpressionStatement:{enter:function(node) {
                    return new basic.Div("expression");
@@ -321,33 +320,43 @@ except instead of defining HTML/XML markup you are writing function calls:
                    item.add(new basic.Span("var "));
                    return item;
                  },leave:function(node,parent,cursor) {
-                //   cursor.add(";");
+
                  }},
                  MemberExpression:{enter:function(n,p,c) {
                    return new basic.Span("","m");
                  },leave:function(n,p,c) {
                    for(var i=2;i<c.elements.length;i++) {
                     var element=c.elements[i];
-                //     element.addBefore(new basic.Span("."));
                    }
                  }},
                  Identifier:{enter:function(node,parent) {
                    var item=new basic.Span(node.name,node.type);
-
                    if(node.name&&node.name!="") { item.content(node.name) }
                    else { item.content("Unnamed"); }
                    return item;
-
                  },leave:function(node,parent) {
-
+                 }},
+                 FunctionDeclaration:{enter:function(n,p,c) {
+                   var item=new basic.Span("function ","");
+                   return item;
+                 },leave:function(n,p,c) {
+                 }},
+                 AssignmentExpression:{enter:function(n,p,c) {
+                   return new basic.Span("","");
+                 },leave:function(n,p,c) {
+                   c.add(new basic.Span(" = "));
                  }},
                  FunctionExpression:{enter:function(n,p,c) {
                    return new basic.Span("","");
                  },leave:function(n,p,c) {
                    c.addBefore(new basic.Span("function "));
                  }},
+                 ReturnStatement:{enter:function(n,p,c) {
+                   return new basic.Span("return ");
+                 },leave:function(n,p,c) {
+
+                 }},
                  Literal:{enter:function(node,parent) {
-                   //console.debug({literal:node});
                    return new basic.Span("\""+node.value+"\"","literal");
                  },leave:function(n,p,c) {
 
@@ -396,9 +405,10 @@ except instead of defining HTML/XML markup you are writing function calls:
                  }},
                };
                function getColor(depth) {
-                 var r=255*Math.sin((depth*Math.pi/7)+(2*Math.pi/3))
-                 var g=255*Math.sin((depth*Math.pi/7)+(4*Math.pi/3))
+                 var r=255*Math.sin((depth*Math.pi/7)+(2*Math.pi/3));
+                 var g=255*Math.sin((depth*Math.pi/7)+(4*Math.pi/3));
                  var b=255*Math.sin((depth*Math.pi/7)+(2*Math.pi));
+
                  return "rgb("+r+","+g+","+b+")";
                }
                 var cursor=Lines;
@@ -409,16 +419,15 @@ except instead of defining HTML/XML markup you are writing function calls:
                    if(node.leadingComments) {
                      var comments=new basic.Div("Comments");
                      cursor.add(comments);
-                     //node.leadingComments.forEach(function(comment) {
                      var comment=node.leadingComments[0];
-                       var content=comment.value.split("\n");
-                       content.forEach(function(line) {
-                         var ln=new basic.Div();
-                         ln.content(line);
-                         comments.add(ln);
+                     console.debug(comment);
+                     var content=comment.value.split("\n");
+                     content.forEach(function(line) {
+                       var ln=new basic.Div();
+                       ln.content(line);
+                       comments.add(ln);
 
-                       });
-                     //});
+                     });
                    }
                    if(nodetypes[node.type]) {
                      item=nodetypes[node.type].enter(node,parent,cursor);
@@ -427,14 +436,8 @@ except instead of defining HTML/XML markup you are writing function calls:
                    }
                    if(item) {
                    cursor.add(item);
-
-
                    item.element.style["z-index"]=10000+depth;
-
-
                    cursor.add(item);
-
-
                    cursor=item;
                    }
                  },
@@ -454,7 +457,7 @@ except instead of defining HTML/XML markup you are writing function calls:
                    item.tooltip=tooltip;
                    tooltip.hide();
 
-                 //  item.element.style["border-color"]=getColor(depth);
+                   item.element.style["border-color"]=getColor(depth);
                    item.addEvent("showtip","mouseover",function(e) {
                      tooltip.show();
                      item.addClass("hovering");
@@ -472,29 +475,7 @@ except instead of defining HTML/XML markup you are writing function calls:
                    cursor=cursor.parent;
                  }
                });
-           //    comments.forEach(function(comment) {
 
-         /*        var Comment=new basic.Div("Comment");
-                 Comments.add(Comment);
-                 var lns=comment.value.split("\n");
-                 lns.forEach(function (ln) {
-                   var Ln=new basic.Div();
-                   Comment.add(Ln);
-                   Ln.content(ln);
-                 });
-
-               });
-*/
-
-         /*var Lines=new basic.Div("code");
-         Content.add(Lines);
-
-         lines.forEach(function (line) {
-           var Line=new basic.Div();
-           Line.content(line);
-           Lines.add(Line);
-         });
-          */
 
              });
            });

@@ -145,19 +145,19 @@ table .even { background-color:#efefef; }
 .tab {
   background-color:#555;
 }
-::-webkit-scrollbar-track
+/*::-webkit-scrollbar-track
 {
   background: #CCC;
 
 }
-
+*/
 .node.template { margin:0.5em 1em 1.5em 1em; }
-
+/*
 ::-webkit-scrollbar-thumb
 {
   background:#999;
 
-}
+}*/
 	.tabset.fancy {  height: 28px;
 margin: 5px 5px 0 5px;
 padding: 0 5px 0px 5px;}
