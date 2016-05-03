@@ -295,8 +295,6 @@ function Import(path,callback) {
         var parser = document.createElement('a');
         parser.href = path;
         path=parser.pathname;
-        console.debug("path! "+path);
-
       }
     }
     if(ft=='css') { // TODO add a link rel="stylesheet"
@@ -541,14 +539,13 @@ var define=Module.define=function define(n,r,F){ /* F = function (require, expor
     else if(n instanceof Function) {
       //common JS wrapping
       //the result of this function
-      // becomes the value of the thing
+      // becomes the value of the thing????
       fun=n;
 
     } else if(n instanceof Array)  dep=n;
     if(r instanceof Function)  fun=r;
     else if (r instanceof Array)  dep=r;
     if(F instanceof Function) fun=F;
-
 
     var script=getCurrentScript();
     function load(rets,exps) {
@@ -563,13 +560,9 @@ var define=Module.define=function define(n,r,F){ /* F = function (require, expor
     if(dep&&dep.length&&dep.length>0) {
       for(var i=0;i<dep.length;i++) {
         if(dep[i]=="exports") {
-          //dep.splice(i,1,M.Self);
-
-          console.debug({dep:dep});
           dep[i]=M.Self.filename
         }
       }
-      console.debug({dep:dep})
       Import(dep,function() {
         var imports=Array.prototype.slice.call(arguments);
         var req=function(v) {
@@ -582,8 +575,6 @@ var define=Module.define=function define(n,r,F){ /* F = function (require, expor
         if(fun&&fun instanceof Function) {
           returned=fun.apply(this,imports);
           load(returned,exported);
-
-
         }
     });
     } else {
@@ -593,12 +584,6 @@ var define=Module.define=function define(n,r,F){ /* F = function (require, expor
         load(returned, exported);
       }
     }
-
-
-
-
   });
-
-
 }
 define.amd={};
