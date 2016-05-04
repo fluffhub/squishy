@@ -233,7 +233,7 @@ border-right: 1px solid #555;
 .code *:hover { border-color:black; }
 
 
-.code .label { background-color:#555;color:orange;padding:1px;position:absolute;top:-10px;height:10px;left:-9px;font-size:9px;box-shadow:0 0 20px 5px rgba(255,255,255,0.5); }
+.code .label { background-color:#555;color:orange;padding:1px 3px;position:absolute;top:-14px;height:10px;left:-9px;font-size:9px;box-shadow:0 0 20px 5px rgba(255,255,255,0.5); }
 
 .hovering { border-width:1px;border-style:solid;border-color:black;}/*box-shadow:0px 0px 10px rgba(200,200,200,0.5) */
 
@@ -517,7 +517,7 @@ background-color:#efbb55;
 .Comments,.code {
  white-space:nowrap;
 }
-.code div { float:left;clear:both; }
+.code div { clear:both; }
 .Comments {
 
 }
@@ -527,13 +527,22 @@ background-color:#efbb55;
 
   padding:10px;
 }
+.code div, .code span { min-width:15px;padding:0.1em; }
 .Comments {
    font-family:sans-serif;
   background-color:rgba(100,150,200,0.2);
 
   color:#888;float:left;clear:both;
-  position:relative;
+  position:relative;font-size:0.9em;
 }
+.Comments.Block {
+
+  display:block; clear:both;float:left;
+}
+.Comments.Line {
+ float:left;clear:none;
+}
+
 .Comments>div {
 
 
