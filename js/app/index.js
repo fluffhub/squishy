@@ -240,9 +240,9 @@ except instead of defining HTML/XML markup you are writing function calls:
 */
 
        var Req=Request.Request;
-       /*
-       Note 2.3: Var Req is used here to create a shorthand to the Request.Request class.
-       */
+
+       //Note 2.3: Var Req is used here to create a shorthand to the Request.Request class.
+
 
              var URLVars=Window.getUrlVars();
              var page="js/app/index.js";

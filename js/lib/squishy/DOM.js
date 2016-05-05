@@ -107,6 +107,16 @@ Module(function M() { if(document) {
     C.Def(function addBefore(element,name) {
       this.element.insertBefore(element.element,this.element.firstChild);
       if(name) this.elements[name]=element;
+      else this.elements.unshift(element);
+    });
+    C.Def(function insert(element,location) {
+      this.element.insertBefore(element.element,location.element);
+      for(var i=0;i<this.elements.length;i++) {
+        if(location===this.elements[i]) {
+         this.elements.splice(i-1,0,element);
+          break;
+        }
+      }
     });
     C.Def(function place(target) {
       var el=target;
@@ -135,7 +145,7 @@ Module(function M() { if(document) {
       var clss;
       //  if(this.element.className&&this.element.className!='')  clss = this.element.className;
       clss=this.element.getAttribute('class');
-      if(clss&&clss.split) clss=clss.split(' ');
+      if(clss&&clss.split) clss=clss.split(/\W+/);
       else      clss=[];
 
       var i=clss.indexOf(cls);

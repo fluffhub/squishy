@@ -6,18 +6,28 @@ Module(function M() {
            "js/lib/escodegen/escodegen.squishy.js",
            "js/lib/estraverse/estraverse",
            function(event,basic,esprima,ESCG,esv) {
+             function PseudoRandomColor(n) {
+               var P=Math.PI;
+               var r=Math.round(128+255*Math.sin((n*P/7)+(2*P/3))/2);
+               var g=Math.round(128+255*Math.sin((n*P/7)+(4*P/3))/2);
+               var b=Math.round(128+255*Math.sin((n*P/7)+(2*P))/2);
+
+               return "rgb("+r+","+g+","+b+")";
+             }
              var nodetypes={
                NewExpression:{enter:function(n,p,c) {
-                 var item=new basic.Span("(new ","C");
+                 var item=new basic.Span("new ","C");
                  return item;
                },leave:function(n,p,c) {
+                 c.elements[1].add(new basic.Span("("));
                  c.add(new basic.Span(")"));
                }},
                BlockStatement:{enter:function(node){
                  var item=new basic.Div("B "+node.name);
-                 item.add(new basic.Span("{","BD"));
+                 item.add(new basic.Span("","BD"));
                  return item;
                },leave:function(n,p,c) {
+                 c.parent.insert(new basic.Span("{"),c);
                  c.add(new basic.Span("}","BD"));
                }},
                ExpressionStatement:{enter:function(node) {
@@ -32,13 +42,22 @@ Module(function M() {
                },leave:function(node,parent,cursor) {
 
                }},
+               ThisExpression:{enter:function(n,p,c) {
+                 return new basic.Span("this");
+               },leave:function(n,p,c) {
+
+               }},
                MemberExpression:{enter:function(n,p,c) {
                  return new basic.Span("","M");
                },leave:function(n,p,c) {
                    var L=c.elements.length;
-                   c.elements[2].addBefore(new basic.Span(".","DL"))
+                 if(n.property.type=="Literal") {
+                   c.elements[2].addBefore(new basic.Span("["));
+                   c.elements[2].add(new basic.Span("]"));
+                 }else {
+                   c.elements[2].addBefore(new basic.Span(".","DL"));
                  }
-               },
+               }},
                Identifier:{enter:function(node,parent) {
                  var item=new basic.Span(node.name,"I");
                  if(node.name&&node.name!="") { item.content(node.name) }
@@ -48,7 +67,7 @@ Module(function M() {
                }},
                FunctionDeclaration:{enter:function(n,p,c) {
                  var item=new basic.Div("F")
-                 item.add(new Span("function(","F"));
+                 item.add(new basic.Span("function ","F"));
                  return item;
                },leave:function(n,p,c) {
                  c.elements[1].add(new basic.Span(")"));
@@ -64,10 +83,30 @@ Module(function M() {
                  return new basic.Span("","");
                },leave:function(n,p,c) {
                  c.addBefore(new basic.Span("function "));
-                 if(n.parameters&&n.parameters.length>0) {
-                   for(var i=c.elements.length;i>1;i--) {
-                    c.elements[i].add(new basic.Span(","));
+                 var parampos=0;
+
+
+                 if(n.params&&n.params.length>0) {
+
+                     for(var i=n.params.length-1;i>0;i--) {
+                     n.params[i].element.addBefore(new basic.Span(","));
+
+
                    }
+                 }
+                 if(n.params.length>=1) {
+                   n.params[0].element.addBefore(new basic.Span("("));
+                   n.params[n.params.length-1].element.add(new basic.Span(")"));
+                 }
+                   else { c.elements[0].add(new basic.Span("()"));
+                        }
+
+               }},
+               UpdateExpression:{enter:function(n,p,c) {
+                 return new basic.Span("&nbsp;","OP");
+               },leave:function(n,p,c) {
+                   if(n.operator) {
+                   c.elements[1].add(new basic.Span(n.operator));
                  }
                }},
                ReturnStatement:{enter:function(n,p,c) {
@@ -76,25 +115,41 @@ Module(function M() {
 
                }},
                Literal:{enter:function(node,parent) {
-                 return new basic.Span("\""+node.value+"\"","literal");
+                 var str=node.value;
+                 if(typeof(str)=="string") str="\""+str+"\"";
+                 return new basic.Span(""+str,"literal");
                },leave:function(n,p,c) {
 
                }},
                VariableDeclarator:{enter:function(n,p) {
                  return new basic.Span("");
                },leave:function(n,p,c) {
+                 if(n.init!=null)
                  c.elements[1].add(new basic.Span(" = "));
                }},
                CallExpression:{enter:function(n,p) {
                  var item=new basic.Span("&nbsp;","EX");
+
                  return item;
                },leave:function(n,p,cursor) {
                  cursor.elements[0].add(new basic.Span("("));
                  cursor.add(new basic.Span(")"));
                  if(n.arguments.length>1) {
-                   for(var i=cursor.elements.length-2;i>1;i-=2) {
-                    cursor.elements[i].add(new basic.Span(","));
+                   for(var i=cursor.elements.length-3;i>3;i-=2) {
+                    cursor.elements[i].addBefore(new basic.Span(","));
                    }
+                 }
+               }},
+               ForStatement:{enter:function(n,p) {
+                 return new basic.Span("for ","FL");
+               },leave:function(n,p,c) {
+
+               }},
+               LogicalExpression:{enter:function(n,p) {
+                  return new basic.Span("&nbsp;","OP");
+               },leave:function(n,p,c) {
+                  if(n.operator) {
+                   c.elements[2].addBefore(new basic.Span(n.operator));
                  }
                }},
                BinaryExpression:{enter:function(n,p) {
@@ -104,12 +159,15 @@ Module(function M() {
                    c.elements[2].addBefore(new basic.Span(n.operator));
                  }
                }},
-               IfExpression:{enter:function(node,parent) {
+               IfStatement:{enter:function(node,parent) {
                  var item=new basic.Span("if(");
 
                  return item;
                },leave:function(n,p,c) {
-                 c.add(new basic.Span(")"));
+                 //n.consequent.element.parent.insert(new basic.Span(")"),n.consequent.element);
+                 if(n.test)
+                   n.test.element.add(new basic.Span(")"));
+                 //c.elements[c.elements.length-1].add(new basic.Span(")"));
                }},
                Program:{enter:function(node,parent,c) {
                  return new basic.Div("eeprogram");
@@ -133,6 +191,11 @@ Module(function M() {
                  return new basic.Span("{");
                },leave:function(n,p,c) {
                  c.add(new basic.Span("}"));
+                 if(c.properties&&c.properties.length>1) {
+                 for(var i=0;i<c.properties.length-1;i++) {
+                   c.properties[i].element.add(new basic.Span(","));
+                 }
+                 }
                }},
              };
              var codemasks={
@@ -171,20 +234,13 @@ Module(function M() {
 
 
 
-               function PseudoRandomColor(n) {
-                 var P=Math.PI;
-                 var r=Math.round(128+255*Math.sin((n*P/7)+(2*P/3))/2);
-                 var g=Math.round(128+255*Math.sin((n*P/7)+(4*P/3))/2);
-                 var b=Math.round(128+255*Math.sin((n*P/7)+(2*P))/2);
 
-                 return "rgb("+r+","+g+","+b+")";
-               }
                var cursor=Lines;
                estraverse.traverse(parsed,{
                  enter:function(node,parent) {
                    depth++;
                    var item;
-                   if(node.leadingComments) {
+                   if(node.leadingComments&&node.type!="Program") {
                      var comments=new basic.Div("Comments");
 
                      cursor.add(comments);
@@ -200,11 +256,13 @@ Module(function M() {
                      });
                    }
                    if(nodetypes[node.type]) {
-                     item=nodetypes[node.type].enter(node,parent,cursor);
+                     item=nodetypes[node.type].enter.call(this,node,parent,cursor);
                    } else {
-                     item=nodetypes["Unknown"].enter(node,parent,cursor);
+                     item=nodetypes["Unknown"].enter.call(this,node,parent,cursor);
                    }
                    if(item) {
+                     item.node=node;
+                     node.element=item;
                      cursor.add(item);
                      item.element.style["z-index"]=10000+depth;
                      cursor.add(item);
