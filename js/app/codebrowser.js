@@ -22,6 +22,11 @@ Module(function M() {
                },leave:function(n,p,c) {
                  c.elements[1].add(new basic.Span("("));
                  c.add(new basic.Span(")"));
+                  if(n.arguments.length>1) {
+                   for(var i=3;i<c.elements.length-3;i+=2) {
+                    c.elements[i].add(new basic.Span(","));
+                   }
+                 }
                }},
                BlockStatement:{enter:function(node){
                  var item=new basic.Div("B "+node.name);
@@ -29,8 +34,10 @@ Module(function M() {
                  return item;
                },leave:function(n,p,c) {
                  c.parent.insert(new basic.Span("{"),c);
-                 if(n.loc.end.line<=p.loc.end.line) c.parent.add("}");
-                 else c.add(new basic.Span("}","BD"));
+                 if(n.loc.end.line<=p.loc.end.line)
+                   c.parent.add(new basic.Span("}"));
+                 else
+                   c.add(new basic.Span("}","BD"));
                }},
                ExpressionStatement:{enter:function(node) {
                  return new basic.Div("E");
@@ -87,13 +94,9 @@ Module(function M() {
                  c.addBefore(new basic.Span("function "));
                  var parampos=0;
                  if(n.id!==null) parampos=1;
-
                  if(n.params&&n.params.length>0) {
-
                      for(var i=n.params.length-1;i>0;i--) {
                      n.params[i].element.addBefore(new basic.Span(","));
-
-
                    }
                  }
                  if(n.params.length>=1) {
@@ -165,7 +168,8 @@ Module(function M() {
                  }
                }},
                IfStatement:{enter:function(node,parent) {
-                 var item=new basic.Span("if(");
+                 var item=new basic.Div();
+                 item.add(new basic.Span("if("));
 
                  return item;
                },leave:function(n,p,c) {
@@ -184,6 +188,7 @@ Module(function M() {
                  return new basic.Span("","");
                },leave:function(n,p,c) {
                  c.elements[1].add(new basic.Span(":"));
+              //   c.elements[2].add(new basic.Span(","));
                }},
                Unknown:{enter:function(node,parent) {
                  var item=new basic.Span("[","unknown "+node.type);
@@ -196,9 +201,9 @@ Module(function M() {
                  return new basic.Span("{");
                },leave:function(n,p,c) {
                  c.add(new basic.Span("}"));
-                 if(c.properties&&c.properties.length>1) {
-                 for(var i=0;i<c.properties.length-1;i++) {
-                   c.properties[i].element.add(new basic.Span(","));
+                 if(n.properties&&n.properties.length>1) {
+                 for(var i=n.properties.length-1;i>0;i--) {
+                   n.element.insert(new basic.Span(","),n.properties[i].element);
                  }
                  }
                }},
@@ -248,7 +253,7 @@ Module(function M() {
 
                    if(node.leadingComments&&node.type!="Program") {
                      var comments=new basic.Div("Comments");
-
+                     comments.element.style["margin-left"]=(-1)+"em";
                      cursor.add(comments);
                      var comment=node.leadingComments[0];
                      comments.addClass(comment.type);
@@ -295,7 +300,7 @@ Module(function M() {
                    item.addEvent("showtip","mouseover",function(e) {
                      tooltip.show();
                      item.addClass("hovering");
-                     item.element.style["background"]=PseudoRandomColor(d,0.125);
+                     item.element.style["border-color"]=""+PseudoRandomColor(d,0.5);
                    });
                    item.addEvent("select","click",function(e) {
                      console.debug(node);
@@ -306,7 +311,9 @@ Module(function M() {
                    item.addEvent("hidetip","mouseout",function(e) {
                      tooltip.hide();
                      item.removeClass("hovering");
-                      item.element.style["background-color"]="rgba(180,180,180,0.25)";
+                      //item.element.style["background-color"]="rgba(180,180,180,0.25)";
+
+                      item.element.style["border-color"]=""+"rgba(250,250,250,0.25)";
                    });
                    item.enableEvents();
                    if(parent&&parent.loc.start.line!=node.loc.start.line) {

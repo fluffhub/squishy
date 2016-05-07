@@ -216,8 +216,8 @@ border-right: 1px solid #555;
   height: 10px; /* for horizontal scrollbars */
 }
 .codeblock {
-  margin-left:10px;
-
+  margin-left:5px;
+border-left:1px solid black;
 }
 .pane>.title-bar {
   line-height:35px;
@@ -225,7 +225,7 @@ border-right: 1px solid #555;
 }
 .code .clears { clear:both;display:block; }
 .code * { position:relative;color:#555;border:0px solid rgba(0,0,0,0);background-color:rgba(180,180,180,0.1); }
-.code div { padding-top:0.8em;margin:2px;margin-left:8px;margin-top:16px; }
+.code div { padding-top:0.0em;margin:0;margin-left:0.5em; }
 .code div>span:first-child { margin-top:0.8em;}
 .m>.Identifier:before {content:"." }
 .m>.Identifier:first-child:before { content:""}
@@ -520,8 +520,8 @@ background-color:#efbb55;
  white-space:nowrap;
 }
 .code div { clear:both; }
-.Comments {
-
+.Comments div {
+background-color:rgba(255,255,255,0.9);
 }
 .code {
  font-family:monospace;
@@ -529,10 +529,11 @@ background-color:#efbb55;
 
   padding:10px;
 }
-.code div, .code span { min-width:2px;padding:1em 0 0 0; }
-.Comments {
+.code div, .code span { min-width:2px;padding:0 0 0 0;border-bottom:2px solid rgba(0,0,0,0) }
+.code div { border-left:2px solid rgba(0,0,0,0) }
+.Comments {width:100%;
    font-family:sans-serif;
-  background-color:rgba(100,150,200,0.2);
+  background-color:rgba(255,255,255,0.99);
 
   color:#888;float:left;clear:both;
   position:relative;font-size:0.9em;
