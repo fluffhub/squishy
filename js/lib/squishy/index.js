@@ -58,11 +58,6 @@ function getCurrentScript() {
   }
 }
 var Squishy=getCurrentScript();
-console.debug("scripts:");
-for(var sid in document.scripts) {
-  console.debug(document.scripts[sid]);
-}
-//console.debug(document.scripts);
 
 function extend(destination,source) {
   // var destination = destination || this;
@@ -297,27 +292,9 @@ function Import(path,callback) {
         path=parser.pathname;
       }
     }
-    if(ft=='css') { // TODO add a link rel="stylesheet"
-      var exists=document.querySelector('link[href="'+path+'"]');
-      var element;
-      if(exists)
-        element=exists;
-      else {
-        element=document.createElement("link");
-        element.setAttribute("rel","stylesheet");
-        element.setAttribute("href",path);
-        document.head.appendChild(element);
+      if(ft in Import.types) {
+        Import.types[ft](path,callback);
       }
-
-    }
-    else if(ft=='jpg'||ft=='gif'||ft=='svg'||ft=='png') {//create img tag behind the scenes
-    }
-    else if(ft=='html') { // TODO: semantically what to happen when html importad
-    }
-    else if(ft=='txt') {// TODO:  Etc.   TXT->string
-    }
-    else if(ft=='json') {// TODO: etc.
-    }
     else {
       if(fn=='') path=path+'index';
       if(fn.indexOf('.')=='-1') path=path+'.js';
@@ -408,7 +385,7 @@ function Import(path,callback) {
     }
   }
   else {
-    var paths;
+    var paths=[];
     if(args1.length<=2) {
     if(path instanceof Array) {
       paths=path;
@@ -440,7 +417,36 @@ function Import(path,callback) {
   }
   return that;
 }
+Import.types={
+  css:function(path,callback) {
 
+    var exists=document.querySelector('link[href="'+path+'"]');
+    var element;
+    if(exists)
+      element=exists;
+    else {
+      element=document.createElement("link");
+      element.setAttribute("rel","stylesheet");
+      element.setAttribute("href",path);
+      element.onload=function(e) { callback(element) };
+      document.head.appendChild(element);
+    }
+    return element;
+  },
+  bmp:function(path,callback) {
+    var element=document.createElement("img");
+    element.setAttribute("src",path);
+    element.onload=function(e) { callback(element) };
+    return element;
+  },
+  jpg:function(path,callback) {
+    return Import.types.bmp(path,callback);
+  },
+  png:function(path,callback) {
+    return Import.types.bmp(path,callback);
+  },
+
+};
 function Class(def,fun) {
   var fun=fun || new Function();
   Object.defineProperty(fun.prototype,'supers',{enumerable:false,writable:true,value:[]});

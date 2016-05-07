@@ -61,10 +61,11 @@ Module(function M() {
                },leave:function(n,p,c) {
                    var L=c.elements.length;
                  if(n.property.type=="Literal") {
+                   c.insert(new basic.Span("["),c.elements[2])
                    c.elements[2].addBefore(new basic.Span("["));
                    c.elements[2].add(new basic.Span("]"));
                  }else {
-                   c.elements[2].addBefore(new basic.Span(".","DL"));
+                   c.elements[2].addBefore(new basic.Span( ".","DL"));
                  }
                }},
                Identifier:{enter:function(node,parent) {
@@ -210,10 +211,69 @@ Module(function M() {
              };
              var codemasks={
                ImportStatement:{
-                 match:function(node) {},
+                 match:function(node) {
+                   if(node.type=="CallExpression") {
+                     if(node.callee.type=="MemberExpression") {
+                       if(node.callee.property.name=="Import") {
+                        return true
+                       }
+                     } else {
+                       if(node.callee.type=="Identifier") {
+                         if(node.callee.name=="Import") {
+
+                           return true;
+                         }
+                       }
+                     }
+                   }
+                   return false;
+
+                 },
                  enter:function(node,parent,cursor) {},
-                 leave:function(node,parent,cursor) {}
+                 leave:function(node,parent,cursor) {
+                   var nl=node.arguments.length;
+                   var fun = node.arguments[nl-1];
+                   for(var i=0;i<nl-1;i++) {
+                     Import(node.arguments[i].value,function(mod) {
+
+
+                     node.arguments[i].element.clear();
+                     node.arguments[i].element.content(" ");
+                       var modlink=new basic.Link({url:"?page="+mod.filename,content:"\""+node.arguments[i].value+"\""});
+                       modlink.element.href="?page="+mod.filename;
+                       modlink.element.style.color="orange";
+                     node.arguments[i].element.add(modlink);
+                       if(fun&&fun.type=="FunctionExpression"&&fun.arguments) {
+                       fun.arguments[i].element.clear();
+                       fun.arguments[i].element.content(" ");
+                       var funlink=new basic.Span(fun.arguments[i].name);
+                       funlink.element.onclick=function(e) {
+                         console.debug(mod);
+                       }
+                       funlink.element.style.color="orange";
+                       fun.arguments[i].element.add(funlink);
+                       }
+                     });
+                   }
+
+                 }
+               },
+               ModuleStatement:{
+                 match:function(node) {
+                   if(node.type=="CallExpression") {
+                     if(node.callee.type=="Identifier") {
+                       if(node.callee.name=="Module") {
+                        return true;
+                       }
+                     }
+                   }
+                 },
+                 enter:function(node,parent,cursor) {},
+                 leave:function(node,parent,cursor) {
+                  node.element.element.style["background-color"]="orange";
+                 }
                }
+
              };
 
 
@@ -242,7 +302,7 @@ Module(function M() {
 
                console.debug({estraverse:estraverse});
 
-
+               var maskcursors=[];
 
 
                var cursor=Lines;
@@ -266,10 +326,19 @@ Module(function M() {
 
                      });
                    }
+
                    if(nodetypes[node.type]) {
                      item=nodetypes[node.type].enter.call(this,node,parent,cursor);
                    } else {
                      item=nodetypes["Unknown"].enter.call(this,node,parent,cursor);
+                   }
+                   for(var maskname in codemasks) {
+                     var mask=codemasks[maskname];
+                     if(mask.match(node)) {
+
+                       mask.enter(node,parent,cursor);
+                       maskcursors.push({mask:mask,node:node});
+                     }
                    }
                    if(item) {
                      item.node=node;
@@ -279,14 +348,21 @@ Module(function M() {
                      cursor.add(item);
                      cursor=item;
                    }
+
                  },
 
                  leave:function(node,parent) {
                    depth--;
+                   for(var i=0;i<maskcursors.length;i++) {
+                    if(maskcursors[i].node===node) maskcursors[i].mask.leave.call(this,node,parent,cursor);
+                   }
+                   //if(maskcursor) { maskcursor.leave.call(this,node,parent,cursor); maskcursor=null }
                    if(nodetypes[node.type]&&nodetypes[node.type].leave)
-                     nodetypes[node.type].leave(node,parent,cursor);
+                     nodetypes[node.type].leave.call(this,node,parent,cursor);
                    else
-                     nodetypes["Unknown"].leave(node,parent,cursor);
+                     nodetypes["Unknown"].leave.call(this,node,parent,cursor);
+
+
                    var item=cursor;
                    item.Mixin(event.hasEvents);
                    var tooltip=new basic.Div("label");
