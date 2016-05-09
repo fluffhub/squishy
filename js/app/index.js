@@ -260,15 +260,24 @@ except instead of defining HTML/XML markup you are writing function calls:
     as imports, but with a specific way to handle the results:
 */
 
-
-
-
+var SquishyLogo=null;
+      Import("squishy/svg",function(svg) {
+        SquishyLogo=new svg.SVG(100,100);
+        SquishyLogo.addClass("sitemenu");
+        var svglogo=new svg.SVG({src:"img/squishy.svg",onload:function(svg) {
+          SquishyLogo.add(svg.query("#SquishyLogo")[0]);
+          SquishyLogo.NSattrs({viewbox:"0 0 100 100"});
+        }})
+        Content.add(SquishyLogo);
+      });
+      var browser=new codebrowser.FileBrowser();
+      Content.add(browser);
       new Req("URI","TEXT").Get(page,{
         /*
            Note 2.4:  If there were GET or POST arguments for this request, they would be listed here.
          */
       },function(samplepage) {
-        Content.add(codebrowser.draw(samplepage));
+        Content.add(new codebrowser.CodeBrowser(samplepage,browser));
 
       });
     });

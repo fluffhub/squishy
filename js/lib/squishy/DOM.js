@@ -193,6 +193,9 @@ Module(function M() { if(document) {
       }
       this.elements=[];
     });
+    C.Def(function query(str) {
+      return this.element.querySelectorAll(str);
+    });
 
   });
   var LayoutItem=M.Class(function C() {

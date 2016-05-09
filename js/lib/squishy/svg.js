@@ -64,16 +64,45 @@ M.Import('squishy/DOM',function(DOM) {
       return transform;
     });
   });
+
   var SVG=M.Class(function C(){
     C.Super(SVGTag);
-    C.Init(function SVG(width,height) {
+    C.Init(function SVG() {
       SVGTag.call(this,'svg');
-      //Tag.prototype.attrs.call(this,{version:"1.1",xmlns:SVGNS});
-      this.NSattrs({version:"1.1"});
-      if(width&&height) this.NSattrs({width:width+'px',height:height+'px'});
-      this.paths=[];
+      with(SVG.kwargs({width:null,height:null,src:null,content:null,onload:null})) {
+        var tag=this;
+        this.NSattrs({version:"1.1"});
 
-    });
+        if(width&&height) this.NSattrs({width:width+'px',height:height+'px'});
+        this.paths=[];
+
+        if(src!==null) {
+
+          Import("/js/lib/squishy_ext/Request",function(Req) {
+            var Request=Req.Request;
+            var req=new Request("URI","TEXT").Get(src,{},function(svgtext) {
+
+              tag.content(svgtext);
+              if(onload!==null) {
+                onload(tag);
+              }
+            });
+          });
+        }
+
+
+
+          //Tag.prototype.attrs.call(this,{version:"1.1",xmlns:SVGNS});
+
+
+
+              if(content!=null) {
+                tag.content(content);
+
+              }
+
+      }});
+
     C.Mixin({
       addPath:function(path,fill,stroke,id) {
         this.add(new Path(path, fill, stroke, id));
@@ -240,6 +269,7 @@ M.Import('squishy/DOM',function(DOM) {
   var Group=M.Class(function C() {
     C.Super(SVGTag);
     C.Init(function Group(cls, id) {
+
       SVGTag.call(this,'g');
       if(cls) this.NSattrs({class:cls});
       if(id) this.NSattrs({id:id});
@@ -323,6 +353,39 @@ M.Import('squishy/DOM',function(DOM) {
       if(arguments.length>this.dof) throw new Exception('too few arguments. # arguments is '+this.dof);
       return _interpolate(this.paths,arguments);
     });
+  });
+  M.Def("defaults",{
+    svg:function(element) {
+      var svg=new SVG();
+    },
+    g:function(element) {
+
+      var g=new Group(element.getAttributeNS("class"),element.getAttributeNS("id"));
+      g.element=element;
+      return g;
+
+    },
+    path:function(element) {
+      var d=element.getAttributeNS("d");
+      var fill=element.getAttributeNS("fill");
+      var stroke=element.getAttributeNS("stroke");
+      var id=element.getAttributeNS("id");
+        var path=new Path(d,{},fill,stroke,id);
+      return path;
+    },
+    text:function(element) {
+
+    },
+    circle:function(element) {
+
+    },
+    rect:function(element) {
+
+    },
+    _default:function(element) {
+
+
+    }
   });
 
 });
