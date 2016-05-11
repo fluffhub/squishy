@@ -288,6 +288,7 @@ M.Import('squishy/DOM',function(DOM) {
   var Rect=M.Class(function C() {
     C.Super(SVGTag);
     C.Init(function Rect(x,y,w,h) {
+
       this.position={x:x,y:y};
       XTag.call(this,SVGNS, 'rect', { width:w,height:h,x:x,y:y});
 

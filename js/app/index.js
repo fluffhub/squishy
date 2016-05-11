@@ -211,18 +211,14 @@ except instead of defining HTML/XML markup you are writing function calls:
       var Header=new DOM.Tag({type:"h1","content":title});
 
       /*
-  the basic library includes many default tags representing typical HTML Elements:
+  the "basic" library includes many default tags representing typical HTML Elements:
 */
-      console.debug({M:M});
       var Content=new basic.Div("Content");
-      var Tagline=new basic.Span();
-      Content.add(Tagline);
       Window.add(Content);
 
       /*
   You can also add text or set the content of the node directly:
 */
-      Tagline.add(page);
       var Location=new basic.Link({cls:"location",url:window.location.pathname});
       Location.content("Location: "+window.location.pathname);
 
@@ -271,17 +267,22 @@ var SquishyLogo=null;
         Content.add(SquishyLogo);
       });
       var browser=new codebrowser.FileBrowser();
+      console.debug({M:M});
+      browser.Import("/"+M.Self.filename);
       Content.add(browser);
-      new Req("URI","TEXT").Get(page,{
+
+
+      /*new Req("URI","TEXT").Get(page,{
         /*
            Note 2.4:  If there were GET or POST arguments for this request, they would be listed here.
          */
-      },function(samplepage) {
+      /*},function(samplepage) {
         Content.add(new codebrowser.CodeBrowser(samplepage,browser));
 
-      });
+      });*/
     });
 });
+
 
 
 

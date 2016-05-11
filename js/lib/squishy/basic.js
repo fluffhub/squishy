@@ -36,7 +36,7 @@ M.Import('squishy/DOM', function (DOM) {
 			C.Super(LayoutItem);
 			C.Init(function Link() {
         with(Link.kwargs({url:"",content:null,id:null,cls:null}) ) {
-          content=content || url;
+          var content=content || url;
           if(content=='') content='&nbsp;';
 
           LayoutItem.call(this,'a',id,cls,{href:url});

@@ -224,7 +224,6 @@ Module(function M() {
               } else {
                 if(node.callee.type=="Identifier") {
                   if(node.callee.name=="Import") {
-
                     return true;
                   }
                 }
@@ -238,7 +237,6 @@ Module(function M() {
             var nl=node.arguments.length;
             var fun = node.arguments[nl-1];
             var browser=this;
-            console.debug({fun:fun});
             for(var i=0;i<nl-1;i++) {
               var arg=node.arguments[i];
               var farg=fun.params[i];
@@ -248,20 +246,20 @@ Module(function M() {
                 var modlink=new basic.FakeLink("?page="+mod.filename,"\""+arg.value+"\"",function click(e) {
 
                 });
-                modlink.element.href="?page="+mod.filename;
+              //  modlink.element.href="?page="+mod.filename;
                 modlink.element.style.color="orange";
                 arg.element.add(modlink);
 
                 if(fun&&fun.type=="FunctionExpression"&&fun.params) {
                   fun.params.forEach(function(farg) {
-                  farg.element.clear();
-                  farg.element.content(" ");
-                  var funlink=new basic.Span(farg.name);
-                  funlink.element.onclick=function(e) {
-                    console.debug(mod);
-                  }
-                  funlink.element.style.color="orange";
-                  farg.element.add(funlink);
+                    farg.element.clear();
+                    farg.element.content(" ");
+                    var funlink=new basic.Span(farg.name);
+                    funlink.element.onclick=function(e) {
+                      console.debug(mod);
+                    }
+                    funlink.element.style.color="orange";
+                    farg.element.add(funlink);
                   });
                 }
                 browser.browser.Import(arg.value);
@@ -315,8 +313,6 @@ Module(function M() {
 
 
       M.Def("nodeformats",nodetypes);
-
-
       var escodegen=ESCG.escodegen;
       window.escodegen=escodegen;
       var estraverse=esv;
@@ -325,64 +321,72 @@ Module(function M() {
         C.Super(basic.Div);
         C.Init(function FileBrowser()  {
           basic.Div.call(this,"FileBrowser");
-
           this.files={};
           this.absolutefiles={};
+          this.rawfiles={};
           this.windows={};
         });
-        C.Def(function Import(path) {
-          var paths=path.split('/');
+        C.Def(function Import(path1) {
           var item;
           var browser=this;
-
           var cursor=this;
-          for(var i=0;i<paths.length-1;i++) {
-            var file;
-            if(paths[i] in cursor.files) {
-              file=cursor.files[paths[i]];
-            }
-            else file=new basic.Div();
-            if(paths.length-i>=1) {
-              file.addClass("dir");
-              var label=new basic.Div("label");
-              file.add(label);
-              label.content(paths[i]+"\\");
+          window.Import(path1,function(item) {
+            var path=item.filename;
+            var paths=path.split('/');
+            var start=0;
+            if(paths[0]=="") start=1;
+            for(var i=start;i<paths.length-1;i++) {
+              var file;
+              if(paths[i] in cursor.files) {
+                file=cursor.files[paths[i]];
+              }
+              else { file=new basic.Div();
 
-              file.files={};
-              cursor.files[paths[i]]=file
-              cursor.add(file);
+                    if(paths.length-i>1) { //is a dir
+                      file.addClass("dir");
+                      var label=new basic.Div("label");
+                      label.attrs({id:paths[i]});
+                      file.add(label);
+                      label.content(paths[i]+"\\");
+                      file.files={};
+
+
+
+                    }
+                    cursor.files[paths[i]]=file
+                   cursor.add(file);
+
+              }
               cursor=file;
 
             }
-          }
+            function load(path) {
+              browser.absolutefiles[path]=item;
+                  new Request("URI","TEXT").Get(item.filename,{},function(raw) {
 
-              var link=new basic.FakeLink("?page="+path,paths[i],function() {
-                browser.windows.forEach(function(brow) {
-                  brow.hide();
-                });
-                if(browser.windows[path]) {
-                  browser.windows[path].show();
-                } else {
-                  Import(path,function(item) {
-                    browser.absolutefiles[path]=item;
-                    new Request("URI","TEXT").Get(item.filename,{},function(raw) {
-                      browser.windows[path]=new M.Self.CodeBrowser(raw,browser);
-                      browser.parent.add(browser.windows[path]);
-                    });
+                    browser.windows[path]=new M.Self.CodeBrowser(raw,browser);
+                    browser.windows[path].addBefore(new basic.Span(path));
 
+                    browser.parent.add(browser.windows[path]);
                   });
-                }
+            }
+            var link=new basic.FakeLink("?page="+path,paths[i],function() {
+              for(var windowid in browser.windows) {
+              browser.windows[windowid].hide();
+              }
+              if(browser.windows[path]) {
+                browser.windows[path].show();
+              } else {
+                load(path);
+              }
 
-              });
-          cursor.add(link);
+            });
+            if(browser.windows.length==1) load(path);
+            cursor.add(link);
 
-          if(browser.files[path]) item=browser.files[path];
-          else {
+          });
 
-           this.files[path]= new basic.Div("Filepath");
-          }
-
-        });
+      });
       });
       M.Class(function C() {
         C.Super(basic.Div);
