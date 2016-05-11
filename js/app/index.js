@@ -267,6 +267,7 @@ var SquishyLogo=null;
         Content.add(SquishyLogo);
       });
       var browser=new codebrowser.FileBrowser();
+      M.Def("browser",browser);
       console.debug({M:M});
       browser.Import("/"+M.Self.filename);
       Content.add(browser);

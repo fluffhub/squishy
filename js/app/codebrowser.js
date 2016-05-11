@@ -212,7 +212,7 @@ Module(function M() {
           }
         }},
       };
-      var  curstate={}
+      var curstate={}
       var codemasks={
         ImportStatement:{
           match:function(node) {
@@ -230,7 +230,6 @@ Module(function M() {
               }
             }
             return false;
-
           },
           enter:function(node,parent,cursor,state) {},
           leave:function(node,parent,cursor,state) {
@@ -240,13 +239,13 @@ Module(function M() {
             for(var i=0;i<nl-1;i++) {
               var arg=node.arguments[i];
               var farg=fun.params[i];
-              Import(arg.value,function(mod) {
+              window.Import(arg.value,function(mod) {
                 arg.element.clear();
                 arg.element.content(" ");
                 var modlink=new basic.FakeLink("?page="+mod.filename,"\""+arg.value+"\"",function click(e) {
 
                 });
-              //  modlink.element.href="?page="+mod.filename;
+                //  modlink.element.href="?page="+mod.filename;
                 modlink.element.style.color="orange";
                 arg.element.add(modlink);
 
@@ -306,11 +305,11 @@ Module(function M() {
 
           },
           leave:function(node,parent,cursor) {
-            node.element.element.style["background-color"]="purple";
+
+            node.element.addClass("cls");
           }
         }
       };
-
 
       M.Def("nodeformats",nodetypes);
       var escodegen=ESCG.escodegen;
@@ -335,58 +334,51 @@ Module(function M() {
             var paths=path.split('/');
             var start=0;
             if(paths[0]=="") start=1;
-            for(var i=start;i<paths.length-1;i++) {
-              var file;
-              if(paths[i] in cursor.files) {
-                file=cursor.files[paths[i]];
-              }
-              else { file=new basic.Div();
-
-                    if(paths.length-i>1) { //is a dir
-                      file.addClass("dir");
-                      var label=new basic.Div("label");
-                      label.attrs({id:paths[i]});
-                      file.add(label);
-                      label.content(paths[i]+"\\");
-                      file.files={};
-
-
-
-                    }
-                    cursor.files[paths[i]]=file
-                   cursor.add(file);
-
-              }
-              cursor=file;
-
-            }
             function load(path) {
               browser.absolutefiles[path]=item;
-                  new Request("URI","TEXT").Get(item.filename,{},function(raw) {
-
-                    browser.windows[path]=new M.Self.CodeBrowser(raw,browser);
-                    browser.windows[path].addBefore(new basic.Span(path));
-
-                    browser.parent.add(browser.windows[path]);
-                  });
+              new Request("URI","TEXT").Get(item.filename,{},function(raw) {
+                browser.windows[path]=new M.Self.CodeBrowser(raw,browser);
+                browser.windows[path].addBefore(new basic.Span(path));
+                browser.parent.add(browser.windows[path]);
+              });
             }
-            var link=new basic.FakeLink("?page="+path,paths[i],function() {
+            var link=new basic.FakeLink("?page="+path,paths[paths.length-1],function() {
               for(var windowid in browser.windows) {
-              browser.windows[windowid].hide();
+                browser.windows[windowid].hide();
               }
               if(browser.windows[path]) {
                 browser.windows[path].show();
               } else {
                 load(path);
               }
-
             });
+            for(var i=start;i<paths.length;i++) {
+              var file;
+              if(paths[i] in cursor.files) {
+                file=cursor.files[paths[i]];
+              }
+              else {
+                file=new basic.Div();
+
+                if(paths.length-i==1) {
+                  file.addClass("file");
+                  cursor.add(link);
+                } else {
+                  file.addClass("dir");
+                  var label=new basic.Div("label");
+                  label.attrs({id:paths[i]});
+                  file.add(label);
+                  label.content(paths[i]+"\\");
+                  file.files={};
+                }
+                cursor.files[paths[i]]=file
+                cursor.add(file);
+              }
+              cursor=file;
+            }
             if(browser.windows.length==1) load(path);
-            cursor.add(link);
-
           });
-
-      });
+        });
       });
       M.Class(function C() {
         C.Super(basic.Div);
@@ -408,9 +400,6 @@ Module(function M() {
           var Lines=new basic.Div("code");
           this.add(Lines);
           this.state={};
-
-          console.debug({estraverse:estraverse});
-
           this.maskcursors=[];
           var filestate={};
 
@@ -420,17 +409,13 @@ Module(function M() {
             enter:function(n,p) {
               browser.enterNode(n,p);
             },
-
             leave:function(n,p) {
               browser.leaveNode(n,p);
             }
           });
-
-
         });
 
         C.Def(function leaveNode(node,parent) {
-
           this.depth--;
           var depth=this.depth;
           var cursor=this.cursor;
@@ -443,8 +428,6 @@ Module(function M() {
             nodetypes[node.type].leave.call(this,node,parent,cursor);
           else
             nodetypes["Unknown"].leave.call(this,node,parent,cursor);
-
-
           var item=cursor;
           item.Mixin(event.hasEvents);
           var tooltip=new basic.Div("label");
@@ -462,7 +445,6 @@ Module(function M() {
           });
           item.addEvent("select","click",function(e) {
             console.debug(node);
-
             //  e.stopPropagation();
           });
 
@@ -470,7 +452,6 @@ Module(function M() {
             tooltip.hide();
             item.removeClass("hovering");
             //item.element.style["background-color"]="rgba(180,180,180,0.25)";
-
             item.element.style["border-color"]=""+"rgba(250,250,250,0.25)";
           });
           item.enableEvents();
@@ -499,7 +480,6 @@ Module(function M() {
               var ln=new basic.Div();
               ln.content(line);
               comments.add(ln);
-
             });
           }
 
@@ -511,7 +491,6 @@ Module(function M() {
           for(var maskname in codemasks) {
             var mask=codemasks[maskname];
             if(mask.match(node)) {
-
               mask.enter.call(this,node,parent,cursor,this.state);
               maskcursors.push({mask:mask,node:node});
             }
@@ -524,7 +503,6 @@ Module(function M() {
             cursor.add(item);
             this.cursor=item;
           }
-
         });
       });
     });
