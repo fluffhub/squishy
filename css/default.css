@@ -5,6 +5,8 @@ td { }
 height: 100%;
 position: absolute;
 }
+.sitemenu { position:fixed;right:0;top:0;height:50px;width:30px; }
+
 .submitter {}
 .submitter .comments {
 
@@ -523,6 +525,15 @@ background-color:#efbb55;
 .Comments div {
 background-color:rgba(255,255,255,0.9);
 }
+.code .V {
+
+}
+.V>span>span:nth-child(1) {
+  color:pink;
+}
+.code .V>span:nth-child(1) {
+
+}
 .code {
  font-family:monospace;
   font-size:0.95em;
@@ -555,3 +566,8 @@ background-color:rgba(255,255,255,0.9);
 .code>div {
 
 }
+
+.FileBrowser { position:fixed;right:0;height:100%;top:0;overflow-y:scroll; }
+.FileBrowser .dir { margin-left:1em; }
+.FileBrowser .dir>a {margin-left:1em;display:block; }
+
