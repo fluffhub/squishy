@@ -308,7 +308,21 @@ Module(function M() {
 
             node.element.addClass("cls");
           }
-        }
+        },
+        DefStatement:{
+          match:function(node) {
+            return node.type=="CallExpression"&&node.callee.type=="MemberExpression"&&node.callee.property.name=="Def"
+
+          },
+          enter:function(n,p,c) {
+            var ret= new basic.Div("Def");
+
+          },
+          leave:function(n,p,c) {
+            c.element.style["color"]="green";
+          }
+        },
+
       };
 
       M.Def("nodeformats",nodetypes);
@@ -325,6 +339,16 @@ Module(function M() {
           this.rawfiles={};
           this.windows={};
         });
+        C.Def(function load(path,item) {
+          var browser=this;
+
+          browser.absolutefiles[path]=item;
+          new Request("URI","TEXT").Get(item.filename,{},function(raw) {
+            browser.windows[path]=new M.Self.CodeBrowser(raw,browser);
+            browser.windows[path].addBefore(new basic.Span(path));
+            browser.parent.add(browser.windows[path]);
+          });
+        });
         C.Def(function Import(path1) {
           var item;
           var browser=this;
@@ -334,14 +358,7 @@ Module(function M() {
             var paths=path.split('/');
             var start=0;
             if(paths[0]=="") start=1;
-            function load(path) {
-              browser.absolutefiles[path]=item;
-              new Request("URI","TEXT").Get(item.filename,{},function(raw) {
-                browser.windows[path]=new M.Self.CodeBrowser(raw,browser);
-                browser.windows[path].addBefore(new basic.Span(path));
-                browser.parent.add(browser.windows[path]);
-              });
-            }
+
             var link=new basic.FakeLink("?page="+path,paths[paths.length-1],function() {
               for(var windowid in browser.windows) {
                 browser.windows[windowid].hide();
@@ -349,7 +366,7 @@ Module(function M() {
               if(browser.windows[path]) {
                 browser.windows[path].show();
               } else {
-                load(path);
+                browser.load(path,item);
               }
             });
             for(var i=start;i<paths.length;i++) {
@@ -376,7 +393,7 @@ Module(function M() {
               }
               cursor=file;
             }
-            if(browser.windows.length==1) load(path);
+            if(browser.windows.length==1) browser.load(path,item);
           });
         });
       });

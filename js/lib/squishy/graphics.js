@@ -11,21 +11,21 @@ M.Import('squishy/DOM',function(DOM) {
 
     function color_pallette() {
 
-      cols=[];
+      var cols=[];
 
-      a1=0;
-      a2=0;
-      a3=0;
+      var a1=0;
+      var a2=0;
+      var a3=0;
 
-      h=0;
+      var h=0;
       Math.sin(a1);
-      i=0;
+      var i=0;
       //for (a1=0;a1<Math.PI*2;a1+=Math.PI/18) {
       for(h=0;h<Math.PI*2;h+=2.3996/19) {
         a1+=Math.PI/18;
-        v=Math.pow(((Math.sin(a1*6)+1)/2)+0.01,0.2);
-        row=[];
-
+        var v=Math.pow(((Math.sin(a1*6)+1)/2)+0.01,0.2);
+        var row=[];
+        var r,g,b;
         for (s=Math.PI;s>=0;s-=Math.PI/5) {
           r=Math.round((Math.sin(h)+1)*v*0.9*255/2);
           if(r>255) r=255;
@@ -42,7 +42,7 @@ M.Import('squishy/DOM',function(DOM) {
       return cols;
     }
     function dec2hex(i,n) {
-      padding='';
+      var padding='';
       for(j=0;j<n;j++) {
         padding+='0';
       }
@@ -54,9 +54,9 @@ M.Import('squishy/DOM',function(DOM) {
     }
     function random_color(a){
       a=Math.random()*2*Math.PI;
-      r=Math.round((Math.sin(a)+1)*255/2);
-      g=Math.round((Math.sin(a+Math.PI/2)+1)*255/2);
-      b=Math.round((Math.sin(a+Math.PI)+1)*255/2);
+      var r=Math.round((Math.sin(a)+1)*255/2);
+      var g=Math.round((Math.sin(a+Math.PI/2)+1)*255/2);
+      var b=Math.round((Math.sin(a+Math.PI)+1)*255/2);
       //a+=2.3996;
       return {r:r,g:g,b:b};
     }
@@ -69,11 +69,11 @@ M.Import('squishy/DOM',function(DOM) {
       });
     }
     function dims (item) {
-      o=item.offset();
+      var o=item.offset();
       return {left:o.left,top:o.top,w:item.width(),h:item.height()};
     }
     function dims2(item) {
-      o=item.position();
+      var o=item.position();
       return {x1:o.left,y1:o.top,x2:item.width()+o.left,y2:item.height()+o.top};
     }
     function intersect_rect(r1,r2) {
@@ -85,7 +85,7 @@ M.Import('squishy/DOM',function(DOM) {
     }
     M.Class(function C() {
       C.Init(function Canvas(target, cls) {
-        canvas=document.createElement('CANVAS');
+        var canvas=document.createElement('CANVAS');
         canvas.width="100%";
         canvas.height="100%";
         if(cls)
@@ -101,7 +101,7 @@ M.Import('squishy/DOM',function(DOM) {
       });
       C.Mixin({
         reset:function() {
-          gcd=dims($(this.canvas));
+          var gcd=dims($(this.canvas));
           this.context.setTransform(1,0,0,1,0,0);
           this.context.translate(-gcd.left,-gcd.top);
           this.context.clearRect(0,0,canvas.width+gcd.left,canvas.height+gcd.top);
@@ -117,15 +117,15 @@ M.Import('squishy/DOM',function(DOM) {
           this.context.lineWidth=w;
           this.context.strokeStyle=style;
           this.context.moveTo(start.left,start.top);
-          dx=start.left-end.left;
-          dy=start.top-end.top;
-          mlc=Math.sqrt(dx*dx+dy*dy)/1.75;
+          var dx=start.left-end.left;
+          var dy=start.top-end.top;
+          var mlc=Math.sqrt(dx*dx+dy*dy)/1.75;
           //mlc=d/2;
           this.context.bezierCurveTo(start.left+mlc,start.top,end.left-mlc,end.top,end.left,end.top);
           this.context.stroke();
         },
         draw_wire_path:function (ip,op,w,style) {
-          context=this.context;
+          var context=this.context;
           context.beginPath();
           context.lineWidth=w;
           context.strokeStyle=style;
