@@ -226,6 +226,8 @@ border-left:1px solid black;
   text-indent:8px;
 }
 .code .clears { clear:both;display:block; }
+.code .init {border:2px solid green;
+border-width:2px 0 2px 0;}
 .code * { position:relative;color:#555;border:0px solid rgba(0,0,0,0);background-color:rgba(180,180,180,0.1); }
 .code div { padding-top:0.0em;margin:0;margin-left:0.5em; }
 .code div>span:first-child { margin-top:0.8em;}

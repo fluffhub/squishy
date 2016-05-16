@@ -45,6 +45,16 @@ M.Import('squishy/DOM', function (DOM) {
         }
 			});
 		});
+  M.Class(function C() {
+
+    C.Super(DOM.Tag);
+    C.Init(function Anchor(name) {
+     DOM.Tag.call(this,"a");
+      this.attrs({name:name});
+
+    });
+  });
+
 		M.Class(function C() {
 			C.Super(Link);
 			C.Init(function FakeLink(url,content,callback) {

@@ -149,8 +149,6 @@ Module(function M() {
               cursor.elements[i].add(new basic.Span(","));
             }
           }
-
-
         }},
         ForStatement:{enter:function(n,p) {
           return new basic.Span("for ","FL");
@@ -214,6 +212,29 @@ Module(function M() {
       };
       var curstate={}
       var codemasks={
+        InitStatement:{
+          match:function(node) {
+            if(node.type=="CallExpression") {
+              if(node.callee.type=="MemberExpression") {
+                if(node.callee.property.name=="Init") {
+                  return true;
+                }
+              }
+            }
+          },
+          enter:function(n,p,c) {
+
+          },
+          leave:function(n,p,c) {
+            c.addClass("init");
+            var name;
+            if(n.params&&n.params[0]) {
+              if(n.params[0].id) {
+                c.add(new basic.Anchor(n.params[0].id));
+              }
+            }
+          }
+        },
         ImportStatement:{
           match:function(node) {
             if(node.type=="CallExpression") {
@@ -264,7 +285,6 @@ Module(function M() {
                 browser.browser.Import(arg.value);
               });
             }
-
           }
         },
         ModuleStatement:{
@@ -316,7 +336,7 @@ Module(function M() {
           },
           enter:function(n,p,c) {
             var ret= new basic.Div("Def");
-
+            return ret;
           },
           leave:function(n,p,c) {
             c.element.style["color"]="green";
@@ -459,10 +479,11 @@ Module(function M() {
             tooltip.show();
             item.addClass("hovering");
             item.element.style["border-color"]=""+PseudoRandomColor(d,0.5);
+             e.stopPropagation();
           });
           item.addEvent("select","click",function(e) {
             console.debug(node);
-            //  e.stopPropagation();
+              e.stopPropagation();
           });
 
           item.addEvent("hidetip","mouseout",function(e) {
@@ -470,6 +491,7 @@ Module(function M() {
             item.removeClass("hovering");
             //item.element.style["background-color"]="rgba(180,180,180,0.25)";
             item.element.style["border-color"]=""+"rgba(250,250,250,0.25)";
+            e.stopPropagation();
           });
           item.enableEvents();
           if(parent&&parent.loc.start.line!=node.loc.start.line) {

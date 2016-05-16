@@ -134,7 +134,7 @@ This is required in some cases:
   - or in procedural definitions which will not be concurrently executed.
 
 */
-      Import("js/lib/ckeditor/ckeditor",function(cke) { console.debug("?????"); console.debug(cke); });
+    //  Import("js/lib/ckeditor/ckeditor",function(cke) { console.debug("?????"); console.debug(cke); });
 
       /* this includes several default stylesheets
 */
