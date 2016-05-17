@@ -23,11 +23,11 @@ Module(function M() {
           var item=new basic.Span("new ","C");
           return item;
         },leave:function(n,p,c) {
-          c.elements[1].add(new basic.Span("("));
+          n.callee.element.add(new basic.Span("("));
           c.add(new basic.Span(")"));
           if(n.arguments.length>1) {
-            for(var i=3;i<c.elements.length-3;i+=2) {
-              c.elements[i].add(new basic.Span(","));
+            for(var i=0;i<n.arguments.length;i++) {
+              n.arguments[i].element.add(new basic.Span(","));
             }
           }
         }},
@@ -48,7 +48,8 @@ Module(function M() {
           cursor.add(new basic.Span(";","EC"));
         }},
         VariableDeclaration:{enter:function(node) {
-          var item=new basic.Div("V");
+          var item=new basic.Span("");
+          item.addClass("V");
           item.add(new basic.Span("var "));
           return item;
         },leave:function(node,parent,cursor) {
@@ -62,13 +63,13 @@ Module(function M() {
         MemberExpression:{enter:function(n,p,c) {
           return new basic.Span("","M");
         },leave:function(n,p,c) {
-          var L=c.elements.length;
+          //var L=c.elements.length;
           if(n.property.type=="Literal") {
-            c.insert(new basic.Span("["),c.elements[2])
-            c.elements[2].addBefore(new basic.Span("["));
-            c.elements[2].add(new basic.Span("]"));
+            c.insert(new basic.Span("["),n.property.element)
+            n.property.element.addBefore(new basic.Span("["));
+            n.property.element.add(new basic.Span("]"));
           }else {
-            c.elements[2].addBefore(new basic.Span( ".","DL"));
+            n.property.element.addBefore(new basic.Span( ".","DL"));
           }
         }},
         Identifier:{enter:function(node,parent) {
@@ -83,19 +84,19 @@ Module(function M() {
           item.add(new basic.Span("function ","F"));
           return item;
         },leave:function(n,p,c) {
-          c.elements[1].add(new basic.Span(")"));
-          c.elements[2].add(new basic.Span("{"));
+          n.params[n.params.length-1].element.add(new basic.Span(")"));
+          c.add(new basic.Span("{"));
           c.add(new basic.Span("}"));
         }},
         AssignmentExpression:{enter:function(n,p,c) {
           return new basic.Span("","A");
         },leave:function(n,p,c) {
-          c.elements[2].addBefore(new basic.Span(" = "));
+          n.right.element.addBefore(new basic.Span(" = "));
         }},
         FunctionExpression:{enter:function(n,p,c) {
           return new basic.Span("","");
         },leave:function(n,p,c) {
-          c.addBefore(new basic.Span("function "));
+          n.element.addBefore(new basic.Span("function "));
           var parampos=0;
           if(n.id!==null) parampos=1;
           if(n.params&&n.params.length>0) {
@@ -108,7 +109,7 @@ Module(function M() {
             n.params[n.params.length-1].element.add(new basic.Span(")"));
           }
           else {
-            c.elements[parampos].add(new basic.Span("() "));
+            c.add(new basic.Span("() "));
           }
 
         }},
@@ -116,7 +117,7 @@ Module(function M() {
           return new basic.Span("","OP");
         },leave:function(n,p,c) {
           if(n.operator) {
-            c.elements[1].add(new basic.Span(n.operator));
+            n.argument.element.add(new basic.Span(n.operator));
           }
         }},
         ReturnStatement:{enter:function(n,p,c) {
@@ -135,7 +136,7 @@ Module(function M() {
           return new basic.Span("");
         },leave:function(n,p,c) {
           if(n.init!=null)
-            c.elements[1].add(new basic.Span(" = "));
+            n.init.element.addBefore(new basic.Span(" = "));
         }},
         CallExpression:{enter:function(n,p) {
           var item=new basic.Span("","EX");
@@ -145,8 +146,8 @@ Module(function M() {
           cursor.elements[0].add(new basic.Span("("));
           cursor.add(new basic.Span(")"));
           if(n.arguments.length>1) {
-            for(var i=3;i<cursor.elements.length-3;i+=2) {
-              cursor.elements[i].add(new basic.Span(","));
+            for(var i=0;i<n.arguments.length-1;i++) {
+              n.arguments[i].element.add(new basic.Span(","));
             }
           }
         }},
@@ -159,14 +160,14 @@ Module(function M() {
           return new basic.Span("","OP");
         },leave:function(n,p,c) {
           if(n.operator) {
-            c.elements[2].addBefore(new basic.Span(n.operator));
+            n.left.element.add(new basic.Span(n.operator));
           }
         }},
         BinaryExpression:{enter:function(n,p) {
           return new basic.Span("","OP");
         },leave:function(n,p,c) {
           if(n.operator) {
-            c.elements[2].addBefore(new basic.Span(n.operator));
+            n.left.element.add(new basic.Span(n.operator));
           }
         }},
         IfStatement:{enter:function(node,parent) {
@@ -189,7 +190,7 @@ Module(function M() {
         Property:{enter:function(node,parent,c) {
           return new basic.Span("","");
         },leave:function(n,p,c) {
-          c.elements[1].add(new basic.Span(":"));
+          n.key.element.add(new basic.Span(":"));
           //   c.elements[2].add(new basic.Span(","));
         }},
         Unknown:{enter:function(node,parent) {
@@ -379,7 +380,7 @@ Module(function M() {
             var start=0;
             if(paths[0]=="") start=1;
 
-            var link=new basic.FakeLink("?page="+path,paths[paths.length-1],function() {
+            var filelink=new basic.FakeLink("?page="+path,paths[paths.length-1],function() {
               for(var windowid in browser.windows) {
                 browser.windows[windowid].hide();
               }
@@ -399,7 +400,7 @@ Module(function M() {
 
                 if(paths.length-i==1) {
                   file.addClass("file");
-                  cursor.add(link);
+                  cursor.add(filelink);
                 } else {
                   file.addClass("dir");
                   var label=new basic.Div("label");
@@ -412,6 +413,29 @@ Module(function M() {
                 cursor.add(file);
               }
               cursor=file;
+              /* now iterate the enumerable members of item! */
+              var cursize=1;
+              cursor.add((function travel(item) {
+                var items=Object.keys(item);
+                if(items.length>0) cursor.addClass("module");
+                for(var j=0;j<items.length;j++) {
+                  var key=items[j];
+                  var c=new basic.Span(key);
+                  c.addClass("member");
+                  c.element.style["font-size"]=cursize+"em";
+                  cursize=cursize*0.9;
+                  var member=item[items[j]];
+                  if(member instanceof Object) {
+                  var submembers=Object.keys(member);
+                  if(cursize>0.2) {
+                  if(submembers.length>0) {
+                    c.add(travel(member));
+                  }
+                  }
+                  }
+                  return c;
+                }
+              })(item))
             }
             if(browser.windows.length==1) browser.load(path,item);
           });
@@ -483,7 +507,7 @@ Module(function M() {
           });
           item.addEvent("select","click",function(e) {
             console.debug(node);
-              e.stopPropagation();
+             // e.stopPropagation();
           });
 
           item.addEvent("hidetip","mouseout",function(e) {
@@ -527,20 +551,26 @@ Module(function M() {
           } else {
             item=nodetypes["Unknown"].enter.call(this,node,parent,cursor,this.state);
           }
-          for(var maskname in codemasks) {
-            var mask=codemasks[maskname];
-            if(mask.match(node)) {
-              mask.enter.call(this,node,parent,cursor,this.state);
-              maskcursors.push({mask:mask,node:node});
-            }
-          }
+
           if(item) {
             item.node=node;
             node.element=item;
             cursor.add(item);
             item.element.style["z-index"]=10000+depth;
-            cursor.add(item);
+            //cursor.add(item);
             this.cursor=item;
+          }
+          for(var maskname in codemasks) {
+            var mask=codemasks[maskname];
+            if(mask.match(node)) {
+              var newnode=mask.enter.call(this,node,parent,cursor,this.state);
+              if(newnode&&newnode!==true) {
+                node.element.remove()
+                newnode.add(node.element);
+                cursor.add(newnode);
+              }
+              maskcursors.push({mask:mask,node:node});
+            }
           }
         });
       });
