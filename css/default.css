@@ -221,6 +221,15 @@ border-right: 1px solid #555;
   margin-left:5px;
 border-left:1px solid black;
 }
+span.member {
+    display: block;
+    margin-left: 1em;
+}
+.file.module {
+    margin-left: 1em;
+    /* color: #ddcccc; */
+    color: #aaa;
+}
 .pane>.title-bar {
   line-height:35px;
   text-indent:8px;
