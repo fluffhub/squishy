@@ -116,7 +116,7 @@ to the import statement by its first parameter, which is a list of resources sep
     "squishy/interactive",
     "squishy/form",
     "squishy/layout",
-    "js/lib/squishy_ext/Request",
+    "squishy/request",
     "app/codebrowser.js",
     /*
 
