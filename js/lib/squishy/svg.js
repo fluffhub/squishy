@@ -78,7 +78,7 @@ M.Import('squishy/DOM',function(DOM) {
 
         if(src!==null) {
 
-          Import("/js/lib/squishy_ext/Request",function(Req) {
+          Import("squishy/request",function(Req) {
             var Request=Req.Request;
             var req=new Request("URI","TEXT").Get(src,{},function(svgtext) {
 
