@@ -1,40 +1,19 @@
 Module(function M() {
 M.Import('squishy/DOM',function(DOM) {
   var Tag=DOM.LayoutItem;
+  var XTag=DOM.XTag;
   var SVGNS="http://www.w3.org/2000/svg";
-  var XTag=M.Class(function C(){
-    C.Super(Tag);
-    C.Init(function XTag(NS,type,attrs) {
-      this.xmlns=NS;
-      Object.defineProperty(this,'element',{value:document.createElementNS(NS,type)});
-      this.element.object=this;
-      Object.defineProperty(this,'elements',{value:[],writable:true});
 
-      this.elements=[];
-      this.element.Tag=this;
-      if(attrs)
-        for (var attr in attrs)
-          this.element.setAttributeNS(null,attr,attrs[attr]);
-    });
-
-    C.Mixin({
-      NSattr:function(name,value) {
-        if(name) {
-          if(value) this.element.setAttributeNS(null,name,value);
-          else return this.element.getAttributeNS(null,name);
-        }
-      },
-      NSattrs:function(attrs) {
-        for (var attr in attrs) {
-          this.element.setAttributeNS(null,attr,attrs[attr]);
-        }
-      }
-    });
-  });
   var SVGTag=M.Class(function C() {
     C.Super(XTag);
     C.Init(function SVGTag(type,attrs) {
-      XTag.call(this,SVGNS,type,attrs);
+      if(arguments[0] instanceof Node) {
+        XTag.call(this,SVGNS,arguments[0].tagName);
+        this.element=arguments[0];
+      } else {
+        XTag.call(this,SVGNS,type,attrs);
+      }
+
       this.position={x:0,y:0};
     });
     C.Def(function bounds() {
@@ -48,6 +27,7 @@ M.Import('squishy/DOM',function(DOM) {
         extend(this.position,x);
       this.NSattrs({transform:'translate('+this.position.x+','+this.position.y+')'});
     });
+
     C.Def(function ClassName() {
       if(this.element.className.baseVal)
       return this.element.className.baseVal
@@ -68,7 +48,9 @@ M.Import('squishy/DOM',function(DOM) {
   var SVG=M.Class(function C(){
     C.Super(SVGTag);
     C.Init(function SVG() {
-      SVGTag.call(this,'svg');
+
+        SVGTag.call(this,'svg');
+
       with(SVG.kwargs({width:null,height:null,src:null,content:null,onload:null})) {
         var tag=this;
         this.NSattrs({version:"1.1"});
@@ -355,26 +337,29 @@ M.Import('squishy/DOM',function(DOM) {
       return _interpolate(this.paths,arguments);
     });
   });
-  M.Def("defaults",{
+  var defaults=M.Def("defaults",{
     svg:function(element) {
-      var svg=new SVG();
+      var svg=new SVGTag(element.getAttributeNS(null,"width"),element.getAttributeNS(null,"height"));
+      //svg.element=element;
+      return svg
     },
     g:function(element) {
 
-      var g=new Group(element.getAttributeNS("class"),element.getAttributeNS("id"));
-      g.element=element;
+      var g=new Group()//element.getAttributeNS(null,"class"),element.getAttributeNS(null,"id"));
+      //g.element=element;
       return g;
 
     },
     path:function(element) {
-      var d=element.getAttributeNS("d");
-      var fill=element.getAttributeNS("fill");
-      var stroke=element.getAttributeNS("stroke");
-      var id=element.getAttributeNS("id");
-        var path=new Path(d,{},fill,stroke,id);
+      var d=element.getAttributeNS(null,"d");
+      var fill=element.getAttributeNS(null,"fill");
+      var stroke=element.getAttributeNS(null,"stroke");
+      var id=element.getAttributeNS(null,"id");
+      var path=new Path(d,{},fill,stroke,id);
+      //path.element=element;
       return path;
     },
-    text:function(element) {
+    /*text:function(element) {
 
     },
     circle:function(element) {
@@ -386,8 +371,25 @@ M.Import('squishy/DOM',function(DOM) {
     _default:function(element) {
 
 
-    }
+    }*/
   });
+  DOM.namespaces[SVGNS]=new DOM.NameSpace({
+      name:"SVG",
+      convert:function convert(element) {
+        var el;
+        if(element.tagName in defaults) {
+          el= defaults[element.tagName](element)
+        }
+        else el= new XTag(SVGNS,element.tagName);
 
+        el.element=element;
+        element.Tag=el;
+        return el;
+      },
+
+      tags:{
+
+      }
+  });
 });
 });

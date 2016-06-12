@@ -1,12 +1,41 @@
 Module(function M() { if(document) {
+  M.Def("TagList",function TagList() {})
+    var NameSpace=M.Class(function C() {
+    C.Init(function NameSpace() {
+      with(NameSpace.kwargs({name:"Unnamed", tags:{}, convert:function(o) { return o; },nsuri:""})) {
+        /*
+            convert should take a DOM node and return a Squishy style element wrapper,
+            with an attribute "element" pointing to the DOM node
+        */
+        Object.defineProperty(this,"tags",{value:tags});
+        Object.defineProperty(this,"convert",{value:convert});
+        this.name=name;
+        this.nsuri=nsuri;
+      }
+    });
+  });
+
+  var XHTMLNS="http://www.w3.org/1999/xhtml"
+  var namespaces=M.Def("namespaces",{});
+  namespaces[XHTMLNS]=new NameSpace({
+      name:"XHTML",
+      convert:function convert(element) {
+        return new Tag(element);
+      },
+
+      tags:{
+
+      }
+  });
+
   var Tag=M.Class(function C() {
     C.Init(function Tag() { with(Tag.kwargs({"type":"div","cls":null,"id":null,attrs:null,content:""})) {
       /* @args type, cls, id, attrs */
       var element;
-      if(type instanceof Element) {
+      if(arguments[0] instanceof Element) {
         /* this is a wrapper for an existing DOM element
         */
-        var element=type;
+        var element=arguments[0];
 
       } else {
         var element=document.createElement(type);
@@ -194,10 +223,65 @@ Module(function M() { if(document) {
       this.elements=[];
     });
     C.Def(function query(str) {
-      return this.element.querySelectorAll(str);
+      var elements= Array.prototype.slice.call(this.element.querySelectorAll(str));
+      var new_elements=new M.Self.TagList()
+      Object.defineProperty(new_elements, "length",{enumerable:true,editable:true})
+       var el;
+      //for(var i=0;i<elements.length;i++) {
+      elements.forEach(function(element,i) {
+        new_elements.length++;
+        new_elements[i]=undefined;
+
+        //var element=elements[i];
+        if(element.hasOwnProperty("Tag")) {
+          new_elements[i]=element.Tag;
+        } else {
+          function populate(o) {
+            element.Tag=o;
+            o.element=element;
+            new_elements[i]=o;
+            el.query("*")
+          }
+          //make a new wrapping element and add it!
+          var classname=element.getAttribute("data-class");
+          if(classname&&classname!="") {
+            //load by import the classname.
+            //classname should be inthe format importname#classname
+            var cln=classname.split("#");
+            var ii=i;
+            Import(cln[0],function(imported) {
+              var cls=imported[cln[1]]
+              if(cls) {
+                el=new cls(element);
+                populate(el);
+              }
+            });
+
+          } else {
+            //var cons=M.Self.Tag;
+
+            if(M.Self.namespaces[element.namespaceURI]) {
+              el=M.Self.namespaces[element.namespaceURI].convert(element);
+              populate(el);
+            }
+            else {
+              console.debug(element.namespaceURI);
+              el=new M.Self.XTag(element.namespaceURI,element.tagName);
+              populate(el);
+            }
+
+
+          }
+
+        }
+      });
+      return new_elements;
     });
 
   });
+
+
+
   var LayoutItem=M.Class(function C() {
     C.Super(Tag);
     C.Init(function LayoutItem() {
@@ -266,7 +350,35 @@ Module(function M() { if(document) {
 
     });
   });
+  var XTag=M.Class(function C(){
+    C.Super(Tag);
+    C.Init(function XTag(NS,type,attrs) {
+      this.xmlns=NS;
+      Object.defineProperty(this,'element',{value:document.createElementNS(NS,type),writable:true});
+      this.element.object=this;
+      Object.defineProperty(this,'elements',{value:[],writable:true});
 
+      this.elements=[];
+      this.element.Tag=this;
+      if(attrs)
+        for (var attr in attrs)
+          this.element.setAttributeNS(null,attr,attrs[attr]);
+    });
+
+    C.Mixin({
+      NSattr:function(name,value) {
+        if(name) {
+          if(value) this.element.setAttributeNS(null,name,value);
+          else return this.element.getAttributeNS(null,name);
+        }
+      },
+      NSattrs:function(attrs) {
+        for (var attr in attrs) {
+          this.element.setAttributeNS(null,attr,attrs[attr]);
+        }
+      }
+    });
+  });
   M.Class(function C() {
     C.Super(LayoutItem);
     C.Init(function Frame() { with(Frame.kwargs({win:window,doc:document,callback:function(){}})) {

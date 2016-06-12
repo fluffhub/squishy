@@ -118,12 +118,13 @@ to the import statement by its first parameter, which is a list of resources sep
     "squishy/layout",
     "js/lib/squishy_ext/Request",
     "app/codebrowser.js",
+    "app/filebrowser.js",
     /*
 
 Once all of the files listed have loaded and run, they will be passed in order to the code inside the Import.
 
 */
-    function(squishy,DOM, basic, interactive,form,layout,Request,codebrowser) {
+    function(squishy,DOM, basic, interactive,form,layout,Request,codebrowser,filebrowser) {
       /*
 
 You can also use Import to just load files by calling it without referencing the containing Module.
@@ -261,12 +262,15 @@ var SquishyLogo=null;
         SquishyLogo=new svg.SVG(100,100);
         SquishyLogo.addClass("sitemenu");
         var svglogo=new svg.SVG({src:"img/squishy.svg",onload:function(svg) {
-          SquishyLogo.add(svg.query("#SquishyLogo")[0]);
+          var logo=svg.query("#SquishyLogo")[0];
+          console.debug({squishylogo:logo,svg:svg});
+          logo.remove();
+          SquishyLogo.add(logo);
           SquishyLogo.NSattrs({viewbox:"0 0 100 100"});
         }})
         Content.add(SquishyLogo);
       });
-      var browser=new codebrowser.FileBrowser();
+      var browser=new filebrowser.FileBrowser();
 
       M.Def("browser",browser);
       console.debug({M:M});

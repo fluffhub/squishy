@@ -88,11 +88,7 @@ function Module() {
                 var M=this;
                 window.Import(this.filename,function(loaded) {
                   M.loaded=true;
-
-
-
                   extend(M,loaded);
-
                   callback(M);
                 });
               },
@@ -507,6 +503,7 @@ function Class(def,fun) {
   if(currentScript.Module) {
     fun.src=currentScript.Module.filename+"#"+name;
   }
+  fun.isClass=true;
   return fun;
 }
 
