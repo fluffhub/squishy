@@ -6,7 +6,7 @@ Module(function M() {
     "js/lib/esprima/esprima",
     "js/lib/escodegen/escodegen.squishy.js",
     "js/lib/estraverse/estraverse",
-    "js/lib/squishy_ext/Request.js",
+    "squishy/request",
     function(event,basic,interactive,esprima,ESCG,esv,Req) {
       var Request=Req.Request;
       function PseudoRandomColor(n,a) {
