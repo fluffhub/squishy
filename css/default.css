@@ -5,7 +5,7 @@ td { }
 height: 100%;
 position: absolute;
 }
-.sitemenu { position:fixed;right:0;top:0;height:50px;width:30px; }
+.sitemenu { position:fixed;right:0;top:0;height:50px;width:30px;z-index:100000; }
 
 .submitter {}
 .submitter .comments {
@@ -16,6 +16,7 @@ position: absolute;
    font-size:1.5em;
   line-height:25px;
 }
+.FileBrowser { z-index:10000;background-color:white; }
 .submitter .button {
     bottom: 0;
     position: absolute;
@@ -186,7 +187,36 @@ transform: skew(15deg, 0deg);
 border-right: 1px solid #555;
 
 }
-
+a.filelink {
+    border-bottom:1px solid orange;
+      width: 100%;
+    margin-left: -1em;
+    padding-left: 1em;
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: block;
+  transition:background-color 3s ease;
+  background-color:rgba(255,255,0,0.5);
+}
+a.filelink.loaded {
+  background-color:rgba(255,255,255,0.25);
+}
+.module.member {
+    /* border-left: 1px solid orange; */
+    padding-top: 1.25em;
+    position: relative;
+}
+.collapsible.dir>h3 {
+    background: none;
+    border-bottom: none;
+}
+.collapsible.dir .content {
+ border:none;
+  background-color:rgba(200,200,200,0.25);
+}
 .pane>.content {
 
   border:1px inset #ccc;
@@ -221,22 +251,26 @@ border-right: 1px solid #555;
   margin-left:5px;
 border-left:1px solid black;
 }
-span.member {
+.FileBrowser .member {
     display: block;
     margin-left: 1em;
 }
 .file.module {
     margin-left: 1em;
     /* color: #ddcccc; */
-    color: #aaa;
+    color: #bb5;
 }
 .pane>.title-bar {
   line-height:35px;
   text-indent:8px;
 }
 .code .clears { clear:both;display:block; }
-.code .init {border:2px solid green;
+.code .init {border:2px solid green;background:rgba(25,150,25,0.5);
+  display:block;
 border-width:2px 0 2px 0;}
+
+.code .cls { background:rgba(100,200,100,0.5);display:block; margin:10px 0;}
+.code .module { background:rgba(200,200,100,0.5);display:block;}
 .code * { position:relative;color:#555;border:0px solid rgba(0,0,0,0);background-color:rgba(180,180,180,0.1); }
 .code div { padding-top:0.0em;margin:0;margin-left:0.5em; }
 .code div>span:first-child { margin-top:0.8em;}

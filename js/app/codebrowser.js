@@ -84,6 +84,7 @@ Module(function M() {
           item.add(new basic.Span("function ","F"));
           return item;
         },leave:function(n,p,c) {
+          if(n.params.length>0)
           n.params[n.params.length-1].element.add(new basic.Span(")"));
           c.add(new basic.Span("{"));
           c.add(new basic.Span("}"));
@@ -258,9 +259,11 @@ Module(function M() {
             var nl=node.arguments.length;
             var fun = node.arguments[nl-1];
             var browser=this;
+            node.element.addClass("Import");
             for(var i=0;i<nl-1;i++) {
               var arg=node.arguments[i];
               var farg=fun.params[i];
+
               window.Import(arg.value,function(mod) {
                 arg.element.clear();
                 arg.element.content(" ");
@@ -268,7 +271,7 @@ Module(function M() {
 
                 });
                 //  modlink.element.href="?page="+mod.filename;
-                modlink.element.style.color="orange";
+                modlink.addClass("module_link")
                 arg.element.add(modlink);
 
                 if(fun&&fun.type=="FunctionExpression"&&fun.params) {
@@ -279,7 +282,7 @@ Module(function M() {
                     funlink.element.onclick=function(e) {
                       console.debug(mod);
                     }
-                    funlink.element.style.color="orange";
+                    funlink.addClass("module_link")
                     farg.element.add(funlink);
                   });
                 }
@@ -302,7 +305,8 @@ Module(function M() {
             state.Module=node
           },
           leave:function(node,parent,cursor,state) {
-            node.element.element.style["background-color"]="orange";
+            node.element.addClass("module");
+            //node.element.element.style["background-color"]="orange";
 
           }
         },
@@ -354,11 +358,14 @@ Module(function M() {
       M.Class(function C() {
         C.Super(basic.Div);
         C.Init(function CodeBrowser(raw,browser) {
+
           basic.Div.call(this,"CodeBrowser");
           var parsed=esprima.parse(raw,{comment:true,attachComment:true,range:true,loc:true,tokens:true});
           var comments=parsed.comments;
           var code=escodegen.generate(parsed);
           var lines = code.split("\n");
+          this.curline=0;
+          this.curcol=0;
           this.browser=browser;
           console.debug({lines:lines, comments:comments, parsed:parsed});
           var Comments=new basic.Div("comments");
@@ -428,10 +435,12 @@ Module(function M() {
             e.stopPropagation();
           });
           item.enableEvents();
-          if(parent&&parent.loc.start.line!=node.loc.start.line) {
+          if(parent&&((parent.loc.start.line!=node.loc.start.line))) {
             item.addClass("clears");
           }
           this.cursor=cursor.parent;
+          curline=node.loc.end.line;
+
         });
 
         C.Def(function enterNode(node,parent) {
