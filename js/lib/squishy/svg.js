@@ -391,5 +391,8 @@ M.Import('squishy/DOM',function(DOM) {
 
       }
   });
+  window.Import.types["svg"]=function(path,callback) {
+    var img=new SVG({src:path,onload:callback});
+  }
 });
 });

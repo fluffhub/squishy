@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 612 792" enable-background="new 0 0 612 792" xml:space="preserve">
+<rect x="253.3" y="269.6" fill="none" width="92.3" height="17.1"/>
+<rect x="253.3" y="300.3" fill="none" width="92.3" height="17.1"/>
+<rect x="253.3" y="315.6" fill="none" width="92.3" height="17.1"/>
+<rect x="238.1" y="254.3" fill="none" width="107.5" height="17.1"/>
+<g id="Style">
+	<rect x="238.1" y="256.1" fill="#39B54A" width="13.5" height="13.5"/>
+	
+		<text transform="matrix(1 0 0 1 241.3963 267.0238)" fill="#E2E2E2" font-family="'FranklinGothic-Demi'" font-size="12.7639" letter-spacing="-1">S</text>
+</g>
+<rect x="253.3" y="271.4" fill="#39B54A" width="13.5" height="13.5"/>
+<text transform="matrix(1 0 0 1 256.5807 282.3568)" fill="#E2E2E2" font-family="'FranklinGothic-Book'" font-size="12.7639" letter-spacing="-1">S</text>
+<g id="Layout">
+	<rect x="253.3" y="271.4" fill="#D5AF29" width="13.5" height="13.5"/>
+	
+		<text transform="matrix(1 0 0 1 256.5807 282.3568)" fill="#E2E2E2" font-family="'FranklinGothic-Demi'" font-size="12.7639" letter-spacing="-1">L</text>
+</g>
+<g id="Module">
+	<g>
+		<rect x="268.5" y="286.9" fill="#226FB7" width="13.5" height="13.5"/>
+		<g>
+			
+				<text transform="matrix(1 0 0 1 269.597 297.833)" fill="#E2E2E2" font-family="'FranklinGothic-Demi'" font-size="12.7639" letter-spacing="-1">M</text>
+		</g>
+	</g>
+</g>
+<g>
+	<rect x="205.2" y="324.2" fill="none" stroke="#226FB7" stroke-miterlimit="10" width="13.5" height="13.5"/>
+	<g>
+		
+			<text transform="matrix(1 0 0 1 206.3918 335.1191)" fill="#226FB7" font-family="'FranklinGothic-Demi'" font-size="12.7639" letter-spacing="-1">M</text>
+	</g>
+</g>
+<g id="Type">
+	<rect x="282.8" y="302.1" fill="#A3469A" width="13.5" height="13.5"/>
+	
+		<text transform="matrix(1 0 0 1 286.5157 313.0223)" fill="#E2E2E2" font-family="'FranklinGothic-Demi'" font-size="12.7639" letter-spacing="-1">T</text>
+</g>
+<g id="Graphic_1_">
+	<rect id="Graphic" x="268.5" y="317.4" fill="#BA3E26" width="13.5" height="13.5"/>
+	
+		<text transform="matrix(1 0 0 1 271.1902 328.3553)" fill="#E2E2E2" font-family="'FranklinGothic-Demi'" font-size="12.7639" letter-spacing="-1">G</text>
+</g>
+<text transform="matrix(1 0 0 1 257.9011 267.024)" fill="#010101" font-family="'LucidaConsole'" font-size="13.9779">name</text>
+<text transform="matrix(1 0 0 1 286.7725 297.8332)" fill="#3D5BA9" font-family="'LucidaConsole'" font-size="13">name</text>
+<text transform="matrix(1 0 0 1 287.8082 327.645)" fill="#010101" font-family="'LucidaConsole'" font-size="13.9779">name</text>
+<polygon fill="none" points="253.3,286.8 238.1,286.8 238.1,269.6 245.7,269.6 253.3,269.6 "/>
+<polyline fill="none" stroke="#5A5A5A" stroke-width="2" stroke-miterlimit="10" points="253.3,278.2 245.7,278.2 245.7,269.6 "/>
+<rect x="253.3" y="331" fill="none" width="92.3" height="17.1"/>
+<g id="Attribute_1_">
+	<rect id="Attribute" x="268.5" y="332.8" fill="#5B6B6E" width="13.5" height="13.5"/>
+	
+		<text transform="matrix(1 0 0 1 271.1902 343.6882)" fill="#E2E2E2" font-family="'FranklinGothic-Demi'" font-size="12.7639" letter-spacing="-1">A</text>
+</g>
+<text transform="matrix(1 0 0 1 287.8082 342.9778)" fill="#010101" font-family="'LucidaConsole'" font-size="13.9779">name</text>
+<rect x="253.3" y="346.3" fill="none" width="92.3" height="17.1"/>
+<g id="Object">
+	<rect x="268.5" y="348.1" fill="#584845" width="13.5" height="13.5"/>
+	
+		<text transform="matrix(1 0 0 1 271.1902 359.021)" fill="#E2E2E2" font-family="'FranklinGothic-Demi'" font-size="12.7639" letter-spacing="-1">O</text>
+</g>
+<text transform="matrix(1 0 0 1 287.8082 358.3107)" fill="#010101" font-family="'LucidaConsole'" font-size="13.9779">name</text>
+<g id="tip_1_">
+	<rect x="267.6" y="300.3" fill="none" width="15.2" height="17.1"/>
+	<g>
+		<polygon fill="#5A5A5A" points="282.8,309.6 274.7,309.6 274.7,300.3 275.8,300.3 275.8,308.4 282.8,308.4 		"/>
+	</g>
+</g>
+<g id="branch1">
+	<rect x="253.3" y="285" fill="none" width="15.2" height="17.1"/>
+	<polygon fill="#5A5A5A" points="268.5,293 261.4,293 261.4,285 260.3,285 260.3,300.3 261.4,300.3 261.4,294.1 268.5,294.1 	"/>
+</g>
+<g id="branch1_2_">
+	<rect x="253.3" y="331" fill="none" width="15.2" height="17.1"/>
+	<polygon fill="#5A5A5A" points="268.5,339 261.4,339 261.4,331 260.3,331 260.3,346.3 261.4,346.3 261.4,340.1 268.5,340.1 	"/>
+</g>
+<g id="branch1_3_">
+	<rect x="253.3" y="315.6" fill="none" width="15.2" height="17.1"/>
+	<polygon fill="#5A5A5A" points="268.5,323.7 261.4,323.7 261.4,315.7 260.3,315.7 260.3,331 261.4,331 261.4,324.8 268.5,324.8 	
+		"/>
+</g>
+<g id="branch2">
+	<rect x="253.3" y="300.3" fill="none" width="15.2" height="17.1"/>
+	<rect x="260.3" y="300.3" fill="#5A5A5A" width="1.1" height="15.3"/>
+</g>
+<g id="tip">
+	<rect x="253.3" y="346.3" fill="none" width="15.2" height="17.1"/>
+	<g>
+		<polygon fill="#5A5A5A" points="268.5,355.6 260.3,355.6 260.3,346.3 261.4,346.3 261.4,354.4 268.5,354.4 		"/>
+	</g>
+</g>
+<rect x="126.5" y="373.9" fill="none" stroke="#C2C1C1" stroke-miterlimit="10" stroke-dasharray="3" width="92.3" height="17.1"/>
+</svg>

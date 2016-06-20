@@ -230,9 +230,12 @@ Module(function M() {
           leave:function(n,p,c) {
             c.addClass("init");
             var name;
-            if(n.params&&n.params[0]) {
-              if(n.params[0].id) {
-                c.add(new basic.Anchor(n.params[0].id));
+             console.debug({"function":n})
+            if(n.arguments&&n.arguments[0]) {
+
+              if(n.arguments[0].id) {
+
+                c.add(new basic.Anchor(n.arguments[0].id.name));
               }
             }
           }
@@ -332,6 +335,7 @@ Module(function M() {
           leave:function(node,parent,cursor) {
 
             node.element.addClass("cls");
+
           }
         },
         DefStatement:{

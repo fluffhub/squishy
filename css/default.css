@@ -11,7 +11,48 @@ position: absolute;
 .submitter .comments {
 
 }
-
+.member.module .content {
+ float:left;
+}
+.button.grip {
+    float: left;
+    line-height: 1em;
+    /* color: white; */
+    background: none;
+    font-family: monospace;
+    line-height: 1.6em;
+    font-size: 1em;
+    height: 1em;
+    margin-left: -2em;
+    height: 2em;
+    padding: 0;
+    width: 2em;
+    text-align: center;
+    vertical-align: middle;
+  text-decoration:none;
+}
+a.member { text-decoration:none; }
+.member:last-child:before {
+    content: "└";
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 1.35em;
+  line-height:1em;
+}
+.member:before {
+    content: "├";
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 1.35em;
+  line-height:1em;
+    text-decoration: none;
+}
+.module.member.collapsed {
+    line-height: 1.25em;
+    margin: 0;
+    margin-left: 1em;
+    padding: 0;
+}
 .submitter>span {
    font-size:1.5em;
   line-height:25px;

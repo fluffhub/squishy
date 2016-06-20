@@ -4,7 +4,9 @@ Module(function M() { M.Import(
     var LayoutItem=DOM.LayoutItem;
     var Collapsible=M.Class(function C() {
       C.Super(LayoutItem);
-      C.Init(function Collapsible(name, title,content,callback) {
+      C.Mixin(events.hasEvents);
+      C.Init(function Collapsible(name, title,content,callback,handle) {
+        var collaps=this;
         LayoutItem.call(this,'div','collapsible',name); //set id to name
         this.bar=new LayoutItem('h3',null,null);
         this.show=true;
@@ -15,6 +17,12 @@ Module(function M() { M.Import(
         else this.onopen=function() { };
         if(title) this.bar.content(title);
         else this.bar.content(name);
+        if(handle) {
+          this.addBefore(handle);
+          this.button=handle;
+          this.addBefore(handle);
+          this.button.element.onclick=this.handle(this.toggle);
+        } else
         this.bar.element.onclick=this.handle(this.toggle);
         this.open();
         this.disabled=false;
@@ -22,6 +30,27 @@ Module(function M() { M.Import(
           this.add(content);
         this.elements['contents']=this.contents;
         this.elements['bar']=this.bar;
+        this.onclose=function() {};
+
+        Object.defineProperty(this,"__handle",{value:null,writable:true})
+
+        Object.defineProperty(this,"Handle",{get:function() { return this.__handle; },
+                                             set:function(h) {
+                                                              if(h.element) {
+                                                               this.__handle=h;
+                                                                this.__handle.element.onclick=function() {
+                                                                 collaps.toggle();
+                                                                }
+                                                              } collaps.bar.onclick=function() {};
+                                                             }
+                                            });
+      });
+      C.Def(function setHandle(h) {
+        if(typeof h=="function")  {
+
+        } else {
+
+        }
       });
       C.Def(function toggle() {
         if(!this.disabled) {
@@ -45,11 +74,13 @@ Module(function M() { M.Import(
       });
       C.Def(function close() {
         this.opened=false;
+        this.onclose();
         this.contents.addClass("hidden");
       });
       C.Def(function content(value) {
         this.contents.content(value);
       });
+
       C.Def(function add(item) {
         var ni=new LayoutItem('div','list-item');
         ni.add(item,'content');
@@ -229,11 +260,13 @@ Module(function M() { M.Import(
       C.Mixin(events.hasEvents);
 
       C.Def(function enable() {
-        this.addEvent("clickstart","mousedown touchstart",
+        var evs=["mousedown","mouseup","mouseout"]
+        if('ontouchstart' in window)  evs =["touchstart","touchend","touchleave"];
+        this.addEvent("clickstart",evs[0],
                       this.clickstart);
-        this.addEvent("clickend","mouseup touchend",
+        this.addEvent("clickend",evs[1],
                       this.clickend);
-        this.addEvent("cancel","mouseout touchleave",
+        this.addEvent("cancel",evs[2],
                       this.cancel);
         this.addClass('enabled');
         this.removeClass('disabled');
@@ -244,6 +277,7 @@ Module(function M() { M.Import(
         this.addClass('disabled');
       });
       C.Def(function clickstart(ev) {
+
         if(ev.which) {
           if(ev.which==1) {
             this.clicking=true;
@@ -252,6 +286,7 @@ Module(function M() { M.Import(
         else {
           this.clicking=true;
         }
+
       });
       C.Def(function clickend(ev) {
         if(this.clicking) {

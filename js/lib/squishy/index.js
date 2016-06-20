@@ -1,6 +1,24 @@
-"use strict"
-  //var Squishy=document.currentScript;
 
+  //var Squishy=document.currentScript;
+Object.defineProperty(window, '__stack', {
+  get: function(){
+    var orig = Error.prepareStackTrace;
+    Error.prepareStackTrace = function(_, stack){ return stack; };
+    var err = new Error;
+    Error.captureStackTrace(err, arguments.callee);
+    var stack = err.stack;
+    Error.prepareStackTrace = orig;
+    return stack;
+  }
+});
+
+Object.defineProperty(window, '__line', {
+  get: function(){
+    return __stack[1].getLineNumber();
+  }
+});
+
+console.log(__line);
 Function.prototype.kwargs=function kwargs(args) {
   /* if args length >=1,
         if the last arg is an obj,
@@ -143,13 +161,19 @@ function Module() {
       Object.defineProperty(M,'Template',{value:{},writable:true});
       for(var templatefield in window.Module.Template) {
         var Field=function Field() {
-          return Field.fun.apply(M,arguments);
+         // try { throw new Error(""); } catch(e) { console.debug({LN:e}); }
+
+          var ob=Field.fun.apply(M,arguments);
+          if(ob!==undefined&&ob!==null)ob.funcall=__stack[1];
+
+          return ob;
         };
         Field.fun=window.Module.Template[templatefield];
         M.Template[templatefield]=Field;
       }
       extend(callback,M.Template);
       element.ran=false;
+      callback.continue=function() { element.finish() };
       callback.call(M);
       M.loaded=true;
       if(M.waiting==0 && element.finish) element.finish();
@@ -160,7 +184,10 @@ function Module() {
       for(var templatefield in window.Module.Template) {
         var field=window.Module.Template[templatefield];
         M.Template[templatefield]=function Field() {
-          return field.apply(M,arguments);
+
+          var ob=field.apply(M,arguments);
+          if(ob!==undefined&&ob!==null)ob.funcall=__stack[1];
+          return ob;
         }
       }
       extend(callback,M.Template);
@@ -303,7 +330,11 @@ function Import(path,callback) {
         //script.parent=parent;
         if(script.failed) {
           if(callback.error) callback.error(script);
-          else throw new Exception(script);
+          else {
+            console.debug("failed to load script:")
+            console.debug({error:script});
+          //throw new Error(script);
+        }
         } else {
           if(script.dependencies) script.dependencies[script.dependencies.length]=callback;
           else script.dependencies=[callback];

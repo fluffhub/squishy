@@ -1,5 +1,5 @@
 Module(function M() { if(document) {
-  M.Def("TagList",function TagList() {})
+  M.Def("TagList",function TagList() { Object.defineProperty(this,"forEach",{value:Array.prototype.forEach}) } )
     var NameSpace=M.Class(function C() {
     C.Init(function NameSpace() {
       with(NameSpace.kwargs({name:"Unnamed", tags:{}, convert:function(o) { return o; },nsuri:""})) {
@@ -225,7 +225,7 @@ Module(function M() { if(document) {
     C.Def(function query(str) {
       var elements= Array.prototype.slice.call(this.element.querySelectorAll(str));
       var new_elements=new M.Self.TagList()
-      Object.defineProperty(new_elements, "length",{enumerable:true,editable:true})
+      Object.defineProperty(new_elements, "length",{enumerable:false,editable:true})
        var el;
       //for(var i=0;i<elements.length;i++) {
       elements.forEach(function(element,i) {

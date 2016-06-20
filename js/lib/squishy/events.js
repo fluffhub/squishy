@@ -1,4 +1,4 @@
-"use strict"
+
 Module(function M() {
 	var Handler=M.Class(function C() {
 		C.Init(function Handler(type,handler,target,object) {

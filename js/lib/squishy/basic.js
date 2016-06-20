@@ -41,6 +41,7 @@ M.Import('squishy/DOM', function (DOM) {
 
           LayoutItem.call(this,'a',id,cls,{href:url});
           this.url=url;
+          this.element.href=url;
           this.content(content);
         }
 			});
