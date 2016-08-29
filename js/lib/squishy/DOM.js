@@ -1,6 +1,11 @@
-Module(function M() { if(document) {
-  M.Def("TagList",function TagList() { Object.defineProperty(this,"forEach",{value:Array.prototype.forEach}) } )
-    var NameSpace=M.Class(function C() {
+Module(function M() {
+  if(document) {
+  M.Def("TagList",function TagList() {
+    Object.defineProperty(this,"forEach",{
+      value:Array.prototype.forEach
+    })
+  })
+  var NameSpace=M.Class(function C() {
     C.Init(function NameSpace() {
       with(NameSpace.kwargs({name:"Unnamed", tags:{}, convert:function(o) { return o; },nsuri:""})) {
         /*
@@ -18,14 +23,14 @@ Module(function M() { if(document) {
   var XHTMLNS="http://www.w3.org/1999/xhtml"
   var namespaces=M.Def("namespaces",{});
   namespaces[XHTMLNS]=new NameSpace({
-      name:"XHTML",
-      convert:function convert(element) {
-        return new Tag(element);
-      },
+    name:"XHTML",
+    convert:function convert(element) {
+      return new Tag(element);
+    },
 
-      tags:{
+    tags:{
 
-      }
+    }
   });
 
   var Tag=M.Class(function C() {
@@ -130,7 +135,7 @@ Module(function M() { if(document) {
         if(name) this.elements[name]=element;
         else this.elements[Object.keys(this.elements).length]=element;
         if(typeof(element)!="string")
-        Object.defineProperty(element,'container',{value:this,configurable:true});;
+          Object.defineProperty(element,'container',{value:this,configurable:true});;
       }
     });
     C.Def(function addBefore(element,name) {
@@ -142,7 +147,7 @@ Module(function M() { if(document) {
       this.element.insertBefore(element.element,location.element);
       for(var i=0;i<this.elements.length;i++) {
         if(location===this.elements[i]) {
-         this.elements.splice(i-1,0,element);
+          this.elements.splice(i-1,0,element);
           break;
         }
       }
@@ -174,7 +179,7 @@ Module(function M() { if(document) {
       var clss;
       //  if(this.element.className&&this.element.className!='')  clss = this.element.className;
       clss=this.element.getAttribute('class');
-      if(clss&&clss.split) clss=clss.split(/\W+/);
+      if(clss&&clss.split) clss=clss.split();
       else      clss=[];
 
       var i=clss.indexOf(cls);
@@ -185,7 +190,7 @@ Module(function M() { if(document) {
       this.element.setAttribute('class',clss.join(' '));
     });
     C.Def(function removeClass(cls) {
-      var clss = this.element.getAttribute('class').split(' ');//Name.split(' ');
+      var clss = this.element.getAttribute('class').split(/\W+/);//Name.split(' ');
       var i=clss.indexOf(cls);
       if(i>-1) {
         delete clss[i];
@@ -194,11 +199,11 @@ Module(function M() { if(document) {
     });
     C.Def(function hasClass(cls) {
       if(this.element.className)
-        var clss = this.element.getAttribute('class').split(' ');//className.split(' ');
+        var clss = this.element.getAttribute('class').split(/\W+/);//className.split(' ');
       return cls in clss;
     });
     C.Def(function toggleClass(cls) {
-      var clss = this.element.getAttribute('class').split(' ');
+      var clss = this.element.getAttribute('class').split(/\W+/);
       //var clss = this.element.className.split(' ');
       var i=clss.indexOf(cls);
       if(i>-1) {
@@ -226,7 +231,7 @@ Module(function M() { if(document) {
       var elements= Array.prototype.slice.call(this.element.querySelectorAll(str));
       var new_elements=new M.Self.TagList()
       Object.defineProperty(new_elements, "length",{enumerable:false,editable:true})
-       var el;
+      var el;
       //for(var i=0;i<elements.length;i++) {
       elements.forEach(function(element,i) {
         new_elements.length++;
@@ -379,7 +384,7 @@ Module(function M() { if(document) {
       }
     });
   });
-  M.Class(function C() {
+  var Frame=M.Class(function C() {
     C.Super(LayoutItem);
     C.Init(function Frame() { with(Frame.kwargs({win:window,doc:document,callback:function(){}})) {
       /* @args win,doc,callback */
@@ -421,8 +426,23 @@ Module(function M() { if(document) {
       });
       return vars;
     });
-
   });
+    Object.defineProperty(M.Self,"root",{get:function() {
+      if(document&&document.body&&document.body.Tag) {
+        return document.body.Tag
+      } else {
+        return new Frame();
+      }
+    }})
+
+
+
+
+
 } else {
-  throw new Exception("No DOM document available: from DOM.js");
-}});
+  throw new Error("No DOM document available: from DOM.js");
+}
+
+});
+
+

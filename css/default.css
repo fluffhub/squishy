@@ -31,6 +31,10 @@ position: absolute;
     vertical-align: middle;
   text-decoration:none;
 }
+span.branch1 {
+
+}
+span.branch1:before { content:"|"; float:left}
 a.member { text-decoration:none; }
 .member:last-child:before {
     content:"\2514";

@@ -1,0 +1,98 @@
+/*<style>*/
+a { color:#05862C }
+body { margin:0;font-family: 'Source Sans Pro', sans-serif;background-color:#f2f2f2;position:absolute;top:0;background-image:url('http://i.econofy.com/whitebg.png');background-position:bottom center;background-attachment:fixed;color:#444;}
+.count { font-size:35px; }
+h1 { margin:5px;font-size:24px;line-height:28px;color:#777;}
+.formbox { background-color:#eee;background-position:center bottom;background-repeat:repeat-x;width:1000px;display:block;border-radius:0 0 2px 2px;text-align:left;-moz-border-radius:0 0 2px 2px;margin:1px auto;border:1px solid #ddd;}
+.formbox h2 { margin:0;line-height:38px;width:auto;text-align:left;border-radius:10px 10px 0 0;text-indent:12px; }
+		.field { padding:5px;text-align:left;margin-top:10px; }
+		.field input { font-size:14px;padding:5px 5px 1px 5px;margin-top:-3px;margin-bottom:3px;color:#0AAF3C;display:block; }
+		.field strong { display:block !important; }
+		.field caption { font-weight:normal;font-style:italic;display:block;
+						font-size:11px;
+						margin:5px;margin-top:2px;}
+.footer { display:none; }
+#register { width:600px; }
+#mainfooter .col { 	width:140px;float:left;clear:right;  }
+		#hn { width:100%;margin-top:5px; font-weight:bold;font-size:24px;clear:both;float:left;}
+#rn { width:100%;margin-top:5px; font-weight:bold;font-size:24px;clear:both;float:left;}
+		#ah { float:right; }
+#user { padding-left:25px; }
+#user { vertical-align:bottom; }
+#user span { vertical-align:middle;font-size:45px; }
+.header .nw { width:100px; }
+.window-header .right { float:right; }
+#login h2 { clear:both;float:left;width:100%; }
+.formbox hr { width:600px;text-align:left;float:left;clear:both; }
+			.header .user { font-size:18px;line-height:50px;height:50px;float:right;vertical-align:middle;}
+			.header a { color:#edf0db;float:left;clear:right; }
+.header *:hover,.header * *:hover { color:#fff !important; }
+			.user a span { font-size:45px;background:none !important;width:55px;  }
+			.user a { height:40px !important;padding:5px 10px;float:left;clear:right;display:block;background-repeat:no-repeat;background-position:center bottom;border-bottom:2px solid #7aa3a8;border-left:1px solid #aaeeff;border-right:1px solid #a4dbe2; }
+
+			#ne  span { font-size:25px; }
+			#ne { width:200px;text-align:right;text-overflow:ellipsis;overflow:hidden;color:#28b604;float:left;clear:right; }
+.header-in { width:1000px;margin:0 auto;height:100%; }
+input { background-color:#fff;border:1px solid #ddd;color:#bbb }
+input.focus { background-color:#fff;color:black; }
+.header {z-index:10000; width:100%;position:fixed;background-color:#21c5d4;background-image:url('http://i.econofy.com/header_bg.png');color:#bbb;height:50px;border-bottom:1px solid #333;font-size:30px;line-height:50px;vertical-align:middle; }
+.header span { line-height:50px;vertical-align:middle;color:#edf0db;height:40px;font-size:40px;background-repeat:no-repeat;background-position:center bottom; }
+
+.body { width:100%; width:100%;float:right;clear:both; }
+.footer { width:100%;float:left;clear:both;background-color:#666;color:#eee;height:25px;border-top:2px solid #555; }
+.window-header {color:#112; height:50px;text-indent:5px;text-shadow:1px 1px #bbb; font-weight:bold;font-size:28px;line-height:65px;vertical-align:bottom;width:1000px;display:block;margin:0px auto 0 auto;z-index:101;padding-top:10px;}
+.window-header a { color:#28b604;font-size:18px;line-height:55px; }
+		a { text-decoration:none; }
+		.product { width:140px;text-align:center;float:left;clear:right;overflow:hidden;height:140px;margin:0 2px;
+					background-color:white;background-position:center 8px; background-repeat:no-repeat;
+					border:1px solid #ddd;}
+.product-details h1 {text-overflow:ellipsis;overflow:hidden; }
+		.product img { margin:0 auto; }
+
+		.product .name { width:140px; font-size:16px;text-align:center;margin:2px;margin-top:100px;width:136px;clear:both;overflow:hidden;}
+		.product_details { display:none }
+.detail-stats { width:100%; }
+.detail-stats * { float:left; clear:right ;font-size:55px;}
+.detail-stats * strong { display:block;width:100%;float:left;clear:both;font-size:20px; }
+.detail { width:95%; }
+.ui-widget-overlay { margin-top:50px; }
+.ui-dialog { background-color:white;width:100%;display:block;float:left;position:fixed;top:50px; }
+.ui-dialog-title {
+box-sizing: border-box;
+cursor: move;
+display: block;
+float: left;
+font-family: Verdana, Arial, sans-serif;
+font-size: 17px;
+font-style: normal;
+font-variant: normal;
+font-weight: bold;
+height: 32px;
+background-color:#ddd;color:#999;
+line-height: 32px;
+margin:0 0 0 5px;
+overflow-x: hidden;
+overflow-y: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+width: 100%;
+}
+	.map_room {  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;cursor:move;
+  user-select: none;color:#77c;font-size:12px;overflow:hidden;text-align:center;z-index:100;overflow:hidden;background-color:#fff;border:1px solid #aae;background-attachment:fixed;background-position:10px 37px;}
+.ui-resizable-se { color:#ddd;width:30px;height:30px;position:absolute;right:1px;font-size:12px;bottom:1px;content:'\e04e';font-family:icomoon;cursor:se-resize }
+.ui-resizable-sw { color:#ddd;width:30px;height:30px;position:absolute;left:1px;font-size:12px;bottom:1px;content:'\e04e';font-family:icomoon;cursor:sw-resize }
+.ui-resizable-nw { color:#ddd;width:30px;height:30px;position:absolute;left:1px;font-size:12px;top:1px;content:'\e04e';font-family:icomoon;cursor:nw-resize }
+.ui-resizable-ne { color:#ddd;width:30px;height:30px;position:absolute;right:1px;font-size:12px;top:1px;content:'\e04e';font-family:icomoon;cursor:ne-resize }
+ .ui-resizable-n { color:#ddd;width:100%;height:30px;position:absolute;right:0;font-size:12px;top:1px;content:'\e04e';font-family:icomoon;cursor:n-resize }
+.ui-resizable-e { color:#ddd;width:30px;height:100%;position:absolute;right:1px;font-size:12px;bottom:0;content:'\e04e';font-family:icomoon;cursor:e-resize }
+.ui-resizable-s { color:#ddd;width:100%;height:30px;position:absolute;right:0px;font-size:12px;bottom:1px;content:'\e04e';font-family:icomoon;cursor:s-resize }
+.ui-resizable-w { color:#ddd;width:30px;height:100%;position:absolute;left:1px;font-size:12px;bottom:0;content:'\e04e';font-family:icomoon;cursor:w-resize }
+.ui-resizable-se:hover { color:#008000 }
+#map-container { position:relative;margin-top:5px;clear:right;width:100%;height:520px; float:left;clear:right;overflow:hidden;text-align:center; }
+		#map { position:absolute;width:6000px;height:6000px;z-index:1; }
+	.map_room.active { background-color:#aaffaa;border-width:3px; }
+	.map_room span { width:100%;float:left;clear:both;text-align:Center;display:block;font-size:36px; }
+	.map_room.empty { background-color:#ddd;border-color:#aaa;color:#999; cursor:pointer;}
+/*</style>*/
