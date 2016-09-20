@@ -40,8 +40,9 @@ Module(function M() {
           command=command.replace(/\n/,"\u00ac")
           this.request=new Req.Request("URI","TEXT");
           this.request.request.timeout=60000;
+          console.debug("sending:"+command);
           this.request.Get(this.url+"/membrane.cgi",{op:"w",cmd:command,id:this.id},function(result){
-            console.debug("sending:"+command);
+            console.debug("received:"+command);
             receive(result);
 
           });

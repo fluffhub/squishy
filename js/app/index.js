@@ -270,7 +270,7 @@ var SquishyLogo=null;
         }})
         Content.add(SquishyLogo);
       });
-      var browser=new filebrowser.FileBrowser("..");
+      var browser=new filebrowser.FileBrowser("/var/www/html/squishy","poop7");
 
       M.Def("browser",browser);
       console.debug({M:M});
