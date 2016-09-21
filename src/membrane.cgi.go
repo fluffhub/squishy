@@ -8,14 +8,9 @@ import (
   "net/http/cgi"
   "os/exec"
   "strings"
-  // "bufio"
   "io/ioutil"
   "os"
   "syscall"
-  //"encoding/json"
-  //"io"
-  //  "math/rand"
-  //  "strconv"
 )
 func dump(err error) {
   if(err!=nil) {
@@ -34,31 +29,27 @@ func Readwrite(name string,writer http.ResponseWriter, pos int64,leng int64)    
     pos=pos+int64(n)
     writer.Write(bn)
     log1.Write(bn)
-    if( n==0 || pos>leng ){ 
+    if( n==0 || pos>=leng ){ 
       break
     }
-    //if(bn[0]==byte(027)&&bn[1]==byte(03)&&bn[2]==byte(04)) {
-    //log1.Write([]byte("BING"))
-    //break
-    //}
+    ///// POSSIBLE AREA TO CHECK FOR END OF RESPONSE SIGNAL
+    
+    //   (bn[0]==byte(027)&&bn[1]==byte(03)&&bn[2]==byte(04)) {
+    //      log1.Write([]byte("BING"))
+    //      break
+    //   }
   }
-  posfile,err:=os.Create(".pos_"+name)
-  dump(err)
-  fmt.Fprintf(posfile,"%d",pos)
-  posfile.Close()
+
   o.Close()
   writer.Write([]byte("\n\n"))
-  //writer.Close()
+
 }
 func get_or_create_proc(name string) {
-  //
-
   files, _ := ioutil.ReadDir("./")
   outfound:=false
   infound:=false
   procfound:=false
   var session *exec.Cmd
-  //var session *os.Process
   var pwd string
   for _, f := range files {
     fn:=f.Name()
@@ -72,7 +63,6 @@ func get_or_create_proc(name string) {
       pwdf,err:=os.Open(".~_"+name)
       dump(err)
       fmt.Fscanf(pwdf,"%s",&pwd)
-
     }
     if(fn==".session2_"+name) {
       sesh,err:=os.Open(".session2_"+name)
@@ -80,23 +70,18 @@ func get_or_create_proc(name string) {
       dump(err)
       pid:=-1
 
-
       fmt.Fscanf(sesh,"%d",&pid)
       proc,err:=os.FindProcess(pid)
       dump(err)
       if(proc!=nil) {
         procfound=true
       }
-
     }
   }
 
   if(!(infound && outfound)) {
-
     if(infound) {
-      
     } else {
-      
       /////THIS ILLUSTRATES THE DIFFERENCE BETWEEN GO NATIVE SYSTEM CALLS AND ARBITRARY SYSTEM CALLS
       ///// IT IS PROBABLY BEST TO AVOID ARBITRARY SYSTEM CALLS - THEY WOULD NOT NECESSARILY BE CROSS PLATFORM COMPATIBLE
       
@@ -107,8 +92,6 @@ func get_or_create_proc(name string) {
     }
     if(outfound) {
     } else {
-      
-      // exec.Command("mkfifo",".out_"+name).Start()
       _,err:=os.Create(".out_"+name)
       dump(err)
       outfound=true;
@@ -150,15 +133,7 @@ func get_or_create_proc(name string) {
     
   }
 }
-func flush_pipe(f string) {
-  ///// I AM NOT SURE WHETHER THIS IS ACTUALLY NECESSARY
-  
-  
 
-  // we're not even _doing_ anything (including closing) with the returned file
-  _, err := os.OpenFile(f, os.O_RDWR, os.ModeNamedPipe)
-  dump(err)
-}
 func main() {
 
   logue,err:=os.Create("logue")
@@ -208,23 +183,14 @@ func main() {
     }
     if(namefound) {
       get_or_create_proc(name)
-
+      
       if(op=="r") {
         out,err:=os.Open(".out_"+name)
-
         dump(err)
-
-
         Readwrite(name,w,0,100000)
-
         out.Close()
-
-
       } else if(op=="w") {
         cmd:=data
-
-
-
         /////substitute chars for uri encoding
         cmd=strings.Replace(cmd,"¶",";",-1)
         cmd=strings.Replace(cmd,"Ɛ","&",-1)
@@ -236,30 +202,36 @@ func main() {
         pwd:=string(pwdfile[0:len(pwdfile)-1]);
         dump(err2)
         
-        /////HERE WE CAN "WRAP" THE EXEC CODE IN COMMANDS TO CREATE AND REMOVE THE .HOLD FILE
+        /////HERE WE CAN WRAP THE EXEC CODE IN COMMANDS TO CREATE AND REMOVE THE .HOLD FILE 
+        ///// AND TRACK OUTPUT CURSOR POS BEFORE AND AFTER THE COMMAND EXECUTES
         /////NOTE THAT THIS MUST REFER TO THE ABSOLUTE POSITION OF WHERE THIS COMMAND STARTED - 
-        /////THATS WHY WE HAVE THE PWD FILE
+        ///// THATS WHY WE HAVE THE PWD FILE
 
-        cmd="touch "+pwd+"/.hold_"+name+";\n"+cmd
+        ///// CREATE HOLD & Write the LENGTH of the output file to .pos_name immediately before the command starts
+        cmd="touch "+pwd+"/.hold_"+name+";\n (wc -c < "+pwd+"/.out_"+name+" > "+pwd+"/.pos_"+name+");\n"+cmd
+        
         
         /////this line is executed after the individual command
-        ///// to add a command end delimiter to the end of the commadn output
+        ///// to add a command end delimiter to the end of the commadn output (SEE READWRITE)
+        // cmd = cmd + ";\n (echo -e \x02ZZZZ > .out_"+name+")";
         
-        /////this may be a solution to the race condition if i can figure out how to catch the eof string on the output
+      
+        ///// Write the LENGTH of the output file to .len_name immediately after the command starts.
         cmd=cmd+";\n (wc -c < "+pwd+"/.out_"+name+" > "+pwd+"/.len_"+name+")";
         
-        ///// to remove .hold_name thereby triggering the next step
+        
+        ///// REMOVE .hold_name thereby triggering the next step
         cmd=cmd+";\nrm "+pwd+"/.hold_"+name+"; \n"
 
         
-        
-        /////THIS IS WHERE THE RACE CONDITION LIES.
+        /////THIS IS WHERE THE RACE CONDITION HAPPENS.
         ///// WHEN YOU RUN MULTIPLE COMMANDS IN QUICK SUCCESSION, THE FINISHING OF 1 COMMAND WILL START THE EXECUTION OF ALL FOLLOWING COMMANDS,
         ///// INSTEAD OF EXECUTING AS A QUEUE,
         ///// AND THE OUTPUT WILL BE OUT OF SYNC and include multiple command results at once.
         ///// SO THIS WILL NEED TO BE IMPLEMENTED INTO A QUEUE SOMEHOW
         ///// SEE THE READWRITE METHOD AND POSFILE BELOW FOR MORE INFO ON THAT
         for {
+          /////  WAIT UNTIL HOLD  FROM OTHER COMMANDS IS REMOVED TO BEGIN EXECUTION
           if _, err := os.Stat(".hold_"+name); os.IsNotExist(err) {
             _,err:=os.Create(".hold_"+name);
             dump(err)
@@ -267,64 +239,62 @@ func main() {
           }
         }
         
-        ///// GETTING THE POS AT THE TIME OF COMMAND EXECUTION - THIS IS TO RECORD THE CURSOR POSITION OF THE OUTPUT FILE AT THE BEGINNING OF THIS COMMAND
-        ///// BECAUSE THE UOUTPUT RESULT OF THE COMMAND WILL BE PARSED USING THE CURSOR POSITION
-        ///// WHAT REALLY NEEDS TO BE ADDED IS A END DELIMITER FOR THE COMMANDS
         var pos int64
         pos=0
         var posfile *os.File
+        var leng int64
+        leng=0
+        var lenfile *os.File
         var err error
-        if _, err2 := os.Stat(".pos_"+name); os.IsNotExist(err2) {
-
-
-        } else {
-          posfile,err=os.OpenFile(".pos_"+name,os.O_RDWR,0666)
-          fmt.Fscanf(posfile,"%d",&pos)
-          
-        }
-        dump(err)
- 
-
-        /////OPENING THE DEDICATED NAMED PIPE FOR THIS SH INSTANCE TO WRITE
+        
+        /////OPENING THE DEDICATED NAMED PIPE FOR THIS SH INSTANCE TO WRITE COMMANDS TO
         in,err:=os.OpenFile(".in_"+name, os.O_RDWR, 0666)
         
         
+        ///// WRITING THE COMMAND TO THE INPUT STREAM
         in.Write([]byte(cmd))
         
         
-        
+        ///// LOGGING THE COMMAND
         logue.Write([]byte(cmd))
         
         dump(err)
         
         
-        /////WAITING FOR COMMAND COMPLETION, ANOTHER RACE CONDITION WHEN MULTIPLE COMMANDS ARE SENT IN QUICK SUCCESSION
+        ///// WAIT FOR HOLD (COMMAND HAS FINISHED)
         for {
           if _, err := os.Stat(".hold_"+name); os.IsNotExist(err) {
-            var leng int64
-            leng=0
-            var lenfile *os.File
-            var err error
-            if _, err2 := os.Stat(".len_"+name); os.IsNotExist(err2) {
-
-
-            } else {
+            ///// ADD NEW HOLD TO PREVENT OTHER REQUESTS FROM PROCESSING UNTIL I'VE WRITTEN MY RESULTS            
+            _,err2:=os.Create(".hold_"+name);
+            dump(err2)
+            
+            ///// GETTING THE POS BEFORE AND AFTER COMMAND EXECUTION - 
+            ///// THIS IS TO SEEK TO THE CORRECT PLACE  AND READ TO  THE END OF LAST COMMAND IN READWRITE
+            if _, err2 := os.Stat(".pos_"+name); os.IsNotExist(err2) { } else {
+              posfile,err=os.OpenFile(".pos_"+name,os.O_RDWR,0666)
+              fmt.Fscanf(posfile,"%d",&pos)
+            }
+            
+            dump(err)
+            
+            if _, err2 := os.Stat(".len_"+name); os.IsNotExist(err2) { } else {
               lenfile,err=os.OpenFile(".len_"+name,os.O_RDWR,0666)
               fmt.Fscanf(lenfile,"%d",&leng)
-
             }
+            
             dump(err)
+            
+            
+            /////WRITING THE RESULT STRING TO THE HTTP OUTPUT
             Readwrite(name,w,pos,leng)
             break
           }
         }
-        
-        /////WRITING THE RESULT STRING TO THE HTTP OUTPUT
-        
 
-        
         /////FINISHING THE HTTP RESPONSE
         w.Write([]byte("\n\n"))
+        os.Remove(".hold_"+name)
+        
 
       }
     }
