@@ -41,7 +41,7 @@ func Readwrite(name string,writer http.ResponseWriter, pos int64,leng int64)    
   }
 
   o.Close()
-  writer.Write([]byte("\n\n"))
+  //writer.Write([]byte("\n\n"))
 
 }
 func get_or_create_proc(name string) {
@@ -292,7 +292,7 @@ func main() {
         }
 
         /////FINISHING THE HTTP RESPONSE
-        w.Write([]byte("\n\n"))
+        //w.Write([]byte("\n\n"))
         os.Remove(".hold_"+name)
         
 

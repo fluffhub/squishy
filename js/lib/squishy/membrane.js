@@ -43,7 +43,7 @@ Module(function M() {
           console.debug("sending:"+command);
           this.request.Get(this.url+"/membrane.cgi",{op:"w",cmd:command,id:this.id},function(result){
             console.debug("received:"+command);
-            receive(result);
+            receive(result.slice(0,-1));
 
           });
         })

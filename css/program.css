@@ -67,6 +67,7 @@ padding-top: 2px;
 	.error { background-color:#BB5555;}
 	.running { background-color:#55bb55; }
 
+.importer { position:absolute;bottom:0;right:0; }
 .file-browser tr:hover>td { box-shadow: 0 0 50px -1px rgba(0,0,255,0.2) inset !important;
 background-color: #fff;}
 .file-browser { line-height:27px; }
