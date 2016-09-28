@@ -62,17 +62,17 @@ Module(function M() {
             dir.click=click
 
           } else {
-            dir.click=function() {
-            }
+            dir.click=null
           }
           interactive.MomentaryButton.call(this,name,"",function(e) {
             console.debug(dir.loc);
 
 
+            if(dir.click instanceof Function) {
+              dir.click.call(dir,dir.loc);
 
-            dir.click.call(dir,dir.loc);
-
-            e.stopPropagation();
+              e.stopPropagation();
+            }
           });
           this.name=name;
           //this.add(new basic.Span(name))
@@ -215,6 +215,7 @@ Module(function M() {
             } else {
               console.debug("initializing dir "+dirs.join("/"));
               lib.dirs[val]=new Dir(dirs[dirs.length],dirs.join("/"),lib.session,function(dirloc) {
+                console.debug("clicking dir "+dirs.join("/"));
                 lib.setDir(dirloc);
                 lib.cd(dirloc)
               });
@@ -275,6 +276,7 @@ Module(function M() {
             (function(tpdir) {
 
               var dirbutt=new interactive.MomentaryButton(dirs[i]+"/","pwddir dirlink",function() {
+                console.debug("selected "+tpdir)
                 lib.cd(tpdir)
 
               });
