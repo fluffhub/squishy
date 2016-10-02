@@ -295,7 +295,9 @@ function Import(path,callback) {
 
       var ps=path.split('/');
       var fn=ps.slice(-1)[0];
-      if(fn=="") ps[ps.length-1]=fn="index.js"
+      if(fn=="") { ps[ps.length-1]=fn="index.js";
+      path=path+"index.js";
+                 }
 
 
       var fns=fn.split('.');
