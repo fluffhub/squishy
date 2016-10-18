@@ -5,7 +5,7 @@ Module(function M() {
            function(spoon) {
              //Import("spoon",function(spoon) {
                console.debug("spoon loaded from conf");
-             Import("apps/",function() {console.debug("fse loaded from conf")})
+             Import("apps/FSE",function() {console.debug("fse loaded from conf")})
     spoon.openers=spoon.openers+[
 
       ]

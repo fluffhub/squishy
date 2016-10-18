@@ -1,0 +1,3 @@
+Module(function M() {
+
+});
