@@ -1,11 +1,6 @@
 Module(function M() {
   M.Index(
-    "FSe/",
-    "HTMLe/",
-    "JSe/",
-    "JSONe/",
-    "SVGe/",
-    "TXTe/",
+
     'Library',
     'Models',
     'UserBrowser'
@@ -63,10 +58,10 @@ Module(function M() {
 
 
 
-             var EditorWindow=M.Class(function C() {
+             var HomeWindow=M.Class(function C() {
                C.Super(Frame);
                C.Mixin(hasEvents);
-               C.Init(function EditorWindow() {
+               C.Init(function HomeWindow() {
                  Frame.call(this,window,document);
                  var W=this;
                  var EW=this;
@@ -383,7 +378,7 @@ Module(function M() {
                });
              });
                //window.ew=new EditorWindow();
-               M.Def("main",new EditorWindow())
+               M.Def("main",new HomeWindow())
                var Types={
 
                }
@@ -444,4 +439,3 @@ Module(function M() {
 
              });
            });
-

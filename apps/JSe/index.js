@@ -1,12 +1,12 @@
 Module(function M() {
   M.Import(
-    "spoon",
+
     //  context actions
     //  list view
     //  tile view
     //  editor
     //  viewer
-    function (spoon) {
+    function () {
       M.Def(function match(name, file) {
 
 
@@ -45,5 +45,3 @@ Module(function M() {
 
     });
 });
-
-
