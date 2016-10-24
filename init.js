@@ -117,8 +117,8 @@ to the import statement by its first parameter, which is a list of resources sep
     "squishy/form",
     "squishy/layout",
     "squishy/request",
-    "apps/spoon",
-    "apps/FSe",
+    "apps/spoon/",
+    "apps/FSe/",
     /*
 
 Once all of the files listed have loaded and run, they will be passed in order to the code inside the Import's callback function.
