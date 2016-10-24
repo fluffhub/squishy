@@ -273,7 +273,7 @@ except instead of defining HTML/XML markup you are writing function calls:
                 spoon.main.add(SquishyLogo);
             });
                        var browser=new FSe.FileBrowser("/var/www/html/squishy","poop7");
-                       spoon.main.tasks.addTab(browser);
+                       spoon.main.tasks.addTab("root_explorer","",browser);
                        //M.Def("browser",browser);
                        console.debug({M:M});
                        //browser.Import("..");
