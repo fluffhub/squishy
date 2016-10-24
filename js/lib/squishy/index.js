@@ -236,7 +236,9 @@ Module.Template={
       if(this.element && this.element.root)
         if(k.slice(-1)=="/") {
           NM=new window.Module(this.element.root+"/"+k+"index.js");
+
           k=k.slice(0,-1);
+
         }
         else
           NM=new window.Module(this.element.root+'/'+k+'.js');
@@ -291,7 +293,9 @@ function Import(path,callback) {
       var absolute=false;
       var dirname='chewy';
       var parent=null;
+
       if (r.test(path)||path[0]=='/' ) {
+
         //absolute path, use as-is
         var parser = document.createElement('a');
         parser.href = path;
@@ -303,6 +307,7 @@ function Import(path,callback) {
         //the path is relative, either:
         //     to an index.js, given a data-root by module call, or
         //     to the base url of the page
+
 
       }
 
@@ -320,6 +325,7 @@ function Import(path,callback) {
       var vn=fn;
       if(fns.length>1) ft=fns.slice(-1)[0] || '';
       if(fns.length>1) vn=fns.slice(0,-2).join('.');
+
 
 
       else if(ps.length==1) dirname=ps[0];
@@ -350,6 +356,7 @@ function Import(path,callback) {
             parser.href = path;
             path=parser.pathname;
           }
+
         }
       }
       if(ft in Import.types) {

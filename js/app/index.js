@@ -289,7 +289,3 @@ except instead of defining HTML/XML markup you are writing function calls:
       });*/
     });
 });
-
-
-
-

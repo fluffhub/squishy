@@ -1,4 +1,4 @@
- .toolbar { border-radius:0 0 6px 0;margin-top:0px;color:#ddd;font-weight:normal;position:absolute;
+.toolbar { border-radius:0 0 6px 0;margin-top:0px;color:#ddd;font-weight:normal;position:absolute;
   top:0;left:0;z-index:101000;width:100%;height:35px;background-color:#ddd;}
   .toolbar .edit_controls {  }
   .toolbar .add_controls {  }
@@ -112,4 +112,3 @@ line-height:27px;vertical-align:middle;
 
 	.drawer_item img { height:48px; }
 	.drawer_item span { width:50px;height:50px;font-size:36px;line-height:50px;text-align:center;vertical-align:middle; }
-
