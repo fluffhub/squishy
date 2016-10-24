@@ -177,13 +177,7 @@ svg.highlight {fill:blue; -webkit-filter: drop-shadow( -5px -5px 5px inset #000 
 .TabbedTitlebar .tab { background-color:#bbb; }
 table { background-color:#fff; }
 table .even { background-color:#efefef; }
-.button {
-  background-color:#ccc;
-  line-height:1.75em;
-  padding:0 0.5em;
-  position:relative;
-  z-index:2;
-}
+
 .tabset.fancy .tab.active:before,
 .tab.active:after,
 .pane,
@@ -656,8 +650,21 @@ background-color:rgba(255,255,255,0.9);
 .code>div {
 
 }
-
+.pwddir { border-bottom:2px solid #aaa; }
 .FileBrowser { position:fixed;right:0;height:100%;width:300px;top:0;overflow-y:scroll; }
 .FileBrowser .dir { margin-left:1em; }
 .FileBrowser .dir>a {margin-left:1em;display:block; }
 
+.importer { position:absolute;bottom:0;right:0; }
+.pwddir { display:inline; padding:0; margin:0;}
+
+.dirlink.button:hover { text-decoration:underline;color:black; }
+.pwddir .dirlink.button:hover { text-decoration:none; color:black; }
+.button {
+  background-color:#ccc;
+  line-height:1.75em;
+  padding:0 0.5em;
+  position:relative;
+  z-index:2;
+}
+.FileBrowser .button { background:none;font-weight:600;letter-spacing:0.01em;font-size:1.1em;padding:0;color:#aaa;}
