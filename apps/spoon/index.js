@@ -120,7 +120,7 @@ Module(function M() {
                  },true);
                  this.enableEvents("cursorpos","context","closeContext");
                  C.Def(function newTask(appName) {
-                   var args=arguments.slice(1,-1)
+                   var args=Array.prototype.slice.call(arguments,1,-1)
                    var task=null;
 
                    if(appName in conf.apps) {
