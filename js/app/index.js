@@ -118,7 +118,8 @@ to the import statement by its first parameter, which is a list of resources sep
     "squishy/layout",
     "squishy/request",
     "app/codebrowser.js",
-    "app/filebrowser.js",
+    "apps/FSe/index.js",
+    "apps/spoon/index.js",
     /*
 
 Once all of the files listed have loaded and run, they will be passed in order to the code inside the Import.
