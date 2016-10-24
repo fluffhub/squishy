@@ -176,7 +176,10 @@ function Module() {
           // try { throw new Error(""); } catch(e) { console.debug({LN:e}); }
 
           var ob=Field.fun.apply(M,arguments);
-          if(ob!==undefined&&ob!==null)ob.funcall=__stack[1];
+          if(ob!==undefined&&ob!==null){
+            Object.defineProperty(ob,"funcall",{value:__stack[1]});
+          }
+
 
           return ob;
         };
