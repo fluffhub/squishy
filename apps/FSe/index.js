@@ -130,7 +130,10 @@ Module(function M() {
           var lib=this;
           if(id!==undefined) this.id=id;
           else this.id="pool"
-          this.session=new membrane.Environment(id)
+          if(spoon.session!==undefined)
+            this.session=spoon.session;
+          else
+            this.session=new membrane.Environment(id)
           this.presentdir=new basic.Div("pwdbar");
           this.presentdir.dirs=[];
           this.dirs={};
