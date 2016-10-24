@@ -113,12 +113,22 @@ Module(function M() {
                    return false;
 
                  });
+
                  this.element.addEventListener("contextmenu",function startcontext() {
                    EW.clearContext();
 
                  },true);
                  this.enableEvents("cursorpos","context","closeContext");
+                 C.Def(function newTask(appName) {
+                   var args=arguments.slice(1,-1)
+                   var task=null;
 
+                   if(appName in conf.apps) {
+                    task=conf.apps[appName].open.apply(this,args)
+                    this.tasks.addTab(appName+":"+args.join(" "),appName+":"+args.join(" "),task)
+                   }
+
+                 });
                  C.Def(function create(type) {
                    var EW=this;
                    var P;
@@ -433,7 +443,7 @@ Module(function M() {
 
                M.Def("match",function match(item) {
                  var ret=[]
-                 for(var i=0;i<this.apps.length;i++) {
+                 for(var i=0;i<conf.apps.length;i++) {
                   if(this.apps[i].match(item))ret.push(this.apps[i]);
 
                  }
@@ -444,7 +454,9 @@ Module(function M() {
              var id="pool"
 
 M.Def("session",new membrane.Environment(id));
+             M.Def(function open(item) {
 
+             });
 
              });
            });

@@ -119,7 +119,7 @@ Module(function M() {
       });
 
 
-      M.Class(function C() {
+      var FileBrowser=M.Class(function C() {
         C.Super(basic.Div);
         C.Init(function FileBrowser(loc,id)  {
           basic.Div.call(this,"FileBrowser");
@@ -128,12 +128,17 @@ Module(function M() {
           this.rawfiles={};
           this.windows={};
           var lib=this;
-          if(id!==undefined) this.id=id;
-          else this.id="pool"
-          if(spoon.session!==undefined)
+
+
+          if(spoon.session!==undefined) {
             this.session=spoon.session;
-          else
+            this.id=this.session.id
+          }
+          else {
+            if(id!==undefined) this.id=id;
+            else this.id="pool"
             this.session=new membrane.Environment(id)
+          }
           this.presentdir=new basic.Div("pwdbar");
           this.presentdir.dirs=[];
           this.dirs={};
@@ -250,7 +255,9 @@ Module(function M() {
         })
 
       });
-      M.Def("openers",{})
+      M.Def(function open(loc) {
+        return new FileBrowser(loc);
+      });
 
 
     });
