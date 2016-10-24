@@ -9,7 +9,7 @@ Module(function M() {
     "squishy/form",
     "squishy/membrane",
     "js/lib/squishy_ext/LocalModel",
-    "spoon/",
+    "spoon",
     function(event,basic,interactive,Req,svg,form,membrane,spoon) {
       var osroot=""
       var Request=Req.Request;
