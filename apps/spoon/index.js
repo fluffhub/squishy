@@ -9,11 +9,11 @@ Module(function M() {
            "squishy/interactive","squishy/keyboard","squishy/events","squishy/svg",
 
            "spoon/UserBrowser","spoon/Library",
-           "spoon/Models","spoon/conf", "squishy/cookies",
+           "spoon/Models","spoon/conf", "squishy/cookies","squishy/membrane",
            function(DOM,basic,layout,
                      interactive,kb,events,svg,
                      ub,op,
-                     Ms,conf,cookies) {
+                     Ms,conf,cookies,membrane) {
 
              var hasEvents=events.hasEvents;
              var UserBrowser=ub.UserBrowser;
@@ -441,6 +441,9 @@ Module(function M() {
                });
 
 
+             var id="pool"
+
+M.Def("session",new membrane.Environment(id));
 
 
              });
