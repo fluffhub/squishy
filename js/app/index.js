@@ -117,14 +117,14 @@ to the import statement by its first parameter, which is a list of resources sep
     "squishy/form",
     "squishy/layout",
     "squishy/request",
-    "app/codebrowser.js",
-    "app/filebrowser.js",
+
+
     /*
 
-Once all of the files listed have loaded and run, they will be passed in order to the code inside the Import.
+Once all of the files listed have loaded and run, they will be passed in order to the code inside the Import's callback function.
 
 */
-    function(squishy,DOM, basic, interactive,form,layout,Request,codebrowser,filebrowser) {
+    function(squishy,DOM, basic, interactive,form,layout,Request) {
       /*
 
 You can also use Import to just load files by calling it without referencing the containing Module.
@@ -257,7 +257,7 @@ except instead of defining HTML/XML markup you are writing function calls:
     as imports, but with a specific way to handle the results:
 */
 
-var SquishyLogo=null;
+      var SquishyLogo=null;
       Import("squishy/svg",function(svg) {
         SquishyLogo=new svg.SVG(100,100);
         SquishyLogo.addClass("sitemenu");
@@ -289,7 +289,3 @@ var SquishyLogo=null;
       });*/
     });
 });
-
-
-
-

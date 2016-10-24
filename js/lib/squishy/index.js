@@ -105,9 +105,13 @@ function Module() {
                 var callback=callback || function() {};
                 var M=this;
                 window.Import(this.filename,function(loaded) {
-                  M.loaded=true;
-                  extend(M,loaded);
-                  callback(M);
+                  //                  M.loaded=true;
+                  //extend(M,loaded);
+                  //if(M.loaded)
+
+                  delete M.parent[loaded.name];
+                  M.parent[loaded.name]=loaded;
+                  callback(loaded);
                 });
               },
              }
@@ -154,9 +158,17 @@ function Module() {
         M = element.Module = new window.Module(src);
         M.def=callback;
       }
+      M.dir=element.root;
       Object.defineProperty(callback,'Self',{value:M});
       Object.defineProperty(M,'element',{value:element});
-      if(M.name) {} else M.name=vn;
+      if(M.name) {} else {
+
+        if(vn!="index") M.name=vn;
+        else {
+          M.name=ps.slice(-3,-2)[0]
+        }
+
+      }
       Object.defineProperty(M,'waiting',{value:0,writable:true});
       Object.defineProperty(M,'Template',{value:{},writable:true});
       for(var templatefield in window.Module.Template) {
@@ -224,12 +236,15 @@ Module.Template={
       if(this.element && this.element.root)
         if(k.slice(-1)=="/") {
           NM=new window.Module(this.element.root+"/"+k+"index.js");
-      k=k.slice(0,-1);
+
+          k=k.slice(0,-1);
+
         }
         else
           NM=new window.Module(this.element.root+'/'+k+'.js');
       else
         NM=new window.Module();
+      NM.parent=this;
       this[k]=NM;
     }
   },
@@ -278,7 +293,9 @@ function Import(path,callback) {
       var absolute=false;
       var dirname='chewy';
       var parent=null;
-      if (r.test(path)||path[0]=='/' ){
+
+      if (r.test(path)||path[0]=='/' ) {
+
         //absolute path, use as-is
         var parser = document.createElement('a');
         parser.href = path;
@@ -291,13 +308,15 @@ function Import(path,callback) {
         //     to an index.js, given a data-root by module call, or
         //     to the base url of the page
 
+
       }
 
       var ps=path.split('/');
       var fn=ps.slice(-1)[0];
-      if(fn=="") { ps[ps.length-1]=fn="index.js";
-      path=path+"index.js";
-                 }
+      if(fn=="") {
+        ps[ps.length-1]=fn="index.js";
+        path=path+"index.js";
+      }
 
 
       var fns=fn.split('.');
@@ -306,7 +325,8 @@ function Import(path,callback) {
       var vn=fn;
       if(fns.length>1) ft=fns.slice(-1)[0] || '';
       if(fns.length>1) vn=fns.slice(0,-2).join('.');
-      }
+
+
 
       else if(ps.length==1) dirname=ps[0];
       var dir=ps.slice(0,-1).join('/');
@@ -324,17 +344,19 @@ function Import(path,callback) {
           parent=document.querySelector('script[data-name=\''+dirname+'\']');
 
 
-        if(parent!=null) {
-          //if(path[0]!='/') path='/'+path;
-          if(ps.length==1) path=parent.root+'/'+ps[0];
-          else path = parent.root+'/'+ps.slice(1).join('/');
-        }
-        else {
-          //this is provided as a relative path (to the document root)
+          if(parent!=null) {
+            //if(path[0]!='/') path='/'+path;
+            if(ps.length==1) path=parent.root+'/'+ps[0];
+            else path = parent.root+'/'+ps.slice(1).join('/');
+          }
+          else {
+            //this is provided as a relative path (to the document root)
 
-          var parser = document.createElement('a');
-          parser.href = path;
-          path=parser.pathname;
+            var parser = document.createElement('a');
+            parser.href = path;
+            path=parser.pathname;
+          }
+
         }
       }
       if(ft in Import.types) {
@@ -648,3 +670,4 @@ var define=Module.define=function define(n,r,F){ /* F = function (require, expor
   });
 }
 define.amd={};
+

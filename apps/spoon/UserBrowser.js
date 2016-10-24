@@ -86,10 +86,3 @@ M.Import("squishy/basic", "squishy/tables", "squishy/template",
   });
 });
 });
-/*
-});
-});
-});
-});
-});
-*/
