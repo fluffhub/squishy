@@ -16,18 +16,18 @@ The file and URI structure of a Squishy app consists of multiple file or resourc
 
 */
 Module(function M() {
-  /*
+    /*
       As the name implies, the index.js contains a javascript-rendition of the
       directory index ("dir" or "ls") command for that directory.
       This file you are reading is an example of an index.js.
       Define the other files in the module using the Index command:
 
 */
-  M.Index(
-    "page",
-    "user"
-  );
-  /*
+    M.Index(
+        "page",
+        "user"
+    );
+    /*
 
       Here, we list the files and subdirectories in this directory which should be available for
       inspection by the public.  It does not prevent unlisted files from being read, but will only
@@ -36,7 +36,7 @@ Module(function M() {
 
 */
 
-  /*
+    /*
 
       Note 1.1:
         Within the module definition, the module is referred to by the callback's name (in this case M)
@@ -45,7 +45,7 @@ Module(function M() {
 
 */
 
-  /*
+    /*
 
       It can also include any other code relevant to the directory or app as a whole.
       There will be additional code examples below.
@@ -109,23 +109,22 @@ statement.  All of the code wrapped inside of an Import will have available the 
 to the import statement by its first parameter, which is a list of resources separated by spaces.
 
 */
-  M.Import(
-    "squishy",
-    "squishy/DOM",
-    "squishy/basic",
-    "squishy/interactive",
-    "squishy/form",
-    "squishy/layout",
-    "squishy/request",
-    "apps/spoon/",
-    "apps/FSe/",
-    /*
+    M.Import(
+        "squishy",
+        "squishy/DOM",
+        "squishy/basic",
+        "squishy/interactive",
+        "squishy/form",
+        "squishy/layout",
+        "squishy/request",
+
+        /*
 
 Once all of the files listed have loaded and run, they will be passed in order to the code inside the Import's callback function.
 
 */
-    function(squishy,DOM, basic, interactive,form,layout,Request,spoon,fse) {
-      /*
+        function(squishy,DOM, basic, interactive,form,layout,Request) {
+            /*
 
 You can also use Import to just load files by calling it without referencing the containing Module.
 This is required in some cases:
@@ -135,14 +134,14 @@ This is required in some cases:
   - or in procedural definitions which will not be concurrently executed.
 
 */
-    //  Import("js/lib/ckeditor/ckeditor",function(cke) { console.debug("?????"); console.debug(cke); });
+            //  Import("js/lib/ckeditor/ckeditor",function(cke) { console.debug("?????"); console.debug(cke); });
 
-      /* this includes several default stylesheets
+            /* this includes several default stylesheets
 */
-      Import("css/ui.css");
-      Import("css/default.css");
+            Import("css/ui.css");
+            Import("css/default.css");
 
-      /*
+            /*
 
 Section 2: Defining the Module
 
@@ -150,25 +149,25 @@ Section 2: Defining the Module
 The most basic way to define the contents of the Module, is via Def statements:
 
 */
-      var title=M.Def("title","Squishy");
-      /*
+            var title=M.Def("title","Squishy");
+            /*
   Note 2.1:  Here "title" is being declared in this scope with "var"
   so the defined object is also available in this code block as "title".
 */
 
-      /*
+            /*
 
 You can define any value as a member of this file's resulting module object, including other objects,
 and functions:
 
 */
 
-      M.Def("update",function() {
+            M.Def("update",function() {
 
-        /* @TODO: give some content here */
+                /* @TODO: give some content here */
 
-      });
-      /*
+            });
+            /*
 
 2.2 Creating new objects
 Squishy provides several libraries of objects to be defined in building an application.
@@ -177,60 +176,60 @@ DOM Elements.  The first is the Frame found in the DOM module, which wraps
 the javascript window object and is the lowest level DOM object:
 
 */
-      var Window=new DOM.Frame();
-      /*
+            var Window=new DOM.Frame();
+            /*
 To build out the application,
 you can add additional new items just as you would in writing HTML pages,
 except instead of defining HTML/XML markup you are writing function calls:
 
 */
 
-      var Title=M.Def("Title", new DOM.Tag({type:"title","content":title}));
+            var Title=M.Def("Title", new DOM.Tag({type:"title","content":title}));
 
 
 
 
 
-      Window.head.add(Title);
+            Window.head.add(Title);
 
-      var URLVars=Window.getUrlVars();
-      var page="js/app/index.js";
-      if(URLVars.page!==undefined) {
-        page=URLVars.page;
-      }
+            var URLVars=Window.getUrlVars();
+            var page="js/app/index.js";
+            if(URLVars.page!==undefined) {
+                page=URLVars.page;
+            }
 
-      /*
+            /*
   Note 2.2:  The result of this code is an addition of the equivalent HTML to the <head>:
   <title>The Meta Tutorial</title>
 
 */
 
-      /*
+            /*
   There are many available components to be created this way.  You can add directly to the
   document body by using Window.add.
 */
-      var Header=new DOM.Tag({type:"h1","content":title});
+            var Header=new DOM.Tag({type:"h1","content":title});
 
-      /*
+            /*
   the "basic" library includes many default tags representing typical HTML Elements:
 */
-      var Content=new basic.Div("Content");
-      Window.add(Content);
+            var Content=new basic.Div("Content");
+            Window.add(Content);
 
-      /*
+            /*
   You can also add text or set the content of the node directly:
 */
-      var Location=new basic.Link({cls:"location",url:window.location.pathname});
-      Location.content("Location: "+window.location.pathname);
+            var Location=new basic.Link({cls:"location",url:window.location.pathname});
+            Location.content("Location: "+window.location.pathname);
 
-      /*
+            /*
 
   You can explore the available components in depth by browsing the squishy and squishy_ext libs
   by continuing this tutorial.
 
 */
 
-      /*
+            /*
   2.3 Accessing Remote Resources
     Using remote resources as data sources is critical to building dynamic applications.
     Remote resources include data files stored in the same directory as this file as well as
@@ -241,14 +240,14 @@ except instead of defining HTML/XML markup you are writing function calls:
 
 */
 
-      var Req=Request.Request;
+            var Req=Request.Request;
 
-      //Note 2.3: Var Req is used here to create a shorthand to the Request.Request class.
-
-
+            //Note 2.3: Var Req is used here to create a shorthand to the Request.Request class.
 
 
-      /*  To grab the plain text content of the file without importing the contents, use the Request module.
+
+
+            /*  To grab the plain text content of the file without importing the contents, use the Request module.
     The constructor for Request takes two strings describing the request and response types
     of the resource.
 
@@ -257,35 +256,39 @@ except instead of defining HTML/XML markup you are writing function calls:
     as imports, but with a specific way to handle the results:
 */
 
-      var SquishyLogo=null;
-      Import("squishy/svg",function(svg) {
-        SquishyLogo=new svg.SVG(100,100);
-        SquishyLogo.addClass("sitemenu");
-        var svglogo=new svg.SVG({src:"img/squishy.svg",onload:function(svg) {
-          var logo=svg.query("#SquishyLogo")[0];
-          console.debug({squishylogo:logo,svg:svg});
-          logo.remove();
-          SquishyLogo.add(logo);
-          SquishyLogo.NSattrs({viewbox:"0 0 100 100"});
-        }})
-        Content.add(SquishyLogo);
-      });
-      var browser=new fse.FileBrowser("/var/www/html/squishy","poop7");
+            Import("apps/spoon/","apps/FSe/",
+                   function(spoon,FSe) {
 
-      M.Def("browser",browser);
-      console.debug({M:M});
-      //browser.Import("..");
-      //browser.Import("app");
-      //browser.load(M.Self.filename,M.Self);
-      Content.add(browser);
+            var SquishyLogo=null;
+            Import("squishy/svg",function(svg) {
+                SquishyLogo=new svg.SVG(100,100);
+                SquishyLogo.addClass("sitemenu");
+                var svglogo=new svg.SVG({src:"img/squishy.svg",onload:function(svg) {
+                    var logo=svg.query("#SquishyLogo")[0];
+                    console.debug({squishylogo:logo,svg:svg});
+                    logo.remove();
+                    SquishyLogo.add(logo);
+                    SquishyLogo.NSattrs({viewbox:"0 0 100 100"});
+                }})
+                spoon.main.add(SquishyLogo);
+            });
+                       var browser=new FSe.FileBrowser("/var/www/html/squishy","poop7");
+                       spoon.main.add(browser);
+                       //M.Def("browser",browser);
+                       console.debug({M:M});
+                       //browser.Import("..");
+                       //browser.Import("app");
+                       //browser.load(M.Self.filename,M.Self);
+                       //Content.add(browser);
 
-      /*new Req("URI","TEXT").Get(page,{
+                       /*new Req("URI","TEXT").Get(page,{
         /*
            Note 2.4:  If there were GET or POST arguments for this request, they would be listed here.
          */
-      /*},function(samplepage) {
+                       /*},function(samplepage) {
         Content.add(new codebrowser.CodeBrowser(samplepage,browser));
 
       });*/
-    });
+                   });
+        });
 });

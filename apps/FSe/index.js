@@ -9,7 +9,7 @@ Module(function M() {
     "squishy/form",
     "squishy/membrane",
     "js/lib/squishy_ext/LocalModel",
-    "spoon",
+    "spoon/",
     function(event,basic,interactive,Req,svg,form,membrane,spoon) {
       var osroot=""
       var Request=Req.Request;
@@ -34,7 +34,9 @@ Module(function M() {
         C.Def(function close() {
           this.container.hide();
         });
-        C.Def(function onrefresh(val) {})
+        C.Def(function onrefresh(val) {
+
+        })
         C.Def(function refresh() {
           var F=this;
           this.env.exec("cd "+this.loc+";cat "+this.name+";cd ~-",function(val) {

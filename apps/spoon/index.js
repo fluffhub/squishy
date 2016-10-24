@@ -7,12 +7,13 @@ Module(function M() {
   );
   M.Import("squishy/DOM","squishy/basic","squishy/layout",
            "squishy/interactive","squishy/keyboard","squishy/events","squishy/svg",
+
            "spoon/UserBrowser","spoon/Library",
-           "spoon/Models","spoon/conf",
+           "spoon/Models","spoon/conf", "squishy/cookies",
            function(DOM,basic,layout,
                      interactive,kb,events,svg,
                      ub,op,
-                     Ms,conf) {
+                     Ms,conf,cookies) {
 
              var hasEvents=events.hasEvents;
              var UserBrowser=ub.UserBrowser;
@@ -430,8 +431,13 @@ Module(function M() {
 
 
 
-               M.Def("match",function () {
-                 return true
+               M.Def("match",function match(item) {
+                 var ret=[]
+                 for(var i=0;i<this.apps.length;i++) {
+                  if(this.apps[i].match(item))ret.push(this.apps[i]);
+
+                 }
+                 return ret;
                });
 
 
