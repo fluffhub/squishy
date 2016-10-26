@@ -79,7 +79,7 @@ Module(function M() {
           this.container.hide();
         });
         C.Def(function onrefresh(val) {})
-        C.Def(function refresh() {
+        C.Def(function load() {
           var dir=this;
           console.debug("refreshing "+this.loc);
 
@@ -104,9 +104,11 @@ Module(function M() {
                 //is a file
 
                 var F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
-                  if(filename.slice(-1)!="*")
-                    this.refresh();
-                  this.open();
+                 // if(filename.slice(-1)!="*")
+                 //   this.refresh();
+                 // this.open();
+                  //call spoon newtask
+                  var fileeditor=spoon.main.newTask(filename,dir.loc+"/"+filename)
                 });
 
                 dir.contents[filename]=F;
