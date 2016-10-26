@@ -202,7 +202,8 @@ Module(function M() {
                 lib.cd(dirloc)
               });
               lib.add(lib.dirs[val])
-              lib.dirs[val].refresh();
+              //if(
+              lib.dirs[val].load();
               lib.dirs[val].hide()
 
             }
