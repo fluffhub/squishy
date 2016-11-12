@@ -129,6 +129,10 @@ Module(function M() {
                    }
 
                  });
+                 C.Def(function openFile(file) {
+                   //check what app is needed for this file
+                   //
+                 })
                  C.Def(function create(type) {
                    var EW=this;
                    var P;

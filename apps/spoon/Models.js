@@ -1,9 +1,9 @@
 Module(function M() {
-M.Import('squishy/localstorage',function(LM) {
+M.Import('squishy/browser',function(browser) {
 ////M.Import('fluff',function(FI) {
   //var Graph=FI.Graph;
-  var LocalDB=LM.LocalDB;
-  var LocalModel=LM.LocalModel;
+  ////var LocalDB=LM.LocalDB;
+ // var LocalModel=LM.LocalModel;
   var Local=LocalDB(function L() {
     L.Name("Local");
     L.Model(function Mdl() {
