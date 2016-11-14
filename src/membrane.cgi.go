@@ -8,19 +8,9 @@ import (
   "net/http/cgi"
   "os/exec"
   "strings"
-<<<<<<< HEAD
-  // "bufio"
-  "io/ioutil"
-  "os"
-  //"encoding/json"
-  //"io"
-  //  "math/rand"
-  //  "strconv"
-=======
   "io/ioutil"
   "os"
   "syscall"
->>>>>>> 3dacd2d28e7dbb96962137b2490473218d3325de
 )
 func dump(err error) {
   if(err!=nil) {
@@ -29,74 +19,16 @@ func dump(err error) {
     eo.Close()
   }
 }
-<<<<<<< HEAD
-func Readwrite(name string,o *os.File, writer http.ResponseWriter)       {
-  log1,_:=os.Create("log1")
-  var pos int64
-  pos=0
-  var posfile *os.File
-  var err error
-  if _, err2 := os.Stat(".pos_"+name); os.IsNotExist(err2) {
-
-
-  } else {
-    posfile,err=os.OpenFile(".pos_"+name,os.O_RDWR,0666)   
-    fmt.Fscanf(posfile,"%d",&pos)
-    o.Seek(pos,0)
-  }
-  dump(err)
-  for {
-    bn:=make([]byte,128)
-=======
 func Readwrite(name string,writer http.ResponseWriter, pos int64,leng int64)       {
   log1,_:=os.Create("log1")
   o,_:=os.Open(".out_"+name)
   o.Seek(pos,0)
   for {
     bn:=make([]byte,1)
->>>>>>> 3dacd2d28e7dbb96962137b2490473218d3325de
     n,_:=o.Read(bn)
     pos=pos+int64(n)
     writer.Write(bn)
     log1.Write(bn)
-<<<<<<< HEAD
-    if( n==0 ){ //log1.Write([]byte("BONG"))
-      /*     oo,_:=os.Open(".session2_"+name)
-pid:=-1
-
-
-fmt.Fscanf(oo,"%d",&pid)
-proc,err:=os.FindProcess(pid)
-dump(err) 
-if(proc!=nil) {
-proc.Signal(os.Interrupt)
-}
-*/
-      break
-    } 
-    // if(bn[0]==byte(027)&&bn[1]==byte(03)&&bn[2]==byte(04)) {
-    // log1.Write([]byte("BING"))
-
-    //  break
-    //}
-    //else {
-
-    // }
-    //}
-    //writer.Write([]byte("."))
-    //logue.Write([]byte("ok"))
-  }
-  posfile,err=os.Create(".pos_"+name)
-  fmt.Fprintf(posfile,"%d",pos)
-  posfile.Close()
-  o.Close()
-  writer.Write([]byte("\n\n"))
-  //writer.Close()
-}
-func get_or_create_proc(name string) {
-  //
-
-=======
     if( n==0 || pos>=leng ){
       break
     }
@@ -113,41 +45,18 @@ func get_or_create_proc(name string) {
 
 }
 func get_or_create_proc(name string) {
->>>>>>> 3dacd2d28e7dbb96962137b2490473218d3325de
   files, _ := ioutil.ReadDir("./")
   outfound:=false
   infound:=false
   procfound:=false
   var session *exec.Cmd
-<<<<<<< HEAD
-  //var session *os.Process
-=======
   var pwd string
->>>>>>> 3dacd2d28e7dbb96962137b2490473218d3325de
   for _, f := range files {
     fn:=f.Name()
     if(fn==".out_"+name) {
       outfound=true
     }
     if(fn==".in_"+name) {
-<<<<<<< HEAD
-      infound=true 
-    }
-    if(fn==".session_"+name) {
-      sesh,err:=os.Open(".session_"+name)
-
-      dump(err) 
-      pid:=-1
-
-
-      fmt.Fscanf(sesh,"%d",&pid)
-      proc,err:=os.FindProcess(pid)
-      dump(err) 
-      if(proc!=nil) {
-        procfound=true
-      }
-
-=======
       infound=true
     }
     if(fn==".~_"+name) {
@@ -167,17 +76,10 @@ func get_or_create_proc(name string) {
       if(proc!=nil) {
         procfound=true
       }
->>>>>>> 3dacd2d28e7dbb96962137b2490473218d3325de
     }
   }
 
   if(!(infound && outfound)) {
-<<<<<<< HEAD
-
-    if(infound) {     
-    } else {
-      exec.Command("mkfifo",".in_"+name).Start()    
-=======
     if(infound) {
     } else {
       /////THIS ILLUSTRATES THE DIFFERENCE BETWEEN GO NATIVE SYSTEM CALLS AND ARBITRARY SYSTEM CALLS
@@ -186,64 +88,16 @@ func get_or_create_proc(name string) {
       //exec.Command("mkfifo",".in_"+name).Start() /////THIS IS AN ARBITRARY SYSTEM CALL
       syscall.Mkfifo(".in_"+name,0777) ///// THIS IS A GO NATIVE SYSTEM CALL
 
->>>>>>> 3dacd2d28e7dbb96962137b2490473218d3325de
       infound=true;
     }
     if(outfound) {
     } else {
-<<<<<<< HEAD
-      // exec.Command("mkfifo",".out_"+name).Start()
-=======
->>>>>>> 3dacd2d28e7dbb96962137b2490473218d3325de
       _,err:=os.Create(".out_"+name)
       dump(err)
       outfound=true;
     }
   }
   if(!procfound){
-<<<<<<< HEAD
-    //session= exec.Command("sh","-c","(while true ; do  cat .in_"+name+";  done) | (sh  > .out_"+name+") & echo $! > .session2_"+name)
-    session= exec.Command("sh","-c","tail -f .in_"+name+" | (sh  >> .out_"+name+") & echo $! > .session2_"+name)
-    //(while true ; do  (cat .in_poop; echo -e \"\\4\") ;  done) | (sh  > .out_poop) ;echo $! > .session2_poop
-    // session= exec.Command("sh","-c","cat .in_"+name+" | (sh  > .out_"+name+")")
-    // var attr  os.ProcAttr
-    //argv:=[]string{"-c","cat .in_"+name+" | (/bin/bash > .out_"+name+")"}
-    // session,err:=exec.("/bin/bash",argv,&attr)
-    //dump(err)
-    //go session.Wait()
-    session.Start()
-    // exec.Command("touch",".session_"+name).Start()
-    sesh,err:=os.Create(".session_"+name)
-    dump(err) 
-    //fmt.Fprintf(sesh,"%d",session.ProcessState.Pid())
-    fmt.Fprintf(sesh,"%d",session.Process.Pid)
-
-
-
-
-    //sesh.Flush()
-    sesh.Close()
-  }
-}
-func flush_pipe(f string) {
-  //	println("Thread2: About to force the reading of pipe to finish by opening the pipe O_RDWR")
-  //	println("Thread2: Press 'enter' when you're ready")
-
-  // we're not even _doing_ anything (including closing) with the returned file
-  _, err := os.OpenFile(f, os.O_RDWR, os.ModeNamedPipe)
-  dump(err)
-}
-func main() {
-
-  //args := os.Args
-  logue,err:=os.Create("logue")
-  dump(err)
-  // if args!=nil  { 
-  // }
-  //  else {
-  //  fmt.Println(args)
-
-=======
 
     /////THIS EXECUTES SH -C WHICH TAKES A STRING REPRESENTING THE CONSOLE COMMANDS TO RUN USING ARBITRARY SYSTEM CALLS.
     ///// I ONLY USED THIS AS A CRUTCH TO QUICKLY ADD PIPES AND DELIMITERS TO THE COMMAND STRING.
@@ -284,7 +138,6 @@ func main() {
 
   logue,err:=os.Create("logue")
   dump(err)
->>>>>>> 3dacd2d28e7dbb96962137b2490473218d3325de
 
   if err := cgi.Serve(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
     header := w.Header()
