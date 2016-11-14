@@ -1,16 +1,18 @@
 Module(function M() {
   M.Import(
     "squishy/request",
-    "squishy/system",
+    "squishy/filesystem",
     function(Req,system) {
 
       var Device=M.Class(function C() {
+        C.Super(system.Device);
         C.Def("session",null);
         C.Def("url","/squishy/membrane")
         C.Def("root","/squishy/")
         C.Def("id","pool")
 
         C.Init(function Device(name,struct,session) {
+          system.Device.call(this,name);
           this.request=new Req.Request("URI","TEXT");
           this.request.request.timeout=60000;
           if(typeof name=="string") {
@@ -34,7 +36,7 @@ Module(function M() {
             env.home=pwd;
             env.root=new Dir
           });
-        })
+        });
 
         C.Def(function exec(command,receive) {
           command=command.replace(/;/g,"\u00b6")
@@ -47,22 +49,18 @@ Module(function M() {
             receive(result.slice(0,-1));
 
           });
-        })
-
-
+        });
       });
       M.Class(function C() {
         C.Super(system.File);
         C.Init(function File(name,value) {
           this.name=null
           this.value=null
-          if(typeof name=="string")
-            this.name=name
-            if(value!==undefined)
-              this.value=value
+          if(typeof name=="string")this.name=name;
+          if(value!==undefined) this.value=value;
 
 
-              });
+        });
         C.Def(function read(success) {
           var F=this;
           this.env.exec("cat "+this.loc+"/"+this.name+"",function(val) {
@@ -74,8 +72,8 @@ Module(function M() {
           if(value!==undefined) this.value=value;
         });
         C.Def(function rename(name,success) {
-          if(typeof name=="string") this.name=name
-            });
+          if(typeof name=="string") this.name=name;
+        });
       });
 
       var Dir=M.Class(function C() {

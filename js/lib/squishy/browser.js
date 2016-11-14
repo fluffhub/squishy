@@ -6,10 +6,10 @@ Module(function M() {
 
         if(typeof name=="string")
           this.name=name;
-        if(root instanceof Dir) {
+        if(root instanceof M.Self.Dir) {
           this.root=root;
         } else {
-          this.root=new Dir()
+          this.root=new M.Self.Dir()
         }
       });
       C.Def(function lookup(loc) {
