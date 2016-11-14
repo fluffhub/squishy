@@ -1,5 +1,5 @@
 
-  //var Squishy=document.currentScript;
+//var Squishy=document.currentScript;
 Object.defineProperty(window, '__stack', {
   get: function(){
     var orig = Error.prepareStackTrace;
@@ -44,7 +44,7 @@ Function.prototype.kwargs=function kwargs(args) {
       }
     }
     if(AL>0) {
-     /* *args remain to be added */
+      /* *args remain to be added */
       for(var i=0;i<AL;i++) {
         this._kwargs[argnames[i]]=this.arguments[i];
       }
@@ -105,9 +105,13 @@ function Module() {
                 var callback=callback || function() {};
                 var M=this;
                 window.Import(this.filename,function(loaded) {
-                  M.loaded=true;
-                  extend(M,loaded);
-                  callback(M);
+                  //                  M.loaded=true;
+                  //extend(M,loaded);
+                  //if(M.loaded)
+
+                  delete M.parent[loaded.name];
+                  M.parent[loaded.name]=loaded;
+                  callback(loaded);
                 });
               },
              }
@@ -154,17 +158,28 @@ function Module() {
         M = element.Module = new window.Module(src);
         M.def=callback;
       }
+      M.dir=element.root;
       Object.defineProperty(callback,'Self',{value:M});
       Object.defineProperty(M,'element',{value:element});
-      if(M.name) {} else M.name=vn;
+      if(M.name) {} else {
+
+        if(vn!="index") M.name=vn;
+        else {
+          M.name=ps.slice(-3,-2)[0]
+        }
+
+      }
       Object.defineProperty(M,'waiting',{value:0,writable:true});
       Object.defineProperty(M,'Template',{value:{},writable:true});
       for(var templatefield in window.Module.Template) {
         var Field=function Field() {
-         // try { throw new Error(""); } catch(e) { console.debug({LN:e}); }
+          // try { throw new Error(""); } catch(e) { console.debug({LN:e}); }
 
           var ob=Field.fun.apply(M,arguments);
-          if(ob!==undefined&&ob!==null)ob.funcall=__stack[1];
+          if(ob!==undefined&&ob!==null&&ob instanceof Object){
+            Object.defineProperty(ob,"funcall",{value:__stack[1]});
+          }
+
 
           return ob;
         };
@@ -222,9 +237,17 @@ Module.Template={
       var k=arguments[i];
       var NM;
       if(this.element && this.element.root)
-        NM=new window.Module(this.element.root+'/'+k+'.js');
+        if(k.slice(-1)=="/") {
+          NM=new window.Module(this.element.root+"/"+k+"index.js");
+
+          k=k.slice(0,-1);
+
+        }
+        else
+          NM=new window.Module(this.element.root+'/'+k+'.js');
       else
         NM=new window.Module();
+      NM.parent=this;
       this[k]=NM;
     }
   },
@@ -232,7 +255,7 @@ Module.Template={
     if(typeof this.waiting=='number') {} else this.waiting=0;
     var args=Array.prototype.slice.call(arguments);
     if(args.length>2) {
-     callback2=args.slice(-1)[0];
+      callback2=args.slice(-1)[0];
       paths=args.slice(0,-1);
     }
     if(paths instanceof String) paths=[paths];
@@ -269,143 +292,167 @@ function Import(path,callback) {
 
     //check if relative path or uri
     if(typeof(path)=="string") {
-    var r = new RegExp('^(?:[a-z]+:)?//', 'i');
-    var absolute=false;
-    if (r.test(path)||path[0]=='/' ){
-      //absolute path, use as-is
-      var parser = document.createElement('a');
-      parser.href = path;
-      path=parser.pathname;
-      console.debug(path);
-      absolute=true;
-    } else {
+      var r = new RegExp('^(?:[a-z]+:)?//', 'i');
+      var absolute=false;
+      var dirname='chewy';
+      var parent=null;
 
-      //the path is relative, either:
-      //     to an index.js, given a data-root by module call, or
-      //     to the base url of the page
+      if (r.test(path)||path[0]=='/' ) {
 
-    }
-
-    var ps=path.split('/');
-    var fn=ps.slice(-1)[0];
-    var fns=fn.split('.');
-    var dirname='chewy';
-    var ft='';
-    var vn=fn;
-    if(fns.length>1) ft=fns.slice(-1)[0] || '';
-    if(fns.length>1) vn=fns.slice(0,-2).join('.');
-    if(ps.length>1) dirname=ps.slice(-2)[0];
-    else if(ps.length==1) dirname=ps[0];
-    var dir=ps.slice(0,-1).join('/');
-    callback.ran=false;
-    this.path=path;
-    var parent=null;
-    if(!absolute) {
-      parent=document.querySelector('script[data-name=\''+dirname+'\']');
-      if(parent!=null) {
-        //if(path[0]!='/') path='/'+path;
-        if(ps.length==1) path=parent.root+'/'+ps[0];
-        else path = parent.root+'/'+ps.slice(1).join('/');
-      }
-      else {
-        //this is provided as a relative path (to the document root)
-
+        //absolute path, use as-is
         var parser = document.createElement('a');
         parser.href = path;
         path=parser.pathname;
+        console.debug(path);
+        absolute=true;
+      } else {
+
+        //the path is relative, either:
+        //     to an index.js, given a data-root by module call, or
+        //     to the base url of the page
+
+
       }
-    }
+
+      var ps=path.split('/');
+      var fn=ps.slice(-1)[0];
+      if(fn=="") {
+        ps[ps.length-1]=fn="index.js";
+        path=path+"index.js";
+      }
+
+
+      var fns=fn.split('.');
+
+      var ft='';
+      var vn=fn;
+      if(fns.length>1) ft=fns.slice(-1)[0] || '';
+      if(fns.length>1) vn=fns.slice(0,-2).join('.');
+
+
+
+      else if(ps.length==1) dirname=ps[0];
+      var dir=ps.slice(0,-1).join('/');
+      callback.ran=false;
+      this.path=path;
+
+      if(!absolute) {
+        //preprocess the uri to convert it from a relative to a absolute path
+        if(ps.length>=1) {
+
+          dirname=ps[0];
+
+
+
+          parent=document.querySelector('script[data-name=\''+dirname+'\']');
+
+
+          if(parent!=null) {
+            //if(path[0]!='/') path='/'+path;
+            if(ps.length==1) path=parent.root+'/'+ps[0];
+            else path = parent.root+'/'+ps.slice(1).join('/');
+          }
+          else {
+            //this is provided as a relative path (to the document root)
+
+            var parser = document.createElement('a');
+            parser.href = path;
+            path=parser.pathname;
+          }
+
+        }
+      }
       if(ft in Import.types) {
         Import.types[ft](path,callback);
       }
-    else {
-      if(fn=='') path=path+'index';
-      if(fn.indexOf('.')=='-1') path=path+'.js';
-      //assume its a js file
-      //find existing script tag
-      var script=null;
-      script=document.querySelector('script[data-name="'+fn+'"]') ||
-        document.querySelector('script[src=\''+path+'\']');
-      if(script) {
-        //script.parent=parent;
-        if(script.failed) {
-          if(callback.error) callback.error(script);
-          else {
-            console.debug("failed to load script:")
-            console.debug({error:script});
-          //throw new Error(script);
-        }
-        } else {
-          if(script.dependencies) script.dependencies[script.dependencies.length]=callback;
-          else script.dependencies=[callback];
-          if(callback.error) {
-          if(script.errors) script.errors[script.errors.length]=callback.error;
-          else script.errors=[callback.error];
-          }
-          // if the script ran already, re-run this dependency only
-          //with script.Module as agrment
-          if(script.ran&&!callback.ran) {
-            callback(script.Module);
-            callback.ran=true;
-          }
-          if(script.Module) {
-          }
-          else {
-            script.Module=new window.Module(path);
-            //this probably was a script tag inserted into html on its own
-            //without Import statement,
-            //create Import for it
-          }
-        }
-      }
-      else  {
-        var script=document.createElement('script');
-        script.errors=[function err(v) { console.debug("script load error: ");console.debug(v); }];
-        Object.defineProperty(this,'element',{value:script});
-        var waiting=0;
-        if(parent && vn in parent.Module) script.Module=parent.Module[vn];
-        else script.Module=new window.Module(path);
-        script.dependencies=[callback];
-        if(callback.error) {
-          if(script.errors&&script.errors.length) script.errors.push(callback.error);
-          else script.errors=[callback.error];
-        }
-        script.parent=parent;
-        script.finish=function() {
-          //for (var i=script.dependencies.length-1;i>=0;i--) {
-          var L=script.dependencies.length;
-          for (var i=0;i<L;i++) {
-            if(!script.dependencies[i].ran) {
-              script.dependencies[i](script.Module);
-              script.dependencies[i].ran=true;
+      else {
+        if(fn=='') path=path+'index';
+        if(fn.indexOf('.')=='-1') path=path+'.js';
+        //assume its a js file
+        //find existing script tag
+        var script=null;
+        script=document.querySelector('script[data-name="'+fn+'"]') ||
+          document.querySelector('script[src=\''+path+'\']');
+        if(script) {
+          //script.parent=parent;
+          if(script.failed) {
+            if(callback.error) callback.error(script);
+            else {
+              console.debug("failed to load script:")
+              console.debug({error:script});
+              //throw new Error(script);
+            }
+          } else {
+            if(script.dependencies) script.dependencies[script.dependencies.length]=callback;
+            else script.dependencies=[callback];
+            if(callback.error) {
+              if(script.errors) script.errors[script.errors.length]=callback.error;
+              else script.errors=[callback.error];
+            }
+            // if the script ran already, re-run this dependency only
+            //with script.Module as agrment
+            if(script.ran&&!callback.ran) {
+              callback(script.Module);
+              callback.ran=true;
+            }
+            if(script.Module) {
+            }
+            else {
+              script.Module=new window.Module(path);
+              //this probably was a script tag inserted into html on its own
+              //without Import statement,
+              //create Import for it
             }
           }
-          //try to find the dirname script
-          if(script.parent) {
-            if(script.parent.Children) {}
-            else script.parent.Children={}
-            script.parent.Children[vn]=script.Module;
-            script.parent.Module[script.name]=script.Module;
-          }
-          script.ran=true;
-          if (script.onfinish) script.onfinish(script.Module);
         }
-        script.src=path;
-        script.type='text/javascript';
-        script.Import=this;
-        script.addEventListener("error",function(e) {
-          console.debug("error in import ("+path+"):");
-          console.debug(e);
-          script.failed=true;
-          script.errors.forEach(function(caller) {
-            console.debug(caller);
-            if(caller) caller(e);
+        else  {
+          var script=document.createElement('script');
+          script.errors=[function err(v) { console.debug("script load error: ");console.debug(v); }];
+          Object.defineProperty(this,'element',{value:script});
+          var waiting=0;
+          if(parent && vn in parent.Module) script.Module=parent.Module[vn];
+          else script.Module=new window.Module(path);
+          script.dependencies=[callback];
+          if(callback.error) {
+            if(script.errors&&script.errors.length) script.errors.push(callback.error);
+            else script.errors=[callback.error];
+          }
+          script.parent=parent;
+          script.finish=function() {
+            //for (var i=script.dependencies.length-1;i>=0;i--) {
+            var L=script.dependencies.length;
+            for (var i=0;i<L;i++) {
+              if(!script.dependencies[i].ran) {
+                script.dependencies[i](script.Module);
+                script.dependencies[i].ran=true;
+              }
+            }
+            //try to find the dirname script
+            if(script.parent) {
+              if(script.parent.Children) {}
+              else script.parent.Children={}
+              script.parent.Children[vn]=script.Module;
+              script.parent.Module[script.name]=script.Module;
+            }
+            script.ran=true;
+            if (script.onfinish) script.onfinish(script.Module);
+          }
+          script.src=path;
+          script.type='text/javascript';
+          script.Import=this;
+          script.addEventListener("error",function(e) {
+            console.debug("error in import ("+path+"):");
+            console.debug(e);
+            script.failed=true;
+            script.errors.forEach(function(caller) {
+              console.debug(caller);
+              if(caller) caller(e);
+            });
           });
-        });
-        document.head.appendChild(script);
-        //     return script.Module;
+          document.head.appendChild(script);
+          //     return script.Module;
+        }
       }
-    }
     } else {
       callback(path);
       callback.ran=true;
@@ -414,14 +461,14 @@ function Import(path,callback) {
   else {
     var paths=[];
     if(args1.length<=2) {
-    if(path instanceof Array) {
-      paths=path;
-    }
-    if(typeof path=='string') {
-      paths=path.split(' ')
-    }
+      if(path instanceof Array) {
+        paths=path;
+      }
+      if(typeof path=='string') {
+        paths=path.split(' ')
+      }
     } else {
-       callback=args1.slice(-1)[0];
+      callback=args1.slice(-1)[0];
       paths=args1.slice(0,-1);
     }
     that=[];
@@ -430,7 +477,7 @@ function Import(path,callback) {
 
     var args=[];
     paths.forEach(function(path,index) {
-      that[that.length]=new Import(path,function resolve(item) {
+      that[that.length]=new Import(path.trim(),function resolve(item) {
 
         waiting--;
 
@@ -472,7 +519,12 @@ Import.types={
   png:function(path,callback) {
     return Import.types.bmp(path,callback);
   },
+  svg:function(path,callback) {
 
+  },
+  html:function(path,callback) {
+
+  }
 };
 function Class(def,fun) {
   var fun=fun || new Function();
@@ -610,7 +662,7 @@ var define=Module.define=function define(n,r,F){ /* F = function (require, expor
           returned=fun.apply(this,imports);
           load(returned,exported);
         }
-    });
+      });
     } else {
       if(fun&&fun instanceof Function) {
         var req=function(v) {}
@@ -621,3 +673,4 @@ var define=Module.define=function define(n,r,F){ /* F = function (require, expor
   });
 }
 define.amd={};
+

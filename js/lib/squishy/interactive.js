@@ -261,7 +261,8 @@ Module(function M() { M.Import(
 
       C.Def(function enable() {
         var evs=["mousedown","mouseup","mouseout"]
-        if('ontouchstart' in window)  evs =["touchstart","touchend","touchleave"];
+        if('ontouchstart' in window)  evs = ["touchstart mousedown","touchend mouseup","touchleave mouseout"];
+
         this.addEvent("clickstart",evs[0],
                       this.clickstart);
         this.addEvent("clickend",evs[1],
@@ -286,16 +287,20 @@ Module(function M() { M.Import(
         else {
           this.clicking=true;
         }
-
+if (ev.touches !==undefined) ev.preventDefault()
       });
       C.Def(function clickend(ev) {
         if(this.clicking) {
           this.clicking=false;
           this.onclick(ev);
         }
+
+if (ev.touches !==undefined) ev.preventDefault()
       });
       C.Def(function cancel(ev) {
         this.clicking=false;
+
+if (ev.touches !==undefined) ev.preventDefault()
       });
       C.Def(function click() {
 

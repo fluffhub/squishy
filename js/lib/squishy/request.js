@@ -1,6 +1,7 @@
 Module(function M() {
   M.Import('squishy/events',function(events) {
 var Request=M.Class(function C() {
+  C.Def("timeout",0)
     C.Init(function Request(requesttype,responsetype) {
       this.requesttype=requesttype || 'URI';
       this.responsetype=responsetype || 'TEXT';

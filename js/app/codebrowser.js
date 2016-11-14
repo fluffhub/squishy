@@ -85,7 +85,7 @@ Module(function M() {
           return item;
         },leave:function(n,p,c) {
           if(n.params.length>0)
-          n.params[n.params.length-1].element.add(new basic.Span(")"));
+            n.params[n.params.length-1].element.add(new basic.Span(")"));
           c.add(new basic.Span("{"));
           c.add(new basic.Span("}"));
         }},
@@ -230,7 +230,7 @@ Module(function M() {
           leave:function(n,p,c) {
             c.addClass("init");
             var name;
-             console.debug({"function":n})
+            console.debug({"function":n})
             if(n.arguments&&n.arguments[0]) {
 
               if(n.arguments[0].id) {
@@ -396,7 +396,67 @@ Module(function M() {
             }
           });
         });
+        C.Def(function summary(node,parent) {
+          var cursor=this;
+                              function travel(item2,depth) {
+                      if(depth>0) {
+                        var items=Object.keys(item2);
+                        if(items.length>0) cursor.addClass("module");
+                        console.debug(items);
 
+                        for(var j=0;j<items.length;j++) {
+
+                          var key=items[j];
+
+                          var existing=cursor.query("div[data-key=\""+key+"\"]");
+                          var c;
+                          if(existing.length>0) { c=existing[0]; }
+                          // if(key!="supers") {//
+                          else  {
+                            c=new basic.Link({url:"#"+key,content:key});
+                            //  for(var j=0;j<filedepth;j++) {
+                            //    c.add(new basic.Span("","branch1"));
+                            // }
+                            c.onclick=function() {
+                             // browser.change(path,item)
+                            };
+                            c.attrs({"data-key":key});
+                            c.addClass("member");
+                            var cursize=1-(depth*0.125);
+                            c.element.style["font-size"]=cursize+"em";
+                            cursor.add(c);
+                          }
+
+
+
+                          var member=item2[items[j]];
+                          if(member.funcall)
+                          {
+                            var linenumber=new basic.Span(":"+member.funcall.getLineNumber()+":"+member.funcall.getColumnNumber());
+                            c.add(linenumber);
+                            linenumber.element.style["font-size"]="0.5em";
+                          }
+                          if(member instanceof Object) {
+
+                            var submembers=Object.keys(member);
+
+                            if(submembers.length>0) {
+
+                              if(c.parent) cursor=c;
+                              c.add(travel(member,depth-1));
+                              if(c.parent) cursor=c.parent;
+                            }
+                            //  }
+                          }
+
+                        }
+
+                      }
+                    }
+                    travel(this,1);
+
+                  //  cursor=modulewrapper.parent;
+        });
         C.Def(function leaveNode(node,parent) {
           this.depth--;
           var depth=this.depth;
@@ -424,11 +484,11 @@ Module(function M() {
             tooltip.show();
             item.addClass("hovering");
             item.element.style["border-color"]=""+PseudoRandomColor(d,0.5);
-             e.stopPropagation();
+            e.stopPropagation();
           });
           item.addEvent("select","click",function(e) {
             console.debug(node);
-             // e.stopPropagation();
+            // e.stopPropagation();
           });
 
           item.addEvent("hidetip","mouseout",function(e) {
