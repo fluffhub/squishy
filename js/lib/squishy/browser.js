@@ -1,29 +1,31 @@
 Module(function M() {
   M.Import("squishy/localmodel",function(local) {
 
-  M.Class(function C() {
-    C.Init(function Device(name,root) {
+    M.Class(function C() {
+      C.Init(function Device(name,root) {
 
-      if(typeof name=="string")
-        this.name=name;
-      if(root instanceof Dir) {
-       this.root=root;
-      } else {
-       this.root=new Dir()
-      }
-    });
-    C.Def(function lookup(loc) {
+        if(typeof name=="string")
+          this.name=name;
+        if(root instanceof Dir) {
+          this.root=root;
+        } else {
+          this.root=new Dir()
+        }
+      });
+      C.Def(function lookup(loc) {
 
+      });
+      C.Def("exec",null)
     });
-    C.Def("exec",null)
-  });
     C.Init(function File(name,value) {
       this.name=null
       this.value=null
-      if(typeof name=="string")
+      if(typeof name=="string") {
         this.name=name
-      if(value!==undefined)
-        this.value=value
+      }
+      if(value!==undefined) {
+        this.value=value;
+      }
 
 
     });
@@ -32,11 +34,12 @@ Module(function M() {
     });
     C.Def(function write(value) {
       if(value!==undefined)
-      this.value=value;
+        this.value=value;
     });
     C.Def(function rename(name) {
-      if(typeof name=="string")
-         this.name=name
+      if(typeof name=="string") {
+        this.name=name
+      }
     });
 
   });
