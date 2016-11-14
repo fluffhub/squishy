@@ -15,6 +15,7 @@ Module(function M() {
     });
     C.Def("exec",null)
   });
+  M.Class(function C() {
   C.Init(function File(name,value) {
     this.name=null
     this.value=null
@@ -29,9 +30,10 @@ Module(function M() {
       this.value=value;
   });
   C.Def(function rename(name) {
-    if(typeof name=="string")
+    if(typeof name=="string")  {
       this.name=name
-      });
+    }
+  });
 
 });
 M.Class(function C() {
