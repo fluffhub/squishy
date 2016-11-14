@@ -270,15 +270,14 @@ var SquishyLogo=null;
         }})
         Content.add(SquishyLogo);
       });
-      var browser=new filebrowser.FileBrowser();
+      var browser=new filebrowser.FileBrowser("..");
 
       M.Def("browser",browser);
       console.debug({M:M});
-
-      browser.Import("app");
-      browser.load(M.Self.filename,M.Self);
+      //browser.Import("..");
+      //browser.Import("app");
+      //browser.load(M.Self.filename,M.Self);
       Content.add(browser);
-
 
       /*new Req("URI","TEXT").Get(page,{
         /*
