@@ -139,7 +139,7 @@ Module(function M() {
           else {
             if(id!==undefined) this.id=id;
             else this.id="pool"
-            this.session=new membrane.Environment(id)
+            this.session=new membrane.Device(id)
           }
           this.presentdir=new basic.Div("pwdbar");
           this.presentdir.dirs=[];

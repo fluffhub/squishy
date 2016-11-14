@@ -21,7 +21,7 @@ Module(function M() {
              var TabbedPane=interactive.TabbedPane;
              var GridLayout=layout.GridLayout;
              var Pane=basic.Pane;
-            // var Library=op.Library;
+             // var Library=op.Library;
 
 
 
@@ -124,8 +124,8 @@ Module(function M() {
                    var task=null;
 
                    if(appName in conf.apps) {
-                    task=conf.apps[appName].open.apply(this,args)
-                    this.tasks.addTab(appName+":"+args.join(" "),appName+":"+args.join(" "),task)
+                     task=conf.apps[appName].open.apply(this,args)
+                     this.tasks.addTab(appName+":"+args.join(" "),appName+":"+args.join(" "),task)
                    }
 
                  });
@@ -392,75 +392,75 @@ Module(function M() {
                  //  M.continue();
                });
              });
-               //window.ew=new EditorWindow();
-               M.Def("main",new HomeWindow())
-               var Types={
+             //window.ew=new EditorWindow();
+             M.Def("main",new HomeWindow())
+             var Types={
+
+             }
+
+
+
+             M.Def(function match(item) {
+               Object.keys(Types).forEach(function(name) {
+
+               });
+             });
+
+             var defaultType=Module(function M2 () {
+               M.Class(function C() {
+                 C.Init(function ListItem(path) {
+                   basic.Div.call(this,"FSListItem")
+                   this.content(path);
+                 })
+               });
+
+               M.Class(function C() {
+                 C.Init(function Icon() {
+                   basic.Div.call(this,"FSIcon")
+                   this.content("?")
+                 });
+               });
+               M.Class(function C() {
+                 C.Init(function Editor() {
+                   basic.Div.call(this,"FSWindow")
+                 });
+               });
+
+               M.Class(function C() {
+                 C.Init(function Viewer() {
+                   basic.Div.call(this,"FSWindow")
+                 });
+               });
+
+             });
+             M.Def(function register(name,item) {
+               Types[name]=item;
+               //if(name in Types) {
+
+               //}
+
+             });
+
+
+
+
+
+             M.Def("match",function match(item) {
+               var ret=[]
+               for(var i=0;i<conf.apps.length;i++) {
+                 if(this.apps[i].match(item))ret.push(this.apps[i]);
 
                }
-
-
-
-               M.Def(function match(item) {
-                 Object.keys(Types).forEach(function(name) {
-
-                 });
-               });
-
-               var defaultType=Module(function M2 () {
-                 M.Class(function C() {
-                   C.Init(function ListItem(path) {
-                     basic.Div.call(this,"FSListItem")
-                     this.content(path);
-                   })
-                 });
-
-                 M.Class(function C() {
-                   C.Init(function Icon() {
-                     basic.Div.call(this,"FSIcon")
-                     this.content("?")
-                   });
-                 });
-                 M.Class(function C() {
-                   C.Init(function Editor() {
-                     basic.Div.call(this,"FSWindow")
-                   });
-                 });
-
-                 M.Class(function C() {
-                   C.Init(function Viewer() {
-                     basic.Div.call(this,"FSWindow")
-                   });
-                 });
-
-               });
-               M.Def(function register(name,item) {
-                 Types[name]=item;
-                 //if(name in Types) {
-
-                 //}
-
-               });
-
-
-
-
-
-               M.Def("match",function match(item) {
-                 var ret=[]
-                 for(var i=0;i<conf.apps.length;i++) {
-                  if(this.apps[i].match(item))ret.push(this.apps[i]);
-
-                 }
-                 return ret;
-               });
+               return ret;
+             });
 
 
              var id="pool"
 
-M.Def("session",new membrane.Environment(id));
+             M.Def("session",new membrane.Device(id));
              M.Def(function open(item) {
 
              });
 
-             });
            });
+});
