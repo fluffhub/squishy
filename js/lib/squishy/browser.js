@@ -17,58 +17,60 @@ Module(function M() {
       });
       C.Def("exec",null)
     });
-    C.Init(function File(name,value) {
-      this.name=null
-      this.value=null
-      if(typeof name=="string") {
-        this.name=name
-      }
-      if(value!==undefined) {
-        this.value=value;
-      }
+    M.Class(function C() {
+      C.Init(function File(name,value) {
+        this.name=null
+        this.value=null
+        if(typeof name=="string") {
+          this.name=name
+        }
+        if(value!==undefined) {
+          this.value=value;
+        }
 
 
-    });
-    C.Def(function read() {
-      return this.value
-    });
-    C.Def(function write(value) {
-      if(value!==undefined)
-        this.value=value;
-    });
-    C.Def(function rename(name) {
-      if(typeof name=="string") {
-        this.name=name
-      }
-    });
-
-  });
-  M.Class(function C() {
-    C.Init(function Dir(name,contents) {
-      if(typeof name=="string") {
-        this.name=name
-      }
-      if(contents!==undefined) {
-        this.contents=contents
-      }
-    });
-    C.Def(function list() {
-      return this.contents
-    });
-    C.Def(function mkdir() {
+      });
+      C.Def(function read() {
+        return this.value
+      });
+      C.Def(function write(value) {
+        if(value!==undefined)
+          this.value=value;
+      });
+      C.Def(function rename(name) {
+        if(typeof name=="string") {
+          this.name=name
+        }
+      });
 
     });
-    C.Def(function rename() {
+    M.Class(function C() {
+      C.Init(function Dir(name,contents) {
+        if(typeof name=="string") {
+          this.name=name
+        }
+        if(contents!==undefined) {
+          this.contents=contents
+        }
+      });
+      C.Def(function list() {
+        return this.contents
+      });
+      C.Def(function mkdir() {
 
-    });
-    C.Def(function remove() {
+      });
+      C.Def(function rename() {
 
-    });
-    //C.Def(function load() {
+      });
+      C.Def(function remove() {
 
-    //})
-    C.Def(function lookup(loc) {
+      });
+      //C.Def(function load() {
 
+      //})
+      C.Def(function lookup(loc) {
+
+      });
     });
   });
 });
