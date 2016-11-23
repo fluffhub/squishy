@@ -291,7 +291,10 @@ function Import(path,callback) {
     that=this;
 
     //check if relative path or uri
+
     if(typeof(path)=="string") {
+      var parser = document.createElement('a');
+      var fullpath;
       var r = new RegExp('^(?:[a-z]+:)?//', 'i');
       var absolute=false;
       var dirname='chewy';
@@ -300,7 +303,7 @@ function Import(path,callback) {
       if (r.test(path)||path[0]=='/' ) {
 
         //absolute path, use as-is
-        var parser = document.createElement('a');
+
         parser.href = path;
         path=parser.pathname;
         console.debug(path);
@@ -362,6 +365,9 @@ function Import(path,callback) {
 
         }
       }
+
+      fullpath=parser.href;
+
       if(ft in Import.types) {
         Import.types[ft](path,callback);
       }
@@ -453,6 +459,10 @@ function Import(path,callback) {
           //     return script.Module;
         }
       }
+
+      Import("squishy/live",function(live) {
+        live.init(fullpath)
+      });
     } else {
       callback(path);
       callback.ran=true;
