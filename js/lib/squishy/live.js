@@ -23,9 +23,12 @@ Module(function M () {
   M.Def(function init(path) {
     var loc2=document.createElement("a");
     loc2.href=path;
+    var fileloc=loc2.href;
+    loc2.href="/";
     var fileroot=loc2.href;
+
     if(fileroot in devices) {
-      devices[fileroot].push(path);
+      devices[fileroot].push(fileloc.slice(fileroot.length));
     } else {
      devices[fileroot]=[path];
     }
