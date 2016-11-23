@@ -193,6 +193,9 @@ function Module() {
       M.loaded=true;
       if(M.waiting==0 && element.finish) element.finish();
       else element.ran=true;
+      window.Import("squishy/live",function(live) {
+        live.init(parser.href)
+      });
     }
     else {
       var M=new window.Module();
@@ -460,9 +463,7 @@ function Import(path,callback) {
         }
       }
 
-      window.Import("squishy/live",function(live) {
-        live.init(fullpath)
-      });
+
     } else {
       callback(path);
       callback.ran=true;
