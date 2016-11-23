@@ -460,7 +460,7 @@ function Import(path,callback) {
         }
       }
 
-      Import("squishy/live",function(live) {
+      window.Import("squishy/live",function(live) {
         live.init(fullpath)
       });
     } else {
