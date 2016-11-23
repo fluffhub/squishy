@@ -3,12 +3,11 @@ Module(function M() {
     "squishy/events",
     "squishy/basic",
     "squishy/interactive",
-
     "squishy/request",
     "squishy/svg",
     "squishy/form",
     "squishy/membrane",
-    "js/lib/squishy_ext/LocalModel",
+    "squishy/localstorage",
     "spoon",
     function(event,basic,interactive,Req,svg,form,membrane,LM,spoon) {
       var osroot=""
@@ -152,11 +151,11 @@ Module(function M() {
             var dirs=val.split('/')
             var dirname=dirs[dirs.length-1];
 
-            if(dirname=="membrane")
+            if(dirname=="membrane"){
               lib.cd ("..",function(val) {
 
               });
-
+            }
           });
           this.importer=new form.Form("importer",function submit(e) {
             var path2=lib.importer.searchbox.value();

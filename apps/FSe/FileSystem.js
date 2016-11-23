@@ -8,7 +8,7 @@ Module(function M() {
     "squishy/svg",
     "squishy/form",
     "squishy/membrane",
-    "js/lib/squishy_ext/LocalModel",
+    "squishy/localstorage",
     "spoon",
     function(event,basic,interactive,Req,svg,form,membrane,spoon) {
       var osroot=""
