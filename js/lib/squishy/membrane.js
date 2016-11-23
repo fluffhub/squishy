@@ -1,14 +1,15 @@
 Module(function M() {
   M.Import(
     "squishy/request",
-    "squishy/filesystem",
+    "squishy/system",
     function(Req,system) {
 
       var Device=M.Class(function C() {
         C.Super(system.Device);
         C.Def("session",null);
+        /*these are default values and should be updated via the init command */
         C.Def("url","/squishy/membrane")
-        C.Def("root","/squishy/")
+        C.Def("webroot","/squishy/")
         C.Def("id","pool")
 
         C.Init(function Device(name,struct,session) {
@@ -54,9 +55,13 @@ Module(function M() {
       M.Class(function C() {
         C.Super(system.File);
         C.Init(function File(name,value) {
+
           this.name=null
           this.value=null
-          if(typeof name=="string")this.name=name;
+          if(typeof name=="string") {
+            name=name.split(/\W/)[0]
+            this.name=name;
+          }
           if(value!==undefined) this.value=value;
 
 
@@ -103,6 +108,7 @@ Module(function M() {
                 dir.contents[filename]=D;
               } else {
                 //is a file
+
 
                 var F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
                   if(filename.slice(-1)!="*")
