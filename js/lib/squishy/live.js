@@ -1,6 +1,7 @@
 Module(function M () {
   var loc = document.createElement("a")
   loc.href="#"
+  var home=loc.href;
   M.Def("~",loc.href)
   loc.href="/"
   var root=loc.href;
@@ -15,10 +16,10 @@ Module(function M () {
 
 
 
-  Import("squishy/system",function(system) {
-    devices[root]=new system.Device(root);
+ // Import("squishy/system",function(system) {
+ //   devices[root]=new system.Device(root);
 
-  });
+ // });
 
   M.Def(function init(path) {
     var loc2=document.createElement("a");
