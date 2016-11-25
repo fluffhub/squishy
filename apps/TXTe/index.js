@@ -8,7 +8,7 @@ Module(function M() {
     //  viewer
     function (spoon) {
       M.Def(function match(name, file) {
-        return true;
+
 
       });
 

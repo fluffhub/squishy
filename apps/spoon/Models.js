@@ -1,23 +1,20 @@
 Module(function M() {
-  M.Import('squishy/localstorage',function(browser) {
-
-    ////M.Import('fluff',function(FI) {
-    //var Graph=FI.Graph;
-    ////var LocalDB=LM.LocalDB;
-    // var LocalModel=LM.LocalModel;
-
-   /* var Local=LocalDB(function L() {
-      L.Name("Local");
-      L.Model(function Mdl() {
-        Mdl.Init(function User(val) {
-        });
-        Mdl.Template({
-          id:1,
-          username:"Localuser"
-        });
+M.Import('squishy/localstorage',function(LM) {
+////M.Import('fluff',function(FI) {
+  //var Graph=FI.Graph;
+  var LocalDB=LM.LocalDB;
+  var LocalModel=LM.LocalModel;
+  var Local=LocalDB(function L() {
+    L.Name("Local");
+    L.Model(function Mdl() {
+      Mdl.Init(function User(val) {
       });
-    });*/
-    /* L.Model(function Mdl() {
+      Mdl.Template({
+        id:1,
+        username:"Localuser"
+      });
+    });
+   /* L.Model(function Mdl() {
       Mdl.Init(function Program(obj) {
 
       });
@@ -40,7 +37,7 @@ Module(function M() {
       });
 
     });*/
-    /*    L.Model(function Mdl() {
+  /*    L.Model(function Mdl() {
       Mdl.Init(function State(val) {
 
       });
@@ -50,9 +47,9 @@ Module(function M() {
       });
     });
     */
+});
 
-
-    //M.Def("Local",Local);
-    //});
-  });
+M.Def("Local",Local);
+//});
+});
 });

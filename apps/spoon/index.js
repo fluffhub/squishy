@@ -7,13 +7,12 @@ Module(function M() {
   );
   M.Import("squishy/DOM","squishy/basic","squishy/layout",
            "squishy/interactive","squishy/keyboard","squishy/events","squishy/svg",
-
            "spoon/UserBrowser","spoon/Library",
-           "spoon/Models","spoon/conf", "squishy/cookies","squishy/membrane",
+           "spoon/Models","spoon/conf",
            function(DOM,basic,layout,
                      interactive,kb,events,svg,
                      ub,op,
-                     Ms,conf,cookies,membrane) {
+                     Ms,conf) {
 
              var hasEvents=events.hasEvents;
              var UserBrowser=ub.UserBrowser;
@@ -21,7 +20,7 @@ Module(function M() {
              var TabbedPane=interactive.TabbedPane;
              var GridLayout=layout.GridLayout;
              var Pane=basic.Pane;
-             // var Library=op.Library;
+            // var Library=op.Library;
 
 
 
@@ -113,26 +112,12 @@ Module(function M() {
                    return false;
 
                  });
-
                  this.element.addEventListener("contextmenu",function startcontext() {
                    EW.clearContext();
 
                  },true);
                  this.enableEvents("cursorpos","context","closeContext");
-                 C.Def(function newTask(appName) {
-                   var args=Array.prototype.slice.call(arguments,1,-1)
-                   var task=null;
 
-                   if(appName in conf.apps) {
-                     task=conf.apps[appName].open.apply(this,args)
-                     this.tasks.addTab(appName+":"+args.join(" "),appName+":"+args.join(" "),task)
-                   }
-
-                 });
-                 C.Def(function openFile(file) {
-                   //check what app is needed for this file
-                   //
-                 })
                  C.Def(function create(type) {
                    var EW=this;
                    var P;
@@ -392,75 +377,65 @@ Module(function M() {
                  //  M.continue();
                });
              });
-             //window.ew=new EditorWindow();
-             M.Def("main",new HomeWindow())
-             var Types={
-
-             }
-
-
-
-             M.Def(function match(item) {
-               Object.keys(Types).forEach(function(name) {
-
-               });
-             });
-
-             var defaultType=Module(function M2 () {
-               M.Class(function C() {
-                 C.Init(function ListItem(path) {
-                   basic.Div.call(this,"FSListItem")
-                   this.content(path);
-                 })
-               });
-
-               M.Class(function C() {
-                 C.Init(function Icon() {
-                   basic.Div.call(this,"FSIcon")
-                   this.content("?")
-                 });
-               });
-               M.Class(function C() {
-                 C.Init(function Editor() {
-                   basic.Div.call(this,"FSWindow")
-                 });
-               });
-
-               M.Class(function C() {
-                 C.Init(function Viewer() {
-                   basic.Div.call(this,"FSWindow")
-                 });
-               });
-
-             });
-             M.Def(function register(name,item) {
-               Types[name]=item;
-               //if(name in Types) {
-
-               //}
-
-             });
-
-
-
-
-
-             M.Def("match",function match(item) {
-               var ret=[]
-               for(var i=0;i<conf.apps.length;i++) {
-                 if(this.apps[i].match(item))ret.push(this.apps[i]);
+               //window.ew=new EditorWindow();
+               M.Def("main",new HomeWindow())
+               var Types={
 
                }
-               return ret;
+
+
+
+               M.Def(function match(item) {
+                 Object.keys(Types).forEach(function(name) {
+
+                 });
+               });
+
+               var defaultType=Module(function M2 () {
+                 M.Class(function C() {
+                   C.Init(function ListItem(path) {
+                     basic.Div.call(this,"FSListItem")
+                     this.content(path);
+                   })
+                 });
+
+                 M.Class(function C() {
+                   C.Init(function Icon() {
+                     basic.Div.call(this,"FSIcon")
+                     this.content("?")
+                   });
+                 });
+                 M.Class(function C() {
+                   C.Init(function Editor() {
+                     basic.Div.call(this,"FSWindow")
+                   });
+                 });
+
+                 M.Class(function C() {
+                   C.Init(function Viewer() {
+                     basic.Div.call(this,"FSWindow")
+                   });
+                 });
+
+               });
+               M.Def(function register(name,item) {
+                 Types[name]=item;
+                 //if(name in Types) {
+
+                 //}
+
+               });
+
+
+
+
+
+               M.Def("match",function () {
+                 return true
+               });
+
+
+
+
              });
-
-
-             var id="pool"
-
-             M.Def("session",new membrane.Device(id));
-             M.Def(function open(item) {
-
-             });
-
            });
-});

@@ -8,8 +8,8 @@ Module(function M() {
     "squishy/svg",
     "squishy/form",
     "squishy/membrane",
-    "squishy/localstorage",
-    "spoon",
+    "js/lib/squishy_ext/LocalModel",
+    "apps/spoon/index.js",
     function(event,basic,interactive,Req,svg,form,membrane,spoon) {
       var osroot=""
       var Request=Req.Request;
@@ -34,10 +34,10 @@ Module(function M() {
         C.Def(function close() {
           this.container.hide();
         });
-        C.Def(function onread(val) {})
-        C.Def(function read(onread) {
+        C.Def(function onrefresh(val) {})
+        C.Def(function refresh() {
           var F=this;
-          this.env.exec("cat "+this.loc+"/"+this.name+"",function(val) {
+          this.env.exec("cd "+this.loc+";cat "+this.name+";cd ~-",function(val) {
             F.value=val;
             F.onrefresh(val);
           });
@@ -133,7 +133,19 @@ Module(function M() {
           this.presentdir.dirs=[];
           this.dirs={};
           this.pwd="";
+          this.root=null;
+          if(loc) {} else { loc="." }
+          this.cd(loc, function(val) {
 
+            var dirs=val.split('/')
+            var dirname=dirs[dirs.length-1];
+
+            if(dirname=="membrane")
+              lib.cd ("..",function(val) {
+
+              });
+
+          });
           this.importer=new form.Form("importer",function submit(e) {
             var path2=lib.importer.searchbox.value();
             lib.Import(path2,function(m) {

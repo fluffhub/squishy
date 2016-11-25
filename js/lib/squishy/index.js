@@ -176,10 +176,7 @@ function Module() {
           // try { throw new Error(""); } catch(e) { console.debug({LN:e}); }
 
           var ob=Field.fun.apply(M,arguments);
-          if(ob!==undefined&&ob!==null&&ob instanceof Object){
-            Object.defineProperty(ob,"funcall",{value:__stack[1]});
-          }
-
+          if(ob!==undefined&&ob!==null)ob.funcall=__stack[1];
 
           return ob;
         };
@@ -193,9 +190,6 @@ function Module() {
       M.loaded=true;
       if(M.waiting==0 && element.finish) element.finish();
       else element.ran=true;
-      window.Import("squishy/live",function(live) {
-        live.init(parser.href)
-      });
     }
     else {
       var M=new window.Module();
@@ -294,10 +288,7 @@ function Import(path,callback) {
     that=this;
 
     //check if relative path or uri
-
     if(typeof(path)=="string") {
-      var parser = document.createElement('a');
-      var fullpath;
       var r = new RegExp('^(?:[a-z]+:)?//', 'i');
       var absolute=false;
       var dirname='chewy';
@@ -306,7 +297,7 @@ function Import(path,callback) {
       if (r.test(path)||path[0]=='/' ) {
 
         //absolute path, use as-is
-
+        var parser = document.createElement('a');
         parser.href = path;
         path=parser.pathname;
         console.debug(path);
@@ -368,9 +359,6 @@ function Import(path,callback) {
 
         }
       }
-
-      fullpath=parser.href;
-
       if(ft in Import.types) {
         Import.types[ft](path,callback);
       }
@@ -462,8 +450,6 @@ function Import(path,callback) {
           //     return script.Module;
         }
       }
-
-
     } else {
       callback(path);
       callback.ran=true;

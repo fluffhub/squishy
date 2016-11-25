@@ -1,6 +1,48 @@
 Module(function M() {
   /* @TODO:  Do something better with these ad hoc style shets*/
-Import("JSONe/default.css")
+  document.styleSheets[0].addRule(".object.editor:before",
+                                  "");
+
+  document.styleSheets[0].addRule(".EditorItem",
+                                  "min-height:1em;min-width:50px;overflow:visible;"+
+                                  "width:auto;height:auto;margin:0.2em;"+
+                                  "background-color:rgba(100,100,100,0.5)"+
+                                  "margin-left:1px;"+
+                                  "white-space:no-wrap;float:left;position:relative;");
+
+  document.styleSheets[0].addRule(".object.editor .caption",
+                                  "padding:0 0.25em;font-size:1em;"+
+                                  "line-height:1.5em;float:left;clear:both;"+
+                                  "background-color:black;color:white;")
+
+  document.styleSheets[0].addRule(".object.editor",
+                                  "clear:both;float:left;height:auto;");
+  document.styleSheets[0].addRule(".EditorItem input",
+                                  "font-size:1em;line-height:1.5em;height:1.5em;");
+  document.styleSheets[0].addRule(".editor.array",
+                                  "clear:both;min-width:6em;");
+
+  document.styleSheets[0].addRule(".editor.array:before",
+                                  "position:absolute;content:'[';left:-0.1em;"+
+                                  "font-size:1.5em;line-height:1.5em;width:0.1em;");
+  document.styleSheets[0].addRule(".editor.array:after",
+                                  "position:absolute;content:']';"+
+                                  "font-size:1.5em;line-height:1.5em;width:0.1em;right:-0.1em;");
+
+  document.styleSheets[0].addRule(".number.editor",
+                                  "width:2em;position:relative;float:left;")
+  document.styleSheets[0].addRule(".string.editor",
+                                  "float:left;clear:both;position:relative;");
+  document.styleSheets[0].addRule(".array>.EditorItem:after",
+                                  "content:',';float:left;display:block;"+
+                                  "width:1em;height:1em;");
+  document.styleSheets[0].addRule(".array.empty",
+                                  "width:2em;height:2em;");
+  document.styleSheets[0].addRule(".object.editor .object.editor",
+                                  "transform:scale(0.45);opacity:0.8;transform-origin:top left;-webkit-transform-origin:top left;");
+  document.styleSheets[0].addRule(".EditorItem",
+                                  "border:1px solid #555;border-left:3px solid black;overflow:hidden;");
+
 
   /* M.Import('squishy/DOM',function(DOM) {
   M.Import('squishy/events',function(events) {
