@@ -9,8 +9,8 @@ Module(function M() {
     "squishy/form",
     "squishy/membrane",
     "js/lib/squishy_ext/LocalModel",
-    "apps/spoon/index.js",
-    function(event,basic,interactive,Req,svg,form,membrane,spoon) {
+    "spoon",
+    function(event,basic,interactive,Req,svg,form,membrane,LM,spoon) {
       var osroot=""
       var Request=Req.Request;
       var theme={}
@@ -34,7 +34,9 @@ Module(function M() {
         C.Def(function close() {
           this.container.hide();
         });
-        C.Def(function onrefresh(val) {})
+        C.Def(function onrefresh(val) {
+
+        })
         C.Def(function refresh() {
           var F=this;
           this.env.exec("cd "+this.loc+";cat "+this.name+";cd ~-",function(val) {
@@ -77,7 +79,7 @@ Module(function M() {
           this.container.hide();
         });
         C.Def(function onrefresh(val) {})
-        C.Def(function refresh() {
+        C.Def(function load() {
           var dir=this;
           console.debug("refreshing "+this.loc);
 
@@ -102,9 +104,11 @@ Module(function M() {
                 //is a file
 
                 var F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
-                  if(filename.slice(-1)!="*")
-                    this.refresh();
-                  this.open();
+                 // if(filename.slice(-1)!="*")
+                 //   this.refresh();
+                 // this.open();
+                  //call spoon newtask
+                  var fileeditor=spoon.main.newTask(filename,dir.loc+"/"+filename)
                 });
 
                 dir.contents[filename]=F;
@@ -117,7 +121,7 @@ Module(function M() {
       });
 
 
-      M.Class(function C() {
+      var FileBrowser=M.Class(function C() {
         C.Super(basic.Div);
         C.Init(function FileBrowser(loc,id)  {
           basic.Div.call(this,"FileBrowser");
@@ -126,9 +130,17 @@ Module(function M() {
           this.rawfiles={};
           this.windows={};
           var lib=this;
-          if(id!==undefined) this.id=id;
-          else this.id="pool"
-          this.session=new membrane.Environment(id)
+
+
+          if(spoon.session!==undefined) {
+            this.session=spoon.session;
+            this.id=this.session.id
+          }
+          else {
+            if(id!==undefined) this.id=id;
+            else this.id="pool"
+            this.session=new membrane.Device(id)
+          }
           this.presentdir=new basic.Div("pwdbar");
           this.presentdir.dirs=[];
           this.dirs={};
@@ -190,7 +202,8 @@ Module(function M() {
                 lib.cd(dirloc)
               });
               lib.add(lib.dirs[val])
-              lib.dirs[val].refresh();
+              //if(
+              lib.dirs[val].load();
               lib.dirs[val].hide()
 
             }
@@ -245,7 +258,9 @@ Module(function M() {
         })
 
       });
-      M.Def("openers",{})
+      M.Def(function open(loc) {
+        return new FileBrowser(loc);
+      });
 
 
     });

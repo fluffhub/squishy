@@ -1,12 +1,12 @@
 Module(function M() {
-  M.Import(
+  M.Import("JSe/JSeditor","spoon",
 
     //  context actions
     //  list view
     //  tile view
     //  editor
     //  viewer
-    function () {
+    function (JSe,spoon) {
       M.Def(function match(name, file) {
 
 
