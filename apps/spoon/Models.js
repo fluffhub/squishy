@@ -1,5 +1,5 @@
 Module(function M() {
-  M.Import('squishy/browser',function(browser) {
+//  M.Import('squishy/browser',function(browser) {
     ////M.Import('fluff',function(FI) {
     //var Graph=FI.Graph;
     ////var LocalDB=LM.LocalDB;
@@ -53,5 +53,5 @@ Module(function M() {
 
     //M.Def("Local",Local);
     //});
-  });
+//  });
 });
