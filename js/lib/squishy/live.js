@@ -52,7 +52,7 @@ Module(function M () {
 
       cursor[dirs[dirs.length-1]]=obj;
 
-      devices[fileroot].push(fileloc.slice(fileroot.length));
+     // devices[fileroot].push(fileloc.slice(fileroot.length));
 
     });
   });
