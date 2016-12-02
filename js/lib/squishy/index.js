@@ -226,7 +226,7 @@ function Module() {
       */
       window.Import("squishy/live",function(live) {
        // window.Import(parser.href,function(a) {
-        live.init(parser.href,a);
+        live.init(parser.href,element);
       //  });
       });
 
