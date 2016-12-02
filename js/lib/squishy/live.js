@@ -1,4 +1,5 @@
 Module(function M () {
+  Import("squishy/system",function() {
   var loc = document.createElement("a")
   loc.href="#"
   var home=loc.href;
@@ -21,18 +22,37 @@ Module(function M () {
 
  // });
 
-  M.Def(function init(path) {
+  M.Def(function init(path,obj) {
     var loc2=document.createElement("a");
     loc2.href=path;
     var fileloc=loc2.href;
     loc2.href="/";
     var fileroot=loc2.href;
-
+    var uri=fileloc.slice(fileroot.length)
+    var dirs=uri.split('/')
     if(fileroot in devices) {
-      devices[fileroot].push(fileloc.slice(fileroot.length));
+
+
     } else {
-     devices[fileroot]=[path];
+      devices[fileroot]={};
+    }
+    var device=devices[fileroot];
+    var cursor=device;
+    for(var i=0;i<dirs.length-1;i++) {
+      var dn=dirs[i];
+
+      if(dn in cursor) {
+        cursor=cursor[dn]
+      } else {
+        cursor[dn]={}
+        cursor=cursor[dn];
+      }
     }
 
+    cursor[dirs[dirs.length-1]]=obj;
+
+      devices[fileroot].push(fileloc.slice(fileroot.length));
+
+  });
   });
 });

@@ -1,5 +1,9 @@
 
 //var Squishy=document.currentScript;
+
+/* <a name="__stack">
+__stack provides live debugging.
+You can access it at runtime using (global) window.__stack */
 Object.defineProperty(window, '__stack', {
   get: function(){
     var orig = Error.prepareStackTrace;
@@ -12,13 +16,21 @@ Object.defineProperty(window, '__stack', {
   }
 });
 
+
+/* <a name="__line">
+__line provides live debugging.
+You can access it at runtime using (global) window.__line
+*/
 Object.defineProperty(window, '__line', {
   get: function(){
     return __stack[1].getLineNumber();
   }
 });
 
-console.log(__line);
+
+/* <a name="__kwargs">
+kwargs allows a standard way to pass hash arguments to a function call.
+*/
 Function.prototype.kwargs=function kwargs(args) {
   /* if args length >=1,
         if the last arg is an obj,
@@ -54,6 +66,9 @@ Function.prototype.kwargs=function kwargs(args) {
 
 }
 
+/*  <a name="getCurrentScript">
+getCurrentScript tries to get the current executing script tag.
+this doesn't work correctly in older safari and internet explorer. */
 function getCurrentScript() {
   if(document.currentScript)
     return document.currentScript;
@@ -77,6 +92,10 @@ function getCurrentScript() {
 }
 var Squishy=getCurrentScript();
 
+
+/* <a name="extend">
+extend copies enumerable properties from one object to another.
+can be used via reference or return. */
 function extend(destination,source) {
   // var destination = destination || this;
   if(source) {
@@ -88,6 +107,14 @@ function extend(destination,source) {
     throw new Exception('Using an invalid source value, "'+source+'"');
   }
 };
+
+
+/* Global module initializer.
+Is used in every module file at the beginning to wrap the entire file.
+Can also be used directly as an initializer to create bare modules.
+Resulting modules are assigned to the associated <script> and are instances
+of this Module function.
+*/
 function Module() {
   if(this instanceof Module) {
     var filename=arguments[0];
@@ -193,9 +220,16 @@ function Module() {
       M.loaded=true;
       if(M.waiting==0 && element.finish) element.finish();
       else element.ran=true;
+
+      /* Live component
+      this adds the modules path to the live system registry
+      */
       window.Import("squishy/live",function(live) {
-        live.init(parser.href)
+        window.Import(parser.href,function(a) {
+        live.init(parser.href,a);
+        });
       });
+
     }
     else {
       var M=new window.Module();
@@ -623,6 +657,9 @@ Module(function M() {
     'layout',
     'form'
   );
+  M.Def("Module",Module);
+  M.Def("Class",Class);
+
 });
 
 var define=Module.define=function define(n,r,F){ /* F = function (require, exports, */
