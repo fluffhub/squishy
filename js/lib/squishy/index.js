@@ -225,9 +225,9 @@ function Module() {
       this adds the modules path to the live system registry
       */
       window.Import("squishy/live",function(live) {
-        window.Import(parser.href,function(a) {
+       // window.Import(parser.href,function(a) {
         live.init(parser.href,a);
-        });
+      //  });
       });
 
     }
