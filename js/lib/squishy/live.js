@@ -42,15 +42,15 @@ Module(function M () {
       for(var i=0;i<dirs.length-1;i++) {
         var dn=dirs[i];
 
-        if(dn in cursor) {
-          cursor=cursor[dn].contents;
+        if(dn in cursor.contents) {
+          cursor=cursor[dn];
         } else {
-          cursor=cursor.mkdir(dn,{}).contents;
+          cursor=cursor.mkdir(dn,{});
 
         }
       }
 
-      cursor[dirs[dirs.length-1]]=obj;
+      cursor.contents[dirs[dirs.length-1]]=obj;
 
       // devices[fileroot].push(fileloc.slice(fileroot.length));
 
