@@ -23,7 +23,7 @@ Module(function M() {
              var Pane=basic.Pane;
              // var Library=op.Library;
 
-
+             var theme={}
 
              new svg.SVG({
                src:"img/filebrowser.svg",

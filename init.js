@@ -1,12 +1,15 @@
 /*
-Building a Squishy Application:
-The Meta Tutorial
 
-Chapter 2: Structuring Code
-Section 1: Imports and Modules
+<h1>Building a Squishy Application</h1>
+<h2><i>The Meta Tutorial</i></h2>
+
+<h3>Chapter 2</h3>
+<h4><i>Structuring Code</i></h4>
+
+<h5>Section 1: Imports and Modules</h5>
 The file and URI structure of a Squishy app consists of multiple file or resource types:
 
-    1. 1. Directories Or Modules
+    <h5>1. 1. Directories Or Modules</h5>
       Hierarchical structures of groups of files in the file system are referred to as
       directories;  the corresponding groups of code in the programming language are referred
       to as Modules.
@@ -256,13 +259,12 @@ except instead of defining HTML/XML markup you are writing function calls:
     as imports, but with a specific way to handle the results:
 */
 
-            Import("apps/spoon/","apps/FSe/",
-                   function(spoon,FSe) {
+            Import("apps/spoon/","apps/FSe/",function(spoon,FSe) {
 
             var SquishyLogo=null;
             Import("squishy/svg",function(svg) {
                 SquishyLogo=new svg.SVG(100,100);
-                SquishyLogo.addClass("sitemenu");
+                SquishyLogo.addClass("sitemenu");ll
                 var svglogo=new svg.SVG({src:"img/squishy.svg",onload:function(svg) {
                     var logo=svg.query("#SquishyLogo")[0];
                     console.debug({squishylogo:logo,svg:svg});

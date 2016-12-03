@@ -44,18 +44,28 @@ M.Class(function C() {
     if(contents!==undefined) {
       this.contents=contents
     }
+    this.parent=null;
   });
   C.Def(function list() {
     return this.contents
   });
-  C.Def(function mkdir() {
+  C.Def(function mkdir(name) {
+    if(name in this.contents) {}
+    else {
+      var dir=new M.Self.Dir(name,{});
+      this.contents[name]=dir;
+      dir.parent=this;
 
+    }
   });
-  C.Def(function rename() {
+  C.Def(function rename(name) {
+    this.parent.contents[name]=this;
+    delete this.parent.contents[this.name];
+    this.name=name;
 
   });
   C.Def(function remove() {
-
+    delete this.parent.contents[this.name]
   });
   //C.Def(function load() {
 
