@@ -264,7 +264,7 @@ except instead of defining HTML/XML markup you are writing function calls:
             var SquishyLogo=null;
             Import("squishy/svg",function(svg) {
                 SquishyLogo=new svg.SVG(100,100);
-                SquishyLogo.addClass("sitemenu");ll
+                SquishyLogo.addClass("sitemenu");
                 var svglogo=new svg.SVG({src:"img/squishy.svg",onload:function(svg) {
                     var logo=svg.query("#SquishyLogo")[0];
                     console.debug({squishylogo:logo,svg:svg});
