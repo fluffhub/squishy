@@ -12,20 +12,18 @@ Module(function M () {
   //  console.debug({href:loc.href})
 
 
+  var devices={};
 
+  M.Def("devices",devices);
 
   // Import("squishy/system",function(system) {
   //   devices[root]=new system.Device(root);
 
   // });
-  Import("squishy/system",function(system) {
-    var devices=new system.Device({});
-
-    M.Def("devices",devices);
-
-    M.Def(function init(path,obj) {
+  M.Def(function init(path,obj) {
 
 
+    Import("squishy/system",function(system) {
       var loc2=document.createElement("a");
       loc2.href=path;
       var fileloc=loc2.href;
@@ -57,6 +55,9 @@ Module(function M () {
       // devices[fileroot].push(fileloc.slice(fileroot.length));
 
     });
+
+
+
   });
 });
 
