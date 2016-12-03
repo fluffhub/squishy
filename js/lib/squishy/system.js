@@ -43,6 +43,8 @@ M.Class(function C() {
     }
     if(contents!==undefined) {
       this.contents=contents
+    } else {
+      this.contents={}
     }
     this.parent=null;
   });
