@@ -43,7 +43,7 @@ Module(function M () {
         var dn=dirs[i];
 
         if(dn in cursor.contents) {
-          cursor=cursor[dn];
+          cursor=cursor.contents[dn];
         } else {
           cursor=cursor.mkdir(dn,{});
 
