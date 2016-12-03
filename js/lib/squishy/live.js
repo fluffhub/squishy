@@ -38,15 +38,15 @@ Module(function M () {
         devices[fileroot]=new system.Device({});
       }
       var device=devices[fileroot];
-      var cursor=device;
+      var cursor=devices[fileroot].root;
       for(var i=0;i<dirs.length-1;i++) {
         var dn=dirs[i];
 
         if(dn in cursor) {
           cursor=cursor[dn].contents;
         } else {
-          cursor[dn]=new system.Dir(dn,{});
-          cursor=cursor[dn].contents;
+          cursor=cursor.mkdir(dn,{}).contents;
+
         }
       }
 

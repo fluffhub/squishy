@@ -50,13 +50,14 @@ M.Class(function C() {
     return this.contents
   });
   C.Def(function mkdir(name) {
-    if(name in this.contents) {}
+    if(name in this.contents) { return this.contents[name] }
     else {
       var dir=new M.Self.Dir(name,{});
       this.contents[name]=dir;
       dir.parent=this;
-
+      return dir;
     }
+
   });
   C.Def(function rename(name) {
     this.parent.contents[name]=this;
