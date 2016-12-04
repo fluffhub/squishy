@@ -190,7 +190,8 @@ func main() {
         dump(err)
         Readwrite(name,w,0,100000)
         out.Close()
-      }else      if(op=="status") {
+      }
+      else if(op=="status") {
          pwdfile,err2:=ioutil.ReadFile(".~_"+name);
         pwd:=string(pwdfile[0:len(pwdfile)-1]);
         dump(err2)
