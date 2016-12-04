@@ -195,7 +195,7 @@ func main() {
          pwdfile,err2:=ioutil.ReadFile(".~_"+name);
         pwd:=string(pwdfile[0:len(pwdfile)-1]);
         dump(err2)
-        w.Write([]byte("{pwd:"+pwd+"}"))
+        w.Write([]byte("{\"pwd\":\""+pwd+"\"}"))
       }
       if(op=="w") {
         cmd:=data
