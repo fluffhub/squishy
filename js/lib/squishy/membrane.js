@@ -24,19 +24,25 @@ Module(function M() {
           }
           var env=this;
           this.pwd=""
-          this.exec("pwd",function(pwd) {
+          this.status(function(home) {
+            env.home=home.pwd;
+            env.root=new M.Self.Dir("/",{});
+            env.exec("pwd",function(pwd) {
 
-            var dirs=pwd.split('/')
-            var dirname=dirs[dirs.length-1];
+              var dirs=pwd.split('/')
+              var dirname=dirs[dirs.length-1];
 
-            if(dirname=="membrane") {
-              pwd=dirs.slice(0,-1).join("/")
-            }
-
-            env.home=pwd;
-            env.root=new Dir
+              if(dirname=="membrane") {
+                pwd=dirs.slice(0,-1).join("/")
+              }
+            });
           });
         });
+        C.Def(function status(result) {
+          this.request.Get(this.url+"/membrane.cgi",{op:"status",id:this.id},function(r) {
+            result(JSON.parse(r))
+          });
+        })
 
         C.Def(function exec(command,receive) {
           command=command.replace(/;/g,"\u00b6")
