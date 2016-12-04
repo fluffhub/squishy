@@ -191,13 +191,13 @@ func main() {
         Readwrite(name,w,0,100000)
         out.Close()
       }
-      else if(op=="status") {
+      if(op=="status") {
          pwdfile,err2:=ioutil.ReadFile(".~_"+name);
         pwd:=string(pwdfile[0:len(pwdfile)-1]);
         dump(err2)
         w.Write("{pwd:"+pwd+"}")
       }
-      else if(op=="w") {
+      if(op=="w") {
         cmd:=data
         /////substitute chars for uri encoding
         cmd=strings.Replace(cmd,"¶",";",-1)
