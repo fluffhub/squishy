@@ -163,7 +163,7 @@ Module(function M() {
                   lib.dirs[d].hide()
                 })
                 lib.dirs[val].show();*/
-              });
+           //   });
 
           });
           this.importer=new form.Form("importer",function submit(e) {
@@ -239,3 +239,4 @@ Module(function M() {
 
 
     });
+});
