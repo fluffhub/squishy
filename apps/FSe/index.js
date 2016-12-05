@@ -239,6 +239,3 @@ Module(function M() {
 
 
     });
-
-});
-
