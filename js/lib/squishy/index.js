@@ -222,11 +222,12 @@ function Module() {
       else element.ran=true;
 
       /* Live component
-      this adds the modules path to the live system registry
+      this adds the modules path and module obj to the live system registry
       */
       window.Import("squishy/live",function(live) {
        // window.Import(parser.href,function(a) {
         live.init(parser.href,element);
+        live.init(parser.href,M);
       //  });
       });
 

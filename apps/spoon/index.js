@@ -457,7 +457,7 @@ Module(function M() {
 
              var id="pool"
 
-             M.Def("session",new membrane.Device(id));
+
              M.Def(function open(item) {
 
              });

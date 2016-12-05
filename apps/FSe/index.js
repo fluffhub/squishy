@@ -10,7 +10,9 @@ Module(function M() {
     "squishy/membrane",
     "js/lib/squishy_ext/LocalModel",
     "spoon",
-    function(event,basic,interactive,Req,svg,form,membrane,LM,spoon) {
+    "spoon/conf",
+    "squishy/live",
+    function(event,basic,interactive,Req,svg,form,membrane,LM,spoon,conf,live) {
       var osroot=""
       var Request=Req.Request;
       var theme={}
@@ -38,11 +40,7 @@ Module(function M() {
 
         })
         C.Def(function refresh() {
-          var F=this;
-          this.env.exec("cd "+this.loc+";cat "+this.name+";cd ~-",function(val) {
-            F.value=val;
-            F.onrefresh(val);
-          });
+
         });
       });
       var Dir=M.Class(function C() {
@@ -83,11 +81,7 @@ Module(function M() {
           var dir=this;
           console.debug("refreshing "+this.loc);
 
-          this.env.exec("ls -AF "+this.loc+"",function(val) {
-            //"cd "+this.loc+"; cd ~-
-            var files=val.split(/[\s]+/);
-            console.debug({VAL:val});
-            console.debug({files:files});
+          this.instance.list(function(files) {
 
             files.forEach(function(filename) {
               if(filename.slice(-1)=="/") {
@@ -104,12 +98,12 @@ Module(function M() {
                 //is a file
 
                 var F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
-                 // if(filename.slice(-1)!="*")
-                 //   this.refresh();
-                 // this.open();
+                  // if(filename.slice(-1)!="*")
+                  //   this.refresh();
+                  // this.open();
                   //call spoon newtask
                   var fileeditor=spoon.main.newTask(filename,dir.loc+"/"+filename)
-                });
+                  });
 
                 dir.contents[filename]=F;
                 dir.Contents.add(F);
@@ -118,6 +112,7 @@ Module(function M() {
             });
           });
         });
+
       });
 
 
@@ -132,8 +127,8 @@ Module(function M() {
           var lib=this;
 
 
-          if(spoon.session!==undefined) {
-            this.session=spoon.session;
+          if(conf.session!==undefined) {
+            this.session=conf.session;
             this.id=this.session.id
           }
           else {
@@ -147,14 +142,27 @@ Module(function M() {
           this.pwd="";
           this.root=null;
           if(loc) {} else { loc="." }
-          this.cd(loc, function(val) {
+          this.session.cd(loc, function(val) {
+            var dirs=val.split("/");
+            lib.dirs[val]=new Dir(dirs[dirs.length],dirs.join("/"),lib.session,function(dirloc) {
+              lib.setDir(dirloc);
+              lib.cd(dirloc)
+            });
+            lib.add(lib.dirs[val])
+            //if(
+            lib.dirs[val].load();
+            lib.dirs[val].hide()
 
             var dirs=val.split('/')
             var dirname=dirs[dirs.length-1];
 
-            if(dirname=="membrane")
-              lib.cd ("..",function(val) {
-
+            //if(dirname=="membrane")
+            //  lib.cd ("..",function(val) {
+            //    lib.setDir(val.trim());
+               /* Object.keys(lib.dirs).forEach(function(d) {
+                  lib.dirs[d].hide()
+                })
+                lib.dirs[val].show();*/
               });
 
           });
@@ -180,44 +188,11 @@ Module(function M() {
 
         });
 
-        C.Def(function pwd(val) {
+
+
+        C.Def(function cd(loc) {
 
         });
-        C.Def(function cd(to, upon) {
-          var lib=this;
-          lib.session.exec("cd "+to+";pwd",function(val) {
-            lib.pwd=val;
-            var dirs=val.split('/')
-            var dirname=dirs[dirs.length-1];
-            var i;
-            var curs=lib.dirs;
-
-
-            if(lib.dirs[val] instanceof Object) {
-
-            } else {
-              console.debug("initializing dir "+dirs.join("/"));
-              lib.dirs[val]=new Dir(dirs[dirs.length],dirs.join("/"),lib.session,function(dirloc) {
-                lib.setDir(dirloc);
-                lib.cd(dirloc)
-              });
-              lib.add(lib.dirs[val])
-              //if(
-              lib.dirs[val].load();
-              lib.dirs[val].hide()
-
-            }
-            lib.setDir(val.trim());
-            Object.keys(lib.dirs).forEach(function(d) {
-              lib.dirs[d].hide()
-            })
-            lib.dirs[val].show();
-            if(upon instanceof Function) { upon.call(this,val) }
-          });
-
-
-        });
-
         C.Def(function ls(loc) {
           var lib=this;
           var dirs=this.dirs;
@@ -266,3 +241,4 @@ Module(function M() {
     });
 
 });
+

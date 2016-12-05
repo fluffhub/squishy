@@ -49,9 +49,20 @@ Module(function M () {
 
         }
       }
-
-      cursor.contents[dirs[dirs.length-1]]=obj;
-
+      var fn = dirs[dirs.length-1];
+      if (fn in cursor.contents && cursor.contents[fn] instanceof Array) {
+        if(obj instanceof Array) {
+          cursor.contents[fn]=cursor.contents[fn]+obj;
+        } else {
+        cursor.contents[fn].push(obj);
+        }
+      } else {
+        if(obj instanceof Array) {
+          cursor.contents[fn]=obj;
+        } else {
+        cursor.contents[fn]=[obj];
+        }
+      }
       // devices[fileroot].push(fileloc.slice(fileroot.length));
 
     });

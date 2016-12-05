@@ -2,7 +2,8 @@ Module(function M() {
   M.Import(
     "squishy/request",
     "squishy/system",
-    function(Req,system) {
+    "squishy/live",
+    function(Req,system,live) {
 
       var Device=M.Class(function C() {
         C.Super(system.Device);
@@ -35,6 +36,7 @@ Module(function M() {
               if(dirname=="membrane") {
                 pwd=dirs.slice(0,-1).join("/")
               }
+              env.pwd=pwd;
             });
           });
         });
@@ -43,7 +45,9 @@ Module(function M() {
             result(JSON.parse(r))
           });
         })
+        C.Def(function pwd() {
 
+        })
         C.Def(function exec(command,receive) {
           command=command.replace(/;/g,"\u00b6")
           command=command.replace(/\n/,"\u00ac")
@@ -55,6 +59,28 @@ Module(function M() {
             receive(result.slice(0,-1));
 
           });
+        });
+        C.Def(function cd(to, upon) {
+          var lib=this;
+          lib.session.exec("cd "+to+";pwd",function(val) {
+            lib.pwd=val;
+            var dirs=val.split('/')
+            var dirname=dirs[dirs.length-1];
+            var i;
+            var curs=lib.dirs;
+
+
+            if(lib.dirs[val] instanceof Object) {
+
+            } else {
+              console.debug("initializing dir "+dirs.join("/"));
+
+            }
+
+            if(upon instanceof Function) { upon.call(this,val) }
+          });
+
+
         });
       });
       M.Class(function C() {
@@ -90,6 +116,8 @@ Module(function M() {
           }
           if(contents!==undefined) {
             this.contents=contents
+          } else {
+            this.contents={}
           }
         });
         C.Def(function list(success) {
@@ -135,6 +163,7 @@ Module(function M() {
         //C.Def(function load() {
 
         //})
+
         C.Def(function lookup(loc,success) {
 
         });

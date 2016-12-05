@@ -2,8 +2,9 @@ Module(function M() {
   M.Def("apps",{});
   M.Import(
     "apps/",
-    function(apps) {
-
+    "squishy/membrane",
+    function(apps,membrane) {
+      M.Def("session",new membrane.Device("pool"));
       //Import("spoon",function(spoon) {
       console.debug("spoon loaded from conf");
       Object.keys(apps).forEach(function (name) {
