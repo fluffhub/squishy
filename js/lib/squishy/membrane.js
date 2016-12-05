@@ -62,7 +62,7 @@ Module(function M() {
         });
         C.Def(function cd(to, upon) {
           var lib=this;
-          lib.session.exec("cd "+to+";pwd",function(val) {
+          lib.exec("cd "+to+";pwd",function(val) {
             lib.pwd=val;
             var dirs=val.split('/')
             var dirname=dirs[dirs.length-1];
