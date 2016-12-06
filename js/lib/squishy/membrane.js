@@ -70,13 +70,6 @@ Module(function M() {
             var curs=lib.dirs;
 
 
-            if(lib.dirs[val] instanceof Object) {
-
-            } else {
-              console.debug("initializing dir "+dirs.join("/"));
-
-            }
-
             if(upon instanceof Function) { upon.call(this,val) }
           });
 

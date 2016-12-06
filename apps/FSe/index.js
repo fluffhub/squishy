@@ -143,15 +143,7 @@ Module(function M() {
           this.root=null;
           if(loc) {} else { loc="." }
           this.session.cd(loc, function(val) {
-            var dirs=val.split("/");
-            lib.dirs[val]=new Dir(dirs[dirs.length],dirs.join("/"),lib.session,function(dirloc) {
-              lib.setDir(dirloc);
-              lib.cd(dirloc)
-            });
-            lib.add(lib.dirs[val])
-            //if(
-            lib.dirs[val].load();
-            lib.dirs[val].hide()
+
 
             var dirs=val.split('/')
             var dirname=dirs[dirs.length-1];
@@ -159,10 +151,7 @@ Module(function M() {
             //if(dirname=="membrane")
             //  lib.cd ("..",function(val) {
             //    lib.setDir(val.trim());
-               /* Object.keys(lib.dirs).forEach(function(d) {
-                  lib.dirs[d].hide()
-                })
-                lib.dirs[val].show();*/
+               /* */
            //   });
 
           });
@@ -190,7 +179,28 @@ Module(function M() {
 
 
 
-        C.Def(function cd(loc) {
+        C.Def(function cd(val) {
+          var lib=this
+          var dirs=val.split("/")
+            if(lib.dirs[val] instanceof Object) {
+
+            } else {
+
+              console.debug("initializing dir "+dirs.join("/"));
+
+              lib.dirs[val]=new Dir(dirs[dirs.length],dirs.join("/"),lib.session,function(dirloc) {
+                lib.setDir(dirloc);
+                lib.cd(dirloc)
+              });
+              lib.add(lib.dirs[val])
+              //if(
+              lib.dirs[val].load();
+              lib.dirs[val].hide()
+            }
+          Object.keys(lib.dirs).forEach(function(d) {
+                  lib.dirs[d].hide()
+                })
+                lib.dirs[val].show();*/
 
         });
         C.Def(function ls(loc) {
