@@ -200,7 +200,7 @@ Module(function M() {
           Object.keys(lib.dirs).forEach(function(d) {
                   lib.dirs[d].hide()
                 })
-                lib.dirs[val].show();*/
+                lib.dirs[val].show();
 
         });
         C.Def(function ls(loc) {
