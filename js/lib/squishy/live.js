@@ -6,16 +6,16 @@ Module(function M () {
   loc.href="/"
   var root=loc.href;
   M.Def("root",root);
-  Import("squishy/DOM", function(DOM){
-    M.Def("main",new DOM.Frame());
-  });
+
   //  console.debug({href:loc.href})
 
   M.Def("devices",undefined);
-  Import("squishy/system",function(system) {
+  M.Import("squishy/system",function(system) {
      M.Self.devices=new system.DeviceManager();
 
    });
-
+  Import("squishy/DOM", function(DOM){
+    M.Def("main",new DOM.Frame());
+  });
  });
 
