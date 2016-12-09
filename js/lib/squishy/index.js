@@ -226,8 +226,8 @@ function Module() {
       */
       window.Import("squishy/live",function(live) {
        // window.Import(parser.href,function(a) {
-        live.init(parser.href,element);
-        live.init(parser.href,M);
+        live.devices.init(parser.href,element);
+        live.devices.init(parser.href,M);
       //  });
       });
 

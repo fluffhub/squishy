@@ -11,64 +11,11 @@ Module(function M () {
   });
   //  console.debug({href:loc.href})
 
+  M.Def("devices",undefined);
+  Import("squishy/system",function(system) {
+     M.Self.devices=new system.DeviceManager();
 
-  var devices={};
+   });
 
-  M.Def("devices",devices);
-
-  // Import("squishy/system",function(system) {
-  //   devices[root]=new system.Device(root);
-
-  // });
-  M.Def(function init(path,obj) {
-
-
-    Import("squishy/system",function(system) {
-      var loc2=document.createElement("a");
-      loc2.href=path;
-      var fileloc=loc2.href;
-      loc2.href="/";
-      var fileroot=loc2.href;
-      var uri=fileloc.slice(fileroot.length);
-      var dirs=uri.split('/');
-      if(fileroot in devices) {
-
-
-      } else {
-        devices[fileroot]=new system.Device({});
-      }
-      var device=devices[fileroot];
-      var cursor=devices[fileroot].root;
-      for(var i=0;i<dirs.length-1;i++) {
-        var dn=dirs[i];
-
-        if(dn in cursor.contents) {
-          cursor=cursor.contents[dn];
-        } else {
-          cursor=cursor.mkdir(dn,{});
-
-        }
-      }
-      var fn = dirs[dirs.length-1];
-      if (fn in cursor.contents && cursor.contents[fn] instanceof Array) {
-        if(obj instanceof Array) {
-          cursor.contents[fn]=cursor.contents[fn]+obj;
-        } else {
-        cursor.contents[fn].push(obj);
-        }
-      } else {
-        if(obj instanceof Array) {
-          cursor.contents[fn]=obj;
-        } else {
-        cursor.contents[fn]=[obj];
-        }
-      }
-      // devices[fileroot].push(fileloc.slice(fileroot.length));
-
-    });
-
-
-
-  });
-});
+ });
 
