@@ -33,7 +33,6 @@ Module(function M() {
         this.name=name
       }
     });
-
   });
 
   M.Class(function C() {
@@ -43,7 +42,9 @@ Module(function M() {
 
     });
     C.Def(function init(path,obj) {
+      var devices=this.devices;
       Import("squishy/system",function(system) {
+
         var loc2=document.createElement("a");
         loc2.href=path;
         var fileloc=loc2.href;
@@ -107,13 +108,11 @@ Module(function M() {
         dir.parent=this;
         return dir;
       }
-
     });
     C.Def(function rename(name) {
       this.parent.contents[name]=this;
       delete this.parent.contents[this.name];
       this.name=name;
-
     });
     C.Def(function remove() {
       delete this.parent.contents[this.name]
