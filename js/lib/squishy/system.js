@@ -41,6 +41,7 @@ Module(function M() {
     result(cursor);
     });
     C.Def(function init(path,obj) {
+      var device=this;
       Import("squishy/system",function(system) {
 
         var fileloc=system.uri(path).href;
@@ -48,8 +49,8 @@ Module(function M() {
         var uri=fileloc.slice(fileroot.length);
         var dirs=uri.split('/');
 
-        var device=this;
-        var cursor=this.root;
+
+        var cursor=device.root;
         for(var i=0;i<dirs.length-1;i++) {
           var dn=dirs[i];
           if(dn in cursor.contents) {
