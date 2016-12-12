@@ -14,7 +14,7 @@ Module(function M() {
       Import("squishy/live",function(live) {
         var url
         if(typeof path == "string") {
-            url=uri(path)
+          url=uri(path)
         } else {
           url=uri("/");
         }
@@ -30,17 +30,17 @@ Module(function M() {
 
     });
     C.Def(function retrieve(path, result) {
-       var device=this;
-        var cursor=this.root;
+      var device=this;
+      var cursor=this.root;
       var fns=path.split("/")
 
-     for(var i=0;i<dirs.length-1;i++) {
-          var dn=dirs[i];
-          if(dn in cursor.contents) {
-            cursor=cursor.contents[dn];
-          }
+      for(var i=0;i<dirs.length-1;i++) {
+        var dn=dirs[i];
+        if(dn in cursor.contents) {
+          cursor=cursor.contents[dn];
         }
-    result(cursor);
+      }
+      result(cursor);
     });
     C.Def(function init(path,obj) {
       var device=this;
@@ -113,8 +113,8 @@ Module(function M() {
       var results={}
       var names= Object.keys(this.devices);
       var i=names.length;
-       names.forEach(function(name) {
-         i--;
+      names.forEach(function(name) {
+        i--;
         results[name]=this.devices[name].retrieve(path,function(value) {
           if(i==0) result(value);
         });
@@ -124,19 +124,24 @@ Module(function M() {
     C.Def(function init(path,device) {
       var manager=this;
       var url=uri(path)
-
-      var devices=this.devices[url.hostname];
+      var devices;
       var name=null
       if(typeof device.name == "string") {
         name=device.name
       } else {
         name="Device"+Object.keys(devices).length
       }
-      if(devices[name] ===undefined) {
-        devices[name]=device;
-      } else {
-        throw new DeviceManagerException("Device already exists: "+name);
-      }
+      if(this.devices[url.hostname] instanceof Object)
+        devices=this.devices[url.hostname];
+      else
+        devices=this.devices[url.hostname]={}
+
+
+          if(devices[name] ===undefined) {
+          devices[name]=device;
+        } else {
+          throw new DeviceManagerException("Device already exists: "+name);
+        }
     });
   });
   var Dir=M.Class(function C() {
