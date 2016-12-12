@@ -123,7 +123,9 @@ Module(function M() {
     });
     C.Def(function init(path,device) {
       var manager=this;
-      var devices=this.devices;
+      var url=uri(path)
+
+      var devices=this.devices[url.hostname];
       var name=null
       if(typeof device.name == "string") {
         name=device.name
