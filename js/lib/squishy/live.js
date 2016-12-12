@@ -22,12 +22,12 @@ Module(function M () {
 
 
 
-      var devices=M.Self.devices;
+      var manager=M.Self.devices;
       var live;
       //The common device ot all browser instances is the host of these files...
-      if(url.hostname in devices) {
+      if(url.hostname in manager.devices) {
         if(devices[url.hostname].live !==undefined ) {
-          live=devices[url.hostname].live
+          live=manager.devices[url.hostname].live
         } else {
           live= new remote.Device(url.hostname,"live");
 
