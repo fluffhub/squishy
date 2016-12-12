@@ -12,11 +12,13 @@ Module(function M() {
       }
       C.Def("Dir",M.Self.Dir);
       Import("squishy/live",function(live) {
+        var url
         if(typeof path == "string") {
+            url=uri(path)
         } else {
-          path=uri("/");
+          url=uri("/");
         }
-        live.devices.init(path.hostname,device);
+        live.devices.init(url.hostname,device);
       });
 
       // if(typeof name=="string")
