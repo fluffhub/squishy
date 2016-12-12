@@ -108,9 +108,13 @@ Module(function M() {
     });
     C.Def(function retrieve(path, result) {
       var results={}
-
-      Object.keys(this.devices).forEach(function(name) {
-        results[name]=this.devices[name].retrieve(
+      var names= Object.keys(this.devices);
+      var i=names.length;
+       names.forEach(function(name) {
+         i--;
+        results[name]=this.devices[name].retrieve(path,function(value) {
+          if(i==0) result(value);
+        });
       });
 
     });
