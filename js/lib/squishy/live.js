@@ -7,7 +7,7 @@ Module(function M () {
     M.Def("~",loc);
     var root=system.uri("/");
     var devices=M.Def("devices",new system.DeviceManager());
-
+    M.Def("root",root);
     //  console.debug({href:loc.href})
 
 
@@ -46,7 +46,7 @@ Module(function M () {
   // });
 
 
-  M.Def("root",root);
+
   Import("squishy/DOM", function(DOM){
     M.Def("main",new DOM.Frame());
   });
