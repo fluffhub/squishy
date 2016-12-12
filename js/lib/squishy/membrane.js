@@ -4,25 +4,28 @@ Module(function M() {
     "squishy/system",
     "squishy/live",
     function(Req,system,live) {
-
+      var default_url="/squishy/membrane"
+      var default_root="/squishy/"
+      var default_id="pool"
       var Device=M.Class(function C() {
         C.Super(system.Device);
         C.Def("session",null);
-        C.Def("url","/squishy/membrane")
-        C.Def("root","/squishy/")
-        C.Def("id","pool")
+        C.Def("url",default_url)
+        C.Def("root",default_root)
+        C.Def("id",default_id)
 
-        C.Init(function Device(name,struct,session) {
-          system.Device.call(this,name);
+        C.Init(function Device(path, name) {
+          if(typeof name=="string") {
+          this.name=name
+          } else {
+            name=this.name="membrane"
+          }
+
+
+          system.Device.call(this,path,name);
           this.request=new Req.Request("URI","TEXT");
           this.request.request.timeout=60000;
-          if(typeof name=="string") {
-            this.name=name;
-          }
-          this.session=session;
-          if(struct instanceof system.Dir) {
-            this.root=struct;
-          }
+
           var env=this;
           this.pwd=""
           this.status(function(home) {
@@ -40,6 +43,9 @@ Module(function M() {
             });
           });
         });
+        C.Def(function retrieve(path, result) {
+
+        });
         C.Def(function status(result) {
           this.request.Get(this.url+"/membrane.cgi",{op:"status",id:this.id},function(r) {
             result(JSON.parse(r))
@@ -47,7 +53,7 @@ Module(function M() {
         })
         C.Def(function pwd() {
 
-        })
+        });
         C.Def(function exec(command,receive) {
           command=command.replace(/;/g,"\u00b6")
           command=command.replace(/\n/,"\u00ac")

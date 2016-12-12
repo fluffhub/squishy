@@ -4,7 +4,22 @@ Module(function M() {
     "apps/",
     "squishy/membrane",
     function(apps,membrane) {
-      M.Def("session",new membrane.Device("pool"));
+
+      var session_name="poop"
+
+
+      var a=document.createElement('a')
+      a.href=""
+      var loc=a.href
+
+
+
+
+      M.Def("session",new membrane.Device(loc));
+
+
+
+
       //Import("spoon",function(spoon) {
       console.debug("spoon loaded from conf");
       Object.keys(apps).forEach(function (name) {

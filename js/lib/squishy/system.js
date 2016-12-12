@@ -1,63 +1,55 @@
 Module(function M() {
-  M.Class(function C() {
-    C.Init(function Device(name,root) {
-      if(typeof name=="string")
-        this.name=name;
-      if(root instanceof M.Self.Dir) {
-        this.root=root;
-      } else {
-        this.root=new M.Self.Dir()
-      }
-    });
-    C.Def(function lookup(loc) {
-
-    });
-    C.Def("exec",null)
+  var uri=M.Def(function uri(loc) {
+    var a=document.createElement("a")
+    a.href=loc
+    return a;
   });
   M.Class(function C() {
-    C.Init(function File(name,value) {
-      this.name=null
-      this.value=null
-      if(typeof name=="string") this.name=name;
-      if(value!==undefined) this.value=value;
-    });
-    C.Def(function read() {
-      return this.value
-    });
-    C.Def(function write(value) {
-      if(value!==undefined)
-        this.value=value;
-    });
-    C.Def(function rename(name) {
-      if(typeof name=="string")  {
-        this.name=name
+    C.Init(function Device(path,name) {
+      var device=this;
+      if(typeof name=="string") {
+        device.name=name
       }
+      C.Def("Dir",M.Self.Dir);
+      Import("squishy/live",function(live) {
+        if(typeof path == "string") {
+        } else {
+          path=uri("/");
+        }
+        live.devices.init(path.hostname,device);
+      });
+
+      // if(typeof name=="string")
+      //   this.name=name;
+      // if(root instanceof M.Self.Dir) {
+      //   this.root=root;
+      // } else {
+      // }
+
     });
-  });
+    C.Def(function retrieve(path, result) {
+       var device=this;
+        var cursor=this.root;
+      var fns=path.split("/")
 
-  M.Class(function C() {
-
-    C.Init(function DeviceManager() {
-      this.devices={};
-
+     for(var i=0;i<dirs.length-1;i++) {
+          var dn=dirs[i];
+          if(dn in cursor.contents) {
+            cursor=cursor.contents[dn];
+          }
+        }
+    result(cursor);
     });
     C.Def(function init(path,obj) {
-      var devices=this.devices;
       Import("squishy/system",function(system) {
 
-        var loc2=document.createElement("a");
-        loc2.href=path;
-        var fileloc=loc2.href;
-        loc2.href="/";
-        var fileroot=loc2.href;
+        var fileloc=system.uri(path).href;
+        var fileroot=system.uri("/").href;
         var uri=fileloc.slice(fileroot.length);
         var dirs=uri.split('/');
-        if(fileroot in devices) {
-        } else {
-          devices[fileroot]=new system.Device({});
-        }
-        var device=devices[fileroot];
-        var cursor=devices[fileroot].root;
+
+        var device=this;
+        var cursor=this.root;
         for(var i=0;i<dirs.length-1;i++) {
           var dn=dirs[i];
           if(dn in cursor.contents) {
@@ -84,8 +76,61 @@ Module(function M() {
 
       });
     });
+    C.Def("exec",null)
   });
   M.Class(function C() {
+    C.Init(function File(name,value) {
+      this.name=null
+      this.value=null
+      if(typeof name=="string") this.name=name;
+      if(value!==undefined) this.value=value;
+    });
+    C.Def(function read() {
+      return this.value
+    });
+    C.Def(function write(value) {
+      if(value!==undefined)
+        this.value=value;
+    });
+    C.Def(function rename(name) {
+      if(typeof name=="string")  {
+        this.name=name
+      }
+    });
+
+  });
+  var DeviceManagerException=function(message) {Exception.call(this,"Device Manager Exception: "+message)};
+  M.Class(function C() {
+
+    C.Init(function DeviceManager() {
+      this.devices={};
+
+    });
+    C.Def(function retrieve(path, result) {
+      var results={}
+
+      Object.keys(this.devices).forEach(function(name) {
+        results[name]=this.devices[name].retrieve(
+      });
+
+    });
+    C.Def(function init(path,device) {
+      var manager=this;
+      var devices=this.devices;
+      var name=null
+      if(typeof device.name == "string") {
+        name=device.name
+      } else {
+        name="Device"+Object.keys(devices).length
+      }
+      if(devices[name] ===undefined) {
+        devices[name]=device;
+      } else {
+        throw new DeviceManagerException("Device already exists: "+name);
+      }
+    });
+  });
+  var Dir=M.Class(function C() {
     C.Init(function Dir(name,contents) {
       if(typeof name=="string") {
         this.name=name
@@ -97,13 +142,16 @@ Module(function M() {
       }
       this.parent=null;
     });
-    C.Def(function list() {
+    C.Def(function list(result) {
+      if(result instanceof Function) {
+        result(this.contents);
+      }
       return this.contents
     });
     C.Def(function mkdir(name) {
       if(name in this.contents) { return this.contents[name] }
       else {
-        var dir=new M.Self.Dir(name,{});
+        var dir=new Dir(name,{});
         this.contents[name]=dir;
         dir.parent=this;
         return dir;

@@ -223,11 +223,14 @@ function Module() {
 
       /* Live component
       this adds the modules path and module obj to the live system registry
+      since running in the root import command, this must immediately import the dependencies
+      of squishy/live in order to work properly without stalling out
+
       */
       window.Import("squishy/system","squishy/live",function(system,live) {
        // window.Import(parser.href,function(a) {
-        live.devices.init(parser.href,element);
-        live.devices.init(parser.href,M);
+
+        live.init(parser.href,M);
       //  });
       });
 

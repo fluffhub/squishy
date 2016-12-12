@@ -118,7 +118,7 @@ Module(function M() {
 
       var FileBrowser=M.Class(function C() {
         C.Super(basic.Div);
-        C.Init(function FileBrowser(loc,id)  {
+        C.Init(function FileBrowser(path)  {
           basic.Div.call(this,"FileBrowser");
           this.files={};
           this.absolutefiles={};
@@ -126,35 +126,14 @@ Module(function M() {
           this.windows={};
           var lib=this;
 
-
-          if(conf.session!==undefined) {
-            this.session=conf.session;
-            this.id=this.session.id
-          }
-          else {
-            if(id!==undefined) this.id=id;
-            else this.id="pool"
-            this.session=new membrane.Device(id)
-          }
           this.presentdir=new basic.Div("pwdbar");
           this.presentdir.dirs=[];
           this.dirs={};
           this.pwd="";
           this.root=null;
-          if(loc) {} else { loc="." }
-          this.session.cd(loc, function(val) {
 
 
-            var dirs=val.split('/')
-            var dirname=dirs[dirs.length-1];
 
-            //if(dirname=="membrane")
-            //  lib.cd ("..",function(val) {
-            //    lib.setDir(val.trim());
-               /* */
-           //   });
-
-          });
           this.importer=new form.Form("importer",function submit(e) {
             var path2=lib.importer.searchbox.value();
             lib.Import(path2,function(m) {
@@ -182,25 +161,25 @@ Module(function M() {
         C.Def(function cd(val) {
           var lib=this
           var dirs=val.split("/")
-            if(lib.dirs[val] instanceof Object) {
+          if(lib.dirs[val] instanceof Object) {
 
-            } else {
+          } else {
 
-              console.debug("initializing dir "+dirs.join("/"));
+            console.debug("initializing dir "+dirs.join("/"));
 
-              lib.dirs[val]=new Dir(dirs[dirs.length],dirs.join("/"),lib.session,function(dirloc) {
-                lib.setDir(dirloc);
-                lib.cd(dirloc)
-              });
-              lib.add(lib.dirs[val])
-              //if(
-              lib.dirs[val].load();
-              lib.dirs[val].hide()
-            }
+            lib.dirs[val]=new Dir(dirs[dirs.length],dirs.join("/"),lib.session,function(dirloc) {
+              lib.setDir(dirloc);
+              lib.cd(dirloc)
+            });
+            lib.add(lib.dirs[val])
+            //if(
+            lib.dirs[val].load();
+            lib.dirs[val].hide()
+          }
           Object.keys(lib.dirs).forEach(function(d) {
-                  lib.dirs[d].hide()
-                })
-                lib.dirs[val].show();
+            lib.dirs[d].hide()
+          })
+          lib.dirs[val].show();
 
         });
         C.Def(function ls(loc) {
