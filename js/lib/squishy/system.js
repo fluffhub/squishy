@@ -100,7 +100,7 @@ Module(function M() {
     });
 
   });
-  var DeviceManagerException=function(message) {Exception.call(this,"Device Manager Exception: "+message)};
+  var DeviceManagerException=function(message) {console.debug("Device Manager Exception: "+message)};
   M.Class(function C() {
 
     C.Init(function DeviceManager() {
