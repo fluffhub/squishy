@@ -31,6 +31,7 @@ Module(function M() {
           this.status(function(home) {
             env.home=home.pwd;
             env.root=new M.Self.Dir("/",{});
+            env.root.env=env;
             env.exec("pwd",function(pwd) {
 
               var dirs=pwd.split('/')
@@ -133,6 +134,7 @@ Module(function M() {
                 var dirloc=dir.loc+"/"+filename
                 var D=new M.Self.Dir(filename);
                 D.loc=dirloc;
+                D.env=dir.env;
                 dir.contents[filename]=D;
               } else {
                 //is a file
