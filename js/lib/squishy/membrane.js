@@ -31,6 +31,7 @@ Module(function M() {
           this.status(function(home) {
             env.home=home.pwd;
             env.root=new M.Self.Dir("/",{});
+            env.root.loc="/"
             env.root.env=env;
             env.exec("pwd",function(pwd) {
 
