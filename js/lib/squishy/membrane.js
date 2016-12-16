@@ -48,6 +48,9 @@ Module(function M() {
 
 
             }
+            cursor.list(function (ls) {
+
+            });
           }
           this.status(function(home) {
             var pwd=home.pwd;
