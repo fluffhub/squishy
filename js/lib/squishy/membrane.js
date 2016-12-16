@@ -40,7 +40,8 @@ Module(function M() {
             var dirname,dir;
             var cursor=env.root.contents;
             var i;
-            if(dirs[0]=="") i=1 else i=0;
+            if(dirs[0]=="") i=1;
+            else i=0;
             for (;i<dirs.length;i++) {
               dirname=dirs[i];
               dir=new M.Self.Dir(dirname,{});
