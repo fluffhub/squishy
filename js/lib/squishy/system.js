@@ -115,8 +115,9 @@ Module(function M() {
       var i=names.length;
       names.forEach(function(name) {
         i--;
-        results[name]=this.devices[name].retrieve(path,function(value) {
-          if(i==0) result(value);
+        this.devices[name].retrieve(path,function(value) {
+          results[name]=value;
+          if(i==0) result(results);
         });
       });
 

@@ -16,7 +16,7 @@ Module(function M() {
 
         C.Init(function Device(path, name) {
           if(typeof name=="string") {
-          this.name=name
+            this.name=name
           } else {
             name=this.name="membrane"
           }
@@ -27,30 +27,82 @@ Module(function M() {
           this.request.request.timeout=60000;
 
           var env=this;
+
           this.pwd=""
-          this.status(function(home) {
-            env.home=home.pwd;
+          var home=system.uri("").pathname
+          function assign(pwd) {
+            env.pwd=pwd;
+            env.home=pwd;
             env.root=new M.Self.Dir("/",{});
-            env.root.loc="/"
+            env.root.loc="/";
             env.root.env=env;
+            var dirs=pwd.split("/");
+            var dirname,dir;
+            var cursor=env.root.contents;
+            for (var i=0;i<dirs.length;i++) {
+              dirname=dirs[i];
+              dir=new M.Self.Dir(dirname,{});
+              dir.loc=dirs.slice(0,i).join('/');
+              cursor[dirname]=dir;
+              cursor=dir.contents;
+
+
+            }
+          }
+          this.status(function(home) {
+            var pwd=home.pwd;
+
             env.exec("pwd",function(pwd) {
 
-              var dirs=pwd.split('/')
+              var dirs=pwd.split('/');
               var dirname=dirs[dirs.length-1];
 
               if(dirname=="membrane") {
                 pwd=dirs.slice(0,-1).join("/")
+                env.cd("..",function(pwd) {
+                  assign(pwd);
+                })
+              } else {
+
+                assign(pwd);
               }
-              env.pwd=pwd;
             });
           });
+
         });
         C.Def(function retrieve(path, result) {
+          if(path[0]=="/") {
+            //use absolute path to membrane host
 
+          } else {
+            path=this.home+"/"+path;
+
+          }
+          var dirs=path.split("/");
+          var cursor=this.root;
+          for(var i=0;i<dirs.length-1;i++) {
+            var dirname=dirs[i];
+            if(dirname in cursor.contents) {
+              cursor=cursor.contents[dirname];
+            } else {
+              //try to ls this dir to find it?
+              if(cursor.list instanceof Function) {
+                cursor.list(function(val) {
+
+                })
+              }
+            }
+          }
+          var fn=dirs[dirs.length-1];
+          if(fn in cursor.contents) {
+            result( cursor.contents[fn]);
+          } else {
+
+          }
         });
         C.Def(function status(result) {
           this.request.Get(this.url+"/membrane.cgi",{op:"status",id:this.id},function(r) {
-            result(JSON.parse(r))
+            result(JSON.parse(r));
           });
         })
         C.Def(function pwd() {
@@ -177,3 +229,4 @@ Module(function M() {
 
     });
 });
+
