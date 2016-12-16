@@ -39,7 +39,9 @@ Module(function M() {
             var dirs=pwd.split("/");
             var dirname,dir;
             var cursor=env.root.contents;
-            for (var i=0;i<dirs.length;i++) {
+            var i;
+            if(dirs[0]=="") i=1 else i=0;
+            for (;i<dirs.length;i++) {
               dirname=dirs[i];
               dir=new M.Self.Dir(dirname,{});
               dir.loc=dirs.slice(0,i).join('/');
