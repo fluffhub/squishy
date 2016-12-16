@@ -45,6 +45,7 @@ Module(function M() {
             for (;i<dirs.length;i++) {
               dirname=dirs[i];
               dir=new M.Self.Dir(dirname,{});
+              dir.env=env;
               dir.loc=dirs.slice(0,i).join('/');
               cursor[dirname]=dir;
               cursor=dir.contents;
