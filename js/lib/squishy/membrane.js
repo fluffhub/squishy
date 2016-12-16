@@ -179,6 +179,7 @@ Module(function M() {
           } else {
             this.contents={}
           }
+          Object.defineProperty(this,"env",{writable:true,enumerable:false,configurable:false })
         });
         C.Def(function list(success) {
           var dir=this;
