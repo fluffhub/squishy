@@ -51,7 +51,7 @@ Module(function M() {
 
 
             }
-            cursor.list(function (ls) {
+            dir.list(function (ls) {
 
             });
           }
