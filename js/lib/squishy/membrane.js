@@ -47,14 +47,14 @@ Module(function M() {
               dir=new M.Self.Dir(dirname,{});
               dir.env=env;
               dir.loc=dirs.slice(0,i).join('/');
-
+              console.debug({pwd:dir.loc})
               cursor[dirname]=dir;
               cursor=dir.contents;
 
 
             }
             dir.list(function (ls) {
-              console.debug({ls:ls});
+              console.debug({ls:this});
             });
           }
           this.status(function(home) {
