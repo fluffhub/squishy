@@ -57,24 +57,26 @@ Module(function M() {
               console.debug({ls:this});
             });
           }
-          this.status(function(home) {
-            var pwd=home.pwd;
+          this.status(function(status) {
+            var home=status.home;
 
-            env.exec("pwd",function(pwd) {
+           // env.exec("pwd",function(pwd) {
 
               var dirs=pwd.split('/');
               var dirname=dirs[dirs.length-1];
 
               if(dirname=="membrane") {
-                pwd=dirs.slice(0,-1).join("/")
-                env.cd("..",function(pwd) {
-                  assign(pwd);
-                })
+                home=dirs.slice(0,-1).join("/")
+              //  env.cd("..",function(pwd) {
+              //    assign(pwd);
+              //  })
+
               } else {
 
-                assign(pwd);
+
               }
-            });
+                   assign(home);
+            //});
           });
 
         });
