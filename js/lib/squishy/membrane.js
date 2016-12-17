@@ -42,6 +42,7 @@ Module(function M() {
             var i;
             if(dirs[0]=="") i=1;
             else i=0;
+            console.debug(pwd);
             for (;i<dirs.length;i++) {
               dirname=dirs[i];
               dir=new M.Self.Dir(dirname,{});
