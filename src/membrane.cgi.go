@@ -192,10 +192,10 @@ func main() {
         out.Close()
       }
       if(op=="status") {
-         pwdfile,err2:=ioutil.ReadFile(".~_"+name);
-        pwd:=string(pwdfile[0:len(pwdfile)-1]);
+         homefile,err2:=ioutil.ReadFile(".~_"+name);
+        home:=string(homefile[0:len(homefile)-1]);
         dump(err2)
-        w.Write([]byte("{\"pwd\":\""+pwd+"\"}"))
+        w.Write([]byte("{\"home\":\""+home+"\"}"))
       }
       if(op=="w") {
         cmd:=data
@@ -256,7 +256,7 @@ func main() {
         var lenfile *os.File
         var err error
 
-        /////OPENING THE DEDICATED NAMED PIPE FOR THIS SH INSTANCE TO WRITE COMMANDS TO
+        /////OPENING THE DEDICATED OUTFILE FOR THIS SH INSTANCE TO WRITE COMMANDS TO
         in,err:=os.OpenFile(".in_"+name, os.O_RDWR, 0666)
 
 
