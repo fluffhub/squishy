@@ -62,7 +62,7 @@ Module(function M() {
 
            // env.exec("pwd",function(pwd) {
 
-              var dirs=pwd.split('/');
+              var dirs=home.split('/');
               var dirname=dirs[dirs.length-1];
 
               if(dirname=="membrane") {
