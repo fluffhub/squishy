@@ -32,7 +32,7 @@ Module(function M() {
     C.Def(function retrieve(path, result) {
       var device=this;
       var cursor=this.root;
-      var fns=path.split("/")
+      var dirs=path.split("/")
 
       for(var i=0;i<dirs.length-1;i++) {
         var dn=dirs[i];
