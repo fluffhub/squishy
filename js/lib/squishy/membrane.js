@@ -184,7 +184,7 @@ Module(function M() {
             console.debug({files:files});
 
             files.forEach(function(filename) {
-              var tokens=filename.match(/^([\w]+)([\W]?)$/)
+              var tokens=filename.match(/^([\w.]+)([\W]?)$/)
               var F;
               if(tokens[1] in dir.contents) {
 
