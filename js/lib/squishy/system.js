@@ -110,17 +110,22 @@ Module(function M() {
 
     });
     C.Def(function retrieve(path, result) {
-      var results={}
+      var all={}
       var names= Object.keys(this.devices);
-      var i=names.length;
+
       var fs=this;
-      names.forEach(function(name) {
-        i--;
-        fs.devices[name].retrieve(path,function(value) {
-          results[name]=value;
-          if(i==0) result(results);
+      var name=path.split("/")[0]
+     // names.forEach(function(name) {
+        var i=Object.keys(this.devices[name]).length;
+
+        Object.keys(this.devices[name]).forEach(function(id) {
+          i--;
+          fs.devices[name].retrieve(path,function(value) {
+            all[id]=value;
+            if(i==0) result(all);
+          });
         });
-      });
+    //  });
 
     });
     C.Def(function init(path,device) {
@@ -139,7 +144,7 @@ Module(function M() {
         devices=this.devices[url.hostname]={}
 
 
-          if(devices[name] ===undefined) {
+        if(devices[name] ===undefined) {
           devices[name]=device;
         } else {
           throw new DeviceManagerException("Device already exists: "+name);
