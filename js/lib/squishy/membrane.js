@@ -91,19 +91,8 @@ Module(function M() {
           }
           var dirs=path.split("/");
           var cursor=this.root;
-          for(var i=0;i<dirs.length-1;i++) {
-            var dirname=dirs[i];
-            if(dirname in cursor.contents) {
-              cursor=cursor.contents[dirname];
-            } else {
-              //try to ls this dir to find it?
-              if(cursor.list instanceof Function) {
-                cursor.list(function(val) {
+          var i=dirs.length;
 
-                })
-              }
-            }
-          }
           var fn=dirs[dirs.length-1];
           if(fn in cursor.contents) {
             result( cursor.contents[fn]);
