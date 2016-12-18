@@ -138,9 +138,13 @@ Module(function M() {
       });
       M.Class(function C() {
         C.Super(system.File);
-        C.Init(function File(name,value) {
+        C.Init(function File(name,loc,env) {
           this.name=null
           this.value=null
+         // this.env=env;
+          this.loc=loc;
+
+          Object.defineProperty(this,"env",{writable:true,enumerable:false,configurable:false,value:env; })
           if(typeof name=="string")this.name=name;
           if(value!==undefined) this.value=value;
 
@@ -189,9 +193,9 @@ Module(function M() {
               if(tokens[1] in dir.contents) {
 
               } else {
-
+                var dirloc=dir.loc+"/"+tokens[1]
                 if(tokens[2]=="/") {
-                  var dirloc=dir.loc+"/"+tokens[1]
+
 
                   F=new M.Self.Dir(tokens[1]);
                   F.loc=dirloc;
@@ -200,11 +204,12 @@ Module(function M() {
                 } else {
                   //is a file
 
-                  F=new M.Self.File(tokens[1],dir.loc+"/"+tokens[1],dir.env,function() {
+                  F=new M.Self.File(tokens[1],dirloc,dir.env,function() {
                     if(tokens[2]!="*")
                       this.refresh();
                     this.open();
                   });
+                  F.
 
                 }
 
