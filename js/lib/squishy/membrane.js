@@ -61,22 +61,22 @@ Module(function M() {
           this.status(function(status) {
             var home=status.home;
 
-           // env.exec("pwd",function(pwd) {
+            // env.exec("pwd",function(pwd) {
 
-              var dirs=home.split('/');
-              var dirname=dirs[dirs.length-1];
+            var dirs=home.split('/');
+            var dirname=dirs[dirs.length-1];
 
-              if(dirname=="membrane") {
-                home=dirs.slice(0,-1).join("/")
+            if(dirname=="membrane") {
+              home=dirs.slice(0,-1).join("/")
               //  env.cd("..",function(pwd) {
               //    assign(pwd);
               //  })
 
-              } else {
+            } else {
 
 
-              }
-                   assign(home);
+            }
+            assign(home);
             //});
           });
 
@@ -115,7 +115,7 @@ Module(function M() {
           this.request.Get(this.url+"/membrane.cgi",{op:"status",id:this.id},function(r) {
             result(JSON.parse(r));
           });
-        })
+        });
         C.Def(function pwd() {
 
         });
@@ -190,27 +190,36 @@ Module(function M() {
           this.env.exec("ls -AF "+this.loc+"",function(val) {
             //"cd "+this.loc+"; cd ~-
             var files=val.split(/[\s]+/);
+
             console.debug({VAL:val});
             console.debug({files:files});
 
             files.forEach(function(filename) {
-              if(filename.slice(-1)=="/") {
-                console.debug("creating dir: "+filename);
-                var dirloc=dir.loc+"/"+filename
-                var D=new M.Self.Dir(filename);
-                D.loc=dirloc;
-                D.env=dir.env;
-                dir.contents[filename]=D;
+              var tokens=filename.match(/([\w]+)([\W]?)/)
+              var F;
+              if(tokens[1] in dir.contents) {
+
               } else {
-                //is a file
 
-                var F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
-                  if(filename.slice(-1)!="*")
-                    this.refresh();
-                  this.open();
-                });
+                if(tokens[2]=="/") {
+                  var dirloc=dir.loc+"/"+tokens[1]
 
-                dir.contents[filename]=F;
+                  F=new M.Self.Dir(tokens[1]);
+                  F.loc=dirloc;
+                  F.env=dir.env;
+
+                } else {
+                  //is a file
+
+                  F=new M.Self.File(tokens[1],dir.loc+"/"+tokens[1],dir.env,function() {
+                    if(tokens[2]!="*")
+                      this.refresh();
+                    this.open();
+                  });
+
+                }
+
+                dir.contents[tokens[1]]=F;
               }
 
             });
