@@ -113,9 +113,10 @@ Module(function M() {
       var results={}
       var names= Object.keys(this.devices);
       var i=names.length;
+      var fs=this;
       names.forEach(function(name) {
         i--;
-        this.devices[name].retrieve(path,function(value) {
+        fs.devices[name].retrieve(path,function(value) {
           results[name]=value;
           if(i==0) result(results);
         });
