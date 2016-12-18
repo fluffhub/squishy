@@ -152,7 +152,7 @@ Module(function M() {
         });
         C.Def(function read(success) {
           var F=this;
-          this.env.exec("cat "+this.loc+"/"+this.name+"",function(val) {
+          this.env.exec("cat "+this.loc,function(val) {
             F.value=val;
             success(val);
           });
