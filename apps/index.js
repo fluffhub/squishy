@@ -1,11 +1,11 @@
 Module(function M ()  {
 
-  M.Index("FSe/",
-          "HTMLe/",
-          "JSe/",
-          "JSONe/",
+  M.Index("fluffy/",
+          "fork/",
+          "graphics/",
+          "layout/",
           "spoon/",
-          "SVGe/",
-          "TXTe/")
+          "object/",
+          "text/")
 
 });
