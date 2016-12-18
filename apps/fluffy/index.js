@@ -1,5 +1,5 @@
 Module(function M() {
-  M.Import("JSe/JSeditor","spoon",
+  M.Import("code/JSeditor","spoon",
 
     //  context actions
     //  list view

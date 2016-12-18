@@ -1,6 +1,6 @@
 Module(function M() {
   /* @TODO:  Do something better with these ad hoc style shets*/
-Import("JSONe/default.css")
+Import("object/default.css")
 
   /* M.Import('squishy/DOM',function(DOM) {
   M.Import('squishy/events',function(events) {
