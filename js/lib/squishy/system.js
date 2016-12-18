@@ -120,7 +120,7 @@ Module(function M() {
 
         Object.keys(this.devices[name]).forEach(function(id) {
           i--;
-          fs.devices[name].retrieve(path,function(value) {
+          fs.devices[name][id].retrieve(path,function(value) {
             all[id]=value;
             if(i==0) result(all);
           });
