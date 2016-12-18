@@ -172,6 +172,7 @@ Module(function M() {
             this.name=name
           }
           this.loc=location;
+          this.contents={};
           Object.defineProperty(this,"env",{writable:true,enumerable:false,configurable:false })
         });
         C.Def(function list(success) {
