@@ -209,7 +209,7 @@ Module(function M() {
                       this.refresh();
                     this.open();
                   });
-                  F.
+
 
                 }
 
