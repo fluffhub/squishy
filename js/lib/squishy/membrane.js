@@ -33,8 +33,8 @@ Module(function M() {
           function assign(pwd) {
             env.pwd=pwd;
             env.home=pwd;
-            env.root=new M.Self.Dir("/",{});
-            env.root.loc="/";
+            env.root=new M.Self.Dir("/","/");
+
             env.root.env=env;
             var dirs=pwd.split("/");
             var dirname,dir;
@@ -45,9 +45,9 @@ Module(function M() {
             console.debug(pwd);
             for (;i<dirs.length;i++) {
               dirname=dirs[i];
-              dir=new M.Self.Dir(dirname,{});
+              dir=new M.Self.Dir(dirname,dirs.slice(0,i).join('/'));
               dir.env=env;
-              dir.loc=dirs.slice(0,i).join('/');
+
               console.debug({pwd:dir.loc})
               cursor[dirname]=dir;
               cursor=dir.contents;
@@ -152,7 +152,7 @@ Module(function M() {
         });
         C.Def(function read(success) {
           var F=this;
-          this.env.exec("cat "+this.loc,function(val) {
+          this.env.exec("cat "+this.loc+"/"+this.name,function(val) {
             F.value=val;
             success(val);
           });
@@ -167,20 +167,16 @@ Module(function M() {
 
       var Dir=M.Class(function C() {
         C.Super(system.Dir);
-        C.Init(function Dir(name,contents) {
+        C.Init(function Dir(name,location) {
           if(typeof name=="string") {
             this.name=name
           }
-          if(contents!==undefined) {
-            this.contents=contents
-          } else {
-            this.contents={}
-          }
+          this.loc=location;
           Object.defineProperty(this,"env",{writable:true,enumerable:false,configurable:false })
         });
         C.Def(function list(success) {
           var dir=this;
-          this.env.exec("ls -AF "+this.loc+"",function(val) {
+          this.env.exec("ls -AF "+this.loc+"/"+this.name,function(val) {
             //"cd "+this.loc+"; cd ~-
             var files=val.split(/[\s]+/);
 
@@ -197,14 +193,14 @@ Module(function M() {
                 if(tokens[2]=="/") {
 
 
-                  F=new M.Self.Dir(tokens[1]);
+                  F=new M.Self.Dir(tokens[1],dir.loc);
                   F.loc=dirloc;
                   F.env=dir.env;
 
                 } else {
                   //is a file
 
-                  F=new M.Self.File(tokens[1],dirloc,dir.env,function() {
+                  F=new M.Self.File(tokens[1],dir.loc,dir.env,function() {
                     if(tokens[2]!="*")
                       this.refresh();
                     this.open();
