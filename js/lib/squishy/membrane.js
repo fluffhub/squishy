@@ -146,7 +146,7 @@ Module(function M() {
 
           Object.defineProperty(this,"env",{writable:true,enumerable:false,configurable:false,value:env })
           if(typeof name=="string")this.name=name;
-          if(value!==undefined) this.value=value;
+          //if(value!==undefined) this.value=value;
 
 
         });
