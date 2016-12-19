@@ -111,16 +111,22 @@ Module(function M() {
     });
     C.Def(function retrieve(path, result) {
       var all={}
-      var names= Object.keys(this.devices);
+      var a=document.createElement("a")
+      a.href=path;
+      var device=a.hostname;
+      var pathname=a.pathname.split("/").slice(1).join("/");
+
+
+      var names= Object.keys(this.devices[device]);
 
       var fs=this;
-      var name=path.split("/")[0]
+      var name=pathname.split("/")[0]
      // names.forEach(function(name) {
-        var i=Object.keys(this.devices[name]).length;
+      var i=Object.keys(this.devices[device]).length;
 
-        Object.keys(this.devices[name]).forEach(function(id) {
+        Object.keys(this.devices[device]).forEach(function(id) {
           i--;
-          fs.devices[name][id].retrieve(path,function(value) {
+          fs.devices[device][id].retrieve(pathname,function(value) {
             all[id]=value;
             if(i==0) result(all);
           });
