@@ -4,7 +4,7 @@ Module(function M() {
     "apps/",
     "squishy/membrane",
     function(apps,membrane) {
-      /*
+
       var session_name="poop"
 
 
@@ -16,7 +16,7 @@ Module(function M() {
 
 
       M.Def("session",new membrane.Device(loc));
-      */
+
 
 
 
