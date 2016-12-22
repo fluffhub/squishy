@@ -12,7 +12,7 @@ Module(function M() {
         C.Super(system.Device);
         C.Def("session",null);
         C.Def("url",default_url)
-        C.Def("root",default_root)
+        C.Def("webroot",default_root)
         C.Def("id",default_id)
 
         C.Init(function Device(path, name) {
@@ -90,7 +90,7 @@ Module(function M() {
 
           } else {
             //merge the relative path and the absolute path
-            var rootsplit=this.root.split("/")
+            var rootsplit=this.webroot.split("/")
 
             var newpath=this.home.split("/")
             for(var i=0;i<rootsplit.length;i++) {
