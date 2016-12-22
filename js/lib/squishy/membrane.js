@@ -82,6 +82,7 @@ Module(function M() {
 
         });
         C.Def(function retrieve(path, result) {
+          console.debug({retrievalpath:path});
           if(path[0]=="/") {
             //use absolute path to membrane host
 
@@ -93,6 +94,35 @@ Module(function M() {
           var cursor=this.root;
           var i=dirs.length;
 
+          //for (i=0;i<dirs.length;i++) {
+          function dig() {
+            var fn=dirs[i];
+            i--;
+            if(i>0) {
+              if(fn in cursor.contents) {
+                cursor=cursor.contents[dirname]
+                return
+              } else {
+                cursor.list(function() {
+
+                  if (i==0 && true) {
+                    result(i);
+                  }
+                });
+              }
+            }
+          }
+            cursor.list(function() {
+                        function dig(target) {
+            var dirname=dirs[i];
+            if(dirname in cursor.contents) {
+              cursor=cursor.contents[dirname]
+            } else {
+              cursor.list
+            }
+          }
+            })
+          }
           var fn=dirs[dirs.length-1];
           if(fn in cursor.contents) {
             result( cursor.contents[fn]);
