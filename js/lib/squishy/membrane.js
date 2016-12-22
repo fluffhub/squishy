@@ -92,7 +92,7 @@ Module(function M() {
             //merge the relative path and the absolute path
             var rootsplit=this.webroot.split("/")
 
-            var newpath=this.home.split("/")
+            var newpath=path.split("/")
             for(var i=0;i<newpath.length;i++) {
               if(rootsplit[i]!=newpath[i]) dirs.push(newpath[i]);
             }
