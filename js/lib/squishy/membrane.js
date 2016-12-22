@@ -206,7 +206,7 @@ Module(function M() {
               console.debug({files:files});
 
               files.forEach(function(filename) {
-                var tokens=filename.match(/^([^\a-zA-Z0-9!$~&()_\-+.]+)([\W]?)$/)
+                var tokens=filename.match(/^([\w.+\-_%'"\\!#~]+)([\W]?)$/)
                 var F;
                 console.debug({filename:filename,tok:tokens});
                 if(tokens==null) tokens=[filename,filename,""];
