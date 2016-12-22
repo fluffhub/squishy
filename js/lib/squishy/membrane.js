@@ -6,7 +6,7 @@ Module(function M() {
     function(Req,system,live) {
       function MembraneError() { console.debug({membraneError:arguments[1]}) };
       var default_url="/squishy/membrane"
-      var default_root="/squishy/"
+      var default_root="squishy"
       var default_id="pool"
       var Device=M.Class(function C() {
         C.Super(system.Device);
@@ -84,14 +84,22 @@ Module(function M() {
         });
         C.Def(function retrieve(path, result) {
           console.debug({retrievalpath:path});
+          var dirs=path.split("/");
           if(path[0]=="/") {
             //use absolute path to membrane host
 
           } else {
-            path=this.home+"/"+path;
+            //merge the relative path and the absolute path
+            var rootsplit=this.root.split("/")
+
+            var newpath=this.home.split("/")
+            for(var i=0;i<rootsplit.length;i++) {
+              if(rootsplit[i]!=newpath[i]) dirs.push(newpath[i]);
+            }
+
 
           }
-          var dirs=path.split("/");
+
           var cursor=this.root;
           var i=0;
           if(dirs[i]=="") i=1;
