@@ -4,6 +4,7 @@ Module(function M() {
     "squishy/system",
     "squishy/live",
     function(Req,system,live) {
+      function MembraneError() { console.debug({membraneError:arguments[1]}) };
       var default_url="/squishy/membrane"
       var default_root="/squishy/"
       var default_id="pool"
@@ -56,7 +57,7 @@ Module(function M() {
             }
             dir.list(function (ls) {
               console.debug({ls:this});
-            });
+            },true);
           }
           this.status(function(status) {
             var home=status.home;
@@ -92,43 +93,24 @@ Module(function M() {
           }
           var dirs=path.split("/");
           var cursor=this.root;
-          var i=dirs.length;
+          var i=0;
 
           //for (i=0;i<dirs.length;i++) {
-          function dig() {
+          (function dig() {
             var fn=dirs[i];
-            i--;
-            if(i>0) {
-              if(fn in cursor.contents) {
-                cursor=cursor.contents[dirname]
-                return
-              } else {
-                cursor.list(function() {
-
-                  if (i==0 && true) {
-                    result(i);
-                  }
-                });
-              }
-            }
-          }
+            i++;
             cursor.list(function() {
-                        function dig(target) {
-            var dirname=dirs[i];
-            if(dirname in cursor.contents) {
-              cursor=cursor.contents[dirname]
-            } else {
-              cursor.list
-            }
-          }
-            })
-          }
-          var fn=dirs[dirs.length-1];
-          if(fn in cursor.contents) {
-            result( cursor.contents[fn]);
-          } else {
+              var dirname=fn;
+              if(dirname in cursor.contents) {
+                cursor=cursor.contents[dirname];
+                if(i==dirs.length-1) result(cursor)
+                else dig();
+              } else {
+                throw new MembraneError(cursor)
+              }
+            });
+          })();
 
-          }
         });
         C.Def(function status(result) {
           this.request.Get(this.url+"/membrane.cgi",{op:"status",id:this.id},function(r) {
@@ -147,7 +129,6 @@ Module(function M() {
           this.request.Get(this.url+"/membrane.cgi",{op:"w",cmd:command,id:this.id},function(result){
             console.debug("received:"+command);
             receive(result.slice(0,-1));
-
           });
         });
         C.Def(function cd(to, upon) {
@@ -158,12 +139,8 @@ Module(function M() {
             var dirname=dirs[dirs.length-1];
             var i;
             var curs=lib.dirs;
-
-
             if(upon instanceof Function) { upon.call(this,val) }
           });
-
-
         });
       });
       M.Class(function C() {
@@ -171,21 +148,24 @@ Module(function M() {
         C.Init(function File(name,loc,env) {
           this.name=null
           this.value=null
-         // this.env=env;
+          // this.env=env;
           this.loc=loc;
 
-          Object.defineProperty(this,"env",{writable:true,enumerable:false,configurable:false,value:env })
+          Object.defineProperty(this,"env",{writable:true,enumerable:false,configurable:false,value:env });
+          Object.defineProperty(this,"loaded",{writable:true,value:false,enumerable:false,configurable:false});
           if(typeof name=="string")this.name=name;
           //if(value!==undefined) this.value=value;
-
-
         });
-        C.Def(function read(success) {
+        C.Def(function read(success,scratch) {
           var F=this;
+          if(scratch||!this.loaded) {
           this.env.exec("cat "+this.loc+"/"+this.name,function(val) {
             F.value=val;
-            success(val);
+            success.call(F);
           });
+          } else {
+            success.call(this);
+          }
         });
         C.Def(function write(value,success) {
           if(value!==undefined) this.value=value;
@@ -203,49 +183,51 @@ Module(function M() {
           }
           this.loc=location;
           this.contents={};
-          Object.defineProperty(this,"env",{writable:true,enumerable:false,configurable:false })
+          Object.defineProperty(this,"loaded",{value:false,writable:true,configurable:false,enumerable:false});
+          Object.defineProperty(this,"env",{writable:true,enumerable:false,configurable:false });
         });
-        C.Def(function list(success) {
+        C.Def(function list(success,scratch) {
+
           var dir=this;
-          this.env.exec("ls -AF "+this.loc+"/"+this.name,function(val) {
-            //"cd "+this.loc+"; cd ~-
-            var files=val.split(/[\s]+/);
+          if(scratch||!this.loaded) {
+            this.env.exec("ls -AF "+this.loc+"/"+this.name,function(val) {
+              //"cd "+this.loc+"; cd ~-
+              var files=val.split(/[\s]+/);
 
-            console.debug({VAL:val});
-            console.debug({files:files});
+              console.debug({VAL:val});
+              console.debug({files:files});
 
-            files.forEach(function(filename) {
-              var tokens=filename.match(/^([\w.]+)([\W]?)$/)
-              var F;
-              if(tokens[1] in dir.contents) {
-
-              } else {
-                var dirloc=dir.loc+"/"+tokens[1]
-                if(tokens[2]=="/") {
-
-
-                  F=new M.Self.Dir(tokens[1],dir.loc);
-                  F.loc=dirloc;
-                  F.env=dir.env;
+              files.forEach(function(filename) {
+                var tokens=filename.match(/^([\w.]+)([\W]?)$/)
+                var F;
+                if(tokens[1] in dir.contents) {
 
                 } else {
-                  //is a file
+                  var dirloc=dir.loc+"/"+tokens[1]
+                  if(tokens[2]=="/") {
+                    F=new M.Self.Dir(tokens[1],dir.loc);
+                    F.loc=dirloc;
+                    F.env=dir.env;
 
-                  F=new M.Self.File(tokens[1],dir.loc,dir.env,function() {
-                    if(tokens[2]!="*")
-                      this.refresh();
-                    this.open();
-                  });
+                  } else {
+                    //is a file
 
-
+                    F=new M.Self.File(tokens[1],dir.loc,dir.env,function() {
+                      if(tokens[2]!="*")
+                        this.refresh();
+                      this.open();
+                    });
+                  }
+                  dir.contents[tokens[1]]=F;
                 }
 
-                dir.contents[tokens[1]]=F;
-              }
+              });
+              success.call(dir)
 
             });
-            success.call(dir)
-          });
+          } else {
+            success.call(this);
+          }
         });
         C.Def(function mkdir(success) {
 
