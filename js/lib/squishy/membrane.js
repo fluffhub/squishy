@@ -94,7 +94,7 @@ Module(function M() {
           var dirs=path.split("/");
           var cursor=this.root;
           var i=0;
-          if(dirs[i]=="") i=1
+          if(dirs[i]=="") i=1;
           //for (i=0;i<dirs.length;i++) {
           (function dig() {
             var fn=dirs[i];
