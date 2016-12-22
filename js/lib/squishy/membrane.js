@@ -94,7 +94,7 @@ Module(function M() {
 
             var newpath=path.split("/")
             for(var i=0;i<newpath.length;i++) {
-              if(rootsplit[i]!=newpath[i]) dirs.push(newpath[i]);
+              dirs.push(newpath[i]);
             }
 
 
