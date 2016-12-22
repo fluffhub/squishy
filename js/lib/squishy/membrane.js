@@ -84,7 +84,7 @@ Module(function M() {
         });
         C.Def(function retrieve(path, result) {
           console.debug({retrievalpath:path});
-          var dirs=path.split("/");
+          var dirs=this.home.split("/");
           if(path[0]=="/") {
             //use absolute path to membrane host
 
