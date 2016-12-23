@@ -190,7 +190,8 @@ Module(function M() {
             this.name=name
           }
 
-          this.loc=loc.match(/[/]*(.*)/)[1];
+          this.loc="/"+loc.match(/[/]*(.*)/)[1];
+
           this.contents={};
           Object.defineProperty(this,"loaded",{value:false,writable:true,configurable:false,enumerable:false});
           Object.defineProperty(this,"env",{writable:true,enumerable:false,configurable:false });
