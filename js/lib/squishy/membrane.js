@@ -34,7 +34,7 @@ Module(function M() {
           function assign(pwd) {
             env.pwd=pwd;
             env.home=pwd;
-            env.root=new M.Self.Dir("","/");
+            env.root=new M.Self.Dir("","");
 
             env.root.env=env;
             var dirs=pwd.split("/");
@@ -215,8 +215,8 @@ Module(function M() {
                 } else {
                   var dirloc=dir.loc+"/"+tokens[1]
                   if(tokens[2]=="/") {
-                    F=new M.Self.Dir(tokens[1],dir.loc);
-                    F.loc=dirloc;
+                    F=new M.Self.Dir(tokens[1],dirloc);
+                    //F.loc=dirloc;
                     F.env=dir.env;
 
                   } else {
