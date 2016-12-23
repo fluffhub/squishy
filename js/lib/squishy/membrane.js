@@ -34,7 +34,7 @@ Module(function M() {
           function assign(pwd) {
             env.pwd=pwd;
             env.home=pwd;
-            env.root=new M.Self.Dir("/","/");
+            env.root=new M.Self.Dir("","/");
 
             env.root.env=env;
             var dirs=pwd.split("/");
