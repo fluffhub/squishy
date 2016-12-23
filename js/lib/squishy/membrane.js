@@ -4,7 +4,7 @@ Module(function M() {
     "squishy/system",
     "squishy/live",
     function(Req,system,live) {
-      function MembraneError() { console.debug({membraneError:arguments[1]}) };
+      function MembraneError() { console.debug({membraneError:arguments[0]}) };
       var default_url="/squishy/membrane"
       var default_root="squishy"
       var default_id="pool"
