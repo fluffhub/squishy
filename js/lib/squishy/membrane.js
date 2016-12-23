@@ -185,11 +185,12 @@ Module(function M() {
 
       var Dir=M.Class(function C() {
         C.Super(system.Dir);
-        C.Init(function Dir(name,location) {
+        C.Init(function Dir(name,loc) {
           if(typeof name=="string") {
             this.name=name
           }
-          this.loc=location;
+
+          this.loc=loc.match(/[/]+(.*)/)[1];
           this.contents={};
           Object.defineProperty(this,"loaded",{value:false,writable:true,configurable:false,enumerable:false});
           Object.defineProperty(this,"env",{writable:true,enumerable:false,configurable:false });
@@ -198,8 +199,10 @@ Module(function M() {
 
           var dir=this;
           if(scratch||!this.loaded) {
+
             this.env.exec("ls -AF "+this.loc+"/"+this.name,function(val) {
               //"cd "+this.loc+"; cd ~-
+
               var files=val.split(/[\s]+/);
 
               console.debug({VAL:val});
