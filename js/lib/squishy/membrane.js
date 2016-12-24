@@ -93,8 +93,8 @@ Module(function M() {
 
             var newpath=path.split("/")
             for(var i=0;i<newpath.length;i++) {
-              //if(newpath[i]!=rootsplit[i])
-              dirs.push(newpath[i]);
+              if(newpath[i]!=rootsplit[i])
+                dirs.push(newpath[i]);
             }
 
 
