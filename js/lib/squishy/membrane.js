@@ -92,6 +92,7 @@ Module(function M() {
             var rootsplit=this.webroot.split("/")
 
             var newpath=path.split("/")
+            dirs=dirs.concat(
             for(var i=0;i<newpath.length;i++) {
               if(newpath[i]!=rootsplit[i])
                 dirs.push(newpath[i]);
@@ -219,7 +220,7 @@ Module(function M() {
                 } else {
                   var dirloc=dir.loc+"/"+tokens[1]
                   if(tokens[2]=="/") {
-                    F=new M.Self.Dir(tokens[1],dir.loc);
+                    F=new M.Self.Dir(tokens[1],dirloc);
                     //F.loc=dirloc;
                     F.env=dir.env;
 
