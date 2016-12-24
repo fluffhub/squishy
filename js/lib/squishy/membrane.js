@@ -92,7 +92,7 @@ Module(function M() {
             var rootsplit=this.webroot.split("/")
 
             var newpath=path.split("/")
-            dirs=dirs.concat(
+            dirs=dirs.concat(rootsplit);
             for(var i=0;i<newpath.length;i++) {
               if(newpath[i]!=rootsplit[i])
                 dirs.push(newpath[i]);
