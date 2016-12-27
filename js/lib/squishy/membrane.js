@@ -43,20 +43,17 @@ Module(function M() {
             var i;
             if(dirs[0]=="") i=1;
             else i=0;
-            console.debug(pwd);
             for (;i<dirs.length;i++) {
               dirname=dirs[i];
               dir=new M.Self.Dir(dirname,dirs.slice(0,i).join('/'));
               dir.env=env;
 
-              console.debug({pwd:dir.loc})
               cursor[dirname]=dir;
               cursor=dir.contents;
 
 
             }
             dir.list(function (ls) {
-              console.debug({ls:this});
             },true);
           }
           this.status(function(status) {
@@ -84,7 +81,6 @@ Module(function M() {
         });
         C.Def(function retrieve(path, result) {
           var dirs=this.home.split("/");
-          console.debug({dirs:dirs})
           if(path[0]=="/") {
             //use absolute path to membrane host
 
@@ -211,9 +207,6 @@ Module(function M() {
               //"cd "+this.loc+"; cd ~-
 
               var files=val.split(/[\s]+/);
-
-              console.debug({VAL:val});
-              console.debug({files:files});
 
               files.forEach(function(filename) {
                 var tokens=filename.match(/^([\w.+\-_%'"\\!#~]+)([\W]?)$/)
