@@ -84,6 +84,7 @@ Module(function M() {
         });
         C.Def(function retrieve(path, result) {
           var dirs=this.home.split("/");
+          console.debug({dirs:dirs})
           if(path[0]=="/") {
             //use absolute path to membrane host
 
@@ -92,10 +93,14 @@ Module(function M() {
             var rootsplit=this.webroot.split("/")
 
             var newpath=path.split("/")
+
             dirs=dirs.concat(rootsplit);
             for(var i=0;i<newpath.length;i++) {
-              if(newpath[i]!=rootsplit[i])
+
+              if(newpath[i]!=rootsplit[i]) {
+
                 dirs.push(newpath[i]);
+              }
             }
 
 
@@ -103,7 +108,7 @@ Module(function M() {
 
           var cursor=this.root;
           var i=0;
-          if(dirs[i]=="") i=1;
+          if(dirs[i]=="") dirs=dirs.slice(1);
           //for (i=0;i<dirs.length;i++) {
           (function dig() {
             var fn=dirs[i];
