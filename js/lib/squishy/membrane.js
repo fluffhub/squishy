@@ -181,9 +181,11 @@ Module(function M() {
           if(scratch||!this.loaded) {
           this.env.exec("cat "+this.loc+"/"+this.name,function(val) {
             F.value=val;
+            F.loaded=true;
             success.call(F);
           });
           } else {
+            this.loaded=true;
             success.call(this);
           }
         });
@@ -245,6 +247,7 @@ Module(function M() {
                 }
 
               });
+              this.loaded=true;
               success.call(dir)
 
             });
