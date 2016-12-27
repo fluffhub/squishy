@@ -223,7 +223,7 @@ Module(function M() {
                 if(tokens[1] in dir.contents) {
 
                 } else {
-                  var dirloc=[dir.loc,+dir.webroot,tokens[1]].join("/");
+                  var dirloc=[dir.loc,+dir.env.webroot,tokens[1]].join("/");
                   if(tokens[2]=="/") {
                     F=new M.Self.Dir(tokens[1],dirloc);
                     //F.loc=dirloc;
