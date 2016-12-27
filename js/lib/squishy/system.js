@@ -34,7 +34,7 @@ Module(function M() {
       var cursor=this.root;
       var dirs=path.split("/")
 
-      for(var i=0;i<dirs.length-1;i++) {
+      for(var i=0;i<dirs.length;i++) {
         var dn=dirs[i];
         if(dn in cursor.contents) {
           cursor=cursor.contents[dn];
