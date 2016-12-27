@@ -113,14 +113,24 @@ Module(function M() {
               var dirname=fn;
               if(dirname in cursor.contents) {
                 cursor=cursor.contents[dirname];
-                if(i==dirs.length-1) result(cursor)
-                else dig();
+                if(i==dirs.length)  {
+                  if(cursor instanceof M.Self.Dir) {
+                    cursor.list(function() {
+                      result(this);
+                    });
+                  } else {
+                    result(cursor)
+                  }
+                }
+                else {
+
+                  dig();
+                }
               } else {
                 throw new MembraneError(cursor)
               }
             });
           })();
-
         });
         C.Def(function status(result) {
           this.request.Get(this.url+"/membrane.cgi",{op:"status",id:this.id},function(r) {
