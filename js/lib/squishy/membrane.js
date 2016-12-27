@@ -247,7 +247,7 @@ Module(function M() {
                 }
 
               });
-              this.loaded=true;
+              dir.loaded=true;
               success.call(dir)
 
             });
