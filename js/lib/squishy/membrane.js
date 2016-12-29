@@ -106,6 +106,7 @@ Module(function M() {
           var i=0;
           if(dirs[i]=="") dirs=dirs.slice(1);
           //for (i=0;i<dirs.length;i++) {
+          console.debug({dirs:dirs})
           (function dig() {
             var fn=dirs[i];
             i++;
