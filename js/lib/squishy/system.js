@@ -4,6 +4,9 @@ Module(function M() {
     a.href=loc
     return a;
   });
+  var FileSystemException=M.Def(function FileSystemException(path) {
+    console.debug({FileSystemException:path })
+  });
   M.Class(function C() {
     C.Init(function Device(path,name) {
       var device=this;
@@ -38,6 +41,8 @@ Module(function M() {
         var dn=dirs[i];
         if(dn in cursor.contents) {
           cursor=cursor.contents[dn];
+        } else {
+         throw new FileSystemException(path);
         }
       }
       result(cursor);
@@ -102,7 +107,7 @@ Module(function M() {
     });
 
   });
-  var DeviceManagerException=function(message) {console.debug("Device Manager Exception: "+message)};
+  function DeviceManagerException(message) {console.debug("Device Manager Exception: "+message)}
   M.Class(function C() {
 
     C.Init(function DeviceManager() {
@@ -117,19 +122,25 @@ Module(function M() {
       var pathname=a.pathname.split("/").slice(1).join("/");
 
 
-      var names= Object.keys(this.devices[device]);
+      var names=Object.keys(this.devices[device]);
 
       var fs=this;
       var name=pathname.split("/")[0]
      // names.forEach(function(name) {
+      console.debug({pathname:pathname });
       var i=Object.keys(this.devices[device]).length;
 
         Object.keys(this.devices[device]).forEach(function(id) {
           i--;
-          fs.devices[device][id].retrieve(pathname,function(value) {
+          try {
+            fs.devices[device][id].retrieve(pathname,function(value) {
             all[id]=value;
             if(i==0) result(all);
           });
+          } catch(e) {
+            fs.devices[device][id]=null;
+
+          }
         });
     //  });
 
