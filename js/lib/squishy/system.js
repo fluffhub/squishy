@@ -138,7 +138,7 @@ Module(function M() {
             if(i==0) result(all);
           });
           } catch(e) {
-            fs.devices[device][id]=null;
+           all[id]=null;
 
           }
         });
