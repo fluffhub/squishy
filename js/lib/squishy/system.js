@@ -116,7 +116,7 @@ Module(function M() {
     });
     C.Def(function retrieve(path, result) {
       var all={}
-      var a=document.createElement("a")
+      var a=document.createElement("a");
       a.href=path;
       var device=a.hostname;
       var pathname=a.pathname.split("/").slice(1).join("/");
