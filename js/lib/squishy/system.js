@@ -42,7 +42,7 @@ Module(function M() {
         if(dn in cursor.contents) {
           cursor=cursor.contents[dn];
         } else {
-         throw new FileSystemException(path);
+          throw new FileSystemException(path);
         }
       }
       result(cursor);
@@ -126,23 +126,24 @@ Module(function M() {
 
       var fs=this;
       var name=pathname.split("/")[0]
-     // names.forEach(function(name) {
+      // names.forEach(function(name) {
       console.debug({pathname:pathname });
       var i=Object.keys(this.devices[device]).length;
 
-        Object.keys(this.devices[device]).forEach(function(id) {
-          i--;
-          try {
-            fs.devices[device][id].retrieve(pathname,function(value) {
+      Object.keys(this.devices[device]).forEach(function(id) {
+        i--;
+        try {
+          fs.devices[device][id].retrieve(pathname,function(value) {
             all[id]=value;
             if(i==0) result(all);
           });
-          } catch(e) {
-           all[id]=null;
+        } catch(e) {
 
-          }
-        });
-    //  });
+          all[id]=null;
+          if(i==0) result(all);
+        }
+      });
+      //  });
 
     });
     C.Def(function init(path,device) {
