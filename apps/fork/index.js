@@ -15,6 +15,7 @@ Module(function M() {
     function(event,basic,interactive,Req,svg,form,membrane,LM,spoon,conf,live) {
       var osroot=""
       var Request=Req.Request;
+      var main=live.DeviceManager
       var theme={}
 
       var File=M.Class(function C() {
@@ -80,45 +81,49 @@ Module(function M() {
         C.Def(function load() {
           var dir=this;
           console.debug("refreshing "+this.loc);
+          live.DeviceManager.retrieve(this.loc,function(files) {
+            var devicenames=Object.keys(files);
+            devicenames.forEach(function(devicename) {
+              var dev=files[devicename];
+              var filenames=Object.keys(dev.contents);
 
-          this.instance.list(function(files) {
-
-            files.forEach(function(filename) {
-              if(filename.slice(-1)=="/") {
-                console.debug("creating dir: "+filename);
-                var dirloc=dir.loc+"/"+filename
-                var D=new M.Self.Dir(filename,dirloc,dir.env,function() {
-                  dir.click.call(dir,dirloc);
-                });
-                D.addClass("dirlink");
-                dir.contents[filename]=D;
-                dir.Contents.add(D);
-
-              } else {
-                //is a file
-
-                var F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
-                  // if(filename.slice(-1)!="*")
-                  //   this.refresh();
-                  // this.open();
-                  //call spoon newtask
-                  var fileeditor=spoon.main.newTask(filename,dir.loc+"/"+filename)
+              filenames.forEach(function(filename) {
+                if(filename.slice(-1)=="/") {
+                  console.debug("creating dir: "+filename);
+                  var dirloc=dir.loc+"/"+filename
+                  var D=new M.Self.Dir(filename,dirloc,dir.env,function() {
+                    dir.click.call(dir,dirloc);
                   });
+                  D.addClass("dirlink");
+                  dir.contents[filename]=D;
+                  dir.Contents.add(D);
 
-                dir.contents[filename]=F;
-                dir.Contents.add(F);
-              }
+                } else {
+                  //is a file
 
+                  var F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
+                    // if(filename.slice(-1)!="*")
+                    //   this.refresh();
+                    // this.open();
+                    //call spoon newtask
+                    var fileeditor=spoon.main.newTask(filename,dir.loc+"/"+filename)
+                    });
+
+                  dir.contents[filename]=F;
+                  dir.Contents.add(F);
+                }
+
+              });
             });
           });
         });
-
       });
 
 
       var FileBrowser=M.Class(function C() {
         C.Super(basic.Div);
         C.Init(function FileBrowser(path)  {
+
           basic.Div.call(this,"FileBrowser");
           this.files={};
           this.absolutefiles={};
@@ -129,7 +134,7 @@ Module(function M() {
           this.presentdir=new basic.Div("pwdbar");
           this.presentdir.dirs=[];
           this.dirs={};
-          this.pwd="";
+          this.pwd=path;
           this.root=null;
 
 
@@ -178,7 +183,7 @@ Module(function M() {
           }
           Object.keys(lib.dirs).forEach(function(d) {
             lib.dirs[d].hide()
-          })
+          });
           lib.dirs[val].show();
 
         });
@@ -219,7 +224,7 @@ Module(function M() {
 
           }
 
-        })
+        });
 
       });
       M.Def(function open(loc) {

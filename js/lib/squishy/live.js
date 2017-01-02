@@ -6,7 +6,7 @@ Module(function M () {
     var loc = system.uri("");
     M.Def("~",loc);
     var root=system.uri("/");
-    var devices=M.Def("devices",new system.DeviceManager());
+    var devices=M.Def("DeviceManager",new system.DeviceManager());
     M.Def("root",root);
     //  console.debug({href:loc.href})
 
@@ -22,7 +22,7 @@ Module(function M () {
 
 
 
-      var manager=M.Self.devices;
+      var manager=M.Self.DeviceManager;
       var live;
       //The common device ot all browser instances is the host of these files...
       if(url.hostname in manager.devices) {
