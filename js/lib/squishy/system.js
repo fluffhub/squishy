@@ -21,7 +21,7 @@ Module(function M() {
         } else {
           url=uri("/");
         }
-        live.devices.init(url.hostname,device);
+        live.DeviceManager.init(url.hostname,device);
       });
 
       // if(typeof name=="string")
