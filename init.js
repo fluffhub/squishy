@@ -259,7 +259,7 @@ except instead of defining HTML/XML markup you are writing function calls:
     as imports, but with a specific way to handle the results:
 */
 
-      Import("apps/spoon/","apps/fork/",function(spoon,FSe) {
+      Import("apps/spoon/","apps/fork/","squishy/system",function(spoon,FSe,system) {
 
         var SquishyLogo=null;
         Import("squishy/svg",function(svg) {
@@ -275,7 +275,7 @@ except instead of defining HTML/XML markup you are writing function calls:
           spoon.main.add(SquishyLogo);
         });
         //var browser=new FSe.FileBrowser("/var/www/html/squishy");
-        var browser=spoon.main.newTask("fork");
+        var browser=spoon.main.newTask("fork", system.uri("").href);
         //M.Def("browser",browser);
 
         console.debug({M:M});
