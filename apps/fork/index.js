@@ -93,7 +93,7 @@ Module(function M() {
                   var file = dev.contents[filename]
                   if(file instanceof system.Dir) {
                     console.debug("creating dir: "+filename);
-                    var dirloc=dir.loc+"/"+filename
+                    var dirloc=file.loc+"/"+file.name
                     var D=new M.Self.Dir(filename,dirloc,dir.env,function() {
                       dir.click.call(dir,dirloc);
                     });
