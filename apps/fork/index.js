@@ -12,7 +12,8 @@ Module(function M() {
     "spoon",
     "spoon/conf",
     "squishy/live",
-    function(event,basic,interactive,Req,svg,form,membrane,LM,spoon,conf,live) {
+    "squishy/system",
+    function(event,basic,interactive,Req,svg,form,membrane,LM,spoon,conf,live,system) {
       var osroot=""
       var Request=Req.Request;
       var main=live.DeviceManager
@@ -126,6 +127,8 @@ Module(function M() {
         C.Init(function FileBrowser(path)  {
 
           basic.Div.call(this,"FileBrowser");
+          var uri=system.uri(path)
+
           this.files={};
           this.absolutefiles={};
           this.rawfiles={};
@@ -135,7 +138,7 @@ Module(function M() {
           this.presentdir=new basic.Div("pwdbar");
           this.presentdir.dirs=[];
           this.dirs={};
-          this.pwd=path;
+          this.pwd=uri.pathname;
           this.root=null;
 
 
@@ -160,7 +163,7 @@ Module(function M() {
 
           //this.addBefore(this.importer);
           lib.add(lib.presentdir)
-          this.cd(path);
+          this.cd(uri.pathname);
         });
 
 
