@@ -90,7 +90,8 @@ Module(function M() {
                 var filenames=Object.keys(dev.contents);
 
                 filenames.forEach(function(filename) {
-                  if(filename.slice(-1)=="/") {
+                  var file = dev.contents[filename]
+                  if(file instanceof system.Dir) {
                     console.debug("creating dir: "+filename);
                     var dirloc=dir.loc+"/"+filename
                     var D=new M.Self.Dir(filename,dirloc,dir.env,function() {
@@ -163,7 +164,7 @@ Module(function M() {
 
           //this.addBefore(this.importer);
           lib.add(lib.presentdir)
-          this.cd(uri.pathname);
+          this.cd(uri.href);
         });
 
 
