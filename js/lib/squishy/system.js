@@ -119,7 +119,9 @@ Module(function M() {
       var a=document.createElement("a");
       a.href=path;
       var device=a.hostname;
-      var pathname=a.pathname.split("/").slice(1).join("/");
+      var pathname=a.pathname.split("/").slice(1);
+      if(pathname[pathname.length-1]=="") pathname=pathname.slice(0,-1);
+      pathname=pathname.join("/");
 
 
       var names=Object.keys(this.devices[device]);
