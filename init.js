@@ -279,6 +279,7 @@ except instead of defining HTML/XML markup you are writing function calls:
         //M.Def("browser",browser);
 
         console.debug({M:M});
+        console.debug({browser:browser});
         //browser.Import("..");
         //browser.Import("app");
         //browser.load(M.Self.filename,M.Self);
