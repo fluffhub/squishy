@@ -156,9 +156,10 @@ Module(function M() {
           this.importer.searchbox.attrs({placeholder:"Import URL"});
 
           this.importer.add(new form.Submit("Search"));
+
           //this.addBefore(this.importer);
           lib.add(lib.presentdir)
-
+          this.cd(path);
         });
 
 
