@@ -183,7 +183,7 @@ Module(function M() {
 
             console.debug("initializing dir "+dirs.join("/"));
 
-            lib.dirs[path]=new Dir(dirs[dirs.length],dirs.join("/"),lib.session,function(dirloc) {
+            lib.dirs[path]=new Dir(dirs[dirs.length],val.href,lib.session,function(dirloc) {
               lib.setDir(dirloc);
               lib.cd(dirloc)
             });
