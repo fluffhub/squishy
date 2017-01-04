@@ -96,6 +96,7 @@ Module(function M() {
                   if(file instanceof system.Dir) {
                     console.debug("creating dir: "+filename);
                     var dirloc=file.loc+"/"+file.name
+
                     var D=new M.Self.Dir(filename,dirloc,dir.env,function() {
                       dir.click.call(dir,dirloc);
                     });
@@ -187,7 +188,7 @@ Module(function M() {
 
             lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
 
-              lib.cd(dirloc)
+              lib.cd(val.href)
             });
             lib.add(lib.dirs[path])
             //if(
