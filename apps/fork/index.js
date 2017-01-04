@@ -165,7 +165,7 @@ Module(function M() {
           //this.addBefore(this.importer);
           lib.add(lib.presentdir)
           lib.cd(uri);
-          lib.setDir(uri);
+
         });
 
 
@@ -196,17 +196,18 @@ Module(function M() {
             lib.dirs[d].hide()
           });
           lib.dirs[path].show();
-
+          lib.setDir(val);
         });
         C.Def(function ls(loc) {
           var lib=this;
           var dirs=this.dirs;
 
         });
-        C.Def(function setDir(loc) {
-          if(loc instanceof Element)  {
+        C.Def(function setDir(a) {
+          var loc;
+          if(a instanceof Element)  {
             loc = loc.hostname+loc.pathname;
-          }
+          } else loc=a;
           var dirs=loc.trim();
           if(dirs[0]=="/") dirs=dirs.slice(1);
           dirs=dirs.split("/")
