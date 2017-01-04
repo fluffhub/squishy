@@ -206,7 +206,7 @@ Module(function M() {
         C.Def(function setDir(a) {
           var loc;
           if(a instanceof Element)  {
-            loc = loc.hostname+loc.pathname;
+            loc = a.hostname+a.pathname;
           } else loc=a;
           var dirs=loc.trim();
           if(dirs[0]=="/") dirs=dirs.slice(1);
