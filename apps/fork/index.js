@@ -164,7 +164,7 @@ Module(function M() {
 
           //this.addBefore(this.importer);
           lib.add(lib.presentdir)
-          this.cd(uri.href);
+          this.cd(uri.hostname+"/"+uri.pathname);
         });
 
 
@@ -204,11 +204,11 @@ Module(function M() {
 
           var pdir="";
           this.presentdir.dirs.forEach(function(pwddir) {
-            pwddir.remove()
-            delete pwddir
+            pwddir.remove();
+            delete pwddir;
 
           });
-          delete this.presentdir.dirs
+          delete this.presentdir.dirs;
 
           this.presentdir.dirs=[];
           for(var i=0;i<dirs.length;i++) {
