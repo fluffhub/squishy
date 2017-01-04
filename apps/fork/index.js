@@ -204,6 +204,9 @@ Module(function M() {
 
         });
         C.Def(function setDir(loc) {
+          if(loc instanceof Element)  {
+            loc = loc.hostname+loc.pathname;
+          }
           var dirs=loc.trim();
           if(dirs[0]=="/") dirs=dirs.slice(1);
           dirs=dirs.split("/")
