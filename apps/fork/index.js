@@ -200,7 +200,9 @@ Module(function M() {
 
         });
         C.Def(function setDir(loc) {
-          var dirs=loc.trim().slice(1).split("/")
+          var dirs=loc.trim();
+          if(dirs[0]=="/") dirs=dirs.slice(1);
+          dirs=dirs.split("/")
           var lib=this
 
           var pdir="";
