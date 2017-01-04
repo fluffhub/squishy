@@ -187,15 +187,15 @@ Module(function M() {
               lib.setDir(dirloc);
               lib.cd(dirloc)
             });
-            lib.add(lib.dirs[val])
+            lib.add(lib.dirs[path])
             //if(
-            lib.dirs[val].load();
-            lib.dirs[val].hide()
+            lib.dirs[path].load();
+            lib.dirs[path].hide()
           }
           Object.keys(lib.dirs).forEach(function(d) {
             lib.dirs[d].hide()
           });
-          lib.dirs[val].show();
+          lib.dirs[path].show();
 
         });
         C.Def(function ls(loc) {
