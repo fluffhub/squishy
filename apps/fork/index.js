@@ -64,7 +64,9 @@ Module(function M() {
           this.name=name;
           //this.add(new basic.Span(name))
           this.env=env;
-          this.loc=loc.trim();
+          if(loc instanceof Element) {
+            this.loc=loc.href;
+          } else if (typeof this.loc == "string") this.loc=loc.trim();
           this.contents={};
           this.Contents=new basic.Div("fs_container");
           this.Contents.attrs({"data-key":name})
@@ -183,8 +185,8 @@ Module(function M() {
 
             console.debug("initializing dir "+dirs.join("/"));
 
-            lib.dirs[path]=new Dir(dirs[dirs.length],val.href,lib.session,function(dirloc) {
-              lib.setDir(dirloc);
+            lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
+
               lib.cd(dirloc)
             });
             lib.add(lib.dirs[path])
@@ -210,6 +212,8 @@ Module(function M() {
           } else loc=a;
           var dirs=loc.trim();
           if(dirs[0]=="/") dirs=dirs.slice(1);
+          if(dirs[dirs.length-1]=="/") dirs=dirs.slice(0,-1);
+
           dirs=dirs.split("/")
           var lib=this
 
@@ -227,7 +231,7 @@ Module(function M() {
             (function(tpdir) {
 
               var dirbutt=new interactive.MomentaryButton(dirs[i]+"/","pwddir dirlink",function() {
-                lib.cd(tpdir)
+                lib.cd(system.uri("http://"+tpdir))
 
               });
 
