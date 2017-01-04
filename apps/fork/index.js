@@ -155,16 +155,17 @@ Module(function M() {
           });
 
 
-          this.importer.searchbox=new form.TextInput("Search");
-          this.importer.add(this.importer.searchbox);
+          lib.importer.searchbox=new form.TextInput("Search");
+          lib.importer.add(this.importer.searchbox);
 
-          this.importer.searchbox.attrs({placeholder:"Import URL"});
+          lib.importer.searchbox.attrs({placeholder:"Import URL"});
 
-          this.importer.add(new form.Submit("Search"));
+          lib.importer.add(new form.Submit("Search"));
 
           //this.addBefore(this.importer);
           lib.add(lib.presentdir)
-          this.cd(uri.hostname+"/"+uri.pathname);
+          lib.cd(uri.hostname+"/"+uri.pathname);
+          lib.setDir(uri.hostname+"/"+uri.pathname);
         });
 
 
