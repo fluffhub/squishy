@@ -164,8 +164,8 @@ Module(function M() {
 
           //this.addBefore(this.importer);
           lib.add(lib.presentdir)
-          lib.cd(uri.hostname+"/"+uri.pathname);
-          lib.setDir(uri.hostname+"/"+uri.pathname);
+          lib.cd(uri.hostname+uri.pathname);
+          lib.setDir(uri.hostname+uri.pathname);
         });
 
 
