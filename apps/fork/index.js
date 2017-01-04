@@ -66,7 +66,9 @@ Module(function M() {
           this.env=env;
           if(loc instanceof Element) {
             this.loc=loc.href;
-          } else if (typeof this.loc == "string") this.loc=loc.trim();
+          } else   {
+            this.loc=loc.trim();
+          }
           this.contents={};
           this.Contents=new basic.Div("fs_container");
           this.Contents.attrs({"data-key":name})
