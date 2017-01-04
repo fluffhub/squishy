@@ -164,22 +164,26 @@ Module(function M() {
 
           //this.addBefore(this.importer);
           lib.add(lib.presentdir)
-          lib.cd(uri.hostname+uri.pathname);
-          lib.setDir(uri.hostname+uri.pathname);
+          lib.cd(uri);
+          lib.setDir(uri);
         });
 
 
 
         C.Def(function cd(val) {
           var lib=this
-          var dirs=val.split("/")
-          if(lib.dirs[val] instanceof Object) {
+          var path;
+          if(val instanceof Object) {
+            path=val.hostname+val.pathname
+          } else path=val;
+          var dirs=path.split("/")
+          if(lib.dirs[path] instanceof Object) {
 
           } else {
 
             console.debug("initializing dir "+dirs.join("/"));
 
-            lib.dirs[val]=new Dir(dirs[dirs.length],dirs.join("/"),lib.session,function(dirloc) {
+            lib.dirs[path]=new Dir(dirs[dirs.length],dirs.join("/"),lib.session,function(dirloc) {
               lib.setDir(dirloc);
               lib.cd(dirloc)
             });
