@@ -32,6 +32,10 @@ Module(function M() {
           this.container.hide();
 
         });
+        C.Def(function addReference(name,obj) {
+          this.references[name]=obj;
+          this.addClass(name);
+        });
         C.Def(function open() {
           this.container.show();
         });
