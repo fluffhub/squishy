@@ -188,9 +188,9 @@ Module(function M() {
 
             console.debug("initializing dir "+dirs.join("/"));
 
-            lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
+            lib.dirs[path]=new Dir(dirs[dirs.length-1],val,lib.session,function(dirloc) {
 
-              lib.cd(system.uri(val.href+"/"+dirs[dirs.length]))
+              lib.cd(system.uri(val.href+"/"+dirs[dirs.length-1]))
             });
             lib.add(lib.dirs[path])
             //if(
