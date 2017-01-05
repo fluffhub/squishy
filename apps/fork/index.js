@@ -30,7 +30,7 @@ Module(function M() {
           this.container.attrs({"data-key":name})
           this.add(this.container);
           this.container.hide();
-
+          this.references={};
         });
         C.Def(function addReference(name,obj) {
           this.references[name]=obj;
