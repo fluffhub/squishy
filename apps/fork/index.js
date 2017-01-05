@@ -65,9 +65,9 @@ Module(function M() {
           //this.add(new basic.Span(name))
           this.env=env;
           if(loc instanceof Element) {
-            this.loc=loc.href;
+            this.loc=loc;
           } else   {
-            this.loc=loc.trim();
+            this.loc=system.uri(loc);
           }
           this.contents={};
           this.Contents=new basic.Div("fs_container");
@@ -86,7 +86,7 @@ Module(function M() {
         C.Def(function load() {
           var dir=this;
           console.debug("refreshing "+this.loc);
-          live.DeviceManager.retrieve(this.loc,function(files) {
+          live.DeviceManager.retrieve(this.loc.href,function(files) {
             var devicenames=Object.keys(files);
             devicenames.forEach(function(devicename) {
               var dev=files[devicename];
@@ -97,7 +97,7 @@ Module(function M() {
                   var file = dev.contents[filename]
                   if(file instanceof system.Dir) {
                     console.debug("creating dir: "+filename);
-                    var dirloc=file.loc+"/"+file.name
+                    var dirloc=system.uri(file.loc.href+"/"+file.name)
 
                     var D=new M.Self.Dir(filename,dirloc,dir.env,function() {
                       dir.click.call(dir,dirloc);
@@ -114,7 +114,7 @@ Module(function M() {
                       //   this.refresh();
                       // this.open();
                       //call spoon newtask
-                      var fileeditor=spoon.main.newTask(filename,dir.loc+"/"+filename)
+                      var fileeditor=spoon.main.newTask(filename,dir.loc.href+"/"+filename)
                       });
 
                     dir.contents[filename]=F;
@@ -188,9 +188,9 @@ Module(function M() {
 
             console.debug("initializing dir "+dirs.join("/"));
 
-            lib.dirs[path]=new Dir(dirs[dirs.length-1],val,lib.session,function(dirloc) {
+            lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
 
-              lib.cd(system.uri(val.href+"/"+dirs[dirs.length-1]))
+              lib.cd(dirloc)
             });
             lib.add(lib.dirs[path])
             //if(
