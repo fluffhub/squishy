@@ -190,7 +190,7 @@ Module(function M() {
 
             lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
 
-              lib.cd(val.href)
+              lib.cd(system.uri(val.href+"/"+dirs[dirs.length]))
             });
             lib.add(lib.dirs[path])
             //if(
