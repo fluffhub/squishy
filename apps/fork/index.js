@@ -73,8 +73,13 @@ Module(function M() {
           this.Contents=new basic.Div("fs_container");
           this.Contents.attrs({"data-key":name})
           this.add(this.Contents);
+          this.references={};
           //this.Contents.hide();
           //this.refresh();
+        });
+        C.Def(function addReference(name,obj) {
+          this.references[name]=obj;
+          this.addClass(name);
         });
         C.Def(function open() {
           this.container.show();
@@ -90,33 +95,37 @@ Module(function M() {
             var devicenames=Object.keys(files);
             devicenames.forEach(function(devicename) {
               var dev=files[devicename];
+
               if(dev!=null) {
                 var filenames=Object.keys(dev.contents);
 
                 filenames.forEach(function(filename) {
                   var file = dev.contents[filename]
-                  if(file instanceof system.Dir) {
-                    console.debug("creating dir: "+filename);
-                    var dirloc=system.uri(dir.loc.href+"/"+file.name)
 
-                    var D=new M.Self.Dir(filename,dirloc,dir.env,function() {
-                      dir.click.call(dir,dirloc);
-                    });
-                    D.addClass("dirlink");
-                    dir.contents[filename]=D;
-                    dir.Contents.add(D);
-
+                  if(filename in dir.contents) {
+                    dir.contents[filename].addReference(devicename,file);
                   } else {
-                    //is a file
+                    var F;
+                    if(file instanceof system.Dir) {
+                      console.debug("creating dir: "+filename);
+                      var dirloc=system.uri(dir.loc.href+"/"+file.name)
 
-                    var F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
-                      // if(filename.slice(-1)!="*")
-                      //   this.refresh();
-                      // this.open();
-                      //call spoon newtask
-                      var fileeditor=spoon.main.newTask(filename,dir.loc.href+"/"+filename)
+                      F=new M.Self.Dir(filename,dirloc,dir.env,function() {
+                        dir.click.call(dir,dirloc);
+                      });
+                      F.addClass("dirlink");
+                      F.addReference(devicename,file);
+
+                    } else {
+                      //is a file
+
+                      F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
+
+                        var fileeditor=spoon.main.newTask(filename,dir.loc.href+"/"+filename);
                       });
 
+
+                    }
                     dir.contents[filename]=F;
                     dir.Contents.add(F);
                   }
