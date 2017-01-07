@@ -61,7 +61,6 @@ Module(function M() {
             }
           }
           interactive.MomentaryButton.call(this,name,"",function(e) {
-            console.debug(dir.loc);
             dir.click.call(dir,dir.loc);
             e.stopPropagation();
           });
@@ -95,8 +94,7 @@ Module(function M() {
         C.Def(function onrefresh(val) {})
         C.Def(function load() {
           var dir=this;
-          console.debug("refreshing "+this.loc);
-          live.DeviceManager.retrieve(this.loc.href,function(files) {
+           live.DeviceManager.retrieve(this.loc.href,function(files) {
             var devicenames=Object.keys(files);
             devicenames.forEach(function(devicename) {
               var dev=files[devicename];
@@ -112,7 +110,7 @@ Module(function M() {
                   } else {
                     var F;
                     if(file instanceof system.Dir) {
-                      console.debug("creating dir: "+filename);
+
                       var str;
                       if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+file.name
                       else str=dir.loc.href+"/"+file.name;
@@ -203,10 +201,7 @@ Module(function M() {
 
           } else {
 
-            console.debug("initializing dir "+dirs.join("/"));
-
             lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
-              console.debug({dirloc:dirloc});
               lib.cd(dirloc)
             });
             lib.add(lib.dirs[path])
