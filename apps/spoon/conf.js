@@ -8,14 +8,7 @@ Module(function M() {
       var session_name="poop"
 
 
-      var a=document.createElement('a')
-      a.href=""
-      var loc=a.href
 
-
-
-
-      M.Def("session",new membrane.Device(loc));
 
 
 

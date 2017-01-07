@@ -120,13 +120,14 @@ to the import statement by its first parameter, which is a list of resources sep
     "squishy/form",
     "squishy/layout",
     "squishy/request",
-
+    "squishy/membrane",
+    "squishy/system",
     /*
 
 Once all of the files listed have loaded and run, they will be passed in order to the code inside the Import's callback function.
 
 */
-    function(squishy,DOM, basic, interactive,form,layout,Request) {
+    function(squishy,DOM, basic, interactive,form,layout,Request,membrane,system) {
       /*
 
 You can also use Import to just load files by calling it without referencing the containing Module.
@@ -165,6 +166,9 @@ and functions:
 
 */
 
+
+
+      M.Def("session",new membrane.Device(system.uri("").href));
       M.Def("update",function() {
 
         /* @TODO: give some content here */
@@ -275,7 +279,7 @@ except instead of defining HTML/XML markup you are writing function calls:
           spoon.main.add(SquishyLogo);
         });
         //var browser=new FSe.FileBrowser("/var/www/html/squishy");
-        var browser=spoon.main.newTask("fork", system.uri("").href);
+        var browser=spoon.main.newTask("fork", system.uri(""));
         //M.Def("browser",browser);
 
         console.debug({M:M});
