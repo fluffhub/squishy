@@ -71,6 +71,7 @@ Module(function M() {
           if(loc instanceof Element) {
             this.loc=loc;
           } else   {
+
             this.loc=system.uri(loc);
           }
           this.contents={};
@@ -112,7 +113,10 @@ Module(function M() {
                     var F;
                     if(file instanceof system.Dir) {
                       console.debug("creating dir: "+filename);
-                      var dirloc=system.uri(dir.loc.href+file.name)
+                      var str;
+                      if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+file.name
+                      else str=dir.loc.href+"/"+file.name;
+                      var dirloc=system.uri(str);
 
                       F=new M.Self.Dir(filename,dirloc,dir.env,function() {
                         dir.click.call(dir,dirloc);
