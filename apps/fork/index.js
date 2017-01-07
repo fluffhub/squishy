@@ -203,7 +203,7 @@ Module(function M() {
 
             lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
 
-              lib.cd(val)
+              lib.cd(dirloc)
             });
             lib.add(lib.dirs[path])
             //if(
