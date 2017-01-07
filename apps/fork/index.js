@@ -112,7 +112,7 @@ Module(function M() {
                     var F;
                     if(file instanceof system.Dir) {
                       console.debug("creating dir: "+filename);
-                      var dirloc=system.uri(dir.loc.href+"/"+file.name)
+                      var dirloc=system.uri(dir.loc.href+file.name)
 
                       F=new M.Self.Dir(filename,dirloc,dir.env,function() {
                         dir.click.call(dir,dirloc);
