@@ -202,7 +202,7 @@ Module(function M() {
             console.debug("initializing dir "+dirs.join("/"));
 
             lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
-
+              console.debug({dirloc:dirloc});
               lib.cd(dirloc)
             });
             lib.add(lib.dirs[path])
