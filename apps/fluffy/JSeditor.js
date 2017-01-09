@@ -11,11 +11,6 @@ Module(function M() {
     function(event,basic,interactive,esprima,ESCG,esv,Req,Spoon) {
       var Request=Req.Request;
 
-
-
-
-
-
       function PseudoRandomColor(n,a) {
         var P=Math.PI;
         var r=Math.round(128+255*Math.sin((n*P/7)+(2*P/3))/2);

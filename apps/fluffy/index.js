@@ -6,7 +6,9 @@ Module(function M() {
     //  tile view
     //  editor
     //  viewer
+
     function (JSe,spoon) {
+       console.debug({"js editor loaded":JSe} );
       M.Def(function match(name, file) {
 
 
