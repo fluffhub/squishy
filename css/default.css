@@ -667,10 +667,11 @@ background-color:rgba(255,255,255,0.9);
   position:relative;
   z-index:2;
 }
-.FileBrowser .button {   background:none;font-weight:600;letter-spacing:0.01em;font-size:1.1em;color:#aaa;}
+.FileBrowser .button {  background:none;font-weight:600;letter-spacing:0.01em;font-size:1.1em;color:#aaa;}
 
 
 .FileBrowser .button.live { color:#0F0 }
 .FileBrowser .button.membrane { color:#0AF }
 .FileBrowser .button.live.membrane { color:#FA0 }
-.FileBrowser>.button { padding:0 0.25em; }
+.fs_container>.button {  line-height:1.25em;
+  padding:0 0.25em; }
