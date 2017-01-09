@@ -653,10 +653,10 @@ background-color:rgba(255,255,255,0.9);
 .pwddir { border-bottom:2px solid #aaa; }
 .FileBrowser { position:fixed;right:0;height:100%;width:300px;top:0;overflow-y:scroll; }
 .FileBrowser .dir { margin-left:1em; }
-.FileBrowser .dir>a {margin-left:1em;display:block; }
+.FileBrowser .dir>a { margin-left:1em;display:block; }
 
 .importer { position:absolute;bottom:0;right:0; }
-.pwddir { display:inline; padding:0; margin:0;}
+.pwddir { display:inline; padding:0; margin:0; }
 
 .dirlink.button:hover { text-decoration:underline;color:black; }
 .pwddir .dirlink.button:hover { text-decoration:none; color:black; }
@@ -667,10 +667,10 @@ background-color:rgba(255,255,255,0.9);
   position:relative;
   z-index:2;
 }
-.FileBrowser .button { background:none;font-weight:600;letter-spacing:0.01em;font-size:1.1em;padding:0;color:#aaa;}
+.FileBrowser .button { background:none;font-weight:600;letter-spacing:0.01em;font-size:1.1em;color:#aaa;}
 
 
-.FileBrowser .button.live { color:#0A0 }
+.FileBrowser .button.live { color:#0F0 }
 .FileBrowser .button.membrane { color:#0AF }
 .FileBrowser .button.live.membrane { color:#FA0 }
 .FileBrowser>.button { padding:0 0.25em; }
