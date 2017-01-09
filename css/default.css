@@ -660,6 +660,7 @@ background-color:rgba(255,255,255,0.9);
 
 .dirlink.button:hover { text-decoration:underline;color:black; }
 .pwddir .dirlink.button:hover { text-decoration:none; color:black; }
+.pwddir .dirlink { padding:0; }
 .button {
   background-color:#ccc;
   line-height:1.75em;
