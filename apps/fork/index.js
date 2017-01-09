@@ -120,7 +120,7 @@ Module(function M() {
                         dir.click.call(dir,dirloc);
                       });
                       F.addClass("dirlink");
-                      F.addReference(devicename,file);
+
 
                     } else {
                       //is a file
@@ -132,6 +132,7 @@ Module(function M() {
 
 
                     }
+                    F.addReference(devicename,file);
                     dir.contents[filename]=F;
                     dir.Contents.add(F);
                   }
