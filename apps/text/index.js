@@ -14,14 +14,14 @@ Module(function M() {
 
       M.Class(function C() {
         C.Init(function Tile() {
-          C.Super(spoon.Tile)
+          C.Super(spoon.Tile);
         });
       });
 
       M.Class(function C() {
         C.Init(function ListItem() {
 
-        })
+        });
       });
 
       M.Class(function C() {

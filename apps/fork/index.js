@@ -49,6 +49,11 @@ Module(function M() {
 
         });
       });
+      M.Def(function match(name, file) {
+        if(file instanceof system.Dir) {
+          return true;
+        }
+      });
       var Dir=M.Class(function C() {
         C.Super(interactive.MomentaryButton);
         C.Init(function Dir(name,loc, env,click) {
@@ -94,7 +99,7 @@ Module(function M() {
         C.Def(function onrefresh(val) {})
         C.Def(function load() {
           var dir=this;
-           live.DeviceManager.retrieve(this.loc.href,function(files) {
+          live.DeviceManager.retrieve(this.loc.href,function(files) {
             var devicenames=Object.keys(files);
             devicenames.forEach(function(devicename) {
               var dev=files[devicename];
@@ -110,7 +115,6 @@ Module(function M() {
                   } else {
                     var F;
                     if(file instanceof system.Dir) {
-
                       var str;
                       if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+file.name
                       else str=dir.loc.href+"/"+file.name;
@@ -126,7 +130,7 @@ Module(function M() {
                       //is a file
 
                       F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
-
+                        console.debug({openfile: file })
                         var fileeditor=spoon.main.newTask(filename,dir.loc.href+"/"+filename);
                       });
 
