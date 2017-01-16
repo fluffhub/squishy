@@ -130,8 +130,9 @@ Module(function M() {
                       //is a file
 
                       F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
-                        console.debug({openfile: file })
-                        var fileeditor=spoon.main.newTask(filename,dir.loc.href+"/"+filename);
+                        //console.debug({openfile: file })
+                          var fileeditor=spoon.main.newTask(filename,dir.loc.href+"/"+filename);
+                        console.debug(fileeditor);
                       });
 
 
