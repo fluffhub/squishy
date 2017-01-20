@@ -45,6 +45,7 @@ Module(function M() {
           throw new FileSystemException(path);
         }
       }
+      if (cursor instanceof Array) cursor=cursor[0];
       result(cursor);
     });
     C.Def(function init(path,obj) {
