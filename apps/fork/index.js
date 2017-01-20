@@ -129,7 +129,7 @@ Module(function M() {
                     } else {
                       //is a file
 
-                      F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
+                      F=new M.Self.File(filename,dir.loc+filename,dir.env,function() {
                         //console.debug({openfile: file })
                         console.debug(this.loc);
                         var fileeditor=spoon.main.openFile(dir.loc.href+"/"+filename);
