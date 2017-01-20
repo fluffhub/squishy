@@ -115,8 +115,8 @@ Module(function M() {
                   } else {
                     var F;
                     var str;
-                    if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+file.name
-                    else str=dir.loc.href+"/"+file.name;
+                    if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
+                    else str=dir.loc.href+"/"+filename;
                     var dirloc=system.uri(str);
                     if(file instanceof system.Dir) {
 
