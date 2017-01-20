@@ -10,10 +10,12 @@ Module(function M() {
 
            "spoon/UserBrowser","spoon/Library",
            "spoon/Models","spoon/conf", "squishy/cookies","squishy/membrane",
+           "squishy/live",
            function(DOM,basic,layout,
                      interactive,kb,events,svg,
                      ub,op,
-                     Ms,conf,cookies,membrane) {
+                     Ms,conf,cookies,membrane,
+                    live) {
 
              var hasEvents=events.hasEvents;
              var UserBrowser=ub.UserBrowser;
@@ -57,8 +59,23 @@ Module(function M() {
                });
              });
 
+             var TaskPane=M.Class(function C() {
+               C.Super(interactive.Pane);
+               C.Init(function TaskPane() {
 
+               });
+             });
+             var TaskManager=M.Class(function C() {
+               C.Init(function TaskManager() {
 
+               });
+             });
+
+             var Task=M.Class(function C() {
+               C.Init(function Task() {
+
+               });
+             });
              var HomeWindow=M.Class(function C() {
                C.Super(Frame);
                C.Mixin(hasEvents);
@@ -134,7 +151,9 @@ Module(function M() {
                  C.Def(function openFile(path) {
                    //check what app is needed for this file
                    //
-
+                   live.DeviceManager.retrieve(path,function(items) {
+                     console.debug(items);
+                   });
                  })
                  C.Def(function create(type) {
                    var EW=this;
