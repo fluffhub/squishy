@@ -60,7 +60,7 @@ Module(function M() {
              });
 
              var TaskPane=M.Class(function C() {
-               C.Super(interactive.Pane);
+               C.Super(Pane);
                C.Init(function TaskPane() {
 
                });
