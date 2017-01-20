@@ -114,11 +114,12 @@ Module(function M() {
                     dir.contents[filename].addReference(devicename,file);
                   } else {
                     var F;
+                    var str;
+                    if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+file.name
+                    else str=dir.loc.href+"/"+file.name;
+                    var dirloc=system.uri(str);
                     if(file instanceof system.Dir) {
-                      var str;
-                      if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+file.name
-                      else str=dir.loc.href+"/"+file.name;
-                      var dirloc=system.uri(str);
+
 
                       F=new M.Self.Dir(filename,dirloc,dir.env,function() {
                         dir.click.call(dir,dirloc);
@@ -129,7 +130,7 @@ Module(function M() {
                     } else {
                       //is a file
 
-                      F=new M.Self.File(filename,dir.loc+filename,dir.env,function() {
+                      F=new M.Self.File(filename,dirloc,dir.env,function() {
                         //console.debug({openfile: file })
                         console.debug(this.loc);
                         var fileeditor=spoon.main.openFile(this.loc);
