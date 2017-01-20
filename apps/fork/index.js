@@ -118,7 +118,7 @@ Module(function M() {
                     if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
                     else str=dir.loc.href+"/"+filename;
                     var dirloc=system.uri(str);
-                    console.debug({dirloc:dirloc,dir:dir})
+
                     if(file instanceof system.Dir) {
 
 
