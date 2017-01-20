@@ -119,21 +119,22 @@ Module(function M() {
 
                  },true);
                  this.enableEvents("cursorpos","context","closeContext");
-                 C.Def(function newTask(appName) {
+                 C.Def(function run(path) {
                    var args=Array.prototype.slice.call(arguments,1)
                    var task=null;
 
-                   if(appName in conf.apps) {
-                     task=conf.apps[appName].open.apply(this,args)
+                   if(path in conf.apps) {
+                     task=conf.apps[path].open.apply(this,args)
 
-                     this.tasks.addTab(appName+":"+args.join(" "),appName+":"+args.join(" "),task);
+                     this.tasks.addTab(path+":"+args.join(" "),path+":"+args.join(" "),task);
                      return task;
                    }
 
                  });
-                 C.Def(function openFile(file) {
+                 C.Def(function openFile(path) {
                    //check what app is needed for this file
                    //
+
                  })
                  C.Def(function create(type) {
                    var EW=this;

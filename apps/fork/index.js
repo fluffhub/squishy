@@ -131,7 +131,8 @@ Module(function M() {
 
                       F=new M.Self.File(filename,dir.loc+"/"+filename,dir.env,function() {
                         //console.debug({openfile: file })
-                          var fileeditor=spoon.main.newTask(filename,dir.loc.href+"/"+filename);
+                        console.debug(this.loc);
+                        var fileeditor=spoon.main.openFile(dir.loc.href+"/"+filename);
                         console.debug(fileeditor);
                       });
 
