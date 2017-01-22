@@ -239,7 +239,7 @@ Module(function M() {
                   } else {
                     //is a file
 
-                    F=new M.Self.File(tokens[1],[dirloc,filename].join("/"),dir.env,function() {
+                    F=new M.Self.File(tokens[1],[dirloc,tokens[1]].join("/"),dir.env,function() {
                       if(tokens[2]!="*")
                         this.refresh();
                       this.open();
