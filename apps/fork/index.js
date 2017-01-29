@@ -222,7 +222,7 @@ Module(function M() {
                   lib.dirs[path]=new M.Self.Module(dirs[dirs.length],val,instance,function(dirloc) {
                     lib.cd(dirloc);
                   });
-                } else if(instance instanceof system.Dir) {
+                } else  {
                 lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
                   lib.cd(dirloc)
                 });
