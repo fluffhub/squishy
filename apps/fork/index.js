@@ -206,12 +206,12 @@ Module(function M() {
         C.Def(function cd(val) {
           var lib=this
           var path;
-          if(val instanceof Object) {
-            path=val.hostname+val.pathname
-          } else path=val;
+          if(typeof val == "string") {
+            path=val
+          }
           var dirs=path.split("/")
 
-          live.DeviceManager.retrieve(path,function(mod) {
+          live.DeviceManager.retrieve(val,function(mod) {
             if(lib.dirs[path] instanceof Object) {
 
             } else {
