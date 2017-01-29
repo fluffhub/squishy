@@ -99,16 +99,16 @@ Module(function M() {
         C.Def(function onrefresh(val) {})
         C.Def(function load() {
           var dir=this;
-          live.DeviceManager.retrieve(this.loc.href,function(files) {
-            var devicenames=Object.keys(files);
+          live.DeviceManager.retrieve(this.loc.href,function(mod) {
+            var devicenames=Object.keys(mod);
             devicenames.forEach(function(devicename) {
-              var dev=files[devicename];
+              var dev=mod[devicename];
 
               if(dev!=null) {
                 var filenames=Object.keys(dev.contents);
 
                 filenames.forEach(function(filename) {
-                  var file = dev.contents[filename]
+                  var file = dev.contents[filename];
 
                   if(filename in dir.contents) {
                     dir.contents[filename].addReference(devicename,file);
@@ -120,13 +120,14 @@ Module(function M() {
                     var dirloc=system.uri(str);
 
                     if(file instanceof system.Dir) {
-
-
                       F=new M.Self.Dir(filename,dirloc,dir.env,function() {
                         dir.click.call(dir,dirloc);
                       });
                       F.addClass("dirlink");
 
+
+                    } else if(file instanceof Module) {
+                      F=new M.Self.Module(filename,file);
 
                     } else {
                       //is a file
@@ -277,5 +278,79 @@ Module(function M() {
       });
 
 
+
+      var Module=M.Class(function C() {
+        C.Super(interactive.MomentaryButton);
+        C.Init(function Module(name,loc, obj,click) {
+          var dir=this;
+          if (click instanceof Function) {
+            dir.click=click
+
+          } else {
+            dir.click=function() {
+            }
+          }
+          interactive.MomentaryButton.call(this,name,"",function(e) {
+            dir.click.call(dir,dir.loc);
+            e.stopPropagation();
+          });
+          this.name=name;
+          //this.add(new basic.Span(name))
+          this.obj=obj;
+          if(loc instanceof Element) {
+            this.loc=loc;
+          } else   {
+
+            this.loc=system.uri(loc);
+          }
+          this.contents={};
+          this.Contents=new basic.Div("fs_container");
+          this.Contents.attrs({"data-key":name})
+          this.add(this.Contents);
+          this.references={};
+          //this.Contents.hide();
+          //this.refresh();
+        });
+        C.Def(function addReference(name,obj) {
+          this.references[name]=obj;
+          this.addClass(name);
+        });
+        C.Def(function open() {
+          this.container.show();
+        });
+        C.Def(function close() {
+          this.container.hide();
+        });
+        C.Def(function onrefresh(val) {})
+        C.Def(function load() {
+          var dir=this;
+          var dev=this.obj;
+
+          if(dev!=null) {
+            var filenames=Object.keys(dev);
+
+            filenames.forEach(function(filename) {
+              var file = dev.contents[filename];
+
+              if(filename in dir.contents) {
+                dir.contents[filename].addReference(devicename,file);
+              } else {
+                var F;
+                var str;
+                if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
+                else str=dir.loc.href+"/"+filename;
+                var dirloc=system.uri(str);
+
+
+                F.addReference(devicename,file);
+                dir.contents[filename]=F;
+                dir.Contents.add(F);
+              }
+            });
+          }
+        });
+      });
     });
 });
+
+
