@@ -208,6 +208,8 @@ Module(function M() {
           var path;
           if(typeof val == "string") {
             path=val
+          } else {
+            path=val.href
           }
           var dirs=path.split("/")
 
