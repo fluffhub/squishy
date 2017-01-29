@@ -210,11 +210,12 @@ Module(function M() {
             path=val.hostname+val.pathname
           } else path=val;
           var dirs=path.split("/")
-          if(lib.dirs[path] instanceof Object) {
 
-          } else {
+          live.DeviceManager.retrieve(path,function(mod) {
+            if(lib.dirs[path] instanceof Object) {
 
-            live.DeviceManager.retrieve(path,function(mod) {
+            } else {
+
               Object.keys(mod).forEach(function(devname) {
 
                 var instance=mod[devname];
@@ -223,23 +224,24 @@ Module(function M() {
                     lib.cd(dirloc);
                   });
                 } else  {
-                lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
-                  lib.cd(dirloc)
-                });
+                  lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
+                    lib.cd(dirloc)
+                  });
                 }
                 lib.add(lib.dirs[path]);
                 //if(
                 lib.dirs[path].load();
                 lib.dirs[path].hide()
               });
+
+            }
+            Object.keys(lib.dirs).forEach(function(d) {
+              if(d!=path)
+                lib.dirs[d].hide();
             });
-          }
-          Object.keys(lib.dirs).forEach(function(d) {
-            if(d!=path)
-              lib.dirs[d].hide();
+            lib.dirs[path].show();
+            lib.setDir(val);
           });
-          lib.dirs[path].show();
-          lib.setDir(val);
         });
         C.Def(function ls(loc) {
           var lib=this;
@@ -348,13 +350,13 @@ Module(function M() {
               var file = dev.contents[filename];
 
 
-                var F;
-                var str;
-                if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
-                else str=dir.loc.href+"/"+filename;
-                var dirloc=system.uri(str);
-                dir.contents[filename]=F;
-                dir.Contents.add(F);
+              var F;
+              var str;
+              if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
+              else str=dir.loc.href+"/"+filename;
+              var dirloc=system.uri(str);
+              dir.contents[filename]=F;
+              dir.Contents.add(F);
 
             });
           }
