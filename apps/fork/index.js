@@ -219,7 +219,7 @@ Module(function M() {
 
                 var instance=mod[devname];
                 if(instance instanceof Module) {
-                  lib.dirs[path=new M.Self.Module(dirs[dirs.length],val,instance,function(dirloc) {
+                  lib.dirs[path]=new M.Self.Module(dirs[dirs.length],val,instance,function(dirloc) {
                     lib.cd(dirloc);
                   });
                 } else if(instance instanceof system.Dir) {
