@@ -335,9 +335,7 @@ Module(function M() {
             filenames.forEach(function(filename) {
               var file = dev.contents[filename];
 
-              if(filename in dir.contents) {
-                dir.contents[filename].addReference(devicename,file);
-              } else {
+
                 var F;
                 var str;
                 if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
@@ -348,7 +346,7 @@ Module(function M() {
                 F.addReference(devicename,file);
                 dir.contents[filename]=F;
                 dir.Contents.add(F);
-              }
+
             });
           }
         });
