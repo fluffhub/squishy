@@ -214,7 +214,7 @@ Module(function M() {
 
           } else {
 
-            live.DeviceManager.retrieve(this.loc.href,function(mod) {
+            live.DeviceManager.retrieve(path,function(mod) {
               Object.keys(mod).forEach(function(devname) {
 
                 var instance=mod[devname];
