@@ -13,6 +13,7 @@ Module(function M () {
 
   });
 
+
   M.Def(function init(path,obj) {
     /* this is the dedicated init function for live objects.
     it will always pick the "live" filesystem of a device at a given hostname to add it to. */
@@ -49,6 +50,7 @@ Module(function M () {
 
   Import("squishy/DOM", function(DOM){
     M.Def("main",new DOM.Frame());
+    M.Self.init("",M.Self.main);
   });
 });
 
