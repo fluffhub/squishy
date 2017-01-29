@@ -3,7 +3,6 @@ Module(function M() {
     "squishy/events",
     "squishy/basic",
     "squishy/interactive",
-
     "squishy/request",
     "squishy/svg",
     "squishy/form",
@@ -217,7 +216,7 @@ Module(function M() {
             lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
               lib.cd(dirloc)
             });
-            lib.add(lib.dirs[path])
+            lib.add(lib.dirs[path]);
             //if(
             lib.dirs[path].load();
             lib.dirs[path].hide()
@@ -257,10 +256,8 @@ Module(function M() {
           for(var i=0;i<dirs.length;i++) {
             pdir=pdir+"/"+dirs[i];
             (function(tpdir) {
-
               var dirbutt=new interactive.MomentaryButton(dirs[i]+"/","pwddir dirlink",function() {
                 lib.cd(system.uri("http://"+tpdir))
-
               });
 
               lib.presentdir.dirs[i]=dirbutt;
@@ -328,7 +325,7 @@ Module(function M() {
         C.Def(function load() {
           var dir=this;
           var dev=this.obj;
-
+          console.debug({dev:dev});
           if(dev!=null) {
             var filenames=Object.keys(dev);
 
@@ -341,9 +338,6 @@ Module(function M() {
                 if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
                 else str=dir.loc.href+"/"+filename;
                 var dirloc=system.uri(str);
-
-
-                F.addReference(devicename,file);
                 dir.contents[filename]=F;
                 dir.Contents.add(F);
 
