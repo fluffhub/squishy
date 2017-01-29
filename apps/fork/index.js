@@ -214,16 +214,29 @@ Module(function M() {
 
           } else {
 
-            lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
-              lib.cd(dirloc)
+            live.DeviceManager.retrieve(this.loc.href,function(mod) {
+              Object.keys(mod).forEach(function(devname) {
+
+                var instance=mod[devname];
+                if(instance instanceof Module) {
+                  lib.dirs[path=new M.Self.Module(dirs[dirs.length],val,instance,function(dirloc) {
+                    lib.cd(dirloc);
+                  });
+                } else if(instance instanceof system.Dir) {
+                lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
+                  lib.cd(dirloc)
+                });
+                }
+                lib.add(lib.dirs[path]);
+                //if(
+                lib.dirs[path].load();
+                lib.dirs[path].hide()
+              });
             });
-            lib.add(lib.dirs[path]);
-            //if(
-            lib.dirs[path].load();
-            lib.dirs[path].hide()
           }
           Object.keys(lib.dirs).forEach(function(d) {
-            lib.dirs[d].hide()
+            if(d!=path)
+              lib.dirs[d].hide();
           });
           lib.dirs[path].show();
           lib.setDir(val);
