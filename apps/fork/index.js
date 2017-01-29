@@ -143,6 +143,7 @@ Module(function M() {
 
 
                     }
+                    console.debug(file);
                     F.addReference(devicename,file);
                     dir.contents[filename]=F;
                     dir.Contents.add(F);
