@@ -126,6 +126,7 @@ Module(function M() {
 
 
                     } else if(file instanceof Module) {
+                      console.debug({Module:file});
                       F=new M.Self.Module(filename,dirloc,file,function() {
                         dir.click.call(dir,dirloc);
                       });
@@ -308,6 +309,7 @@ Module(function M() {
           this.Contents.attrs({"data-key":name})
           this.add(this.Contents);
           this.references={};
+          this.load()
           //this.Contents.hide();
           //this.refresh();
         });
