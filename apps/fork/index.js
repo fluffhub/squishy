@@ -127,8 +127,10 @@ Module(function M() {
 
 
                     } else if(file instanceof Module) {
-                      F=new M.Self.Module(filename,file);
-
+                      F=new M.Self.Module(filename,dirloc,file,function() {
+                        dir.click.call(dir,dirloc);
+                      });
+                      F.addClass("dirlink");
                     } else {
                       //is a file
 
