@@ -50,7 +50,7 @@ Module(function M () {
 
   Import("squishy/DOM", function(DOM){
     M.Def("main",new DOM.Frame());
-    M.Self.init("",M.Self.main);
+    M.Self.init("index.html",M.Self.main);
   });
 });
 
