@@ -133,9 +133,9 @@ Module(function M() {
                       F.addClass("dirlink");
                     } else {
                       //is a file
-
+                      console.debug({openfile: file })
                       F=new M.Self.File(filename,dirloc,dir.env,function() {
-                        //console.debug({openfile: file })
+
                         console.debug(this.loc);
                         var fileeditor=spoon.main.openFile(this.loc);
                         console.debug(fileeditor);
