@@ -30,7 +30,7 @@ Module(function M () {
         if(manager.devices[url.hostname].live !==undefined ) {
           live=manager.devices[url.hostname].live
         } else {
-          live= new remote.Device(url.hostname,"live");
+          live=new remote.Device(url.hostname,"live");
 
         }
 
