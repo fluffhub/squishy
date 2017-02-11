@@ -20,7 +20,7 @@ M.Import('squishy/DOM',function(DOM) {
       try{
         if(bbox instanceof Object) { }
         else bbox=this.bounds();
-        this.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+(bbox.x+bbox.width)+" "+(bbox.y+bbox.height)});
+        this.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.width+" "+bbox.height});
 
       } catch(e) {
 
