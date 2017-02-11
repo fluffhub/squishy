@@ -15,7 +15,7 @@ Module(function M() {
     function(event,basic,interactive,Req,svg,form,membrane,LM,spoon,conf,live,system) {
       var osroot=""
       var Request=Req.Request;
-      var main=live.DeviceManager
+      var main=live.DeviceManager;
       var theme={}
 
       var File=M.Class(function C() {

@@ -269,12 +269,12 @@ except instead of defining HTML/XML markup you are writing function calls:
         Import("squishy/svg",function(svg) {
           SquishyLogo=new svg.SVG(100,100);
           SquishyLogo.addClass("sitemenu");
-          var svglogo=new svg.SVG({src:"img/squishy.svg",onload:function(svg) {
-            var logo=svg.query("#SquishyLogo")[0];
+          var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
+            var logo=svg.query("#CLICKER")[0];
             console.debug({squishylogo:logo,svg:svg});
             logo.remove();
             SquishyLogo.add(logo);
-            SquishyLogo.NSattrs({viewbox:"0 0 100 100"});
+            //SquishyLogo.NSattrs({viewbox:"0 0 100 100"});
           }})
           spoon.main.add(SquishyLogo);
         });
