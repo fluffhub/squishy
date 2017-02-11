@@ -435,7 +435,7 @@ Module(function M() {
                SpoonLogo.add(logo);
                //var bbox=logo.element.getBBox();
                //SquishyLogo.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
-               SpoonLogo.fit(bbox);
+               SpoonLogo.fit(logo.bounds());
 
              }})
               main.add(SpoonLogo);
