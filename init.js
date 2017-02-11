@@ -274,7 +274,8 @@ except instead of defining HTML/XML markup you are writing function calls:
             console.debug({squishylogo:logo,svg:svg});
             logo.remove();
             SquishyLogo.add(logo);
-            //SquishyLogo.NSattrs({viewbox:"0 0 100 100"});
+            var bbox=SquishyLogo.getBBox();
+            SquishyLogo.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
           }})
           spoon.main.add(SquishyLogo);
         });
