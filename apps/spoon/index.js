@@ -435,9 +435,9 @@ Module(function M() {
                //var bbox=logo.element.getBBox();
                //SquishyLogo.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
                logo.fit();
-               main.add(SpoonLogo);
-             }})
 
+             }})
+              main.add(SpoonLogo);
              M.Def(function match(item) {
                Object.keys(Types).forEach(function(name) {
 
