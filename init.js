@@ -266,20 +266,7 @@ except instead of defining HTML/XML markup you are writing function calls:
       Import("apps/spoon/","apps/fork/","squishy/system",function(spoon,FSe,system) {
 
         var SquishyLogo=null;
-        Import("squishy/svg",function(svg) {
-          SquishyLogo=new svg.SVG(100,100);
-          SquishyLogo.addClass("sitemenu");
-          var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
-            var logo=svg.query("#CLICKER")[0];
-            console.debug({squishylogo:logo,svg:svg});
-            logo.remove();
-            SquishyLogo.add(logo);
-            //var bbox=logo.element.getBBox();
-            //SquishyLogo.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
-            logo.fit();
-          }})
-          spoon.main.add(SquishyLogo);
-        });
+
         //var browser=new FSe.FileBrowser("/var/www/html/squishy");
         var browser=spoon.main.run("fork", system.uri(""));
         //M.Def("browser",browser);
