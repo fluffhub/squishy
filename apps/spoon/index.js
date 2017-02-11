@@ -429,12 +429,13 @@ Module(function M() {
              SpoonLogo.addClass("sitemenu");
              var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
                var logo=svg.query("#spoon")[0];
+               var bbox=logo.getBBox();
                console.debug({squishylogo:logo,svg:svg});
                logo.remove();
                SpoonLogo.add(logo);
                //var bbox=logo.element.getBBox();
                //SquishyLogo.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
-               logo.fit();
+               SpoonLogo.fit(bbox);
 
              }})
               main.add(SpoonLogo);

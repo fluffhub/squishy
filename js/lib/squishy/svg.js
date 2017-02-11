@@ -16,12 +16,12 @@ M.Import('squishy/DOM',function(DOM) {
 
       this.position={x:0,y:0};
     });
-    C.Def(function fit() {
+    C.Def(function fit(bbox) {
       try{
-        var bbox=this.bounds();
-        if(bbox instanceof Object) {
-          this.parent.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
-        }
+        if(bbox instanceof Object) { }
+        else bbox=this.bounds();
+        this.parent.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
+
       } catch(e) {
 
       }
