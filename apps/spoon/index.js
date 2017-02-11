@@ -51,7 +51,7 @@ Module(function M() {
                logo.fit();
              }})
              M.Self.main.add(SpoonLogo);
-           });
+
              var keyboard=kb.keyboard;
 
              var Tile=M.Class(function C() {
@@ -499,3 +499,4 @@ Module(function M() {
 
            });
 });
+
