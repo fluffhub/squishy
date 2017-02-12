@@ -64,9 +64,9 @@ M.Import('squishy/DOM',function(DOM) {
 
       with(SVG.kwargs({width:null,height:null,src:null,content:null,onload:null})) {
         var tag=this;
-        this.NSattrs({version:"1.1",x:"0px",y:"0px"});
-        this.element.setAttribute("xmlns",SVGNS);
-        this.element.setAttribute("xmlns:xlink","http://www.w3.org/1999/xlink");
+        this.NSattrs({version:"1.1"})//,x:"0px",y:"0px"});
+        //this.element.setAttribute("xmlns",SVGNS);
+        //this.element.setAttribute("xmlns:xlink","http://www.w3.org/1999/xlink");
 
         if(width&&height) this.NSattrs({width:width+'px',height:height+'px'});
         this.paths=[];
