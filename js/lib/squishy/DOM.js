@@ -363,7 +363,7 @@ Module(function M() {
       this.element.object=this;
       Object.defineProperty(this,'elements',{value:[],writable:true});
 
-      this.element.setAttribute("xmlns",NS);
+
       this.elements=[];
       this.element.Tag=this;
       if(attrs)
