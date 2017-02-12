@@ -16,6 +16,7 @@ M.Import('squishy/DOM',function(DOM) {
 
       this.position={x:0,y:0};
     });
+
     C.Def(function fit(bbox) {
       try{
         if(bbox instanceof Object) { }

@@ -370,7 +370,12 @@ Module(function M() {
         for (var attr in attrs)
           this.element.setAttributeNS(this.xmlns,attr,attrs[attr]);
     });
+    C.Def(function content(value) {
+      var doc = new DOMParser().parseFromString(value,'application/xml');
+      this.clear();
+      this.element.appendChild(this.element.ownerDocument.importNode(doc.documentElement, true));
 
+    });
     C.Mixin({
       NSattr:function(name,value) {
         if(name) {
