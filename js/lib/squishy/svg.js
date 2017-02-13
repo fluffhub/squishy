@@ -60,12 +60,12 @@ M.Import('squishy/DOM',function(DOM) {
   var SVG=M.Class(function C(){
     C.Super(SVGTag);
     C.Init(function SVG() {
-
+  var tag=this;
 
 
       with(SVG.kwargs({width:null,height:null,src:null,content:null,onload:null})) {
-        var tag=this;
-        this.NSattrs({version:"1.1"})//,x:"0px",y:"0px"});
+
+//        this.NSattrs({version:"1.1"})//,x:"0px",y:"0px"});
         //this.element.setAttribute("xmlns",SVGNS);
         //this.element.setAttribute("xmlns:xlink","http://www.w3.org/1999/xlink");
 
