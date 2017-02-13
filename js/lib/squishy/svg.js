@@ -65,6 +65,7 @@ M.Import('squishy/DOM',function(DOM) {
     C.Super(SVGTag);
     C.Init(function SVG() {
       SVGTag.call(this,'svg');
+      this.element.setAttribute("xmlns",SVGNS);
       var tag=this;
 
 
@@ -100,7 +101,7 @@ M.Import('squishy/DOM',function(DOM) {
           //SVGTag.call(tag,newtag.query("svg")[0]);//document.importNode(doc.documentElement,false ));
           //SVGTag.call(this,'svg');
 
-          tag.NSattrs({version:"1.1",xmlns:SVGNS})
+          tag.NSattrs({version:"1.1"})
         }
 
 
