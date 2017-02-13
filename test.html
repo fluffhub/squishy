@@ -8,6 +8,11 @@
             Import("squishy/DOM","squishy/svg",function(DOM,svg) {
                 var a=new svg.SVG();
                 var main=new DOM.Frame();
+                var q = document.createElementNS("http://www.w3.org/2000/svg","svg");
+                document.body.appendChild(q);
+                window.dom=DOM;
+                window.svg=svg;
+
                 var b=new svg.SVG({src:"img/squishy2.svg",onload:function(svgf) {
 
                     var spoon=svgf.query("#spoon")[0];
@@ -17,7 +22,14 @@
 
                 }});
 
+                var b=new svg.SVG({src:"img/squishy2.svg",onload:function(svgf) {
 
+                    var spoon=svgf.query("#spoon")[0];
+                    a.add(spoon);
+                    main.add(a);
+                    a.fit(spoon.bounds());
+
+                }});
 
 
             })
