@@ -316,5 +316,15 @@
 			C-3784,1169.2-3783.7,1170.9-3783.3,1172.6z"/>
 	</g>
 </g>
-<polygon id="separator" style="fill:#666666;" points="-3592.1,-838.4 -3676.1,-561.3 -3635.5,-561.3 -3551.5,-838.4 "/>
+<linearGradient id="separator_1_" gradientUnits="userSpaceOnUse" x1="-3743.5459" y1="-731.594" x2="-3596.5532" y2="-695.5958">
+	<stop  offset="1.020408e-002" style="stop-color:#555555"/>
+	<stop  offset="0.1733" style="stop-color:#595959"/>
+	<stop  offset="0.3253" style="stop-color:#646464"/>
+	<stop  offset="0.4729" style="stop-color:#777777"/>
+	<stop  offset="0.6177" style="stop-color:#919191"/>
+	<stop  offset="0.7607" style="stop-color:#B4B4B4"/>
+	<stop  offset="0.9002" style="stop-color:#DDDDDD"/>
+	<stop  offset="0.9994" style="stop-color:#FFFFFF"/>
+</linearGradient>
+<polygon id="separator" style="fill:url(#separator_1_);" points="-3592.1,-838.4 -3676.1,-561.3 -3635.5,-561.3 -3551.5,-838.4 "/>
 </svg>

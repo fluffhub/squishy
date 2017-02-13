@@ -100,6 +100,7 @@ Module(function M() {
           var dir=this;
           live.DeviceManager.retrieve(this.loc.href,function(mod) {
             var devicenames=Object.keys(mod);
+            var F=null;
             devicenames.forEach(function(devicename) {
               var dev=mod[devicename];
 
@@ -131,16 +132,17 @@ Module(function M() {
                         dir.click.call(dir,dirloc);
                       });
                       F.addClass("dirlink");
-                    } else if (file instanceof system.File) {
+                    } else  {
                       //is a file
                       console.debug({openfile: file })
+                      if(F!=null) {
                       F=new M.Self.File(filename,dirloc,dir.env,function() {
 
                         console.debug(this.loc);
                         var fileeditor=spoon.main.openFile(this.loc);
                         console.debug(fileeditor);
                       });
-
+                      }
 
                     }
                     console.debug(file);

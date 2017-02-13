@@ -145,7 +145,7 @@ Module(function M() {
                    if(path in conf.apps) {
                      task=conf.apps[path].open.apply(this,args)
 
-                     this.tasks.addTab(path+":"+args.join(" "),path+":"+args.join(" "),task);
+                     this.tasks.addTab(path+":"+args.join(" "),"",task);
                      return task;
                    }
 
