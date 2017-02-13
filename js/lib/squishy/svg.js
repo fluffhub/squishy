@@ -90,8 +90,10 @@ M.Import('squishy/DOM',function(DOM) {
             });
           });
         } else {
-          var doc = new DOMParser().parseFromString("<svg xmlns=\""+SVGNS+"\" version=\"1.1\"></svg>","image/svg+xml");
-          SVGTag.call(tag,document.importNode(doc.documentElement, true));
+          var newtag=new DOM.Tag("div")
+          newtag.content("<svg xmlns=\""+SVGNS+"\" version=\"1.1\"></svg>");
+          //var doc = new DOMParser().parseFromString("<svg xmlns=\""+SVGNS+"\" version=\"1.1\"></svg>","image/svg+xml");
+          SVGTag.call(tag,newtag.query("svg")[0]);//document.importNode(doc.documentElement,false ));
           //SVGTag.call(this,'svg');
                     //  tag.NSattrs({version:"1.1"})
         }
