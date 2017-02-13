@@ -427,18 +427,19 @@ Module(function M() {
              var SpoonLogo=new svg.SVG(100,100);
              M.Def("homebutton",SpoonLogo);
              SpoonLogo.addClass("sitemenu");
+              main.add(SpoonLogo);
              var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
                var logo=svg.query("#spoon")[0];
                var bbox=logo.bounds();
                console.debug({squishylogo:logo,svg:svg});
-               logo.remove();
+               //logo.remove();
                SpoonLogo.add(logo);
                //var bbox=logo.element.getBBox();
                //SquishyLogo.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
                SpoonLogo.fit(logo.bounds());
 
              }})
-              main.add(SpoonLogo);
+
              M.Def(function match(item) {
                Object.keys(Types).forEach(function(name) {
 
