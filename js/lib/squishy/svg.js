@@ -61,7 +61,7 @@ M.Import('squishy/DOM',function(DOM) {
     C.Super(SVGTag);
     C.Init(function SVG() {
 
-        SVGTag.call(this,'svg');
+
 
       with(SVG.kwargs({width:null,height:null,src:null,content:null,onload:null})) {
         var tag=this;
@@ -79,15 +79,21 @@ M.Import('squishy/DOM',function(DOM) {
             var req=new Request("URI","TEXT").Get(src,{},function(svgtext) {
 
               var doc = new DOMParser().parseFromString(svgtext,"image/svg+xml");
+              SVGTag.call(tag,'svg',document.importNode(doc.documentElement, true);
+              //tag.element=//
 
-              tag.element=document.importNode(doc.documentElement, true);//
 
-
+                      tag.NSattrs({version:"1.1"})
               if(onload!==null) {
                 onload(tag);
               }
             });
           });
+        } else {
+          var doc = new DOMParser().parseFromString("<svg></svg>","image/svg+xml");
+          SVGTag.call(tag,'svg',document.importNode(doc.documentElement, true);
+          //SVGTag.call(this,'svg');
+                      tag.NSattrs({version:"1.1"})
         }
 
 

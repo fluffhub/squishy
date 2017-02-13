@@ -424,11 +424,12 @@ Module(function M() {
              }
 
 
-             var SpoonLogo=new svg.SVG(100,100);
+             var SpoonLogo=new svg.SVG();
              M.Def("homebutton",SpoonLogo);
              SpoonLogo.addClass("sitemenu");
               main.add(SpoonLogo);
              var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
+
                var logo=svg.query("#spoon")[0];
                var bbox=logo.bounds();
                console.debug({squishylogo:logo,svg:svg});
