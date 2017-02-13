@@ -25,7 +25,7 @@ M.Import('squishy/DOM',function(DOM) {
       try{
         if(bbox instanceof Object) { }
         else bbox=this.bounds();
-        this.attrs({viewbox:Math.round(bbox.x)+" "+Math.round(bbox.y)+" "+Math.round(bbox.width)+" "+Math.round(bbox.height)});
+        this.NSattrs({viewbox:Math.round(bbox.x)+" "+Math.round(bbox.y)+" "+Math.round(bbox.width)+" "+Math.round(bbox.height)});
 
       } catch(e) {
 
@@ -41,7 +41,7 @@ M.Import('squishy/DOM',function(DOM) {
         this.position={x:x,y:y};
       else
         extend(this.position,x);
-      this.attrs({transform:'translate('+this.position.x+','+this.position.y+')'});
+      this.NSattrs({transform:'translate('+this.position.x+','+this.position.y+')'});
     });
 
     C.Def(function ClassName() {
@@ -69,11 +69,11 @@ M.Import('squishy/DOM',function(DOM) {
 
       with(SVG.kwargs({width:null,height:null,src:null,content:null,onload:null})) {
 
-//        this.attrs({version:"1.1"})//,x:"0px",y:"0px"});
+//        this.NSattrs({version:"1.1"})//,x:"0px",y:"0px"});
         //this.element.setAttribute("xmlns",SVGNS);
         //this.element.setAttribute("xmlns:xlink","http://www.w3.org/1999/xlink");
 
-        if(width&&height) this.attrs({width:width+'px',height:height+'px'});
+        if(width&&height) this.NSattrs({width:width+'px',height:height+'px'});
         this.paths=[];
 
         if(src!==null) {
@@ -87,7 +87,7 @@ M.Import('squishy/DOM',function(DOM) {
               //tag.element=//
 
 
-                     // tag.attrs({version:"1.1"})
+                     // tag.NSattrs({version:"1.1"})
               if(onload!==null) {
                 onload(tag);
               }
@@ -95,13 +95,11 @@ M.Import('squishy/DOM',function(DOM) {
           });
         } else {
           var newtag=new DOM.Tag("div")
-
           newtag.content("<svg xmlns=\""+SVGNS+"\" version=\"1.1\"></svg>");
           //var doc = new DOMParser().parseFromString("<svg xmlns=\""+SVGNS+"\" version=\"1.1\"></svg>","image/svg+xml");
           SVGTag.call(tag,newtag.query("svg")[0]);//document.importNode(doc.documentElement,false ));
-
           //SVGTag.call(this,'svg');
-                    //  tag.attrs({version:"1.1"})
+                    //  tag.NSattrs({version:"1.1"})
         }
 
 
@@ -124,7 +122,7 @@ M.Import('squishy/DOM',function(DOM) {
       translate:function(x,y) {
         if(x&&y)
           this.position={x:x,y:y};
-        this.attrs({x:this.position.x,y:this.position.y});
+        this.NSattrs({x:this.position.x,y:this.position.y});
       }
     });
   });
@@ -253,17 +251,17 @@ M.Import('squishy/DOM',function(DOM) {
     C.Init(function Text(txt, attrs){
       SVGTag.call(this,'text');
       this.content(txt);
-      this.attrs(attrs);
+      this.NSattrs(attrs);
     });
   });
   var Path=M.Class(function C() {
     C.Super(SVGTag);
     C.Init(function Path(d,attrs,fill,stroke,id){
       SVGTag.call(this,'path');
-      if(attrs) this.attrs(attrs);
-      if(fill) this.attrs({fill:fill}); else this.attrs({fill:'none'});
-      if(stroke) this.attrs({stroke:stroke});
-      if(id) this.attrs({id:id});
+      if(attrs) this.NSattrs(attrs);
+      if(fill) this.NSattrs({fill:fill}); else this.NSattrs({fill:'none'});
+      if(stroke) this.NSattrs({stroke:stroke});
+      if(id) this.NSattrs({id:id});
       if(d) this.define(d);
      // this.fill=fill;
      // this.stroke=stroke;
@@ -272,11 +270,11 @@ M.Import('squishy/DOM',function(DOM) {
     C.Def(function define(d) {
       if(d instanceof PathDefinition){
         this.definition=d;
-        this.attrs({d:d.toString()});
+        this.NSattrs({d:d.toString()});
       }else{
         var pd=new PathDefinition (d);
         this.definition=pd;
-        this.attrs({d:d});
+        this.NSattrs({d:d});
       }
     });
   });
@@ -285,8 +283,8 @@ M.Import('squishy/DOM',function(DOM) {
     C.Init(function Group(cls, id) {
 
       SVGTag.call(this,'g');
-      if(cls) this.attrs({class:cls});
-      if(id) this.attrs({id:id});
+      if(cls) this.NSattrs({class:cls});
+      if(id) this.NSattrs({id:id});
     });
 
   });
