@@ -7,7 +7,7 @@ M.Import('squishy/DOM',function(DOM) {
   var SVGTag=M.Class(function C() {
     C.Super(XTag);
     C.Init(function SVGTag(type,attrs) {
-      if(arguments[0] instanceof Node) {
+      if(arguments[0] instanceof Node  || arguments[0] instanceof Element) {
         XTag.call(this,SVGNS,arguments[0].tagName);
         this.element=arguments[0];
       } else {
