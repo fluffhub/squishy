@@ -22,14 +22,12 @@
 
                 }});
 
-                var b=new svg.SVG({src:"img/squishy2.svg",onload:function(svgf) {
+                var c = new svg.SVG();
 
-                    var spoon=svgf.query("#spoon")[0];
-                    a.add(spoon);
-                    main.add(a);
-                    a.fit(spoon.bounds());
-
-                }});
+                var circ = new svg.Circle(10,0,0,{fill:"black"})
+                c.add(circ);
+                c.fit({x:-15,y:-15,width:30,height:30})
+                main.add(c);
 
 
             })
