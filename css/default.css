@@ -650,7 +650,7 @@ background-color:rgba(255,255,255,0.9);
 .code>div {
 
 }
-.pwddir { border-bottom:2px solid #aaa; }
+.pwddir {  line-height:32px; }
 .FileBrowser { position:fixed;right:0;height:100%;width:300px;top:0;overflow-y:scroll; }
 .FileBrowser .dir { margin-left:1em; }
 .FileBrowser .dir>a { margin-left:1em;display:block; }
