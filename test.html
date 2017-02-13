@@ -1,0 +1,24 @@
+<html>
+    <head>
+         <script src="js/lib/squishy/index.js"></script>
+    </head>
+    <body>
+        <script>
+
+            Import("squishy/DOM","squishy/svg",function(DOM,svg) {
+                var a=new svg.SVG();
+                var main=new DOM.Frame();
+                var b=new svg.SVG({src:"img/squishy2.svg",onload:function(svgf) {
+                    var spoon=svgf.query("#spoon")[0];
+                    a.add(spoon);
+                    a.fit(spoon.bounds());
+                    main.add(a);
+                }});
+
+
+
+
+            })
+        </script>
+    </body>
+</html>
