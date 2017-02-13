@@ -91,7 +91,7 @@ M.Import('squishy/DOM',function(DOM) {
           });
         } else {
           var doc = new DOMParser().parseFromString("<svg></svg>","image/svg+xml");
-          SVGTag.call(tag,'svg',document.importNode(doc.documentElement, true);
+          SVGTag.call(tag,'svg',document.importNode(doc.documentElement, true));
           //SVGTag.call(this,'svg');
                       tag.NSattrs({version:"1.1"})
         }
