@@ -269,6 +269,7 @@ except instead of defining HTML/XML markup you are writing function calls:
 
         //var browser=new FSe.FileBrowser("/var/www/html/squishy");
         var browser=spoon.main.run("fork", system.uri(""));
+
         //M.Def("browser",browser);
 
         console.debug({M:M});

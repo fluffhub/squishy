@@ -424,7 +424,7 @@ Module(function M() {
              }
 
 
-             var SpoonLogo=new svg.SVG();
+             var SpoonLogo=new svg.SVG(50,50);
              M.Def("homebutton",SpoonLogo);
              SpoonLogo.addClass("sitemenu");
               main.add(SpoonLogo);

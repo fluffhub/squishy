@@ -73,7 +73,6 @@ M.Import('squishy/DOM',function(DOM) {
         //this.element.setAttribute("xmlns",SVGNS);
         //this.element.setAttribute("xmlns:xlink","http://www.w3.org/1999/xlink");
 
-        if(width&&height) this.NSattrs({width:width+'px',height:height+'px'});
         this.paths=[];
 
         if(src!==null) {
