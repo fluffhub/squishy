@@ -131,7 +131,7 @@ Module(function M() {
                         dir.click.call(dir,dirloc);
                       });
                       F.addClass("dirlink");
-                    } else {
+                    } else if (file instanceof system.File) {
                       //is a file
                       console.debug({openfile: file })
                       F=new M.Self.File(filename,dirloc,dir.env,function() {
@@ -325,6 +325,7 @@ Module(function M() {
           this.contents={};
           this.Contents=new basic.Div("fs_container");
           this.Contents.attrs({"data-key":name})
+          this.addClass("module");
           this.add(this.Contents);
           this.references={};
           this.load()
