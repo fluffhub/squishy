@@ -113,7 +113,7 @@ Module(function M() {
                   if(filename in dir.contents) {
                     dir.contents[filename].addReference(devicename,file);
                   } else {
-                    var F;
+                   // var F;
                     var str;
                     if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
                     else str=dir.loc.href+"/"+filename;
