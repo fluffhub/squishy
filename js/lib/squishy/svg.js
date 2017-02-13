@@ -64,6 +64,7 @@ M.Import('squishy/DOM',function(DOM) {
   var SVG=M.Class(function C(){
     C.Super(SVGTag);
     C.Init(function SVG() {
+      SVGTag.call(this,'svg');
   var tag=this;
 
 
@@ -82,7 +83,7 @@ M.Import('squishy/DOM',function(DOM) {
             var req=new Request("URI","TEXT").Get(src,{},function(svgtext) {
 
               var doc = new DOMParser().parseFromString(svgtext,"image/svg+xml");
-              SVGTag.call(tag,document.importNode(doc.documentElement, true));
+              tag.element=document.importNode(doc.documentElement, true);
               //tag.element=//
 
 
@@ -93,12 +94,13 @@ M.Import('squishy/DOM',function(DOM) {
             });
           });
         } else {
-          var newtag=new DOM.Tag("div")
-          newtag.content("<svg xmlns=\""+SVGNS+"\" version=\"1.1\"></svg>");
+          //var newtag=new DOM.Tag("div")
+          //newtag.content("<svg xmlns=\""+SVGNS+"\" version=\"1.1\"></svg>");
           //var doc = new DOMParser().parseFromString("<svg xmlns=\""+SVGNS+"\" version=\"1.1\"></svg>","image/svg+xml");
-          SVGTag.call(tag,newtag.query("svg")[0]);//document.importNode(doc.documentElement,false ));
+          //SVGTag.call(tag,newtag.query("svg")[0]);//document.importNode(doc.documentElement,false ));
           //SVGTag.call(this,'svg');
-                    //  tag.NSattrs({version:"1.1"})
+
+          tag.NSattrs({version:"1.1",xmlns:SVGNS})
         }
 
 
@@ -112,7 +114,8 @@ M.Import('squishy/DOM',function(DOM) {
 
               }
 
-      }});
+      }
+    });
 
     C.Mixin({
       addPath:function(path,fill,stroke,id) {
