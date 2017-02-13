@@ -430,7 +430,7 @@ Module(function M() {
               main.add(SpoonLogo);
              var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
 
-               var logo=svg.query("#spoon")[0];
+               var logo=svg.query("#CLICKER")[0];
                var bbox=logo.bounds();
                console.debug({squishylogo:logo,svg:svg});
                //logo.remove();
