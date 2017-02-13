@@ -25,7 +25,7 @@ M.Import('squishy/DOM',function(DOM) {
       try{
         if(bbox instanceof Object) { }
         else bbox=this.bounds();
-        this.NSattrs({viewbox:Math.round(bbox.x)+" "+Math.round(bbox.y)+" "+Math.round(bbox.width)+" "+Math.round(bbox.height)});
+        this.NSattrs({viewBox:Math.round(bbox.x)+" "+Math.round(bbox.y)+" "+Math.round(bbox.width)+" "+Math.round(bbox.height)});
 
       } catch(e) {
 
