@@ -65,7 +65,7 @@ M.Import('squishy/DOM',function(DOM) {
     C.Super(SVGTag);
     C.Init(function SVG() {
       SVGTag.call(this,'svg');
-  var tag=this;
+      var tag=this;
 
 
       with(SVG.kwargs({width:null,height:null,src:null,content:null,onload:null})) {
@@ -76,7 +76,7 @@ M.Import('squishy/DOM',function(DOM) {
 
         this.paths=[];
 
-        if(src!==null) {
+        if(src!==null&&src!==undefined) {
 
           Import("squishy/request",function(Req) {
             var Request=Req.Request;
