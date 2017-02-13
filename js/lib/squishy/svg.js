@@ -7,7 +7,7 @@ M.Import('squishy/DOM',function(DOM) {
   var SVGTag=M.Class(function C() {
     C.Super(XTag);
     C.Init(function SVGTag(type,attrs) {
-      if(type instanceof Node  || type instanceof Element) {
+      if(type instanceof Element) {
         XTag.call(this,SVGNS,type.tagName);
         this.element=type;
       } else if (type instanceof SVGTag) {
@@ -294,6 +294,11 @@ M.Import('squishy/DOM',function(DOM) {
   var Circle=M.Class(function C() {
     C.Super(SVGTag);
     C.Init(function Circle(r,x,y,attrs) {
+      if(attrs instanceof Object) {
+
+      } else {
+        attrs={}
+      }
       this.position={x:x,y:y};
       this.radius=r;
       extend(attrs,{r:r,cx:x,cy:y});

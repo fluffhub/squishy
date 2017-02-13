@@ -380,13 +380,13 @@ Module(function M() {
     C.Mixin({
       NSattr:function(name,value) {
         if(name) {
-          if(value) this.element.setAttributeNS(this.xmlns,name,value);
-          else return this.element.getAttributeNS(this.xmlns,name);
+          if(value) this.element.setAttributeNS(null,name,value);
+          else return this.element.getAttributeNS(null,name);
         }
       },
       NSattrs:function(attrs) {
         for (var attr in attrs) {
-          this.element.setAttributeNS(this.xmlns,attr,attrs[attr]);
+          this.element.setAttributeNS(null,attr,attrs[attr]);
         }
       }
     });
