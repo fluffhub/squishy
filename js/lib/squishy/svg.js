@@ -8,8 +8,12 @@ M.Import('squishy/DOM',function(DOM) {
     C.Super(XTag);
     C.Init(function SVGTag(type,attrs) {
       if(type instanceof Node  || type instanceof Element) {
-        XTag.call(this,SVGNS,arguments[0].tagName);
-        this.element=arguments[0];
+        XTag.call(this,SVGNS,type.tagName);
+        this.element=type;
+      } else if (type instanceof SVGTag) {
+        var name=type.element.tagName;
+        XTag.call(this,SVGNS,name);
+        this.element=type.element;
       } else {
         XTag.call(this,SVGNS,type,attrs);
       }
