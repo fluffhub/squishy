@@ -78,7 +78,7 @@ M.Import('squishy/DOM',function(DOM) {
             var Request=Req.Request;
             var req=new Request("URI","TEXT").Get(src,{},function(svgtext) {
 
-              var doc = new DOMParser().parseFromString(svgtext,'application/xml');
+              var doc = new DOMParser().parseFromString(svgtext,"image/svg+xml");
 
               tag.element=tag.element.ownerDocument.importNode(doc.documentElement, true);
 
