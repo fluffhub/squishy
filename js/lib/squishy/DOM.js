@@ -368,7 +368,7 @@ Module(function M() {
       this.element.Tag=this;
       if(attrs)
         for (var attr in attrs)
-          this.element.setAttributeNS(this.xmlns,attr,attrs[attr]);
+          this.element.setAttributeNS(null,attr,attrs[attr]);
     });
 
     C.Def(function content(value) {
