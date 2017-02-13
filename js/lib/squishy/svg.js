@@ -79,7 +79,7 @@ M.Import('squishy/DOM',function(DOM) {
             var req=new Request("URI","TEXT").Get(src,{},function(svgtext) {
 
               var doc = new DOMParser().parseFromString(svgtext,"image/svg+xml");
-              SVGTag.call(tag,'svg',document.importNode(doc.documentElement, true),{version:"1.1"});
+              SVGTag.call(tag,'svg',document.importNode(doc.documentElement, true));
               //tag.element=//
 
 
@@ -90,8 +90,8 @@ M.Import('squishy/DOM',function(DOM) {
             });
           });
         } else {
-          var doc = new DOMParser().parseFromString("<svg></svg>","image/svg+xml");
-          SVGTag.call(tag,'svg',document.importNode(doc.documentElement, true),{version:"1.1"});
+          var doc = new DOMParser().parseFromString("<svg version=\"1.1\"></svg>","image/svg+xml");
+          SVGTag.call(tag,'svg',document.importNode(doc.documentElement, true));
           //SVGTag.call(this,'svg');
                     //  tag.NSattrs({version:"1.1"})
         }
