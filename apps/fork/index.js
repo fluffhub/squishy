@@ -118,31 +118,30 @@ Module(function M() {
                     if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
                     else str=dir.loc.href+"/"+filename;
                     var dirloc=system.uri(str);
-
+                    console.debug({checking:file});
                     if(file instanceof system.Dir) {
                       F=new M.Self.Dir(filename,dirloc,dir.env,function() {
                         dir.click.call(dir,dirloc);
                       });
                       F.addClass("dirlink");
-
-
                     } else if(file instanceof Module) {
                       console.debug({Module:file});
                       F=new M.Self.Module(filename,dirloc,file,function() {
+                         console.debug({Module:file});
                         dir.click.call(dir,dirloc);
                       });
                       F.addClass("dirlink");
                     } else  {
                       //is a file
                       console.debug({openfile: file })
-                      if(F!=null) {
+
                       F=new M.Self.File(filename,dirloc,dir.env,function() {
 
                         console.debug(this.loc);
                         var fileeditor=spoon.main.openFile(this.loc);
                         console.debug(fileeditor);
                       });
-                      }
+
 
                     }
                     console.debug(file);
