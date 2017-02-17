@@ -151,9 +151,9 @@ Module(function M() {
                     dir.Contents.add(F);
                   }
 
-                }
-                                  });
-              }
+                });
+              });
+
             });
           });
         });
