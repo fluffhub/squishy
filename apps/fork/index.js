@@ -18,11 +18,11 @@ Module(function M() {
       var main=live.DeviceManager;
       var theme={}
 
-      var File=M.Class(function C() {
+      var FileListItem=M.Class(function C() {
         C.Super(interactive.MomentaryButton);
-        C.Init(function File(name,loc,env,click) {
+        C.Init(function FileListItem(name,loc,obj,click) {
           interactive.MomentaryButton.call(this,name,"",click)
-          this.env=env;
+
           this.name=name;
           this.loc=loc;
           this.container=new basic.Div("fs_container");
@@ -30,6 +30,7 @@ Module(function M() {
           this.add(this.container);
           this.container.hide();
           this.references={};
+          //this.addReference(obj);
         });
         C.Def(function addReference(name,obj) {
           this.references[name]=obj;
@@ -113,13 +114,17 @@ Module(function M() {
                   if(filename in dir.contents) {
                     dir.contents[filename].addReference(devicename,file);
                   } else {
-                   // var F;
+                    // var F;
                     var str;
                     if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
                     else str=dir.loc.href+"/"+filename;
                     var dirloc=system.uri(str);
-                    console.debug({checking:file});
-                    if(file instanceof system.Dir) {
+
+                    F=new M.Self.FileListItem(filename,dirloc,function() {
+                      console.debug({Module:file});
+                      dir.click.call(dir,dirloc);
+                    });
+                    /*  if(file instanceof system.Dir) {
                       F=new M.Self.Dir(filename,dirloc,dir.env,function() {
                         dir.click.call(dir,dirloc);
                       });
@@ -135,21 +140,19 @@ Module(function M() {
                       //is a file
                       console.debug({openfile: file })
 
-                      F=new M.Self.File(filename,dirloc,dir.env,function() {
 
                         console.debug(this.loc);
                         var fileeditor=spoon.main.openFile(this.loc);
                         console.debug(fileeditor);
-                      });
-
-
-                    }
-                    console.debug(file);
+                      }
+                  });*/
                     F.addReference(devicename,file);
                     dir.contents[filename]=F;
                     dir.Contents.add(F);
                   }
-                });
+
+                }
+                                  });
               }
             });
           });
