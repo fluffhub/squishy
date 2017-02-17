@@ -20,7 +20,7 @@ Module(function M() {
 
       var FileListItem=M.Class(function C() {
         C.Super(interactive.MomentaryButton);
-        C.Init(function FileListItem(name,loc,obj,click) {
+        C.Init(function FileListItem(name,loc,click) {
           interactive.MomentaryButton.call(this,name,"",click)
 
           this.name=name;
