@@ -55,10 +55,8 @@ Module(function M() {
         });
       });
       M.Def(function match( file, name) {
-        if(file instanceof system.Dir || file instanceof M.Self.FileListItem) {
-          return true;
-        }
-        if(file instanceof Module) {
+        var ws=wrappers.getWrapper(file);
+        if(ws instanceof Array && ws.length>0) {
           return true;
         }
       });
