@@ -109,7 +109,7 @@ Module(function M() {
       });
       var FileList=M.Class(function C() {
         C.Super(basic.Div);
-        C.Init(function FileList(name,loc, env,click) {
+        C.Init(function FileList(name,loc,click) {
           basic.Div.call(this);
           var dir=this;
           if (click instanceof Function) {
@@ -119,14 +119,14 @@ Module(function M() {
             dir.click=function() {
             }
           }
-          interactive.MomentaryButton.call(this,name,"",function(e) {
+          /*interactive.MomentaryButton.call(this,name,"",function(e) {
             dir.click.call(dir,dir.loc);
             e.stopPropagation();
-          });
-          this.addClass("Dir");
+          });*/
+          //this.addClass("Dir");
           this.name=name;
           //this.add(new basic.Span(name))
-          this.env=env;
+          //this.env=env;
           if(loc instanceof Element) {
             this.loc=loc;
           } else   {
