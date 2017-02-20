@@ -34,7 +34,7 @@ Module(function M() {
 
         });
       })
-      var wrappers=window.Module (function M2() {
+      var wrappers=Module(function M2() {
         var fliws={};
         M2.Def("FileListItemWrappers",fliws);
         var afliw=M2.Def(function addFileListItemWrapper(name,match,wrap,open) {
