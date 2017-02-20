@@ -12,7 +12,8 @@ Module(function M() {
     "spoon/conf",
     "squishy/live",
     "squishy/system",
-    function(event,basic,interactive,Req,svg,form,membrane,LM,spoon,conf,live,system) {
+    "fork/wrappers",
+    function(event,basic,interactive,Req,svg,form,membrane,LM,spoon,conf,live,system,wrappers) {
       var osroot=""
       var Request=Req.Request;
       var main=live.DeviceManager;
@@ -34,35 +35,6 @@ Module(function M() {
 
         });
       })
-      var wrappers=Module(function M2() {
-        var fliws={};
-        M2.Def("FileListItemWrappers",fliws);
-        var afliw=M2.Def(function addFileListItemWrapper(name,match,wrap,open) {
-          fliws[name]=new fliw(match,wrap,open);
-        });
-        M2.Def(function getWrapper(item) {
-          var ws=[];
-          for(var i=0;i<fliws.length;i++) {
-            if(fliws[i].match(item)) {
-              ws.push(fliws[i]);
-            }
-
-          }
-          return ws;
-        });
-        afliw("Module",function(item) {
-          if (item instanceof Module) return true;
-          return false;
-        },function(item) {
-          item.addClass("Module")
-        });
-        afliw("Dir",function(item) {
-          if (item instanceof system.Dir) return true;
-          return false;
-        },function(item) {
-          item.addClass("Dir")
-        });
-      });
 
 
 
