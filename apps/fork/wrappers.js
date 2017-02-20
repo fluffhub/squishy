@@ -48,3 +48,4 @@ Module(function M() {
     });
   });
 });
+});
