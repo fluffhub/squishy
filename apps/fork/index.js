@@ -299,7 +299,7 @@ Module(function M() {
 
                 });
                 lib.dirs[path]=newDir;
-                wrappers.getWrapper(instance).forEach(function(wrapper) {
+                M.Self.wrappers.getWrapper(instance).forEach(function(wrapper) {
                   wrapper.wrap(instance);
 
                 });
