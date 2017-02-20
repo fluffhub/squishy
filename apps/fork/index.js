@@ -38,7 +38,7 @@ Module(function M() {
         var fliws={};
         M2.Def("FileListItemWrappers",fliws);
         M2.Def(function addFileListItemWrapper(name,match,wrap,open) {
-          fliws[name]=new fliw(match,wrap,open));
+          fliws[name]=new fliw(match,wrap,open);
         });
         M.Def(function getWrapper(item) {
           var wrappers=[];
