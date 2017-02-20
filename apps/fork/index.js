@@ -263,7 +263,7 @@ Module(function M() {
                 }
 
               }
-              if(path in Object.keys(lib.dirs)) {
+              if(lib.dirs[path] instanceof Object) {
                   Object.keys(lib.dirs).forEach(function(d) {
                     if(d!=path)
                       lib.dirs[d].hide();
