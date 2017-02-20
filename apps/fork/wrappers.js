@@ -1,5 +1,24 @@
 Module(function M() {
   M.Import("system",function(system) {
+    Import("fork",function(fork) {
+      var fliw=M.Class(function C() {
+
+        C.Init(function FileListItemWrapper(match,wrap,open) {
+          if(wrap instanceof Function) { this.wrap=wrap; }
+          if(match instanceof Function) { this.match=match; }
+          if(open instanceof Function) { this.open=open; }
+        });
+        C.Def(function wrap(item) {
+          return item;
+        });
+        C.Def(function match(name,item) {
+          return false;
+        });
+        C.Def(function open() {
+
+        });
+      })
+
     var fliws={};
     M.Def("FileListItemWrappers",fliws);
     var afliw=M.Def(function addFileListItemWrapper(name,match,wrap,open) {
