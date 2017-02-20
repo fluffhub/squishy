@@ -249,7 +249,7 @@ Module(function M() {
                   if(M.Self.match(mod)) {
                     lib.cd(dirloc);
                   } else {
-                    console.debug({unmatched:dirloc});
+                    console.debug({unmatched:dirloc,mod:mod});
                   }
 
                 });
