@@ -256,16 +256,17 @@ Module(function M() {
                   var newDir=new FileList(dirs[dirs.length-1],val,function(dirloc) {
                     lib.cd(dirloc);
                   });
+                  lib.dirs[path]=newDir;
+
+
+                  lib.add(newDir);
+                  //if(
+                  newDir.load();
+                  newDir.hide();
                 } else {
                   console.debug({unmatched:dirs[dirs.length-1],mod:instance});
                 }
-                lib.dirs[path]=newDir;
 
-
-                lib.add(newDir);
-                //if(
-                newDir.load();
-                newDir.hide();
               }
 
 
