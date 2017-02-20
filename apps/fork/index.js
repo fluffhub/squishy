@@ -55,7 +55,7 @@ Module(function M() {
         });
       });
       M.Def(function match( file, name) {
-        if(file instanceof system.Dir || file instanceof M.Self.Dir) {
+        if(file instanceof system.Dir || file instanceof M.Self.FileListItem) {
           return true;
         }
         if(file instanceof Module) {
