@@ -54,8 +54,8 @@ Module(function M() {
 
         });
       });
-      M.Def(function match(name, file) {
-        if(file instanceof system.Dir) {
+      M.Def(function match( file, name) {
+        if(file instanceof system.Dir || file instanceof M.Self.Dir) {
           return true;
         }
         if(file instanceof Module) {
@@ -245,8 +245,8 @@ Module(function M() {
                     lib.cd(dirloc)
                   });
                 }*/
-                var newDir=new FileList(dirs[dirs.length],val,function(dirloc) {
-                  if(M.Self.match(instance)) {
+                var newDir=new FileList(dirs[dirs.length-1],val,function(dirloc) {
+                  if(M.Self.match(instance,dirs[dirs.length-1])) {
                     lib.cd(dirloc);
                   } else {
                     console.debug({unmatched:dirloc,mod:instance});
