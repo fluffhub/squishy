@@ -246,7 +246,7 @@ Module(function M() {
                   });
                 }*/
                 var newDir=new FileList(dirs[dirs.length],val,function(dirloc) {
-                  if(M.Self.match(mod)) {
+                  if(M.Self.match(instance)) {
                     lib.cd(dirloc);
                   } else {
                     console.debug({unmatched:dirloc,mod:mod});
