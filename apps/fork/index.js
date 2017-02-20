@@ -263,6 +263,13 @@ Module(function M() {
                   //if(
                   newDir.load();
                   newDir.hide();
+
+                  Object.keys(lib.dirs).forEach(function(d) {
+                    if(d!=path)
+                      lib.dirs[d].hide();
+                  });
+                  lib.dirs[path].show();
+                  lib.setDir(val);
                 } else {
                   console.debug({unmatched:dirs[dirs.length-1],mod:instance});
                 }
@@ -273,12 +280,6 @@ Module(function M() {
             });
 
 
-            Object.keys(lib.dirs).forEach(function(d) {
-              if(d!=path)
-                lib.dirs[d].hide();
-            });
-            lib.dirs[path].show();
-            lib.setDir(val);
           });
         });
 
