@@ -11,7 +11,7 @@ Module(function M() {
         C.Def(function wrap(item) {
           return item;
         });
-        C.Def(function match(name,item) {
+        C.Def(function match(item,item) {
           return false;
         });
         C.Def(function open() {
@@ -27,16 +27,17 @@ Module(function M() {
     });
     M.Def(function getWrapper(item) {
       var ws=[];
-      for(var i=0;i<fliws.length;i++) {
-        if(fliws[i].match(item)) {
-          ws.push(fliws[i]);
+      var wns=Object.keys(fliws);
+      for(var i=0;i<wns.length;i++) {
+        if(fliws[wns[i]].match(item)) {
+          ws.push(fliws[wns[i]]);
         }
 
       }
       return ws;
     });
     afliw("Module",function(item) {
-      if (item instanceof Module) return true;
+      if (item instanceof window.Module) return true;
       return false;
     },function(item) {
       item.addClass("Module")
