@@ -17,6 +17,56 @@ Module(function M() {
       var Request=Req.Request;
       var main=live.DeviceManager;
       var theme={}
+      var fliw=M.Class(function C() {
+
+        C.Init(function FileListItemWrapper(match,wrap,open) {
+          if(wrap instanceof Function) { this.wrap=wrap; }
+          if(match instanceof Function) { this.match=match; }
+          if(open instanceof Function) { this.open=open; }
+        });
+        C.Def(function wrap(item) {
+          return item;
+        });
+        C.Def(function match(name,item) {
+          return false;
+        });
+        C.Def(function open() {
+
+        });
+      })
+      var wrappers=Module (function M2() {
+        var fliws={};
+        M2.Def("FileListItemWrappers",fliws);
+        M2.Def(function addFileListItemWrapper(name,match,wrap,open) {
+          fliws[name]=new fliw(match,wrap,open));
+        });
+        M.Def(function getWrapper(item) {
+          var wrappers=[];
+          for(var i=0;i<fliws.length;i++) {
+            if(fliws[i].match(item)) {
+              wrappers.push(fliws[i]);
+            }
+
+          }
+          return wrappers;
+        });
+
+      });
+
+      wrappers.addFileListItemWrapper("Module",function(item) {
+        if (item instanceof Module) return true;
+        return false;
+      },function(item) {
+        item.addClass("Module")
+      });
+      wrappers.addFileListItemWrapper("Dir",function(item) {
+        if (item instanceof system.Dir) return true;
+        return false;
+      },function(item) {
+        item.addClass("Dir")
+      });
+
+      M.Def("wrappers",wrappers)
 
       var FileListItem=M.Class(function C() {
         C.Super(interactive.MomentaryButton);
@@ -53,10 +103,14 @@ Module(function M() {
         if(file instanceof system.Dir) {
           return true;
         }
+        if(file instanceof Module) {
+          return true;
+        }
       });
-      var Dir=M.Class(function C() {
-        C.Super(interactive.MomentaryButton);
-        C.Init(function Dir(name,loc, env,click) {
+      var FileList=M.Class(function C() {
+        C.Super(basic.Div);
+        C.Init(function FileList(name,loc, env,click) {
+          basic.Div.call(this);
           var dir=this;
           if (click instanceof Function) {
             dir.click=click
@@ -69,6 +123,7 @@ Module(function M() {
             dir.click.call(dir,dir.loc);
             e.stopPropagation();
           });
+          this.addClass("Dir");
           this.name=name;
           //this.add(new basic.Span(name))
           this.env=env;
@@ -224,7 +279,8 @@ Module(function M() {
               Object.keys(mod).forEach(function(devname) {
 
                 var instance=mod[devname];
-                if(instance instanceof Module) {
+
+                /*if(instance instanceof Module) {
                   lib.dirs[path]=new M.Self.Module(dirs[dirs.length],val,instance,function(dirloc) {
                     console.debug("cding to "+dirloc);
                     lib.cd(dirloc);
@@ -233,11 +289,25 @@ Module(function M() {
                   lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
                     lib.cd(dirloc)
                   });
-                }
-                lib.add(lib.dirs[path]);
+                }*/
+                var newDir=new FileList(dirs[dirs.length],val,function(dirloc) {
+                  if(M.Self.match(mod)) {
+                    lib.cd(dirloc);
+                  } else {
+                    console.debug(dirloc);
+                  }
+
+                });
+                lib.dirs[path]=newDir;
+                wrappers.getWrapper(instance).forEach(function(wrapper) {
+                  wrapper.wrap(instance);
+
+                });
+
+                lib.add(newDir);
                 //if(
-                lib.dirs[path].load();
-                lib.dirs[path].hide()
+                newDir.load();
+                newDir.hide();
               });
 
             }
@@ -360,8 +430,12 @@ Module(function M() {
               var F;
               var str;
               if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
+
               else str=dir.loc.href+"/"+filename;
               var dirloc=system.uri(str);
+              F=new FileListItem(filename,dirloc,function() {
+                dir.click()
+              });
               dir.contents[filename]=F;
               dir.Contents.add(F);
 
