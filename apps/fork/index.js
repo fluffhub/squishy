@@ -134,6 +134,10 @@ Module(function M() {
                       console.debug({Module:file});
                       dir.click.call(dir,dirloc);
                     });
+                    M.Self.wrappers.getWrapper(dev).forEach(function(wrapper) {
+                      wrapper.wrap(F);
+
+                    });
                     /*  if(file instanceof system.Dir) {
                       F=new M.Self.Dir(filename,dirloc,dir.env,function() {
                         dir.click.call(dir,dirloc);
@@ -227,13 +231,16 @@ Module(function M() {
           var dirs=path.split("/")
 
           live.DeviceManager.retrieve(val,function(mod) {
-            if(lib.dirs[path] instanceof Object) {
+            Object.keys(mod).forEach(function(devname) {
+              var instance=mod[devname];
 
-            } else {
+              if(lib.dirs[path] instanceof Object) {
 
-              Object.keys(mod).forEach(function(devname) {
+              } else {
 
-                var instance=mod[devname];
+
+
+
 
                 /*if(instance instanceof Module) {
                   lib.dirs[path]=new M.Self.Module(dirs[dirs.length],val,instance,function(dirloc) {
@@ -245,27 +252,26 @@ Module(function M() {
                     lib.cd(dirloc)
                   });
                 }*/
-                var newDir=new FileList(dirs[dirs.length-1],val,function(dirloc) {
-                  if(M.Self.match(instance,dirs[dirs.length-1])) {
+                if(M.Self.match(instance,dirs[dirs.length-1])) {
+                  var newDir=new FileList(dirs[dirs.length-1],val,function(dirloc) {
                     lib.cd(dirloc);
-                  } else {
-                    console.debug({unmatched:dirloc,mod:instance});
-                  }
-
-                });
+                  });
+                } else {
+                  console.debug({unmatched:dirs[dirs.length-1],mod:instance});
+                }
                 lib.dirs[path]=newDir;
-                M.Self.wrappers.getWrapper(instance).forEach(function(wrapper) {
-                  wrapper.wrap(instance);
 
-                });
 
                 lib.add(newDir);
                 //if(
                 newDir.load();
                 newDir.hide();
-              });
+              }
 
-            }
+
+            });
+
+
             Object.keys(lib.dirs).forEach(function(d) {
               if(d!=path)
                 lib.dirs[d].hide();
@@ -274,6 +280,10 @@ Module(function M() {
             lib.setDir(val);
           });
         });
+
+
+
+
         C.Def(function ls(loc) {
           var lib=this;
           var dirs=this.dirs;
