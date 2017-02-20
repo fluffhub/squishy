@@ -154,7 +154,7 @@ function Module() {
 
     var element;
     element=getCurrentScript();
-    if(element) }// instanceof Element && Object.keys(element).indexOf("Module")<0) {
+    if(element) {// instanceof Element && Object.keys(element).indexOf("Module")<0) {
       var src=element.getAttribute('src');
 
       var parser = document.createElement('a');
