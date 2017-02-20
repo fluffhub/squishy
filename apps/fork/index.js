@@ -235,11 +235,6 @@ Module(function M() {
               if(lib.dirs[path] instanceof Object) {
 
               } else {
-
-
-
-
-
                 /*if(instance instanceof Module) {
                   lib.dirs[path]=new M.Self.Module(dirs[dirs.length],val,instance,function(dirloc) {
                     console.debug("cding to "+dirloc);
@@ -331,7 +326,9 @@ Module(function M() {
 
       });
       M.Def(function open(loc) {
-        return new FileBrowser(loc);
+         window.exp=new FileBrowser(loc);
+
+        return window.exp;
       });
 
 
