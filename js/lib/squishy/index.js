@@ -154,7 +154,7 @@ function Module() {
 
     var element;
     element=getCurrentScript();
-    if(element) {
+    if(element && !("Tag" in Object.keys(element))) {
       var src=element.getAttribute('src');
 
       var parser = document.createElement('a');
