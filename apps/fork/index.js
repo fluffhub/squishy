@@ -257,19 +257,20 @@ Module(function M() {
                   newDir.load();
                   newDir.hide();
 
+
+                } else {
+                  console.debug({unmatched:dirs[dirs.length-1],mod:instance});
+                }
+
+              }
+              if(path in Object.keys(lib.dirs)) {
                   Object.keys(lib.dirs).forEach(function(d) {
                     if(d!=path)
                       lib.dirs[d].hide();
                   });
                   lib.dirs[path].show();
                   lib.setDir(val);
-                } else {
-                  console.debug({unmatched:dirs[dirs.length-1],mod:instance});
-                }
-
               }
-
-
             });
 
 
