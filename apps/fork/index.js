@@ -114,26 +114,9 @@ Module(function M() {
               var dev=mod[devicename];
 
               if(dev!=null) {
-                var filenames=Object.keys(dev.contents);
-
-                filenames.forEach(function(filename) {
-                  var file = dev.contents[filename];
-
-                  if(filename in dir.contents) {
-                    dir.contents[filename].addReference(devicename,file);
-                  } else {
-                    // var F;
-                    var str;
-                    if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
-                    else str=dir.loc.href+"/"+filename;
-                    var dirloc=system.uri(str);
-
-                    F=new M.Self.FileListItem(filename,dirloc,function() {
-                      console.debug({Module:file});
-                      dir.click.call(dir,dirloc);
-                    });
-                    M.Self.wrappers.getWrapper(dev).forEach(function(wrapper) {
+                   M.Self.wrappers.getWrapper(obj).forEach(function(wrapper) {
                       wrapper.wrap(F);
+
 
                     });
                     /*  if(file instanceof system.Dir) {
@@ -306,9 +289,12 @@ Module(function M() {
           delete this.presentdir.dirs;
 
           this.presentdir.dirs=[];
+          this.presentdir.removeClass("longer");
+          if(dirs.length>2) this.presentdir.addClass("longer");
           for(var i=0;i<dirs.length;i++) {
             pdir=pdir+"/"+dirs[i];
             (function(tpdir) {
+
               var dirbutt=new interactive.MomentaryButton(dirs[i]+"/","pwddir dirlink",function() {
                 lib.cd(system.uri("http://"+tpdir))
               });

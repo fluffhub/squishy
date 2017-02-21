@@ -661,7 +661,7 @@ background-color:rgba(255,255,255,0.9);
 .dirlink.button:hover { text-decoration:underline;color:black; }
 .pwddir .dirlink.button:hover { text-decoration:none; color:black; }
 .pwddir .dirlink { padding:0; }
-.pwdbar { padding:0 0.25em }
+.pwdbar { padding:0 0.25em;float:right; }
 .button {
   background-color:#ccc;
 
@@ -674,5 +674,22 @@ background-color:rgba(255,255,255,0.9);
 .FileBrowser .button.live { color:#0F0 }
 .FileBrowser .button.membrane { color:#0AF }
 .FileBrowser .button.live.membrane { color:#FA0 }
-.fs_container>.button {  line-height:1.25em;
+.fs_container>.button {  line-height:1.25em;float:left;clear:both;width:100%;
   padding:0 0.25em; }
+
+.pwdbar>.button {
+ display:none;
+}
+.pwdbar>.button:first-child {
+  display:inline;
+}
+.pwdbar>.button:last-child {
+  display:inline;
+}
+
+.longer.pwdbar>.button:nth-child(-2) {
+ display:inline;
+}
+.longer.pwdbar>.button:nth-child(-2):before {
+ content:".../";
+}

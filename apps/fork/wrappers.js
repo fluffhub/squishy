@@ -36,18 +36,20 @@ Module(function M() {
       }
       return ws;
     });
-    afliw("Module",function(item) {
+    afliw("Module",function match(item) {
       if (item instanceof window.Module) return true;
       return false;
-    },function(item) {
+    },function wrap(item) {
       item.addClass("Module")
+    },function open(obj, FL) {
+
     });
-    afliw("Dir",function(item) {
+    afliw("Dir",function match(item) {
       if (item instanceof system.Dir) return true;
       return false;
-    },function(item) {
+    },function wrap(item) {
       item.addClass("Dir")
-    },function(FL) {
+    },function open(obj, FL) {
 
     });
   });
