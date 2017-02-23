@@ -42,7 +42,27 @@ Module(function M() {
       },function wrap(item) {
         item.addClass("Module")
       },function open(obj, FL) {
+        var filenames=Object.keys(obj);
 
+        filenames.forEach(function(filename) {
+          var file = obj.contents[filename];
+
+          //if(filename in FL.contents) {
+          //  FL.contents[filename].addReference(devicename,file);
+          //} else {
+          // var F;
+          var str;
+          if(FL.loc.href.slice(-1)=="/") str=FL.loc.href+filename
+          else str=FL.loc.href+"/"+filename;
+          var dirloc=system.uri(str);
+
+          var F=new fork.FileListItem(filename,dirloc,function() {
+            console.debug({Module:file});
+            FL.click.call(FL,dirloc);
+          });
+          FL.Contents.add(F);
+
+        });
       });
       afliw("Dir",function match(item) {
         if (item instanceof system.Dir) return true;
