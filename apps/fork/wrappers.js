@@ -45,7 +45,7 @@ Module(function M() {
         var filenames=Object.keys(obj);
 
         filenames.forEach(function(filename) {
-          var file = obj.contents[filename];
+          var file = obj[filename];
 
           //if(filename in FL.contents) {
           //  FL.contents[filename].addReference(devicename,file);
