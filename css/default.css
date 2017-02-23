@@ -687,9 +687,9 @@ background-color:rgba(255,255,255,0.9);
   display:inline;
 }
 
-.longer.pwdbar>.button:nth-child(-2) {
+.longer.pwdbar>.button:nth-last-child(2) {
  display:inline;
 }
-.longer.pwdbar>.button:nth-child(-2):before {
+.longer.pwdbar>.button:nth-last-child(2):before {
  content:".../";
 }
