@@ -68,7 +68,7 @@ Module(function M() {
             console.debug({Module:file});
             FL.click.call(FL,dirloc);
           });
-          FL.contents.add(F);
+          FL.Contents.add(F);
 
         });
       });
