@@ -67,11 +67,33 @@ Module(function M() {
           }
         });
       });
+      Import("squishy/membrane",function(membrane) {
+      afliw("membrane",function match(item) {
+        if(item instanceof membrane.File || item instanceof membrane.Dir) {
+         return true;
+        }
+        return false;
+      },function wrap(item) {
+        item.addClass("membrane");
+      });
+
+      });
+      Import("squishy/live",function(live) {
+        afliw("membrane",function match(item) {
+        if(item instanceof live.File || item instanceof live.Dir) {
+         return true;
+        }
+        return false
+        },function wrap(item) {
+          item.addClass("live");
+        });
+
+      });
       afliw("Dir",function match(item) {
         if (item instanceof system.Dir) return true;
         return false;
       },function wrap(item) {
-        item.addClass("Dir")
+        item.addClass("Directory")
       },function open(obj, FL) {
         var filenames=Object.keys(obj.contents);
 
