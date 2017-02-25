@@ -8,123 +8,123 @@ Module(function M() {
     "squishy/form",
     "squishy/membrane",
     "js/lib/squishy_ext/LocalModel",
-    "spoon",
-    "spoon/conf",
+
     "squishy/live",
     "squishy/system",
     "fork/wrappers",
-    function(event,basic,interactive,Req,svg,form,membrane,LM,spoon,conf,live,system,wrappers) {
-      var osroot=""
-      var Request=Req.Request;
-      var main=live.DeviceManager;
-      var theme={}
+    function(event,basic,interactive,Req,svg,form,membrane,LM,live,system,wrappers) {
+      Import(    "spoon","spoon/conf",function(spoon,conf) {
+        var osroot=""
+        var Request=Req.Request;
+        var main=live.DeviceManager;
+        var theme={}
 
 
 
-      M.Def("wrappers",wrappers)
+        M.Def("wrappers",wrappers)
 
-      var FileListItem=M.Class(function C() {
-        C.Super(interactive.MomentaryButton);
-        C.Init(function FileListItem(name,loc,click) {
-          interactive.MomentaryButton.call(this,name,"",click)
+        var FileListItem=M.Class(function C() {
+          C.Super(interactive.MomentaryButton);
+          C.Init(function FileListItem(name,loc,click) {
+            interactive.MomentaryButton.call(this,name,"",click)
 
-          this.name=name;
-          this.loc=loc;
-          this.container=new basic.Div("fs_container");
-          this.container.attrs({"data-key":name})
-          this.add(this.container);
-          this.container.hide();
-          this.references={};
-          //this.addReference(obj);
+            this.name=name;
+            this.loc=loc;
+            this.container=new basic.Div("fs_container");
+            this.container.attrs({"data-key":name})
+            this.add(this.container);
+            this.container.hide();
+            this.references={};
+            //this.addReference(obj);
+          });
+          C.Def(function addReference(name,obj) {
+            this.references[name]=obj;
+            this.addClass(name);
+          });
+          C.Def(function open() {
+            this.container.show();
+          });
+          C.Def(function close() {
+            this.container.hide();
+          });
+          C.Def(function onrefresh(val) {
+
+          })
+          C.Def(function refresh() {
+
+          });
         });
-        C.Def(function addReference(name,obj) {
-          this.references[name]=obj;
-          this.addClass(name);
-        });
-        C.Def(function open() {
-          this.container.show();
-        });
-        C.Def(function close() {
-          this.container.hide();
-        });
-        C.Def(function onrefresh(val) {
-
-        })
-        C.Def(function refresh() {
-
-        });
-      });
-      M.Def(function match( file, name) {
-        var ws=wrappers.getWrapper(file);
-        if(ws instanceof Array && ws.length>0) {
-          return true;
-        }
-      });
-      var FileList=M.Class(function C() {
-        C.Super(basic.Div);
-        C.Init(function FileList(name,loc,click) {
-          basic.Div.call(this);
-          var dir=this;
-          if (click instanceof Function) {
-            dir.click=click
-
-          } else {
-            dir.click=function() {
-            }
+        M.Def(function match( file, name) {
+          var ws=wrappers.getWrapper(file);
+          if(ws instanceof Array && ws.length>0) {
+            return true;
           }
-          /*interactive.MomentaryButton.call(this,name,"",function(e) {
+        });
+        var FileList=M.Class(function C() {
+          C.Super(basic.Div);
+          C.Init(function FileList(name,loc,click) {
+            basic.Div.call(this);
+            var dir=this;
+            if (click instanceof Function) {
+              dir.click=click
+
+            } else {
+              dir.click=function() {
+              }
+            }
+            /*interactive.MomentaryButton.call(this,name,"",function(e) {
             dir.click.call(dir,dir.loc);
             e.stopPropagation();
           });*/
-          //this.addClass("Dir");
-          this.name=name;
-          //this.add(new basic.Span(name))
-          //this.env=env;
-          if(loc instanceof Element) {
-            this.loc=loc;
-          } else   {
+            //this.addClass("Dir");
+            this.name=name;
+            //this.add(new basic.Span(name))
+            //this.env=env;
+            if(loc instanceof Element) {
+              this.loc=loc;
+            } else   {
 
-            this.loc=system.uri(loc);
-          }
-          this.contents={};
-          this.Contents=new basic.Div("fs_container");
-          this.Contents.attrs({"data-key":name})
-          this.add(this.Contents);
-          this.references={};
-          //this.Contents.hide();
-          //this.refresh();
-        });
-        C.Def(function addReference(name,obj) {
-          this.references[name]=obj;
-          this.addClass(name);
-        });
-        C.Def(function open() {
-          this.container.show();
-        });
-        C.Def(function close() {
-          this.container.hide();
-        });
-        C.Def(function onrefresh(val) {})
-        C.Def(function load() {
-          var dir=this;
-          live.DeviceManager.retrieve(this.loc.href,function(mod) {
-            var devicenames=Object.keys(mod);
-            var F=null;
-            devicenames.forEach(function(devicename) {
-              var dev=mod[devicename];
+              this.loc=system.uri(loc);
+            }
+            this.contents={};
+            this.Contents=new basic.Div("fs_container");
+            this.Contents.attrs({"data-key":name})
+            this.add(this.Contents);
+            this.references={};
+            //this.Contents.hide();
+            //this.refresh();
+          });
+          C.Def(function addReference(name,obj) {
+            this.references[name]=obj;
+            this.addClass(name);
+          });
+          C.Def(function open() {
+            this.container.show();
+          });
+          C.Def(function close() {
+            this.container.hide();
+          });
+          C.Def(function onrefresh(val) {})
+          C.Def(function load() {
+            var dir=this;
+            live.DeviceManager.retrieve(this.loc.href,function(mod) {
+              var devicenames=Object.keys(mod);
+              var F=null;
+              devicenames.forEach(function(devicename) {
+                var dev=mod[devicename];
 
-              if(dev!=null) {
-                M.Self.wrappers.getWrapper(dev).forEach(function(wrapper) {
-                  wrapper.open(dev,dir);
-
-
+                if(dev!=null) {
+                  M.Self.wrappers.getWrapper(dev).forEach(function(wrapper) {
+                    wrapper.open(dev,dir);
 
 
-                });
-                //F.addReference(devicename,file);
-                //dir.contents[filename]=F;
-                //dir.Contents.add(F);
-                /*  if(file instanceof system.Dir) {
+
+
+                  });
+                  //F.addReference(devicename,file);
+                  //dir.contents[filename]=F;
+                  //dir.Contents.add(F);
+                  /*  if(file instanceof system.Dir) {
                       F=new M.Self.Dir(filename,dirloc,dir.env,function() {
                         dir.click.call(dir,dirloc);
                       });
@@ -147,80 +147,80 @@ Module(function M() {
                       }
                   });*/
 
-              }
+                }
 
+              });
             });
           });
         });
-      });
 
 
 
-      var FileBrowser=M.Class(function C() {
-        C.Super(basic.Div);
-        C.Init(function FileBrowser(path)  {
+        var FileBrowser=M.Class(function C() {
+          C.Super(basic.Div);
+          C.Init(function FileBrowser(path)  {
 
-          basic.Div.call(this,"FileBrowser");
-          var uri=system.uri(path)
+            basic.Div.call(this,"FileBrowser");
+            var uri=system.uri(path)
 
-          this.files={};
-          this.absolutefiles={};
-          this.rawfiles={};
-          this.windows={};
-          var lib=this;
+            this.files={};
+            this.absolutefiles={};
+            this.rawfiles={};
+            this.windows={};
+            var lib=this;
 
-          this.presentdir=new basic.Div("pwdbar");
-          this.presentdir.dirs=[];
-          this.dirs={};
-          this.pwd=uri.pathname;
-          this.root=null;
+            this.presentdir=new basic.Div("pwdbar");
+            this.presentdir.dirs=[];
+            this.dirs={};
+            this.pwd=uri.pathname;
+            this.root=null;
 
 
 
-          this.importer=new form.Form("importer",function submit(e) {
-            var path2=lib.importer.searchbox.value();
-            lib.Import(path2,function(m) {
-              //this is the librarymodule
-              // this.remove();
-              // lib.load(path2,);
+            this.importer=new form.Form("importer",function submit(e) {
+              var path2=lib.importer.searchbox.value();
+              lib.Import(path2,function(m) {
+                //this is the librarymodule
+                // this.remove();
+                // lib.load(path2,);
+              });
+              e.preventDefault();
             });
-            e.preventDefault();
+
+
+            lib.importer.searchbox=new form.TextInput("Search");
+            lib.importer.add(this.importer.searchbox);
+
+            lib.importer.searchbox.attrs({placeholder:"Import URL"});
+
+            lib.importer.add(new form.Submit("Search"));
+
+            //this.addBefore(this.importer);
+            lib.add(lib.presentdir)
+            lib.cd(uri);
+
           });
 
 
-          lib.importer.searchbox=new form.TextInput("Search");
-          lib.importer.add(this.importer.searchbox);
 
-          lib.importer.searchbox.attrs({placeholder:"Import URL"});
+          C.Def(function cd(val) {
+            var lib=this
+            var path;
+            if(typeof val == "string") {
+              path=val
+            } else {
+              path=val.href
+            }
+            var dirs=path.split("/")
 
-          lib.importer.add(new form.Submit("Search"));
+            live.DeviceManager.retrieve(val,function(mod) {
+              Object.keys(mod).forEach(function(devname) {
+                var instance=mod[devname];
 
-          //this.addBefore(this.importer);
-          lib.add(lib.presentdir)
-          lib.cd(uri);
+                if(lib.dirs[path] instanceof Object) {
 
-        });
-
-
-
-        C.Def(function cd(val) {
-          var lib=this
-          var path;
-          if(typeof val == "string") {
-            path=val
-          } else {
-            path=val.href
-          }
-          var dirs=path.split("/")
-
-          live.DeviceManager.retrieve(val,function(mod) {
-            Object.keys(mod).forEach(function(devname) {
-              var instance=mod[devname];
-
-              if(lib.dirs[path] instanceof Object) {
-
-              } else {
-                /*if(instance instanceof Module) {
+                } else {
+                  /*if(instance instanceof Module) {
                   lib.dirs[path]=new M.Self.Module(dirs[dirs.length],val,instance,function(dirloc) {
                     console.debug("cding to "+dirloc);
                     lib.cd(dirloc);
@@ -230,171 +230,171 @@ Module(function M() {
                     lib.cd(dirloc)
                   });
                 }*/
-                if(M.Self.match(instance,dirs[dirs.length-1])) {
-                  var newDir=new FileList(dirs[dirs.length-1],val,function(dirloc) {
-                    lib.cd(dirloc);
-                  });
-                  lib.dirs[path]=newDir;
+                  if(M.Self.match(instance,dirs[dirs.length-1])) {
+                    var newDir=new FileList(dirs[dirs.length-1],val,function(dirloc) {
+                      lib.cd(dirloc);
+                    });
+                    lib.dirs[path]=newDir;
 
 
-                  lib.add(newDir);
-                  //if(
-                  newDir.load();
-                  newDir.hide();
+                    lib.add(newDir);
+                    //if(
+                    newDir.load();
+                    newDir.hide();
 
 
-                } else {
-                  console.debug({unmatched:dirs[dirs.length-1],mod:instance});
+                  } else {
+                    console.debug({unmatched:dirs[dirs.length-1],mod:instance});
+                  }
+
                 }
+                if(lib.dirs[path] instanceof Object) {
+                  Object.keys(lib.dirs).forEach(function(d) {
+                    if(d!=path)
+                      lib.dirs[d].hide();
+                  });
+                  lib.dirs[path].show();
+                  lib.setDir(val);
+                }
+              });
 
-              }
-              if(lib.dirs[path] instanceof Object) {
-                Object.keys(lib.dirs).forEach(function(d) {
-                  if(d!=path)
-                    lib.dirs[d].hide();
+
+            });
+          });
+
+
+
+
+          C.Def(function ls(loc) {
+            var lib=this;
+            var dirs=this.dirs;
+
+          });
+          C.Def(function setDir(a) {
+            var loc;
+            if(a instanceof Element)  {
+              loc = a.hostname+a.pathname;
+            } else loc=a;
+            var dirs=loc.trim();
+            if(dirs[0]=="/") dirs=dirs.slice(1);
+            if(dirs[dirs.length-1]=="/") dirs=dirs.slice(0,-1);
+
+            dirs=dirs.split("/")
+            var lib=this
+
+            var pdir="";
+            this.presentdir.dirs.forEach(function(pwddir) {
+              pwddir.remove();
+              delete pwddir;
+
+            });
+            delete this.presentdir.dirs;
+
+            this.presentdir.dirs=[];
+            this.presentdir.removeClass("longer");
+            if(dirs.length>2) this.presentdir.addClass("longer");
+            for(var i=0;i<dirs.length;i++) {
+              pdir=pdir+"/"+dirs[i];
+              (function(tpdir) {
+
+                var dirbutt=new interactive.MomentaryButton(dirs[i]+"/","pwddir dirlink",function() {
+                  lib.cd(system.uri("http://"+tpdir))
                 });
-                lib.dirs[path].show();
-                lib.setDir(val);
-              }
-            });
 
-
-          });
-        });
-
-
-
-
-        C.Def(function ls(loc) {
-          var lib=this;
-          var dirs=this.dirs;
-
-        });
-        C.Def(function setDir(a) {
-          var loc;
-          if(a instanceof Element)  {
-            loc = a.hostname+a.pathname;
-          } else loc=a;
-          var dirs=loc.trim();
-          if(dirs[0]=="/") dirs=dirs.slice(1);
-          if(dirs[dirs.length-1]=="/") dirs=dirs.slice(0,-1);
-
-          dirs=dirs.split("/")
-          var lib=this
-
-          var pdir="";
-          this.presentdir.dirs.forEach(function(pwddir) {
-            pwddir.remove();
-            delete pwddir;
-
-          });
-          delete this.presentdir.dirs;
-
-          this.presentdir.dirs=[];
-          this.presentdir.removeClass("longer");
-          if(dirs.length>2) this.presentdir.addClass("longer");
-          for(var i=0;i<dirs.length;i++) {
-            pdir=pdir+"/"+dirs[i];
-            (function(tpdir) {
-
-              var dirbutt=new interactive.MomentaryButton(dirs[i]+"/","pwddir dirlink",function() {
-                lib.cd(system.uri("http://"+tpdir))
-              });
-
-              lib.presentdir.dirs[i]=dirbutt;
-              lib.presentdir.add(dirbutt);
-            })(pdir);
-          }
-          if (loc in lib.dirs) {
-
-          } else {
-
-          }
-
-        });
-
-      });
-      M.Def(function open(loc) {
-        window.exp=new FileBrowser(loc);
-
-        return window.exp;
-      });
-
-
-
-      var Module=M.Class(function C() {
-        C.Super(interactive.MomentaryButton);
-        C.Init(function Module(name,loc, obj,click) {
-          var dir=this;
-          if (click instanceof Function) {
-            dir.click=click
-
-          } else {
-            dir.click=function() {
+                lib.presentdir.dirs[i]=dirbutt;
+                lib.presentdir.add(dirbutt);
+              })(pdir);
             }
-          }
-          interactive.MomentaryButton.call(this,name,"",function(e) {
-            dir.click.call(dir,dir.loc);
-            e.stopPropagation();
+            if (loc in lib.dirs) {
+
+            } else {
+
+            }
+
           });
-          this.name=name;
-          //this.add(new basic.Span(name))
-          this.obj=obj;
-          if(loc instanceof Element) {
-            this.loc=loc;
-          } else   {
 
-            this.loc=system.uri(loc);
-          }
-          this.contents={};
-          this.Contents=new basic.Div("fs_container");
-          this.Contents.attrs({"data-key":name})
-          this.addClass("module");
-          this.add(this.Contents);
-          this.references={};
-          this.load()
-          //this.Contents.hide();
-          //this.refresh();
         });
-        C.Def(function addReference(name,obj) {
-          this.references[name]=obj;
-          this.addClass(name);
+        M.Def(function open(loc) {
+          window.exp=new FileBrowser(loc);
+
+          return window.exp;
         });
-        C.Def(function open() {
-          this.container.show();
-        });
-        C.Def(function close() {
-          this.container.hide();
-        });
-        C.Def(function onrefresh(val) {})
-        C.Def(function load() {
-          var dir=this;
-          var dev=this.obj;
-          console.debug({dev:dev});
-          if(dev!=null) {
-            var filenames=Object.keys(dev);
-
-            filenames.forEach(function(filename) {
-              var file = dev.contents[filename];
 
 
-              var F;
-              var str;
-              if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
 
-              else str=dir.loc.href+"/"+filename;
-              var dirloc=system.uri(str);
-              F=new FileListItem(filename,dirloc,function() {
-                dir.click()
-              });
-              dir.contents[filename]=F;
-              dir.Contents.add(F);
+        var Module=M.Class(function C() {
+          C.Super(interactive.MomentaryButton);
+          C.Init(function Module(name,loc, obj,click) {
+            var dir=this;
+            if (click instanceof Function) {
+              dir.click=click
 
+            } else {
+              dir.click=function() {
+              }
+            }
+            interactive.MomentaryButton.call(this,name,"",function(e) {
+              dir.click.call(dir,dir.loc);
+              e.stopPropagation();
             });
-          }
+            this.name=name;
+            //this.add(new basic.Span(name))
+            this.obj=obj;
+            if(loc instanceof Element) {
+              this.loc=loc;
+            } else   {
+
+              this.loc=system.uri(loc);
+            }
+            this.contents={};
+            this.Contents=new basic.Div("fs_container");
+            this.Contents.attrs({"data-key":name})
+            this.addClass("module");
+            this.add(this.Contents);
+            this.references={};
+            this.load()
+            //this.Contents.hide();
+            //this.refresh();
+          });
+          C.Def(function addReference(name,obj) {
+            this.references[name]=obj;
+            this.addClass(name);
+          });
+          C.Def(function open() {
+            this.container.show();
+          });
+          C.Def(function close() {
+            this.container.hide();
+          });
+          C.Def(function onrefresh(val) {})
+          C.Def(function load() {
+            var dir=this;
+            var dev=this.obj;
+            console.debug({dev:dev});
+            if(dev!=null) {
+              var filenames=Object.keys(dev);
+
+              filenames.forEach(function(filename) {
+                var file = dev.contents[filename];
+
+
+                var F;
+                var str;
+                if(dir.loc.href.slice(-1)=="/") str=dir.loc.href+filename
+
+                else str=dir.loc.href+"/"+filename;
+                var dirloc=system.uri(str);
+                F=new FileListItem(filename,dirloc,function() {
+                  dir.click()
+                });
+                dir.contents[filename]=F;
+                dir.Contents.add(F);
+
+              });
+            }
+          });
         });
       });
     });
-
 });
 
