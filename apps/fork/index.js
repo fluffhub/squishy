@@ -25,8 +25,9 @@ Module(function M() {
         var FileListItem=M.Class(function C() {
           C.Super(interactive.MomentaryButton);
           C.Init(function FileListItem(name,loc,click) {
+            var fli=this;
             interactive.MomentaryButton.call(this,name,"",click)
-
+            this.addClass("FileListItem");
             this.name=name;
             this.loc=loc;
             this.container=new basic.Div("fs_container");
@@ -34,6 +35,17 @@ Module(function M() {
             this.add(this.container);
             this.container.hide();
             this.references={};
+            live.DeviceManager.retrieve(loc,function(devices) {
+              var devicenames=Object.keys(items);
+              devicenames.forEach(function(devicename) {
+                var device=devices[devicename];
+
+                var ws=wrappers.getWrapper(device);
+                ws.forEach(function(w) { w.wrap(fli); });
+
+              });
+
+            });
             //this.addReference(obj);
           });
           C.Def(function addReference(name,obj) {
@@ -64,6 +76,7 @@ Module(function M() {
           C.Init(function FileList(name,loc,click) {
             basic.Div.call(this);
             var dir=this;
+            this.addClass("FileList");
             if (click instanceof Function) {
               dir.click=click
 
