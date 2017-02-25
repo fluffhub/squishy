@@ -53,15 +53,18 @@ Module(function M() {
           // var F;
           var str;
           if(FL.loc.href.slice(-1)=="/") str=FL.loc.href+filename
-          else str=FL.loc.href+"/"+filename;
+          else str=FL.loc.href+"#"+filename;
           var dirloc=system.uri(str);
-
+          if(filename in FL.contents) {
+            FL.Contents[filename].addClass("Module");
+          }
+          else {
           var F=new fork.FileListItem(filename,dirloc,function() {
             console.debug({Module:file});
             FL.click.call(FL,dirloc);
           });
           FL.Contents.add(F);
-
+          }
         });
       });
       afliw("Dir",function match(item) {
