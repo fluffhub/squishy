@@ -6,13 +6,12 @@ Module(function M() {
     "squishy/request",
     "squishy/svg",
     "squishy/form",
-    "squishy/membrane",
     "js/lib/squishy_ext/LocalModel",
 
     "squishy/live",
     "squishy/system",
     "fork/wrappers",
-    function(event,basic,interactive,Req,svg,form,membrane,LM,live,system,wrappers) {
+    function(event,basic,interactive,Req,svg,form,LM,live,system,wrappers) {
       Import(    "spoon","spoon/conf",function(spoon,conf) {
         var osroot=""
         var Request=Req.Request;
@@ -115,6 +114,7 @@ Module(function M() {
 
                 if(dev!=null) {
                   M.Self.wrappers.getWrapper(dev).forEach(function(wrapper) {
+                    wrapper.wrap(dir);
                     wrapper.open(dev,dir);
 
 
