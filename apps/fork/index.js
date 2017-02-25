@@ -36,7 +36,7 @@ Module(function M() {
             this.container.hide();
             this.references={};
             live.DeviceManager.retrieve(loc,function(devices) {
-              var devicenames=Object.keys(items);
+              var devicenames=Object.keys(devices);
               devicenames.forEach(function(devicename) {
                 var device=devices[devicename];
 
