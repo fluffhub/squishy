@@ -121,10 +121,15 @@ Module(function M() {
     });
     C.Def(function retrieve(path, result) {
       var all={}
-      var a=document.createElement("a");
-      a.href=path;
+      var a;
+      if(path instanceof Element){
+         a=path;
+                                }
+      else if (typeof path=="string") {
+       a=system.uri(path);
+      }
       var device=a.hostname;
-      var pathname=a.pathname.split("/").slice(1);
+      var pathname=a.path.split("/").slice(1);
       if(pathname[pathname.length-1]=="") pathname=pathname.slice(0,-1);
       pathname=pathname.join("/");
 
