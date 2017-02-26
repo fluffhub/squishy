@@ -199,10 +199,12 @@ Module(function M() {
       }
       return this.contents
     });
-    C.Def(function mkdir(name) {
+    C.Def(function mkdir(name,obj) {
+
       if(name in this.contents) { return this.contents[name] }
       else {
         var dir=new Dir(name,{});
+        if(obj !==undefined) dir.obj=obj;
         this.contents[name]=dir;
         dir.parent=this;
         return dir;
