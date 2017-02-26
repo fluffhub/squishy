@@ -309,7 +309,8 @@ Module(function M() {
             if(dirs[0]=="/") dirs=dirs.slice(1);
             if(dirs[dirs.length-1]=="/") dirs=dirs.slice(0,-1);
 
-            dirs=dirs.split("/")
+            dirs=dirs.split("/[#/]{1}/")
+
             var lib=this
 
             var pdir="";
