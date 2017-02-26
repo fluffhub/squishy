@@ -7,7 +7,14 @@ Module(function M() {
         this.root=new system.Dir("/",{});
 
       });
-
+      C.Def(function retrieve(path,result) {
+        system.Device.retrieve.call(path,function(obj) {
+          if (obj.obj instanceof Module) {
+            result(obj.obj);
+          }
+           else result(obj);
+        });
+      });
     });
     M.Class(function C() {
       C.Init(function File(loc) {
@@ -15,5 +22,6 @@ Module(function M() {
 
       });
     });
+
   });
 });
