@@ -78,7 +78,6 @@ Module(function M() {
       });
 
       });
-      Import("squishy/membrane",function(membrane) {
       afliw("class",function match(item, name) {
         if(item instanceof Class) {
          return true;
@@ -88,7 +87,7 @@ Module(function M() {
         item.addClass("Class");
       });
 
-      });
+
       afliw("Dir",function match(item, name) {
         if (item instanceof system.Dir) return true;
         return false;
