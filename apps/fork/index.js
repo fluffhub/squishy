@@ -303,14 +303,14 @@ Module(function M() {
           C.Def(function setDir(a) {
             var loc;
             if(a instanceof Element)  {
-              loc = a.hostname+a.pathname;
+              loc = a.hostname+a.path+a.hash;
             } else loc=a;
             var dirs=loc.trim();
             if(dirs[0]=="/") dirs=dirs.slice(1);
             if(dirs[dirs.length-1]=="/") dirs=dirs.slice(0,-1);
 
-            dirs=dirs.split("/[#/]{1}/")
-
+            //dirs=dirs.split("/[#/]{1}/")
+           system.uri("#ok").href.match(/(.+?([#/]|$))/g)
             var lib=this
 
             var pdir="";
@@ -325,10 +325,10 @@ Module(function M() {
             this.presentdir.removeClass("longer");
             if(dirs.length>2) this.presentdir.addClass("longer");
             for(var i=0;i<dirs.length;i++) {
-              pdir=pdir+"/"+dirs[i];
+              pdir=pdir+dirs[i];
               (function(tpdir) {
 
-                var dirbutt=new interactive.MomentaryButton(dirs[i]+"/","pwddir dirlink",function() {
+                var dirbutt=new interactive.MomentaryButton(dirs[i],"pwddir dirlink",function() {
                   lib.cd(system.uri("http://"+tpdir))
                 });
 
