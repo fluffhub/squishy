@@ -9,7 +9,7 @@ Module(function M() {
     return a;
   });
   var FileSystemException=M.Def(function FileSystemException(path) {
-    console.debug({FileSystemException:path })
+    //console.debug({FileSystemException:path })
   });
   M.Class(function C() {
     C.Init(function Device(path,name) {
@@ -139,7 +139,7 @@ Module(function M() {
       var fs=this;
       var name=pathname.split("/")[0]
       // names.forEach(function(name) {
-      console.debug({pathname:pathname });
+      //console.debug({pathname:pathname });
       var i=Object.keys(this.devices[device]).length;
 
       Object.keys(this.devices[device]).forEach(function(id) {
