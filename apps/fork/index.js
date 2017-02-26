@@ -310,7 +310,7 @@ Module(function M() {
             if(dirs[dirs.length-1]=="/") dirs=dirs.slice(0,-1);
 
             //dirs=dirs.split("/[#/]{1}/")
-            dirs=a.href.match(/((?:^http:\/\/)?.+?(?=[#/]|$))/g).slice();
+            dirs=a.href.match(/(.+?(?=[#/]+|$))/g).slice(2)
             var lib=this
 
             var pdir="";
