@@ -79,7 +79,7 @@ Module(function M() {
 
       });
       afliw("class",function match(item, name) {
-        if(item.isClass) {
+        if(item instanceof Function && item.isClass) {
          return true;
         }
         return false;
