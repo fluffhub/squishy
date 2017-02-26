@@ -673,6 +673,9 @@ background-color:rgba(255,255,255,0.9);
 
 .FileBrowser .button.live { color:#0F0 }
 .FileBrowser .button.membrane { color:#0AF }
+.FileBrowser .button.Module { color:#0AF; }
+.FileBrowser .button.Directory { color:#0AF; }
+.FileBrowser .button.Class { color:#F0F; }
 .FileBrowser .button.live.membrane { color:#FA0 }
 .fs_container>.button {  line-height:1.25em;float:left;clear:both;width:100%;
   padding:0 0.25em; }

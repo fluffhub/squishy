@@ -117,6 +117,23 @@ Module(function M() {
             this.container.hide();
           });
           C.Def(function onrefresh(val) {})
+          C.Def(function addItem(name,uri,item) {
+            var str;
+           // if(this.loc.href.slice(-1)=="/") str=this.loc.href+filename
+           // else str=FL.loc.href+"#"+filename;
+            var dirloc=system.uri(str);
+            if(filename in FL.contents) {
+              FL.Contents[filename].addClass("Module live");
+            }
+            else {
+              var F=new fork.FileListItem(filename,dirloc,function() {
+                console.debug({Module:file});
+                FL.click.call(FL,dirloc);
+              });
+              FL.Contents.add(F);
+            }
+
+          });
           C.Def(function load() {
             var dir=this;
             live.DeviceManager.retrieve(this.loc.href,function(mod) {

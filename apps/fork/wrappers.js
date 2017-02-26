@@ -6,16 +6,16 @@ Module(function M() {
         C.Init(function FileListItemWrapper(match,wrap,open) {
           if(wrap instanceof Function) { this.wrap=wrap; }
           if(match instanceof Function) { this.match=match; }
-          if(open instanceof Function) { this.open=open; }
+          if(open instanceof Function) { this.open=open;  }
         });
         C.Def(function wrap(item) {
           return item;
         });
-        C.Def(function match(item,item) {
+        C.Def(function match(item,name) {
           return false;
         });
         C.Def(function open() {
-
+          return null;
         });
 
       })
@@ -56,7 +56,7 @@ Module(function M() {
           else str=FL.loc.href+"#"+filename;
           var dirloc=system.uri(str);
           if(filename in FL.contents) {
-            FL.Contents[filename].addClass("Module");
+            FL.Contents[filename].addClass("Module live");
           }
           else {
           var F=new fork.FileListItem(filename,dirloc,function() {
@@ -68,7 +68,7 @@ Module(function M() {
         });
       });
       Import("squishy/membrane",function(membrane) {
-      afliw("membrane",function match(item) {
+      afliw("membrane",function match(item, name) {
         if(item instanceof membrane.File || item instanceof membrane.Dir) {
          return true;
         }
@@ -78,18 +78,18 @@ Module(function M() {
       });
 
       });
-      Import("squishy/system",function(live) {
-        afliw("live",function match(item) {
-        if(item instanceof live.File || item instanceof live.Dir) {
+      Import("squishy/membrane",function(membrane) {
+      afliw("class",function match(item, name) {
+        if(item instanceof Class) {
          return true;
         }
-        return false
-        },function wrap(item) {
-          item.addClass("live");
-        });
+        return false;
+      },function wrap(item) {
+        item.addClass("Class");
+      });
 
       });
-      afliw("Dir",function match(item) {
+      afliw("Dir",function match(item, name) {
         if (item instanceof system.Dir) return true;
         return false;
       },function wrap(item) {
