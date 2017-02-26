@@ -126,7 +126,7 @@ Module(function M() {
          a=path;
                                 }
       else if (typeof path=="string") {
-       a=system.uri(path);
+       a=uri(path);
       }
       var device=a.hostname;
       var pathname=a.path.split("/").slice(1);
