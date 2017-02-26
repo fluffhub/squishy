@@ -79,7 +79,7 @@ Module(function M() {
 
       });
       Import("squishy/system",function(live) {
-        afliw("membrane",function match(item) {
+        afliw("live",function match(item) {
         if(item instanceof live.File || item instanceof live.Dir) {
          return true;
         }
