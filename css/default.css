@@ -672,9 +672,19 @@ background-color:rgba(255,255,255,0.9);
 
 
 .FileBrowser .button.live { color:#0F0 }
-.FileBrowser .button.membrane { color:#0AF }
-.FileBrowser .button.Module { color:#0FF; }
-.FileBrowser .button.Directory { color:#AAF; }
+.FileBrowser .button.membrane {
+    color: #0AF;
+    font-weight: 100;
+}
+.FileBrowser .button.Module {
+    color: #FA0;
+    font-weight: 500;
+}
+.FileBrowser .button.Directory {
+    color: #3d3;
+    text-decoration: underline;
+    font-weight: 600;
+}
 .FileBrowser .button.Class { color:#F0F; }
 .FileBrowser .button.live.membrane { color:#FA0 }
 .fs_container>.button {  line-height:1.25em;float:left;clear:both;width:100%;
