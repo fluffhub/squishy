@@ -2,6 +2,10 @@ Module(function M() {
   var uri=M.Def(function uri(loc) {
     var a=document.createElement("a")
     a.href=loc
+
+    Object.defineProperty(a,"path",{get:a.__lookupGetter__("pathname")})
+    Object.defineProperty(a,"pathname",{get:function(){ return this.path+this.hash }})
+    a.pathname=function() { return this.path+this.hash; }
     return a;
   });
   var FileSystemException=M.Def(function FileSystemException(path) {
