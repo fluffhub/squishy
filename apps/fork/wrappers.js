@@ -46,7 +46,7 @@ Module(function M() {
 
         filenames.forEach(function(filename) {
           var file = obj[filename];
-
+          if(file instanceof Module) filename=filename+".js"
           //if(filename in FL.contents) {
           //  FL.contents[filename].addReference(devicename,file);
           //} else {
@@ -56,7 +56,7 @@ Module(function M() {
           else str=FL.loc.href+"#"+filename;
           var dirloc=system.uri(str);
           if(filename in FL.contents) {
-            FL.Contents[filename].addClass("Module live");
+           // FL.Contents[filename].addClass("Module live");
           }
           else {
           var F=new fork.FileListItem(filename,dirloc,function() {
