@@ -4,7 +4,9 @@ Module(function M() {
     "squishy/system",
     "squishy/live",
     function(Req,system,live) {
-      function MembraneError() { console.debug({membraneError:arguments[0]}) };
+      function MembraneError() {
+        //console.debug({membraneError:arguments[0]})
+      };
       var default_url="/squishy/membrane"
       var default_root="squishy"
       var default_id="pool"
@@ -107,7 +109,7 @@ Module(function M() {
           var i=0;
           //if(dirs[i]=="") dirs=dirs.slice(1);
           //for (i=0;i<dirs.length;i++) {
-          console.debug({dirs:dirs});
+          //console.debug({dirs:dirs});
           (function dig() {
             var fn=dirs[i];
             i++;
@@ -240,7 +242,7 @@ Module(function M() {
                     //is a file
 
                     F=new M.Self.File(tokens[1],dirloc,dir.env,function() {
-                      console.debug({filename:dirloc})
+                      //console.debug({filename:dirloc})
                       if(tokens[2]!="*")
                         this.refresh();
                       this.open();
