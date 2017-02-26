@@ -150,7 +150,7 @@ Module(function M() {
             if(i==0) result(all);
           });
         } catch(e) {
-
+          console.debug({error:e})
           all[id]=null;
           if(i==0) result(all);
         }
