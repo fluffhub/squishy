@@ -8,7 +8,7 @@ Module(function M() {
 
       });
       C.Def(function retrieve(path,result) {
-        system.Device.retrieve.call(path,function(obj) {
+        system.Device.retrieve.call(this,path,function(obj) {
           if (obj.obj instanceof Module) {
             result(obj.obj);
           }
