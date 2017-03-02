@@ -40,7 +40,8 @@ Module(function M() {
       var device=this;
       var cursor=this.root;
       var dirs=path.split("/");
-
+      var phantom;
+      console.debug({retrieving:path,obj:phantom})
       for(var i=0;i<dirs.length;i++) {
         var dn=dirs[i];
         if(dn in cursor.contents) {
@@ -50,6 +51,7 @@ Module(function M() {
         }
       }
       if (cursor instanceof Array) cursor=cursor[0];
+      phantom=cursor;
       result(cursor);
     });
     C.Def(function init(path,obj) {
