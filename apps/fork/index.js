@@ -106,7 +106,23 @@ Module(function M() {
             //this.Contents.hide();
             //this.refresh();
           });
-          C.Def(function addReference(name,obj) {
+          C.Def(function addListItem(filename,loc,obj) {
+            var FL=this;
+            if(filename in FL.contents) {
+              // FL.Contents[filename].addClass("Module live");
+              FL.contents[filename].addReference(obj);
+            }
+            else {
+              var F=new fork.FileListItem(filename,dirloc,function() {
+                console.debug({Module:file});
+                FL.click.call(FL,dirloc);
+              });
+              FL.Contents.add(F);
+              FL.contents[filename]=F;
+              FL.contents[filename].addReference(obj);
+            }
+          });
+          C.Def(function addReference(obj,name) {
             this.references[name]=obj;
             this.addClass(name);
           });
@@ -119,8 +135,8 @@ Module(function M() {
           C.Def(function onrefresh(val) {})
           C.Def(function addItem(name,uri,item) {
             var str;
-           // if(this.loc.href.slice(-1)=="/") str=this.loc.href+filename
-           // else str=FL.loc.href+"#"+filename;
+            // if(this.loc.href.slice(-1)=="/") str=this.loc.href+filename
+            // else str=FL.loc.href+"#"+filename;
             var dirloc=system.uri(str);
             if(filename in FL.contents) {
               FL.Contents[filename].addClass("Module live");
