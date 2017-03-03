@@ -7,7 +7,7 @@ Module(function M() {
       a.href=loc;
     }
     Object.defineProperty(a,"path",{get:a.__lookupGetter__("pathname"),configurable:true})
-    Object.defineProperty(a,"pathname",{get:function(){ return this.path+this.hash,configurable:true }})
+    Object.defineProperty(a,"pathname",{get:function(){ return this.path+this.hash },configurable:true})
     a.pathname=function() { return this.path+this.hash; }
     return a;
   });
