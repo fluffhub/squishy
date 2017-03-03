@@ -101,11 +101,7 @@ Module(function M() {
           else str=FL.loc.href+"/"+filename;
           var dirloc=system.uri(str);
 
-          var F=new fork.FileListItem(filename,dirloc,function() {
-            console.debug({Module:file});
-            FL.click.call(FL,dirloc);
-          });
-          FL.Contents.add(F);
+          FL.addListItem(filename,dirloc,obj);
 
         });
       });
