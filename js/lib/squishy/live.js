@@ -37,7 +37,7 @@ Module(function M () {
       } else {
         live=new remote.Device(url.hostname,"live");
       }
-      live.init(url.pathname,obj);
+      live.init(url,obj);
       //M.Self.devices.init(path.hostname,live);
     });
     //M.Self.devices[path.hostname].live.init(path.pathname,obj);

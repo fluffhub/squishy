@@ -10,10 +10,11 @@ Module(function M() {
       C.Def(function retrieve(path,result) {
 
         system.Device.prototype.retrieve.call(this,path,function(obj) {
-          if (obj.obj instanceof Module) {
-            result(obj.obj);
-          }
-           else result(obj);
+         // if (obj.obj instanceof Module) {
+         //   result(obj.obj);
+        //  }
+         //  else
+             result(obj);
         });
       });
     });
