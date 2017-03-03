@@ -6,7 +6,7 @@ Module(function M() {
       a=document.createElement("a");
       a.href=loc;
     }
-    Object.defineProperty(a,"path",{get:a.__lookupGetter__("pathname")})
+    Object.defineProperty(a,"path",{get:a.__lookupGetter__("pathname"),configurable:true})
     Object.defineProperty(a,"pathname",{get:function(){ return this.path+this.hash }})
     a.pathname=function() { return this.path+this.hash; }
     return a;
