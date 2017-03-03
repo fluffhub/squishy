@@ -8,7 +8,6 @@ Module(function M() {
     }
     Object.defineProperty(a,"path",{get:a.__lookupGetter__("pathname"),configurable:true})
     Object.defineProperty(a,"pathname",{get:function(){ return this.path+this.hash },configurable:true})
-    a.pathname=function() { return this.path+this.hash; }
     return a;
   });
   var FileSystemException=M.Def(function FileSystemException(path) {
