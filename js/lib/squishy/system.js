@@ -59,9 +59,10 @@ Module(function M() {
     });
     C.Def(function init(path,obj) {
       var device=this;
-      Import("squishy/system",function(system) {
 
-        var fileloc=system.uri(path).href;
+      Import("squishy/system",function(system) {
+        path=path=system.uri(path);
+        var fileloc=path.href;
         var fileroot=system.uri("/").href;
         var uri=fileloc.slice(fileroot.length);
         var dirs=uri.split('/');
