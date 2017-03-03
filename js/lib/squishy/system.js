@@ -6,9 +6,11 @@ Module(function M() {
       a=document.createElement("a");
       a.href=loc;
     }
+    if(a.hasOwnProperty("path") ) { return a } else {
     Object.defineProperty(a,"path",{get:a.__lookupGetter__("pathname"),configurable:true})
     Object.defineProperty(a,"pathname",{get:function(){ return this.path+this.hash },configurable:true})
     return a;
+    }
   });
   var FileSystemException=M.Def(function FileSystemException(path) {
     //console.debug({FileSystemException:path })
