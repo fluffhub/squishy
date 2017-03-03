@@ -44,7 +44,7 @@ Module(function M() {
       var device=this;
       var cursor=this.root;
       var dirs=path.split("/");
-      console.debug({retrieving:path,obj:phantom})
+
       for(var i=0;i<dirs.length;i++) {
         var dn=dirs[i];
         if(dn in cursor.contents) {
