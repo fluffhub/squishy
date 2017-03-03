@@ -1,8 +1,11 @@
 Module(function M() {
   var uri=M.Def(function uri(loc) {
-    var a=document.createElement("a")
-    a.href=loc
-
+    var a;
+    if(loc instanceof Element) a=loc;
+    else {
+      a=document.createElement("a");
+      a.href=loc;
+    }
     Object.defineProperty(a,"path",{get:a.__lookupGetter__("pathname")})
     Object.defineProperty(a,"pathname",{get:function(){ return this.path+this.hash }})
     a.pathname=function() { return this.path+this.hash; }
@@ -40,7 +43,6 @@ Module(function M() {
       var device=this;
       var cursor=this.root;
       var dirs=path.split("/");
-      var phantom;
       console.debug({retrieving:path,obj:phantom})
       for(var i=0;i<dirs.length;i++) {
         var dn=dirs[i];
@@ -51,7 +53,7 @@ Module(function M() {
         }
       }
       if (cursor instanceof Array) cursor=cursor[0];
-      phantom=cursor;
+
       result(cursor);
     });
     C.Def(function init(path,obj) {

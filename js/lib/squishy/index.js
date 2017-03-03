@@ -230,7 +230,7 @@ function Module() {
       window.Import("squishy/system","squishy/live",function(system,live) {
        // window.Import(parser.href,function(a) {
 
-        live.init(parser.href,M);
+        live.init(parser,M);
       //  });
       });
 
