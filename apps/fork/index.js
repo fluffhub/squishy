@@ -113,9 +113,8 @@ Module(function M() {
               FL.contents[filename].addReference(obj);
             }
             else {
-              var F=new FileListItem(filename,dirloc,function() {
-                console.debug({Module:file});
-                FL.click.call(FL,dirloc);
+              var F=new FileListItem(filename,loc,function() {
+                 FL.click.call(FL,loc);
               });
               FL.Contents.add(F);
               FL.contents[filename]=F;
