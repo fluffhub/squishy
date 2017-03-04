@@ -61,19 +61,19 @@ Module(function M() {
         });
       });
       Import("squishy/membrane",function(membrane) {
-      afliw("membrane",function match(item, name) {
-        if(item instanceof membrane.File || item instanceof membrane.Dir) {
-         return true;
-        }
-        return false;
-      },function wrap(item) {
-        item.addClass("membrane");
-      });
+        afliw("membrane",function match(item, name) {
+          if(item instanceof membrane.File || item instanceof membrane.Dir) {
+            return true;
+          }
+          return false;
+        },function wrap(item) {
+          item.addClass("membrane");
+        });
 
       });
       afliw("class",function match(item, name) {
         if(item instanceof Function && item.isClass) {
-         return true;
+          return true;
         }
         return false;
       },function wrap(item) {
@@ -87,25 +87,25 @@ Module(function M() {
       },function wrap(item) {
         item.addClass("Directory")
       },function open(obj, FL) {
-        obj.list(function(ls) {
-          var obj=ls;
-        var filenames=Object.keys(obj.contents);
+        obj.list(function() {
 
-        filenames.forEach(function(filename) {
-          var file = obj.contents[filename];
+          var filenames=Object.keys(obj.contents);
 
-          //if(filename in FL.contents) {
-          //  FL.contents[filename].addReference(devicename,file);
-          //} else {
-          // var F;
-          var str;
-          if(FL.loc.href.slice(-1)=="/") str=FL.loc.href+filename
-          else str=FL.loc.href+"/"+filename;
-          var dirloc=system.uri(str);
+          filenames.forEach(function(filename) {
+            var file = obj.contents[filename];
 
-          FL.addListItem(filename,dirloc,obj);
+            //if(filename in FL.contents) {
+            //  FL.contents[filename].addReference(devicename,file);
+            //} else {
+            // var F;
+            var str;
+            if(FL.loc.href.slice(-1)=="/") str=FL.loc.href+filename
+            else str=FL.loc.href+"/"+filename;
+            var dirloc=system.uri(str);
 
-        });
+            FL.addListItem(filename,dirloc,obj);
+
+          });
         });
       });
     });

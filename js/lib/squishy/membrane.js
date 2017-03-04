@@ -113,17 +113,18 @@ Module(function M() {
           (function dig(cursor) {
             var fn=dirs[i];
             i++;
-            cursor.list(function(ls) {
+            cursor.list(function() {
               var dirname=fn;
-              if(dirname in ls.contents) {
-                cursor=ls.contents[dirname];
+              if(dirname in cursor.contents) {
+                cursor=cursor.contents[dirname];
                 if(i==dirs.length)  {
                   if(cursor instanceof M.Self.Dir) {
-                    ls.list(function(ls2) {
-                      result(ls2);
-                    });
+                    //cursor.list(function(ls2) {
+                    //  result(ls2);
+                    result(cursor)
+                    //});
                   } else {
-                    result(ls)
+                    result(cursor)
                   }
                 }
                 else {
