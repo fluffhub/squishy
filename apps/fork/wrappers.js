@@ -88,7 +88,7 @@ Module(function M() {
         item.addClass("Directory")
       },function open(obj, FL) {
         obj.list(function(ls) {
-          var obj=this;
+          var obj=ls;
         var filenames=Object.keys(obj.contents);
 
         filenames.forEach(function(filename) {
