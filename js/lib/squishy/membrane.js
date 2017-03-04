@@ -120,7 +120,7 @@ Module(function M() {
                 if(i==dirs.length)  {
                   if(cursor instanceof M.Self.Dir) {
                     cursor.list(function() {
-                      result(this);
+                      result(cursor);
                     });
                   } else {
                     result(cursor)
@@ -257,7 +257,7 @@ Module(function M() {
 
             });
           } else {
-            success.call(this);
+            success.call(dir);
           }
         });
         C.Def(function mkdir(success) {
