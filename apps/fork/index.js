@@ -48,7 +48,7 @@ Module(function M() {
             });
             //this.addReference(obj);
           });
-          C.Def(function addReference(name,obj) {
+          C.Def(function addReference(obj,name) {
             this.references[name]=obj;
             this.addClass(name);
           });
@@ -121,7 +121,7 @@ Module(function M() {
               FL.contents[filename].addReference(obj);
             }
           });
-          C.Def(function addReference(name,obj) {
+          C.Def(function addReference(obj,name) {
             this.references[name]=obj;
             this.addClass(name);
           });
@@ -386,7 +386,7 @@ Module(function M() {
             //this.Contents.hide();
             //this.refresh();
           });
-          C.Def(function addReference(name,obj) {
+          C.Def(function addReference(obj,name) {
             this.references[name]=obj;
             this.addClass(name);
           });
