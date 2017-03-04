@@ -113,17 +113,17 @@ Module(function M() {
           (function dig(cursor) {
             var fn=dirs[i];
             i++;
-            cursor.list(function() {
+            cursor.list(function(ls) {
               var dirname=fn;
-              if(dirname in cursor.contents) {
-                cursor=cursor.contents[dirname];
+              if(dirname in ls.contents) {
+                cursor=ls.contents[dirname];
                 if(i==dirs.length)  {
                   if(cursor instanceof M.Self.Dir) {
-                    cursor.list(function() {
-                      result(cursor);
+                    ls.list(function(ls2) {
+                      result(ls2);
                     });
                   } else {
-                    result(cursor)
+                    result(ls)
                   }
                 }
                 else {
@@ -253,11 +253,11 @@ Module(function M() {
 
               });
               dir.loaded=true;
-              success.call(dir)
+              success(dir)
 
             });
           } else {
-            success.call(dir);
+            success(dir);
           }
         });
         C.Def(function mkdir(success) {

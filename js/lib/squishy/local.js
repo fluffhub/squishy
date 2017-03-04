@@ -63,8 +63,8 @@ Module(function M() {
           this.contents=contents
         }
       });
-      C.Def(function list() {
-        return this.contents
+      C.Def(function list(success) {
+        success.call(this)
       });
       C.Def(function mkdir() {
 

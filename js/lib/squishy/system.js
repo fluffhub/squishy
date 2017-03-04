@@ -201,9 +201,9 @@ Module(function M() {
     });
     C.Def(function list(result) {
       if(result instanceof Function) {
-        result(this.contents);
+        result(this);
       }
-      return this.contents
+      return this
     });
     C.Def(function mkdir(name,obj) {
 
