@@ -121,7 +121,7 @@ Module(function M() {
               FL.contents[filename].addReference(obj);
             }
           });
-          C.Def(function addReference(obj,name) {
+          C.Def(function addReference(name,obj) {
             this.references[name]=obj;
             this.addClass(name);
           });
