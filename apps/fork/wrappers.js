@@ -87,6 +87,8 @@ Module(function M() {
       },function wrap(item) {
         item.addClass("Directory")
       },function open(obj, FL) {
+        obj.list(function(ls) {
+          var obj=this;
         var filenames=Object.keys(obj.contents);
 
         filenames.forEach(function(filename) {
@@ -103,6 +105,7 @@ Module(function M() {
 
           FL.addListItem(filename,dirloc,obj);
 
+        });
         });
       });
     });
