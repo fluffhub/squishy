@@ -17,7 +17,7 @@ Module(function M () {
   M.Def(function init(path,obj) {
     /* this is the dedicated init function for live objects.
     it will always pick the "live" filesystem of a device at a given hostname to add it to. */
-    console.debug({initting:obj,at:path})
+    //console.debug({initting:obj,at:path})
     Import("squishy/system","squishy/remote",function(system,remote) {
       var url=system.uri(path);
 

@@ -12,7 +12,7 @@ Module(function M() {
     "squishy/system",
     "fork/wrappers",
     function(event,basic,interactive,Req,svg,form,LM,live,system,wrappers) {
-      Import(    "spoon","spoon/conf",function(spoon,conf) {
+      Import("spoon","spoon/conf",function(spoon,conf) {
         var osroot=""
         var Request=Req.Request;
         var main=live.DeviceManager;
@@ -400,8 +400,7 @@ Module(function M() {
           C.Def(function load() {
             var dir=this;
             var dev=this.obj;
-            console.debug({dev:dev});
-            if(dev!=null) {
+             if(dev!=null) {
               var filenames=Object.keys(dev);
 
               filenames.forEach(function(filename) {

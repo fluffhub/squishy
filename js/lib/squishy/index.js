@@ -347,7 +347,7 @@ function Import(path,callback) {
 
         parser.href = path;
         path=parser.pathname;
-        console.debug(path);
+        //console.debug(path);
         absolute=true;
       } else {
 
