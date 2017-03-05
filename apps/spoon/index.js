@@ -107,9 +107,10 @@ Module(function M() {
                    SpoonLogo.fit(logo.bounds());
 
                  }});
-                 var SpoonButton=new interactive.MomentaryButton("spoon","spoon",function() {
+                 var SpoonButton=new interactive.MomentaryButton("spoon","",function() {
                    W.tasks.header.toggleClass("collapsed");
                  });
+                 SpoonButton.removeClass("button");
                  SpoonButton.add(SpoonLogo);
                  this.tasks.header.addBefore(SpoonButton);
                  this.tasks.header.addClass("TaskList")
