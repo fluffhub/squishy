@@ -5,8 +5,6 @@ td { }
 height: 100%;
 position: absolute;
 }
-.sitemenu { position:static;left:0;bottom:0;z-index:10000000;width:60px;height:60px;float:left; }
-
 .submitter {}
 .submitter .comments {
 
@@ -640,8 +638,37 @@ background-color:rgba(255,255,255,0.9);
 .Comments.Line {
  float:left;clear:none;
 }
-.header-bar.TaskList { position:fixed;bottom:0;left:0;right:0;z-index:1000;background-color:rgba(200,200,200,0.1); }
-.header-bar.TaskList .tab { width:60px;height:60px; overflow:hidden;position:static;float:left; }
+.sitemenu {
+    position: static;
+    left: -5px;
+    bottom: 0;
+    z-index: 10000000;
+    width: 60px;
+    height: 60px;
+    /* float: left; */
+    display: inline;
+    margin-left: -5px;
+}
+.header-bar.TaskList {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    /* right: 0; */
+    width: auto;
+    z-index: 1000;
+    max-width: 100%;
+    background-color: rgba(200,200,200,0.1);
+    box-shadow: 2px 0px 6px -2px rgba(100,100,100,0.9);
+}
+.header-bar.TaskList .tab {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    position: static;
+    float: left;
+    margin: 5px;
+    box-shadow: 3px 3px 10px rgba(150,150,150,0.9);
+}
 .Comments>div {
 
 
