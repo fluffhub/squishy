@@ -667,11 +667,17 @@ span.compositiontitle {
     max-width: 100%;
     background-color: rgba(200,200,200,0.1);
     background: none;
+  transition:width 2s ease-in-out;
     /* box-shadow: 2px 0px 6px -2px rgba(100,100,100,0.9); */
+}
+.header-bar.TaskList.collapsed {
+
+  width:60px;
 }
 .header-bar.TaskList>.tabset {
   /*display:inline;*/
 }
+
 .header-bar.TaskList .tab {
     width: 50px;
     height: 50px;

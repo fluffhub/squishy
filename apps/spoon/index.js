@@ -94,7 +94,7 @@ Module(function M() {
                  //.Def("homebutton",SpoonLogo);
                  this.homebutton=SpoonLogo;
                  SpoonLogo.addClass("sitemenu");
-                 this.tasks.header.addBefore(SpoonLogo);
+
                  var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
 
                    var logo=svg.query("#CLICKER")[0];
@@ -106,7 +106,12 @@ Module(function M() {
                    //SquishyLogo.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
                    SpoonLogo.fit(logo.bounds());
 
-                 }})
+                 }});
+                 var SpoonButton=new interactive.MomentaryButton("spoon","spoon",function() {
+                   W.tasks.header.toggleClass("collapsed");
+                 });
+                 SpoonButton.add(SpoonLogo);
+                 this.tasks.header.addBefore(SpoonButton);
                  this.tasks.header.addClass("TaskList")
                  this.editors=[];
 
