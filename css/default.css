@@ -639,7 +639,7 @@ span.compositiontitle {
   float:left;clear:none;
 }
 .sitemenu {
-    position: static;
+    position: absolute;
     left: -5px;
     bottom: 0;
     z-index: 10000000;
@@ -655,23 +655,29 @@ span.compositiontitle {
     left: 0;
     /* right: 0; */
     width: auto;
-    float: left;
+    transition: width 1s ease;
+    /* width: 50px; */
+    overflow: hidden;
+    padding-left: 50px;
+    padding-right: 0;
+    text-overflow: clip;
+    /* float: left; */
     z-index: 1000;
     white-space: nowrap;
     max-width: 100%;
     background-color: rgba(200,200,200,0.1);
     background: none;
     /* box-shadow: 2px 0px 6px -2px rgba(100,100,100,0.9); */
-
 }
 .header-bar.TaskList>.tabset {
-  display:inline;
+  /*display:inline;*/
 }
 .header-bar.TaskList .tab {
     width: 50px;
     height: 50px;
     overflow: hidden;
     position: static;
+    display: inline;
     /* float: left; */
     margin: 5px;
     box-shadow: 3px 3px 10px rgba(150,150,150,0.9);
