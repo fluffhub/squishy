@@ -680,9 +680,12 @@ background-color:rgba(255,255,255,0.9);
     color: #FA0;
     font-weight: 500;
 }
+.FileBrowser .FileListItem:hover { text-decoration:underline; }
+.FileBrowser .button.Directory:after {
+    content: "/";
+}
 .FileBrowser .button.Directory {
     color: #3d3;
-    text-decoration: underline;
     font-weight: 600;
 }
 .FileBrowser .button.Class { color:#F0F; }
