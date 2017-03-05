@@ -679,10 +679,11 @@ span.compositiontitle {
   /*display:inline;*/
   display:inline-block;width:auto;
   overflow:hidden;
-  transition:width 1s ease-in-out;
+  opacity:1;
+  transition:opacity 1s ease-in-out;
 }
 .TaskList.collapsed>.tabset {
-  width:0;
+ opacity:0;
 }
 .TaskList .tab {
     width: 50px;
