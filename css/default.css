@@ -662,11 +662,7 @@ span.compositiontitle {
     background-color: rgba(200,200,200,0.1);
     background: none;
     /* box-shadow: 2px 0px 6px -2px rgba(100,100,100,0.9); */
-  background: -moz-linear-gradient(left, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0) 14%, rgba(0,0,0,0) 33%, rgba(0,0,0,0) 87%, rgba(0,0,0,0.65) 98%, rgba(0,0,0,0.65) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left, rgba(0,0,0,0.42) 0%,rgba(0,0,0,0) 14%,rgba(0,0,0,0) 33%,rgba(0,0,0,0) 87%,rgba(0,0,0,0.65) 98%,rgba(0,0,0,0.65) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right, rgba(0,0,0,0.42) 0%,rgba(0,0,0,0) 14%,rgba(0,0,0,0) 33%,rgba(0,0,0,0) 87%,rgba(0,0,0,0.65) 98%,rgba(0,0,0,0.65) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b000000', endColorstr='#a6000000',GradientType=1 ); /* IE6-9 */
-copy
+
 }
 .header-bar.TaskList>.tabset {
   display:inline;
