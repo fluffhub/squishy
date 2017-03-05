@@ -7,7 +7,6 @@ Module(function M() {
     "squishy/svg",
     "squishy/form",
     "js/lib/squishy_ext/LocalModel",
-
     "squishy/live",
     "squishy/system",
     "fork/wrappers",
@@ -17,8 +16,6 @@ Module(function M() {
         var Request=Req.Request;
         var main=live.DeviceManager;
         var theme={}
-
-
 
         M.Def("wrappers",wrappers)
 
@@ -46,7 +43,6 @@ Module(function M() {
               });
 
             });
-            //this.addReference(obj);
           });
           C.Def(function addReference(obj,name) {
             this.references[name]=obj;
@@ -84,14 +80,7 @@ Module(function M() {
               dir.click=function() {
               }
             }
-            /*interactive.MomentaryButton.call(this,name,"",function(e) {
-            dir.click.call(dir,dir.loc);
-            e.stopPropagation();
-          });*/
-            //this.addClass("Dir");
             this.name=name;
-            //this.add(new basic.Span(name))
-            //this.env=env;
             if(loc instanceof Element) {
               this.loc=loc;
             } else   {
@@ -103,13 +92,10 @@ Module(function M() {
             this.Contents.attrs({"data-key":name})
             this.add(this.Contents);
             this.references={};
-            //this.Contents.hide();
-            //this.refresh();
           });
           C.Def(function addListItem(filename,loc,obj) {
             var FL=this;
             if(filename in FL.contents) {
-              // FL.Contents[filename].addClass("Module live");
               FL.contents[filename].addReference(obj);
             }
             else {
@@ -145,45 +131,12 @@ Module(function M() {
                   M.Self.wrappers.getWrapper(dev).forEach(function(wrapper) {
                     wrapper.wrap(dir);
                     wrapper.open(dev,dir);
-
-
-
-
                   });
-                  //F.addReference(devicename,file);
-                  //dir.contents[filename]=F;
-                  //dir.Contents.add(F);
-                  /*  if(file instanceof system.Dir) {
-                      F=new M.Self.Dir(filename,dirloc,dir.env,function() {
-                        dir.click.call(dir,dirloc);
-                      });
-                      F.addClass("dirlink");
-                    } else if(file instanceof Module) {
-                      console.debug({Module:file});
-                      F=new M.Self.Module(filename,dirloc,file,function() {
-                         console.debug({Module:file});
-                        dir.click.call(dir,dirloc);
-                      });
-                      F.addClass("dirlink");
-                    } else  {
-                      //is a file
-                      console.debug({openfile: file })
-
-
-                        console.debug(this.loc);
-                        var fileeditor=spoon.main.openFile(this.loc);
-                        console.debug(fileeditor);
-                      }
-                  });*/
-
                 }
-
               });
             });
           });
         });
-
-
 
         var FileBrowser=M.Class(function C() {
           C.Super(basic.Div);
@@ -230,8 +183,6 @@ Module(function M() {
 
           });
 
-
-
           C.Def(function cd(val) {
             var lib=this
             var path;
@@ -249,16 +200,6 @@ Module(function M() {
                 if(lib.dirs[path] instanceof Object) {
 
                 } else {
-                  /*if(instance instanceof Module) {
-                  lib.dirs[path]=new M.Self.Module(dirs[dirs.length],val,instance,function(dirloc) {
-                    console.debug("cding to "+dirloc);
-                    lib.cd(dirloc);
-                  });
-                } else  {
-                  lib.dirs[path]=new Dir(dirs[dirs.length],val,lib.session,function(dirloc) {
-                    lib.cd(dirloc)
-                  });
-                }*/
                   if(M.Self.match(instance,dirs[dirs.length-1])) {
                     var newDir=new FileList(dirs[dirs.length-1],val,function(dirloc) {
                       lib.cd(dirloc);
@@ -273,6 +214,7 @@ Module(function M() {
 
 
                   } else {
+
                     console.debug({unmatched:dirs[dirs.length-1],mod:instance});
                   }
 
@@ -290,9 +232,6 @@ Module(function M() {
 
             });
           });
-
-
-
 
           C.Def(function ls(loc) {
             var lib=this;
@@ -349,8 +288,6 @@ Module(function M() {
 
           return window.exp;
         });
-
-
 
         var Module=M.Class(function C() {
           C.Super(interactive.MomentaryButton);

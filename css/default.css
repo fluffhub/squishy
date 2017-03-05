@@ -640,7 +640,8 @@ background-color:rgba(255,255,255,0.9);
 .Comments.Line {
  float:left;clear:none;
 }
-
+.header-bar.TaskList { position:fixed;bottom:0;left:0; }
+.header-bar.TaskList .tab { width:100px;height:100px; overflow:hidden; }
 .Comments>div {
 
 

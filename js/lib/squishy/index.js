@@ -194,7 +194,6 @@ function Module() {
         else {
           M.name=ps.slice(-3,-2)[0]
         }
-
       }
       Object.defineProperty(M,'waiting',{value:0,writable:true});
       Object.defineProperty(M,'Template',{value:{},writable:true});
