@@ -87,10 +87,10 @@ Module(function M() {
                  var EW=this;
 
                  this.tasks=new TabbedPane()
-                 this.tasks.header.addClass("TaskList")
+
                  this.add(this.tasks.header)
                  this.add(this.tasks)
-
+                 this.tasks.header.addClass("TaskList")
                  this.editors=[];
 
                  var H = new EditorHome(EW);
