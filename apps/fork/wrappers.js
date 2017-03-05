@@ -45,16 +45,24 @@ Module(function M() {
         var filenames=Object.keys(obj);
 
         filenames.forEach(function(filename) {
+          var dirloc="";
           var file = obj[filename];
-          if(file instanceof Module) filename=filename+".js"
+          if(file instanceof Module) {
+            if(typeof file.dir == "string") {
+             dirloc=system.uri(file.filename)
+            }
+
+          } else {
+            var str;
+          if(FL.loc.href.slice(-1)=="/") str=FL.loc.href+filename
+          else str=FL.loc.href+"#"+filename;
+          dirloc=system.uri(str);
+          }
           //if(filename in FL.contents) {
           //  FL.contents[filename].addReference(devicename,file);
           //} else {
           // var F;
-          var str;
-          if(FL.loc.href.slice(-1)=="/") str=FL.loc.href+filename
-          else str=FL.loc.href+"#"+filename;
-          var dirloc=system.uri(str);
+
           FL.addListItem(filename,dirloc,obj);
 
 
