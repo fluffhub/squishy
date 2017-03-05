@@ -87,7 +87,7 @@ Module(function M() {
                  var EW=this;
 
                  this.tasks=new TabbedPane()
-
+                this.tasks.header.removeClass("header-bar");
                  this.add(this.tasks.header)
                  this.add(this.tasks)
                  var SpoonLogo=new svg.SVG(50,50);
