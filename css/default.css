@@ -680,7 +680,7 @@ span.compositiontitle {
   display:inline-block;width:auto;
   overflow:hidden;
   opacity:1;
-  transition:opacity 1s ease-in-out;
+  transition:opacity 0.25s ease-in-out;
 }
 .TaskList.collapsed>.tabset {
  opacity:0;
@@ -734,6 +734,7 @@ span.compositiontitle {
   color: #FA0;
   font-weight: 500;
 }
+.FileListItem { transition:color 0.3s ease-in-out }
 .FileBrowser .FileListItem:hover { text-decoration:underline; }
 .FileBrowser .button.Directory:after {
   content: "/";
