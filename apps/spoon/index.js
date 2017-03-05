@@ -90,6 +90,23 @@ Module(function M() {
 
                  this.add(this.tasks.header)
                  this.add(this.tasks)
+                 var SpoonLogo=new svg.SVG(50,50);
+                 //.Def("homebutton",SpoonLogo);
+                 this.homebutton=SpoonLogo;
+                 SpoonLogo.addClass("sitemenu");
+                 this.tasks.header.add(SpoonLogo);
+                 var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
+
+                   var logo=svg.query("#CLICKER")[0];
+                   var bbox=logo.bounds();
+                   console.debug({squishylogo:logo,svg:svg});
+                   //logo.remove();
+                   SpoonLogo.add(logo);
+                   //var bbox=logo.element.getBBox();
+                   //SquishyLogo.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
+                   SpoonLogo.fit(logo.bounds());
+
+                 }})
                  this.tasks.header.addClass("TaskList")
                  this.editors=[];
 
@@ -425,22 +442,7 @@ Module(function M() {
              }
 
 
-             var SpoonLogo=new svg.SVG(50,50);
-             M.Def("homebutton",SpoonLogo);
-             SpoonLogo.addClass("sitemenu");
-              main.add(SpoonLogo);
-             var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
 
-               var logo=svg.query("#CLICKER")[0];
-               var bbox=logo.bounds();
-               console.debug({squishylogo:logo,svg:svg});
-               //logo.remove();
-               SpoonLogo.add(logo);
-               //var bbox=logo.element.getBBox();
-               //SquishyLogo.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
-               SpoonLogo.fit(logo.bounds());
-
-             }})
 
              M.Def(function match(item) {
                Object.keys(Types).forEach(function(name) {
