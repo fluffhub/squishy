@@ -94,7 +94,7 @@ Module(function M() {
                  //.Def("homebutton",SpoonLogo);
                  this.homebutton=SpoonLogo;
                  SpoonLogo.addClass("sitemenu");
-                 this.tasks.header.add(SpoonLogo);
+                 this.tasks.header.addBefore(SpoonLogo);
                  var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
 
                    var logo=svg.query("#CLICKER")[0];
