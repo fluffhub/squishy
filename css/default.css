@@ -640,14 +640,19 @@ span.compositiontitle {
 }
 .sitemenu {
     position: absolute;
-    left: -5px;
+    left: 0;
     bottom: 0;
     z-index: 10000000;
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 50px;
     float: left;
     display: inline;
-    margin-left: -5px;
+    /* margin-left: -5px; */
+    margin: 5px;
+  transition:left 0.5s ease-in-out, bottom 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+.sitemenu.collapse {
+  left:-45px;bottom:-45px;width:90px;height:90px;
 }
 .TaskList {
     position: fixed;
