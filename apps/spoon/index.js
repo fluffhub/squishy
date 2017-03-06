@@ -98,6 +98,7 @@ Module(function M() {
                  var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
 
                    var logo=svg.query("#CLICKER")[0];
+                   logo.NSattrs({style:""});
                    var bbox=logo.bounds();
                    console.debug({squishylogo:logo,svg:svg});
                    //logo.remove();
