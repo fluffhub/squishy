@@ -649,7 +649,7 @@ span.compositiontitle {
     display: inline;
     /* margin-left: -5px; */
     margin: 5px;
-  transition:left 0.5s ease-in-out, bottom 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+  transition:left 0.5s ease-out;
 }
 .collapsed .sitemenu {
   left:-45px;bottom:-45px;width:90px;height:90px;
@@ -691,11 +691,14 @@ span.compositiontitle {
   /*display:inline;*/
   display:inline-block;width:auto;
   overflow:hidden;
+
+  transition:opacity 0.25s ease-out;
   opacity:1;
-  transition:opacity 0.25s ease-in-out;
 }
 .TaskList.collapsed>.tabset {
+  transition:opacity 1s ease-in;
  opacity:0;
+
 }
 .TaskList .tab {
     width: 50px;
