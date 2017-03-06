@@ -696,7 +696,7 @@ span.compositiontitle {
   opacity:1;
 }
 .TaskList.collapsed>.tabset {
-  transition:opacity 0.25s 1s ease-in;
+  transition:opacity 0.25s 0.25s ease-in;
  opacity:0;
 
 }
