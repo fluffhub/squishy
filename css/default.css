@@ -651,7 +651,7 @@ span.compositiontitle {
     margin: 5px;
   transition:left 0.5s ease-in-out, bottom 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
 }
-.sitemenu.collapse {
+.collapsed .sitemenu {
   left:-45px;bottom:-45px;width:90px;height:90px;
 }
 .TaskList {
