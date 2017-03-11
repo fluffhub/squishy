@@ -64,8 +64,13 @@ Module(function M() {
         M.Def(function match( file, name) {
           var ws=wrappers.getWrapper(file);
           if(ws instanceof Array && ws.length>0) {
+            for (var i=0;i<ws.length;i++) {
+              if(ws[i].open instanceof Function) {
             return true;
+              }
+            }
           }
+          return false;
         });
         var FileList=M.Class(function C() {
           C.Super(basic.Div);
@@ -217,7 +222,6 @@ Module(function M() {
 
                     console.debug({unmatched:dirs[dirs.length-1],mod:instance});
                   }
-
                 }
                 if(lib.dirs[path] instanceof Object) {
                   Object.keys(lib.dirs).forEach(function(d) {
