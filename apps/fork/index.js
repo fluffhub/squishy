@@ -156,12 +156,14 @@ Module(function M() {
             this.windows={};
             var lib=this;
 
+            this.headerbar=new basic.Div("headerbar");
+
             this.presentdir=new basic.Div("pwdbar");
             this.presentdir.dirs=[];
             this.dirs={};
             this.pwd=uri.pathname;
             this.root=null;
-
+            this.headerbar.add(this.presentdir);
 
 
             this.importer=new form.Form("importer",function submit(e) {
@@ -183,7 +185,7 @@ Module(function M() {
             lib.importer.add(new form.Submit("Search"));
 
             //this.addBefore(this.importer);
-            lib.add(lib.presentdir)
+            lib.add(lib.headerbar)
             lib.cd(uri);
 
           });
