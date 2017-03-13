@@ -738,7 +738,7 @@ span.compositiontitle {
   position:relative;
   z-index:2;
 }
-.FileBrowser .button {  background:none;font-weight:600;letter-spacing:0.01em;font-size:1.1em;color:#aaa;}
+.FileBrowser .button {  background:none;font-weight:300;letter-spacing:0.01em;font-size:1.1em;color:#aaa;}
 
 
 .FileBrowser .button.live { color:#0F0 }
@@ -748,7 +748,7 @@ span.compositiontitle {
 }
 .FileBrowser .button.Module {
   color: #FA0;
-  font-weight: 500;
+  font-weight: 300;
 }
 .FileListItem { transition:color 0.3s ease-in-out }
 .FileBrowser .FileListItem:hover { text-decoration:underline; }
