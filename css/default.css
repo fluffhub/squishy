@@ -731,7 +731,7 @@ span.compositiontitle {
 .dirlink.button:hover { text-decoration:underline;color:black; }
 .pwddir .dirlink.button:hover { text-decoration:none; color:black; }
 .pwddir .dirlink { padding:0; }
-.pwdbar { padding:0 0.25em;float:right; }
+.pwdbar { padding:0 0.25em;float:right;padding-right:2em; }
 .button {
   background-color:#ccc;
 
@@ -739,7 +739,12 @@ span.compositiontitle {
   z-index:2;
 }
 .FileBrowser .button {  background:none;font-weight:300;letter-spacing:0.01em;font-size:1.1em;color:#aaa;}
-
+.FileBrowser>.headerbar {     height: 2em;
+    padding-right: 3em;
+    margin: 5px;
+    overflow: hidden;
+    border: 1px solid #aaa;
+  border-radius: 3px;}
 
 .FileBrowser .button.live { color:#0F0 }
 .FileBrowser .button.membrane {
