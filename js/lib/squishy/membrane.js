@@ -117,7 +117,7 @@ Module(function M() {
           //if(dirs[i]=="") dirs=dirs.slice(1);
           //for (i=0;i<dirs.length;i++) {
           //console.debug({dirs:dirs});
-          (function dig(cursor, root,target) {
+          (function dig(cursor, root,target,anchor) {
             var fn=dirs[i];
             i++;
             cursor.list(function() {
