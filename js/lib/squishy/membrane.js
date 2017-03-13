@@ -136,7 +136,7 @@ Module(function M() {
                 }
                 else {
 
-                  dig(cursor,root,target);
+                  dig(cursor,root,target,anchor);
                 }
               } else {
                 throw new MembraneError(cursor)
