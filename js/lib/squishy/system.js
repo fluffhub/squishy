@@ -54,10 +54,18 @@ Module(function M() {
       //console.debug({retrieving:path,obj:phantom})
       for(var i=0;i<dirs.length;i++) {
         var dn=dirs[i];
+        if(cursor instanceof M.Self.Dir) {
         if(dn in cursor.contents) {
           cursor=cursor.contents[dn];
         } else {
           throw new FileSystemException(path);
+        }
+        } else {
+          if(dn in cursor) {
+            cursor=cursor[dn];
+          } else {
+           throw new FileSystemException(path);
+          }
         }
       }
       if (cursor instanceof Array) cursor=cursor[0];
