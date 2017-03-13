@@ -34,7 +34,6 @@ Module(function M() {
                  gs.forEach(function (g) {
                    theme[g.NSattr("id")]=g;
                  });
-
                }
              });
 

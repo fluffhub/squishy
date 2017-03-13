@@ -13,7 +13,7 @@ Module(function M() {
     }
   });
   var FileSystemException=M.Def(function FileSystemException(path) {
-    //console.debug({FileSystemException:path })
+    //console.debug({FileSystemExcepti on:path })
   });
   M.Class(function C() {
     C.Init(function Device(path,name) {
@@ -40,10 +40,16 @@ Module(function M() {
       // }
 
     });
-    C.Def(function retrieve(path, result) {
+    C.Def(function retrieve(a, result) {
       var device=this;
       var cursor=this.root;
-      var dirs=path.split("/");
+      var path;
+      if(a instanceof Element) {
+       path=a.pathname;
+      } else if (typeof a=="string") {
+       path=a;
+      }
+      var dirs=path.split("/[/#]{1}/");
       //console.debug({retrieving:path,obj:phantom})
       for(var i=0;i<dirs.length;i++) {
         var dn=dirs[i];
@@ -151,7 +157,7 @@ Module(function M() {
       Object.keys(this.devices[device]).forEach(function(id) {
         i--;
         try {
-          fs.devices[device][id].retrieve(pathname,function(value) {
+          fs.devices[device][id].retrieve(a,function(value) {
             all[id]=value;
             if(i==0) result(all);
           });

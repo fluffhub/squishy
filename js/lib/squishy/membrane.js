@@ -81,8 +81,12 @@ Module(function M() {
           });
 
         });
-        C.Def(function retrieve(path, result) {
+        C.Def(function retrieve(a, result) {
           var dirs;
+          var path;
+          if(a instanceof Element) {
+            path=a.hostname+a.path;
+          }
           if(path[0]=="/") {
             //use absolute path to membrane host
             dirs=path.split("/").slice(1);

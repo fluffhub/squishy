@@ -126,7 +126,7 @@ Module(function M() {
 
           C.Def(function load() {
             var dir=this;
-            live.DeviceManager.retrieve(this.loc.href,function(mod) {
+            live.DeviceManager.retrieve(this.loc,function(mod) {
               var devicenames=Object.keys(mod);
               var F=null;
               devicenames.forEach(function(devicename) {
