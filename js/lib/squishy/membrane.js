@@ -84,10 +84,11 @@ Module(function M() {
         C.Def(function retrieve(a, result) {
           var dirs;
           var path;
+          var s=this;
           if(a instanceof Element) {
-            path=a.hostname+a.path;
+            path=a.path;
           } else {
-           path=a;
+            path=a;
           }
           if(path[0]=="/") {
             //use absolute path to membrane host
@@ -99,7 +100,7 @@ Module(function M() {
 
             var newpath=path.split("/")
 
-         //   dirs=dirs.concat(rootsplit);
+            //   dirs=dirs.concat(rootsplit);
             for(var i=0;i<newpath.length;i++) {
 
               if(newpath[i]!=rootsplit[i]) {
@@ -190,11 +191,11 @@ Module(function M() {
         C.Def(function read(success,scratch) {
           var F=this;
           if(scratch||!this.loaded) {
-          this.env.exec("cat "+this.loc+"/"+this.name,function(val) {
-            F.value=val;
-            F.loaded=true;
-            success.call(F);
-          });
+            this.env.exec("cat "+this.loc+"/"+this.name,function(val) {
+              F.value=val;
+              F.loaded=true;
+              success.call(F);
+            });
           } else {
             this.loaded=true;
             success.call(this);
