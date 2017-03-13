@@ -45,11 +45,12 @@ Module(function M() {
       var cursor=this.root;
       var path;
       if(a instanceof Element) {
-       path=a.pathname;
+       path=a.pathname.slice(1);
       } else if (typeof a=="string") {
        path=a;
       }
       var dirs=path.split(/[/#]{1}/);
+      if(dirs[dirs.length-1]=="") dirs=dirs.slice(0,-1);
       //console.debug({retrieving:path,obj:phantom})
       for(var i=0;i<dirs.length;i++) {
         var dn=dirs[i];
