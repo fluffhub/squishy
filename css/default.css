@@ -752,8 +752,8 @@ span.compositiontitle {
   font-weight: 100;
 }
 
-.FileBrowser.button.function:before { content:"f",font-size:0.6em;font-weight:600;width:0.6em;height:0.6em;background-color:#dda; }
-.FileBrowser .button.Class.function:before { content:"C";font-size:0.6em;font-weight:600; width:0.6em;height:0.6em;background-color:#ada; }
+.FileBrowser .button.function:before { content:"f",color:white;font-size:0.6em;font-weight:600;width:0.6em;height:0.6em;background-color:#dda; }
+.FileBrowser .button.Class.function:before { content:"C";color:white;font-size:0.6em;font-weight:600; width:0.6em;height:0.6em;background-color:#ada; }
 
 .FileBrowser .button.Module {
   color: #FA0;
