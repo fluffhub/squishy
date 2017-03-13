@@ -751,9 +751,34 @@ span.compositiontitle {
   color: #0AF;
   font-weight: 100;
 }
-
-.FileBrowser .button.function:before { content:"f",color:white;font-size:0.6em;font-weight:600;width:0.6em;height:0.6em;background-color:#dda; }
-.FileBrowser .button.Class.function:before { content:"C";color:white;font-size:0.6em;font-weight:600; width:0.6em;height:0.6em;background-color:#ada; }
+.FileBrowser .button.function { color:#0ad; }
+.FileBrowser .button.function.Class { color:#F0F; }
+.FileBrowser .button.function:before {     content: "f";
+    color: white;
+    font-size: 0.6em;
+    font-weight: 900;
+    width: 1em;
+    /* display: inline-block; */
+    float: left;
+    height: 1em;
+    margin-top: 0.5em;
+    line-height: 1.2em;
+    /* font-size: 0.3em; */
+    text-align: center;
+    background-color: #0bf; }
+.FileBrowser .button.Class.function:before {     content: "C";
+    color: white;
+    font-size: 0.6em;
+    font-weight: 900;
+    width: 1em;
+    /* display: inline-block; */
+    float: left;
+    height: 1em;
+    margin-top: 0.5em;
+    line-height: 1.2em;
+    /* font-size: 0.3em; */
+    text-align: center;
+    background-color: #dad;}
 
 .FileBrowser .button.Module {
   color: #FA0;
@@ -768,7 +793,7 @@ span.compositiontitle {
   color: #3d3;
   font-weight: 300;
 }
-.FileBrowser .button.Class { color:#F0F; }
+
 .FileBrowser .button.live.membrane { color:#FA0 }
 .fs_container>.button {  line-height:1.25em;float:left;clear:both;width:100%;
   padding:0 0.25em; }
