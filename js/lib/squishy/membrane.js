@@ -85,7 +85,9 @@ Module(function M() {
           var dirs;
           var path;
           if(a instanceof Element) {
-            path=a.path;
+            path=a.hostname+a.path;
+          } else {
+           path=a;
           }
           if(path[0]=="/") {
             //use absolute path to membrane host
