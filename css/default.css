@@ -757,6 +757,16 @@ span.compositiontitle {
 .FileBrowser .button.string>.value {
   font-size:0.6em;
   margin-left:1em;
+  font-style:italic;
+}
+.FileBrowser .button.string>.value:before {
+  content:"\""
+}
+.FileBrowser .button.string>.value:after {
+ content:"\""
+}
+.FileBrowser .button.string>.value:hover {
+  text-decoration:none;
 }
 .FileBrowser .button.function { color:#0ad; }
 .FileBrowser .button.function.Class { color:#F0F; }
