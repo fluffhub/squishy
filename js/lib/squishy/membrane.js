@@ -117,7 +117,7 @@ Module(function M() {
           //if(dirs[i]=="") dirs=dirs.slice(1);
           //for (i=0;i<dirs.length;i++) {
           //console.debug({dirs:dirs});
-          (function dig(cursor) {
+          (function dig(cursor, root,target) {
             var fn=dirs[i];
             i++;
             cursor.list(function() {
@@ -142,7 +142,7 @@ Module(function M() {
                 throw new MembraneError(cursor)
               }
             });
-          })(cursor);
+          })(cursor,s,path,a);
         });
         C.Def(function status(result) {
           this.request.Get(this.url+"/membrane.cgi",{op:"status",id:this.id},function(r) {
