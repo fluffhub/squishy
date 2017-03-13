@@ -748,8 +748,15 @@ span.compositiontitle {
 
 .FileBrowser .button.live { color:#0F0 }
 .FileBrowser .button.membrane {
-  color: #0AF;
+  color: #99a;
   font-weight: 100;
+}
+.FileBrowser .button.string {
+  color:#5ad;
+}
+.FileBrowser .button.string>.value {
+  font-size:0.6em;
+  margin-left:1em;
 }
 .FileBrowser .button.function { color:#0ad; }
 .FileBrowser .button.function.Class { color:#F0F; }

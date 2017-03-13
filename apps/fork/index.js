@@ -38,7 +38,7 @@ Module(function M() {
                 var device=devices[devicename];
 
                 var ws=wrappers.getWrapper(device);
-                ws.forEach(function(w) { w.wrap(fli); });
+                ws.forEach(function(w) { w.wrap(fli,device); });
 
               });
 
