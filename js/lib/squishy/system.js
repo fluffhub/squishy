@@ -7,9 +7,9 @@ Module(function M() {
       a.href=loc;
     }
     if(a.hasOwnProperty("path") ) { return a } else {
-    Object.defineProperty(a,"path",{get:a.__lookupGetter__("pathname"),configurable:true})
-    Object.defineProperty(a,"pathname",{get:function(){ return this.path+this.hash },configurable:true})
-    return a;
+      Object.defineProperty(a,"path",{get:a.__lookupGetter__("pathname"),configurable:true})
+      Object.defineProperty(a,"pathname",{get:function(){ return this.path+this.hash },configurable:true})
+      return a;
     }
   });
   var FileSystemException=M.Def(function FileSystemException(path) {
@@ -45,9 +45,9 @@ Module(function M() {
       var cursor=this.root;
       var path;
       if(a instanceof Element) {
-       path=a.pathname.slice(1);
+        path=a.pathname.slice(1);
       } else if (typeof a=="string") {
-       path=a;
+        path=a;
       }
       var dirs=path.split(/[/#]{1}/);
       if(dirs[dirs.length-1]=="") dirs=dirs.slice(0,-1);
@@ -55,17 +55,29 @@ Module(function M() {
       for(var i=0;i<dirs.length;i++) {
         var dn=dirs[i];
         if(cursor instanceof M.Self.Dir) {
-        if(dn in cursor.contents) {
-          cursor=cursor.contents[dn];
-        } else {
-          throw new FileSystemException(path);
-        }
-        } else {
-          if(dn in cursor) {
-            cursor=cursor[dn];
+          if(dn in cursor.contents) {
+            cursor=cursor.contents[dn];
           } else {
-           throw new FileSystemException(path);
+            throw new FileSystemException(path);
           }
+        } else {
+          var cursors;
+          if(cursor instanceof Array) {
+            cursors=cursor;
+          } else {
+            cursors=[cursor];
+          }
+          var newcursor;
+          for(var j=0;j<cursors.length;j++) {
+            if(dn in cursors[j]) {
+              newcursor=cursors[j][dn];
+              break;
+            }
+          }
+          if(newcursor===undefined)
+            throw new FileSystemException(path);
+          else
+            cursor=newcursor;
         }
       }
       if (cursor instanceof Array) cursor=cursor[0];
@@ -144,10 +156,10 @@ Module(function M() {
       var all={}
       var a;
       if(path instanceof Element){
-         a=path;
-                                }
+        a=path;
+      }
       else if (typeof path=="string") {
-       a=uri(path);
+        a=uri(path);
       }
       var device=a.hostname;
       var pathname=a.path.split("/").slice(1);
