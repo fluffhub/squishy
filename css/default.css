@@ -765,7 +765,7 @@ span.compositiontitle {
     line-height: 1.2em;
     /* font-size: 0.3em; */
     text-align: center;
-    background-color: #0bf; }
+    background-color: #0bf;margin-right:0.25em; }
 .FileBrowser .button.Class.function:before {     content: "C";
     color: white;
     font-size: 0.6em;
@@ -778,7 +778,9 @@ span.compositiontitle {
     line-height: 1.2em;
     /* font-size: 0.3em; */
     text-align: center;
-    background-color: #dad;}
+    background-color: #dad;
+  margin-right:0.25em;
+}
 
 .FileBrowser .button.Module {
   color: #FA0;
