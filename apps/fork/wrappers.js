@@ -6,7 +6,7 @@ Module(function M() {
         C.Init(function FileListItemWrapper(match,wrap,open) {
           if(wrap instanceof Function) { this.wrap=wrap; }
           if(match instanceof Function) { this.match=match; }
-          if(open instanceof Function) { this.open=open;  }
+          if(open instanceof Function) { this.open=open;  } else this.open=null;
         });
         C.Def(function wrap(item) {
           return item;
@@ -14,9 +14,9 @@ Module(function M() {
         C.Def(function match(item,name) {
           return false;
         });
-        C.Def(function open() {
-          return null;
-        });
+    ////    C.Def(function open() {
+   ///       return null;
+   //     });
 
       })
 
@@ -49,14 +49,14 @@ Module(function M() {
           var file = obj[filename];
           if(file instanceof Module) {
             if(typeof file.dir == "string") {
-             dirloc=system.uri(file.filename)
+              dirloc=system.uri(file.filename)
             }
 
           } else {
             var str;
-          if(FL.loc.href.slice(-1)=="/") str=FL.loc.href+filename
-          else str=FL.loc.href+"#"+filename;
-          dirloc=system.uri(str);
+            if(FL.loc.href.slice(-1)=="/") str=FL.loc.href+filename
+            else str=FL.loc.href+"#"+filename;
+            dirloc=system.uri(str);
           }
           //if(filename in FL.contents) {
           //  FL.contents[filename].addReference(devicename,file);

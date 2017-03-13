@@ -135,7 +135,9 @@ Module(function M() {
                 if(dev!=null) {
                   M.Self.wrappers.getWrapper(dev).forEach(function(wrapper) {
                     wrapper.wrap(dir);
-                    wrapper.open(dev,dir);
+                    if(wrapper.open instanceof Function) {
+                      wrapper.open(dev,dir);
+                    }
                   });
                 }
               });
@@ -208,6 +210,7 @@ Module(function M() {
 
                 } else {
                   if(M.Self.match(instance,dirs[dirs.length-1])) {
+
                     var newDir=new FileList(dirs[dirs.length-1],val,function(dirloc) {
                       lib.cd(dirloc);
                     });
