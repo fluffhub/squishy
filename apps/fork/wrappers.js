@@ -88,17 +88,19 @@ Module(function M() {
         item.addClass("Class");
       });
       Import("squishy/basic",function(basic) {
-      afliw("string",function match(item,name) {
-        if (typeof item=="string") {
-          return true;
-        } return false;
+        afliw("string",function match(item,name) {
+          if (typeof item=="string") {
+            return true;
+          } return false;
 
-      },function wrap(item) {
-        item.addClass("string");
-        var span=new basic.Span(item);
-        span.addClass("value");
-        item.add(span);
-      });
+        },function wrap(item,obj) {
+          item.addClass("string");
+          if(typeof obj=="string") {
+            var span=new basic.Span(obj);
+            span.addClass("value");
+            item.add(span);
+          }
+        });
       });
       afliw("Fun",function match(item, name) {
         if(item instanceof Function) {

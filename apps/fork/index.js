@@ -134,7 +134,7 @@ Module(function M() {
 
                 if(dev!=null) {
                   M.Self.wrappers.getWrapper(dev).forEach(function(wrapper) {
-                    wrapper.wrap(dir);
+                    wrapper.wrap(dir,dev);
                     if(wrapper.open instanceof Function) {
                       wrapper.open(dev,dir);
                     }
