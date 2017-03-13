@@ -111,7 +111,9 @@ Module(function M() {
 
 
           }
-
+          if(dirs[dirs.length-1]=="") {
+            dirs=dirs.slice(0,-1);
+          }
           var cursor=this.root;
           var i=0;
           //if(dirs[i]=="") dirs=dirs.slice(1);
