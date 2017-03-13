@@ -86,7 +86,7 @@ Module(function M() {
           var path;
           var s=this;
           if(a instanceof Element) {
-            path=a.path;
+            path=a.path.slice(1);
           } else {
             path=a;
           }
