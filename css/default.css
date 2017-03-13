@@ -805,6 +805,9 @@ span.compositiontitle {
 }
 .FileListItem { transition:color 0.3s ease-in-out }
 .FileBrowser .FileListItem:hover { text-decoration:underline; }
+.FileBrowser .FileListItem:hover>.value {
+  text-decoration:none;
+}
 .FileBrowser .button.Directory:after {
   content: "/";
 }
