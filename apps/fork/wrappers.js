@@ -14,9 +14,9 @@ Module(function M() {
         C.Def(function match(item,name) {
           return false;
         });
-    ////    C.Def(function open() {
-   ///       return null;
-   //     });
+        ////    C.Def(function open() {
+        ///       return null;
+        //     });
 
       })
 
@@ -87,8 +87,25 @@ Module(function M() {
       },function wrap(item) {
         item.addClass("Class");
       });
+      Import("squishy/basic",function(basic) {
+      afliw("string",function match(item,name) {
+        if (typeof item=="string") {
+          return true;
+        } return false;
 
-
+      },function wrap(item) {
+        item.addClass("string");
+        var span=new basic.Span(item);
+        span.addClass("value");
+        item.add(span);
+      });
+      });
+      afliw("Fun",function match(item, name) {
+        if(item instanceof Function) {
+          return true;
+        }
+        return false;
+      },function wrap(item) { item.addClass("function");  });
       afliw("Dir",function match(item, name) {
         if (item instanceof system.Dir) return true;
         return false;
