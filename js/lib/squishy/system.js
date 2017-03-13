@@ -49,7 +49,7 @@ Module(function M() {
       } else if (typeof a=="string") {
        path=a;
       }
-      var dirs=path.split("/[/#]{1}/");
+      var dirs=path.split(/[/#]{1}/);
       //console.debug({retrieving:path,obj:phantom})
       for(var i=0;i<dirs.length;i++) {
         var dn=dirs[i];
