@@ -757,7 +757,7 @@ span.compositiontitle {
 }
 .FileBrowser .button.Directory {
   color: #3d3;
-  font-weight: 600;
+  font-weight: 300;
 }
 .FileBrowser .button.Class { color:#F0F; }
 .FileBrowser .button.live.membrane { color:#FA0 }
