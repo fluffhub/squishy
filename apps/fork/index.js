@@ -224,7 +224,8 @@ Module(function M() {
 
 
                   } else {
-
+                    //TRY TO FIND AN APP TO OPEN THE THING WITH
+                    console.debug({matches:spoon.match(instance)});
                     console.debug({unmatched:dirs[dirs.length-1],mod:instance});
                   }
                 }
