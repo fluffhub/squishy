@@ -1,4 +1,3 @@
-Action cgi-node /cgi-bin/cgi-node.js
 AddHandler cgi-node .jss
 DirectoryIndex index.html index.js
 

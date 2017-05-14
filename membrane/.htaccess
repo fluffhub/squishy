@@ -1,2 +1,3 @@
-AddHandler cgi-script .cgi
+
 Options +ExecCGI
+AddHandler cgi-script .cgi
