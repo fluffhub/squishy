@@ -29,6 +29,7 @@ td { }
   vertical-align: middle;
   text-decoration:none;
 }
+
 span.branch1 {
 
 }
@@ -59,7 +60,15 @@ a.member { text-decoration:none; }
   font-size:1.5em;
   line-height:25px;
 }
-.FileBrowser { z-index:10000;background-color:white; }
+.FileBrowser { z-index:10000;background-color:white;
+ }
+.pane * {   -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+  supported by Chrome and Opera */ }
 .submitter .button {
   bottom: 0;
   position: absolute;
