@@ -64,7 +64,7 @@ Module(function M() {
         }
       });
       C.Def(function list(success) {
-        success.call(this)
+        success(this)
       });
       C.Def(function mkdir() {
 
