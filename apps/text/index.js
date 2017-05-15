@@ -19,13 +19,13 @@ Module(function M() {
         C.Init(function TextEditor(loc,items) {
           basic.Div.call(this);
           live.DeviceManager.retrieve(loc,function(results) {
-            console.debug("ok");
-          });
+            console.debug({ok:results});
           });
           this.addClass("TextEditor");
-
         });
+
       });
+
       M.Class(function C() {
         C.Super(spoon.Tile);
         C.Init(function Tile() {
