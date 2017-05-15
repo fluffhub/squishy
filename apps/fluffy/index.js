@@ -9,8 +9,8 @@ Module(function M() {
 
     function (JSe,spoon) {
        console.debug({"js editor loaded":JSe} );
-      M.Def(function match(name, file) {
-        if(name.slice(-3)==".js") {
+      M.Def(function match(file,name) {
+        if(typeof name=="string" && name.slice(-3)==".js") {
           return true;
         }
 
