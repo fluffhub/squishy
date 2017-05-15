@@ -499,7 +499,7 @@ Module(function M() {
              M.Def("match",function match(item) {
                var ret=[]
                var app;
-               conf.apps.keys().forEach(function(name) {
+               Object.keys(conf.apps).forEach(function(name) {
                   app=conf.apps[name];
                  if(app.match(item))
                    ret.push(app);
