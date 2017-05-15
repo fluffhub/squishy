@@ -1,5 +1,6 @@
 .object.editor:before {}
-
+.header-bar.TaskList { position:fixed;bottom:0;left:0; }
+.header-bar.TaskList .tab { width:100px;height:100px; overflow:hidden; }
    .EditorItem {
                                    min-height:1em;min-width:50px;overflow:visible;
                                    width:auto;height:auto;margin:0.2em;

@@ -32,7 +32,7 @@ that entry point.
 
 All applications start by loading the base squishy module as the first script in the page.
 
-Note: some web servers will automatically redirect js/lib/squishy to js/lib/squishy/index.js if it is available.
+Note: some web servers will automatically redirect lib/squishy to lib/squishy/index.js if it is available.
 
 -->
         <script src="lib/squishy/index.js"></script>
@@ -44,7 +44,7 @@ From this point on, this module "squishy" defined in that file will be available
 
     });
 
-in JS code.  The base directory /js/lib/squishy will be referred to as the relative folder name "squishy"
+in JS code.  The base directory /lib/squishy will be referred to as the relative folder name "squishy"
 in import statements: "squishy/DOM, squishy/interactive, etc." This will happen with any module index file.
 
 You can browse through the code found in squishy as a reference while building applications.  It contains

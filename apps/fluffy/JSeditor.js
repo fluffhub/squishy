@@ -3,9 +3,9 @@ Module(function M() {
     "squishy/events",
     "squishy/basic",
     "squishy/interactive",
-    "js/lib/esprima/esprima",
-    "js/lib/escodegen/escodegen.squishy.js",
-    "js/lib/estraverse/estraverse",
+    "lib/esprima/esprima",
+    "lib/escodegen/escodegen.squishy.js",
+    "lib/estraverse/estraverse",
     "squishy/request",
 
     function(event,basic,interactive,esprima,ESCG,esv,Req,Spoon) {

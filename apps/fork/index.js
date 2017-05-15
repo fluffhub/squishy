@@ -6,7 +6,7 @@ Module(function M() {
     "squishy/request",
     "squishy/svg",
     "squishy/form",
-    "js/lib/squishy_ext/LocalModel",
+    "lib/squishy_ext/LocalModel",
     "squishy/live",
     "squishy/system",
     "fork/wrappers",
