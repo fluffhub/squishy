@@ -56,8 +56,9 @@ Module(function M() {
                  var EH=this;
                  this.window=editorwindow;
                  Pane.call(this,'home','Home');
-
-               });
+                 this.window.addClass("EditorWindow");
+                  this.addClass("EditorHome")
+                });
              });
 
              var TaskPane=M.Class(function C() {
