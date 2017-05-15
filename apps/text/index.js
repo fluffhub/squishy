@@ -16,8 +16,9 @@ Module(function M() {
       });
       M.Class(function C() {
         C.Super(basic.Div)
-        C.Init(function TextEditor(loc) {
+        C.Init(function TextEditor(loc,items) {
           basic.Div.call(this);
+
           this.addClass("TextEditor");
 
         });
