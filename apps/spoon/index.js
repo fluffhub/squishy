@@ -501,7 +501,7 @@ Module(function M() {
                var app;
                Object.keys(conf.apps).forEach(function(name) {
                   app=conf.apps[name];
-                 if(app.match!==match&&app.match instanceof Function) //eliminate infinite loop
+                 if(app.match!==match&&app.match instanceof Function) //eliminate infinite loop & missing match function failure
                  if(app.match(item))
                    ret.push(app);
 
