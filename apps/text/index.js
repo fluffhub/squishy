@@ -23,7 +23,7 @@ Module(function M() {
           var ta=new form.TextBox();
           this.add(ta);
           var te=this;
-          Object.defineProperty("File",{enumerable:false,writable:true,configurable:false})
+          Object.defineProperty(this,"File",{enumerable:false,writable:true,configurable:false})
           this.value=null;
 
           live.DeviceManager.retrieve(loc,function(results) {
