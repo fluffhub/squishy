@@ -61,7 +61,7 @@ a.member { text-decoration:none; }
   line-height:25px;
 }
 .TextEditor>.title { display:block; font-size:0.5em }
-.TextEditor>textarea { font-family:fixed, serif;font-size:0.75em; }
+.TextEditor>textarea { font-family:monospace, serif;font-size:0.75em; }
 .FileBrowser { z-index:10000;background-color:white;
  }
 .pane * {   -webkit-touch-callout: none; /* iOS Safari */
