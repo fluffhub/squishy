@@ -225,8 +225,14 @@ Module(function M() {
 
                   } else {
                     //TRY TO FIND AN APP TO OPEN THE THING WITH
-                    console.debug({matches:spoon.match(instance)});
-                    console.debug({unmatched:dirs[dirs.length-1],mod:instance});
+                    var matches=spoon.match(instance);
+                    Object.keys(matches).forEach(function (name) {
+                      var match=matches[name];
+                      if(match.open instanceof Function) {
+                        //var browser=spoon.main.run("fork", system.uri(""));
+                        console.debug({opened: match})
+                      }
+                    });
                   }
                 }
                 if(lib.dirs[path] instanceof Object) {
@@ -294,9 +300,9 @@ Module(function M() {
 
         });
         M.Def(function open(loc) {
-          window.exp=new FileBrowser(loc);
 
-          return window.exp;
+
+          return new FileBrowser(loc);
         });
 
         var Module=M.Class(function C() {
