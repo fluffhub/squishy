@@ -498,10 +498,13 @@ Module(function M() {
 
              M.Def("match",function match(item) {
                var ret=[]
-               for(var i=0;i<conf.apps.length;i++) {
-                 if(conf.apps[i].match(item))ret.push(conf.apps[i]);
+               var app;
+               conf.apps.keys().forEach(function(name) {
+                  app=conf.apps[name];
+                 if(app.match(item))
+                   ret.push(app);
 
-               }
+               });
                return ret;
              });
 
