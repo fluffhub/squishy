@@ -19,6 +19,7 @@ Module(function M() {
         C.Init(function TextEditor(loc,items) {
           basic.Div.call(this);
           var title=new basic.Span(loc);
+          title.addClass("title");
           this.add(title);
           var ta=new form.TextBox();
           this.add(ta);
@@ -31,6 +32,7 @@ Module(function M() {
                var instance=results[name];
               if(instance instanceof system.File) {
                 te.File=instance;
+                console.debug({fileinstance:instance});
                 te.File.load(function() {
                   te.value=te.File.value;
                   ta.value(te.value);
