@@ -209,7 +209,7 @@ Module(function M() {
                 if(lib.dirs[path] instanceof Object) {
 
                 } else {
-                  if(M.Self.match(instance,dirs[dirs.length-1])) {
+                  if(M.Self.match(dirs[dirs.length-1],instance)) {
 
                     var newDir=new FileList(dirs[dirs.length-1],val,function(dirloc) {
                       lib.cd(dirloc);

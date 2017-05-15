@@ -7,7 +7,7 @@ Module(function M() {
     //  editor
     //  viewer
     function (spoon,basic,system) {
-      M.Def(function match(name, file) {
+      M.Def(function match(file,name) {
         if (file instanceof system.File || typeof file=="string" ) {
           return true;
 

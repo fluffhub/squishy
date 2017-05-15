@@ -7,7 +7,7 @@ Module(function M() {
     //  editor
     //  viewer
     function (spoon) {
-      M.Def(function match(name, file) {
+      M.Def(function match(file,name) {
 
 
       });
