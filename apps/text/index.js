@@ -1,20 +1,31 @@
 Module(function M() {
   M.Import(
-    "spoon",
+    "spoon","basic","system",
     //  context actions
     //  list view
     //  tile view
     //  editor
     //  viewer
-    function (spoon) {
+    function (spoon,basic,system) {
       M.Def(function match(name, file) {
-        return true;
+        if (file instanceof system.File || typeof file=="string" ) {
+          return true;
+
+        }
 
       });
-
       M.Class(function C() {
+        C.Super(basic.Div)
+        C.Init(function TextEditor(loc) {
+          basic.Div.call(this);
+          this.addClass("TextEditor");
+
+        });
+      });
+      M.Class(function C() {
+        C.Super(spoon.Tile);
         C.Init(function Tile() {
-          C.Super(spoon.Tile);
+
         });
       });
 

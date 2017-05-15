@@ -499,7 +499,7 @@ Module(function M() {
              M.Def("match",function match(item) {
                var ret=[]
                for(var i=0;i<conf.apps.length;i++) {
-                 if(this.apps[i].match(item))ret.push(this.apps[i]);
+                 if(conf.apps[i].match(item))ret.push(conf.apps[i]);
 
                }
                return ret;
