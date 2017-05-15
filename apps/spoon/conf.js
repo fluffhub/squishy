@@ -21,6 +21,8 @@ Module(function M() {
           apps[name].load(function(app) {
             M.Self.apps[name]=app
           });
+        } else {
+          M.Self.apps[name]=apps[name]
         }
       });
     });
