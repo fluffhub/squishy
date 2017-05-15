@@ -33,7 +33,7 @@ Module(function M() {
               if(instance instanceof system.File) {
                 te.File=instance;
                 console.debug({fileinstance:instance});
-                te.File.load(function() {
+                te.File.read(function() {
                   te.value=te.File.value;
                   ta.value(te.value);
                   te.onload();
