@@ -15,7 +15,7 @@ Module(function M() {
                      interactive,kb,events,svg,
                      ub,op,
                      Ms,conf,cookies,membrane,
-                    live) {
+                     live) {
 
              var hasEvents=events.hasEvents;
              var UserBrowser=ub.UserBrowser;
@@ -57,8 +57,8 @@ Module(function M() {
                  this.window=editorwindow;
                  Pane.call(this,'home','Home');
                  this.window.addClass("EditorWindow");
-                  this.addClass("EditorHome")
-                });
+                 this.addClass("EditorHome")
+               });
              });
 
              var TaskPane=M.Class(function C() {
@@ -87,7 +87,7 @@ Module(function M() {
                  var EW=this;
 
                  this.tasks=new TabbedPane()
-                this.tasks.header.removeClass("header-bar");
+                 this.tasks.header.removeClass("header-bar");
                  this.add(this.tasks.header)
                  this.add(this.tasks)
                  var SpoonLogo=new svg.SVG(50,50);
@@ -444,6 +444,9 @@ Module(function M() {
              //window.ew=new EditorWindow();
              var main = new HomeWindow();
              M.Def("main",main)
+
+
+
              var Types={
 
              }
@@ -500,11 +503,12 @@ Module(function M() {
                var ret=[]
                var app;
                Object.keys(conf.apps).forEach(function(name) {
-                  app=conf.apps[name];
-                 if(app.match!==match&&app.match instanceof Function) //eliminate infinite loop & missing match function failure
-                 if(app.match(item))
-                   ret.push(app);
-
+                 if(name!=="dir") {
+                   app=conf.apps[name];
+                   if(app.match!==match&&app.match instanceof Function) //eliminate infinite loop & missing match function failure
+                     if(app.match(item))
+                       ret.push(app);
+                 }
                });
                return ret;
              });
