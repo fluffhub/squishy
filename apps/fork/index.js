@@ -230,8 +230,11 @@ Module(function M() {
                       var match=matches[name];
                       if(match.open instanceof Function) {
                         //var browser=spoon.main.run("fork", system.uri(""));
+                        var appname=name;
                         if(typeof match.name=="string") {
-                        spoon.main.run(match.name,val);
+                          appname=match.name;
+
+                        spoon.main.run(appname,val);
                           console.debug({opened: match,name:name})
                         }
                       }

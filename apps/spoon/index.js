@@ -500,14 +500,14 @@ Module(function M() {
 
 
              M.Def("match",function match(item) {
-               var ret=[]
+               var ret={}
                var app;
                Object.keys(conf.apps).forEach(function(name) {
                  if(name!=="dir") {
                    app=conf.apps[name];
                    if(app.match!==match&&app.match instanceof Function) //eliminate infinite loop & missing match function failure
                      if(app.match(item))
-                       ret.push(app);
+                       ret[name]=app;
                  }
                });
                return ret;
