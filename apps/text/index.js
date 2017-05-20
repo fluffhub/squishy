@@ -23,9 +23,11 @@ Module(function M() {
           } else {
             loc=system.uri(loc)
           }
-          var title=new basic.Span(loc);
-          title.addClass("title");
-          this.add(title);
+          var title=this.titlebar;
+          //new basic.Span(loc);
+          //title.addClass("title");
+          //this.add(title);
+          title.content(loc);
           var ta=new form.TextBox();
           this.add(ta);
           var te=this;
