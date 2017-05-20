@@ -15,7 +15,7 @@ Module(function M() {
       var AppContainer=M.Class(function C() {
         C.Super(basic.Div);
         C.Mixin(transform.Resizable);
-        C.Mixin(transform.Draggable);
+        //C.Mixin(transform.Draggable);
         C.Init(function AppContainer() {
 
           basic.Div.call(this,"acw");
@@ -24,6 +24,7 @@ Module(function M() {
           //titlebar
           this.titlebar=new basic.Div("acb")
           this.add(this.titlebar);
+          this.titlebar.Mixin(transform.Draggable);
 
 
           //content
@@ -35,10 +36,10 @@ Module(function M() {
 
           //draggable
           var acw=this;
-          this.enabledrag(function ondrag(i,v) {
+          this.titlebar.enabledrag(function ondrag(i,v) {
             console.debug({i:i,v:v})
-            acw.style.top=v.y;
-            acw.style.left=v.x;
+            acw.element.style.top=v.y;
+            acw.element.style.left=v.x;
           });
           //resizable
 
