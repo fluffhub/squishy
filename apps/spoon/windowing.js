@@ -38,8 +38,8 @@ Module(function M() {
           var acw=this;
           this.titlebar.enabledrag(function ondrag(i,v) {
             console.debug({i:i,v:v})
-            acw.element.style.top=v.y+"px";
-            acw.element.style.left=v.x+"px";
+            acw.element.style.top=v.position.y+"px";
+            acw.element.style.left=v.position.x+"px";
           });
           //resizable
 
