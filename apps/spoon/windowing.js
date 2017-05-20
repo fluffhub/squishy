@@ -14,8 +14,8 @@ Module(function M() {
       });
       var AppContainer=M.Class(function C() {
         C.Super(basic.Div);
-        C.Mixin(transform.resizable);
-        C.Mixin(transform.draggable);
+        C.Mixin(transform.Resizable);
+        C.Mixin(transform.Draggable);
         C.Init(function AppContainer() {
 
           basic.Div.call(this,"acw");
