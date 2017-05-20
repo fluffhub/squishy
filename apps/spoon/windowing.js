@@ -37,9 +37,10 @@ Module(function M() {
           //draggable
           var acw=this;
           this.titlebar.enabledrag(function ondrag(i,v) {
-            console.debug({i:i,v:v})
+
             acw.element.style.top=v.position.y+"px";
             acw.element.style.left=v.position.x+"px";
+            console.debug({x:v.position.x,y:v.position.y});
           });
           //resizable
 
