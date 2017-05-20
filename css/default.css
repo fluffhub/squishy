@@ -60,11 +60,13 @@ a.member { text-decoration:none; }
   font-size:1.5em;
   line-height:25px;
 }
-.TextEditor>.title { display:block; font-size:0.5em }
+.TextEditor { display:inline-block;padding:2px;background-color:#efefef; }
+.TextEditor>.title { display:block; font-size:1em;font-family:monospace, serif;line-height:1.8em;text-indent:5px; }
 .TextEditor>textarea { font-family:monospace, serif;font-size:0.75em; }
 .FileBrowser { z-index:10000;background-color:white;
  }
-.pane * {   -webkit-touch-callout: none; /* iOS Safari */
+.pane * {
+  -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
        -moz-user-select: none; /* Firefox */
