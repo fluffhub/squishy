@@ -61,7 +61,7 @@ a.member { text-decoration:none; }
   line-height:25px;
 }
 .TextEditor textarea { font-family:monospace, serif;font-size:0.75em; }
-.acw { display:inline-block;padding:2px;background-color:#efefef; }
+.acw { position:absolute;display:inline-block;padding:2px;background-color:#efefef; }
 .acw>.acb, .TextEditor>.title { display:block; font-size:1em;font-family:monospace, serif;line-height:1.8em;text-indent:5px; }
 
 .FileBrowser { z-index:10000;background-color:white;
