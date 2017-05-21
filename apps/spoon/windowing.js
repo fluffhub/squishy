@@ -14,7 +14,7 @@ Module(function M() {
       });
       var AppContainer=M.Class(function C() {
         C.Super(basic.Div);
-        C.Mixin(transform.Resizable);
+        //C.Mixin(transform.Resizable);
         //C.Mixin(transform.Draggable);
         C.Init(function AppContainer() {
 
@@ -25,7 +25,7 @@ Module(function M() {
           this.titlebar=new basic.Div("acb")
           this.add(this.titlebar);
           this.titlebar.Mixin(transform.Draggable);
-
+          this.Mixin(transform.Resizable);
 
           //content
           this.contents=new basic.Div("acc");
@@ -43,7 +43,7 @@ Module(function M() {
             console.debug({x:v.position.x,y:v.position.y});
           });
           //resizable
-          //this.enableresize()
+          this.enableresize()
 
         });
       });
