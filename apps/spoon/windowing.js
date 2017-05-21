@@ -43,6 +43,7 @@ Module(function M() {
             console.debug({x:v.position.x,y:v.position.y});
           });
           //resizable
+          console.debug(this);
           this.enableresize()
 
         });
