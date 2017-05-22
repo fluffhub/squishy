@@ -13,12 +13,13 @@ Module(function M() {
         });
       });
       var AppContainer=M.Class(function C() {
-        C.Super(basic.Div);
+        C.Super(transform.HTMLMatrixBox);
         //C.Mixin(transform.Resizable);
         //C.Mixin(transform.Draggable);
         C.Init(function AppContainer() {
 
-          basic.Div.call(this,"acw");
+          basic.HTMLMatrixBox.call(this);
+          this.addClass("acw");
 
 
           //titlebar
