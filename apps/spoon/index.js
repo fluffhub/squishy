@@ -124,7 +124,7 @@ Module(function M() {
 
                  }});
                  var SpoonButton=new interactive.MomentaryButton("","spoon",function() {
-                   W.tasks.header.toggleClass("collapsed");
+                   W.hud.toggleClass("collapsed");
                  });
                  SpoonButton.removeClass("button");
                  SpoonButton.add(SpoonLogo);
