@@ -35,7 +35,7 @@ M.Import("squishy/interactive","squishy/DOM","squishy/basic","squishy/svg",
           LI.ghost=LI.window.Hold(LI,ev);
         },200);
         }
-      });
+      },null,{passive:true});
       this.addEvent('leave',"mouseup touchend",function(ev) {
         clearTimeout(LI.timer);
         LI.disableEvents('leave');

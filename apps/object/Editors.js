@@ -106,7 +106,7 @@ Module(function M() {
                 LI.ghost=LI.window.Hold(LI,ev);
               },200);
             }
-          },this.caption.element);
+          },this.caption.element,{passive:true});
           this.addEvent('leave',"mouseup touchend",function(ev) {
             clearTimeout(LI.timer);
             LI.disableEvents('leave');

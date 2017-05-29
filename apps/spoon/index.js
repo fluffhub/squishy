@@ -130,7 +130,7 @@ Module(function M() {
                        EW.cursor.y=e.clientY;
                      }
                    }
-                 });
+                 },null,{passive:true});
 
                  Object.defineProperty(this,"contextactive",{value:false,writable:true});
                  this.contextmenu=new interactive.ButtonSet("div","contextmenu");
