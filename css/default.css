@@ -664,7 +664,7 @@ span.compositiontitle {
     /* margin-left: -5px; */
     margin: 5px;
   transition:left 0.5s ease-in-out, bottom 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out, transform 0.8s ease-in-out;
-  transform:rotate(90deg);
+  transform:rotate(40deg);
 }
 .collapsed .sitemenu {
   left:-45px;bottom:-45px;width:90px;height:90px;transform:rotate(-90deg);
