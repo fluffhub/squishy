@@ -179,6 +179,7 @@ Module(function M() {
                  },true);
                  this.enableEvents("cursorpos","context","closeContext");
                  C.Def(function addTask(path,task) {
+                   this.tasks[path.split(":")[0]]=task;
                    this.add(task);
                    this.tm.addTask(path,task);
                  });

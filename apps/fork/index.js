@@ -11,7 +11,7 @@ Module(function M() {
     "squishy/system",
     "fork/wrappers",
     function(event,basic,interactive,Req,svg,form,LM,live,system,wrappers) {
-      Import("spoon","spoon/conf",function(spoon,conf) {
+      Import("spoon","apps/spoon/conf",function(spoon,conf) {
         var osroot=""
         var Request=Req.Request;
         var main=live.DeviceManager;
@@ -385,4 +385,5 @@ Module(function M() {
       });
     });
 });
+
 
