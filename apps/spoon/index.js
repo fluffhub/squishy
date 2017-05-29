@@ -68,8 +68,16 @@ Module(function M() {
                });
              });
              var TaskManager=M.Class(function C() {
-               C.Init(function TaskManager() {
-
+               C.Super(basic.Div);
+               C.Init(function TaskManager(tasks) {
+                 this.tasks=tasks;
+                 basic.Div.call(this,"tmg TaskList");
+               });
+               C.Def(function addTask(path,task) {
+                 var appname=path.split(":")[0]
+                 var tab=new interactive.MomentaryButton(appname)
+                 this.add(tab);
+                 tab.addClass("tab");
                });
              });
 
@@ -86,10 +94,17 @@ Module(function M() {
                  var W=this;
                  var EW=this;
 
-                 this.tasks=new TabbedPane()
-                 this.tasks.header.removeClass("header-bar");
-                 this.add(this.tasks.header)
-                 this.add(this.tasks)
+
+                 this.tasks={}
+
+                 //this.tasks=new TabbedPane()
+                 //this.tasks.header.removeClass("header-bar");
+                 this.hud=new basic.Div("hud");
+
+                 this.add(this.hud)
+                 this.tm=new TaskManager(this.tasks);
+                 this.hud.add(this.tm);
+
                  var SpoonLogo=new svg.SVG(50,50);
                  //.Def("homebutton",SpoonLogo);
                  this.homebutton=SpoonLogo;
@@ -113,8 +128,8 @@ Module(function M() {
                  });
                  SpoonButton.removeClass("button");
                  SpoonButton.add(SpoonLogo);
-                 this.tasks.header.addBefore(SpoonButton);
-                 this.tasks.header.addClass("TaskList")
+                 this.hud.addBefore(SpoonButton);
+
                  this.editors=[];
 
                  var H = new EditorHome(EW);
@@ -163,6 +178,10 @@ Module(function M() {
 
                  },true);
                  this.enableEvents("cursorpos","context","closeContext");
+                 C.Def(function addTask(path,task) {
+                   this.add(task);
+                   this.tm.addTask(path,task);
+                 });
                  C.Def(function run(path) {
                    var args=Array.prototype.slice.call(arguments,1)
                    var task=null;
@@ -170,7 +189,7 @@ Module(function M() {
                    if(path in conf.apps) {
                      task=conf.apps[path].open.apply(this,args)
 
-                     this.tasks.addTab(path+":"+args.join(" "),"",task);
+                     this.addTask(path+":"+args.join(" "),"",task);
                      return task;
                    }
 
