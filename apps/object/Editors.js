@@ -110,7 +110,7 @@ Module(function M() {
           this.addEvent('leave',"mouseup touchend",function(ev) {
             clearTimeout(LI.timer);
             LI.disableEvents('leave');
-          });
+          },null,{passive:true});
         }
         this.enableEvents('take', 'leave');
 
