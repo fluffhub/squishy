@@ -45,7 +45,7 @@ Module(function M() {
           });
           //resizable
           ///console.debug(this);
-          //this.enableresize()
+          this.enableresize()
 
         });
       });
