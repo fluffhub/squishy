@@ -32,8 +32,8 @@ Module(function M() {
           this.contents=new basic.Div("acc");
           this.add(this.contents);
           var acw=this;
-          this.addEvent("activate","click",function onactivate(e) {
-            e.stopPropagation;
+          this.addEvent("activate","mousedown touchstart",function onactivate(e) {
+            e.stopPropagation();
             acw.removeClass("active");
             acw.addClass("active")
           },this.element,{})
