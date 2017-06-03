@@ -63,8 +63,10 @@ a.member { text-decoration:none; }
 .TextEditor textarea { width:500px;height:300px;font-family:monospace, serif;font-size:0.75em; }
 .acw { position:absolute;display:inline-block;padding:2px;background-color:#efefef; }
 .acw>.acb, .TextEditor>.title { display:block; font-size:1em;font-family:monospace, serif;line-height:1.8em;text-indent:5px; }
+.acw { transition:0.1s opacity;opacity:0; }
+.acw .active { transition:0.5s opacity linear;opacity:1 }
 
-.FileBrowser { z-index:10000;background-color:white;
+.FileBrowser {
  }
 .pane * {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -735,7 +737,7 @@ span.compositiontitle {
 
 }
 .pwddir {  line-height:32px; }
-.FileBrowser { position:fixed;right:0;height:100%;width:300px;top:0;overflow-y:scroll; }
+.FileBrowser { right:0;height:100%;width:300px;top:0;overflow-y:scroll; }
 .FileBrowser .dir { margin-left:1em; }
 .FileBrowser .dir>a { margin-left:1em;display:block; }
 
@@ -752,7 +754,7 @@ span.compositiontitle {
   position:relative;
   z-index:2;
 }
-.FileBrowser .button {  background:none;font-weight:300;letter-spacing:0.01em;font-size:1.1em;color:#aaa;}
+.FileBrowser .button {  background:none;font-weight:300;letter-spacing:0.01em;font-size:1.0em;}
 .FileBrowser>.headerbar {     height: 2em;
 
     margin: 5px;
@@ -817,6 +819,8 @@ span.compositiontitle {
   color: #FA0;
   font-weight: 300;
 }
+.FileList { background-color:white; }
+
 .FileListItem { transition:color 0.3s ease-in-out }
 .FileBrowser .FileListItem:hover { text-decoration:underline; }
 .FileBrowser .FileListItem:hover>.value {

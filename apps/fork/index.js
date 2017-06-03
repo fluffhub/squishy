@@ -149,7 +149,7 @@ Module(function M() {
           C.Super(basic.Div);
           C.Init(function FileBrowser(path)  {
 
-            basic.Div.call(this,"FileBrowser");
+            basic.Div.call(this,"FileBrowser acw");
             var uri=system.uri(path)
 
             this.files={};
@@ -158,7 +158,7 @@ Module(function M() {
             this.windows={};
             var lib=this;
 
-            this.headerbar=new basic.Div("headerbar");
+            this.headerbar=new basic.Div("headerbar acb");
 
             this.presentdir=new basic.Div("pwdbar");
             this.presentdir.dirs=[];
