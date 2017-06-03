@@ -814,7 +814,13 @@ span.compositiontitle {
     background-color: #dad;
   margin-right:0.25em;
 }
-
+.hud {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
 .FileBrowser .button.Module {
   color: #FA0;
   font-weight: 300;
