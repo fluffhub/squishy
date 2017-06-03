@@ -117,7 +117,7 @@ Module(function M() {
 
                  this.add(this.hud)
                  this.tm=new TaskManager(this.tasks);
-                 this.hud.add(this.tm);
+
 
                  var SpoonLogo=new svg.SVG(50,50);
                  //.Def("homebutton",SpoonLogo);
@@ -142,8 +142,8 @@ Module(function M() {
                  });
                  SpoonButton.removeClass("button");
                  SpoonButton.add(SpoonLogo);
-                 this.hud.addBefore(SpoonButton);
-
+                 this.hud.add(SpoonButton);
+                 this.hud.add(this.tm);
                  this.editors=[];
 
                  var H = new EditorHome(EW);
