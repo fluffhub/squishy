@@ -158,7 +158,7 @@ Module(function M() {
             this.windows={};
             var lib=this;
 
-            this.headerbar=new basic.Div("headerbar acb");
+            this.headerbar=new basic.Div("acb");
 
             this.presentdir=new basic.Div("pwdbar");
             this.presentdir.dirs=[];
