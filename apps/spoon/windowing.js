@@ -16,7 +16,7 @@ Module(function M() {
       var AppContainer=M.Class(function C() {
         C.Super(transform.HTMLMatrixBox);
         //C.Mixin(transform.Resizable);
-            C.Mixin(events.HasEvents);
+         //   C.Mixin(events.HasEvents);
         //C.Mixin(transform.Draggable);
         C.Init(function AppContainer() {
 
@@ -29,7 +29,7 @@ Module(function M() {
           this.add(this.titlebar);
           this.titlebar.Mixin(transform.Draggable);
           this.Mixin(transform.Resizable);
-
+          this.Mixin(events.HasEvents);
           //content
           this.contents=new basic.Div("acc");
           this.add(this.contents);
