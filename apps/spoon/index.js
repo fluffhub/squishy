@@ -195,6 +195,7 @@ Module(function M() {
                  C.Def(function addTask(path,task) {
                    this.tasks[path.split(":")[0]]=task;
                    this.add(task);
+                   task.addClass("active");
                    this.tm.addTask(path,task);
                  });
                  C.Def(function run(path) {  //run takes multiple args
