@@ -31,8 +31,13 @@ Module(function M() {
           //content
           this.contents=new basic.Div("acc");
           this.add(this.contents);
-
-
+          var acw=this;
+          this.addEvent("activate","click",function onactivate(e) {
+            e.stopPropagation;
+            acw.removeClass("active");
+            acw.addClass("active")
+          },this.element,{})
+          this.enableEvents("activate");
           //window controls
 
           //draggable
