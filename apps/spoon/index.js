@@ -200,13 +200,21 @@ Module(function M() {
                  C.Def(function run(path) {  //run takes multiple args
                    var args=Array.prototype.slice.call(arguments,1)
                    var task=null;
-
+                   var hw=this;
                    if(path in conf.apps) {
 
                      task=conf.apps[path].open.apply(this,args)
 
-                     this.addTask(path+":"+args.join(" "),task);
+                     hw.addTask(path+":"+args.join(" "),task);
                      return task;
+                   } else {
+                     Import(path,function(a) {
+                       if(a.open instanceof Function) {
+                          task=a.open.apply(this,args)
+                          hw.addTask(path+":"+args.join(" "),task);
+                       }
+                     });
+                     return true;
                    }
 
                  });
