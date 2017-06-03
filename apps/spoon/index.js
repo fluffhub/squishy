@@ -69,13 +69,27 @@ Module(function M() {
              });
              var TaskManager=M.Class(function C() {
                C.Super(basic.Div);
-               C.Init(function TaskManager(tasks) {
-                 this.tasks=tasks;
+               C.Init(function TaskManager(home) {
+                 this.home=home;
+                 var tasks=this.home.tasks;
+                 this.tasks=[];
                  basic.Div.call(this,"tmg TaskList");
                });
+               C.Def(function Activate(task) {
+                 task.removeClass("active");
+                 task.addClass("active");
+               })
                C.Def(function addTask(path,task) {
                  var appname=path.split(":")[0]
-                 var tab=new interactive.MomentaryButton(appname)
+                 var tm=this;
+
+
+                 var tab=new interactive.MomentaryButton(appname,"task",function onclick(e) {
+                   tm.Activate(task)
+                 })
+
+
+
                  this.add(tab);
                  tab.addClass("tab");
                });
@@ -183,14 +197,15 @@ Module(function M() {
                    this.add(task);
                    this.tm.addTask(path,task);
                  });
-                 C.Def(function run(path) {
+                 C.Def(function run(path) {  //run takes multiple args
                    var args=Array.prototype.slice.call(arguments,1)
                    var task=null;
 
                    if(path in conf.apps) {
+
                      task=conf.apps[path].open.apply(this,args)
 
-                     this.addTask(path+":"+args.join(" "),"",task);
+                     this.addTask(path+":"+args.join(" "),task);
                      return task;
                    }
 
