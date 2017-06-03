@@ -4,7 +4,8 @@ Module(function M() {
     "squishy/interactive",
     "squishy/transform",
     "spoon/conf",
-    function(basic,interactive,transform,conf) {
+    "squishy/events",
+    function(basic,interactive,transform,conf,events) {
       var AppConfig=M.Class(function C() {
         C.Super(interactive.MomentaryButton);
         C.Init(function AppConfig() {
@@ -15,6 +16,7 @@ Module(function M() {
       var AppContainer=M.Class(function C() {
         C.Super(transform.HTMLMatrixBox);
         //C.Mixin(transform.Resizable);
+            C.Mixin(events.HasEvents);
         //C.Mixin(transform.Draggable);
         C.Init(function AppContainer() {
 
