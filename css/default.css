@@ -819,7 +819,7 @@ span.compositiontitle {
   color: #FA0;
   font-weight: 300;
 }
-.FileList { background-color:white; }
+.FileList { background-color:white;margin-top:2em;min-height:100%; }
 
 .FileListItem { transition:color 0.3s ease-in-out }
 .FileBrowser .FileListItem:hover { text-decoration:underline; }
