@@ -147,7 +147,7 @@ Module(function M() {
         });
 
         var FileBrowser=M.Class(function C() {
-          C.Super(basic.Div);
+          C.Super(windowing.AppContainer);
           C.Init(function FileBrowser(path)  {
 
             windowing.AppContainer.call(this);
