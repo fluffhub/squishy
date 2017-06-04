@@ -203,7 +203,7 @@ Module(function M() {
 
 
                    this.tm.addTask(path,task);
-                   this.Activate(task);
+                   this.tm.Activate(task);
                  });
                  C.Def(function run(path) {  //run takes multiple args
                    var args=Array.prototype.slice.call(arguments,1)
