@@ -207,7 +207,7 @@ Module(function M() {
                      { e.stopPropagation();
                       hw.tm.Activate(task);
                      }
-                   },task.element,{capture:true;})
+                   },task.element,{capture:true})
                    task.enableEvents("activate");
                    this.tm.addTask(path,task);
                    this.tm.Activate(task);
