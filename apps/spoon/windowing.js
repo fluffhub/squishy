@@ -38,6 +38,7 @@ Module(function M() {
             e.stopPropagation();
             acw.removeClass("active");
             acw.addClass("active")
+
           },this.element,{})
           this.enableEvents("activate");
           //window controls

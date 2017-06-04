@@ -62,10 +62,10 @@ a.member { text-decoration:none; }
 }
 .TextEditor textarea { width:500px;height:300px;font-family:monospace, serif;font-size:0.75em; }
 .acw { position:absolute;display:inline-block;padding:2px;background-color:#efefef; }
-.acw>.acb, .TextEditor>.title { display:block; font-size:1em;font-family:monospace, serif;line-height:1.8em;text-indent:5px; }
+.acw>.acb, .TextEditor>.title { cursor:default;display:block; font-size:1em;font-family:monospace, serif;line-height:1.8em;text-indent:5px; }
 .acw { transition:0.1s opacity;opacity:0;z-index:0; }
-.acw.active { transition:0.5s opacity linear;opacity:1;z-index:1000; }
-
+.acw.active { transition:0.5s opacity linear;z-index:1001; }
+.acw.visible { transition:0.5s opacity linear;opacity:1;z-index:1000; }
 .FileBrowser {
  }
 .pane * {

@@ -76,9 +76,14 @@ Module(function M() {
                  basic.Div.call(this,"tmg TaskList");
                });
                C.Def(function Activate(task) {
-                 task.removeClass("active");
-                 task.addClass("active");
-               })
+                 Object.keys(this.tasks).forEach(function(task1) {
+                 task1.removeClass("active");
+                 //setTimeout(function() { task.addClass("active") },20);
+                 });
+                 task.addClass("active")
+                 task.addClass("visible");
+               });
+
                C.Def(function addTask(path,task) {
                  var appname=path.split(":")[0]
                  var tm=this;
@@ -169,7 +174,7 @@ Module(function M() {
                  this.contextmenu.enableEvents("closeContext");
                  this.addEvent("context","contextmenu",function oncontextmenu(e) {
                    if(e) {
-                     // e.preventDefault();
+                      e.preventDefault();
                      // e.stopPropagation();
                    }
                    var pos=this.cursor;
@@ -195,7 +200,9 @@ Module(function M() {
                  C.Def(function addTask(path,task) {
                    this.tasks[path.split(":")[0]]=task;
                    this.add(task);
+
                    task.addClass("active");
+                   task.addClass("visible");
                    this.tm.addTask(path,task);
                  });
                  C.Def(function run(path) {  //run takes multiple args
