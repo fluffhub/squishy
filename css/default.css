@@ -821,6 +821,7 @@ span.compositiontitle {
     bottom: 0;
     right: 0;
     left: 0;
+  z-index:100000000;
 }
 .FileBrowser .button.Module {
   color: #FA0;
