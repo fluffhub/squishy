@@ -10,8 +10,9 @@ Module(function M() {
     "squishy/live",
     "squishy/system",
     "fork/wrappers",
+    "apps/spoon",
     "spoon/windowing",
-    function(event,basic,interactive,Req,svg,form,LM,live,system,wrappers,windowing) {
+    function(event,basic,interactive,Req,svg,form,LM,live,system,wrappers,spoon,windowing) {
       Import("spoon","apps/spoon/conf",function(spoon,conf) {
         var osroot=""
         var Request=Req.Request;
