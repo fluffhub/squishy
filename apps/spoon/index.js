@@ -81,6 +81,7 @@ Module(function M() {
                  //setTimeout(function() { task.addClass("active") },20);
                  });
                  task.addClass("active")
+                 if(!task.hasClass("visible"))
                  task.addClass("visible");
                });
 
