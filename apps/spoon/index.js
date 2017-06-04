@@ -200,10 +200,16 @@ Module(function M() {
                  C.Def(function addTask(path,task) {
                    this.tasks[path.split(":")[0]]=task;
                    this.add(task);
+                   var hw=this;
+                   task.addEvent("activate","mousedown touchstart",function onactivate(e) {
+                     //e.stopPropagation();
+                     hw.tm.Activate(task);
 
-
+                   },this.element,{})
+                   task.enableEvents("activate");
                    this.tm.addTask(path,task);
                    this.tm.Activate(task);
+
                  });
                  C.Def(function run(path) {  //run takes multiple args
                    var args=Array.prototype.slice.call(arguments,1)
