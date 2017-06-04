@@ -76,7 +76,7 @@ Module(function M() {
                  basic.Div.call(this,"tmg TaskList");
                });
                C.Def(function Activate(task) {
-                 Object.keys(this.tasks).forEach(function(task1) {
+                   this.tasks.forEach(function(task1) {
                  task1.removeClass("active");
                  //setTimeout(function() { task.addClass("active") },20);
                  });
@@ -87,7 +87,7 @@ Module(function M() {
                C.Def(function addTask(path,task) {
                  var appname=path.split(":")[0]
                  var tm=this;
-
+                 this.tasks.push(task);
 
                  var tab=new interactive.MomentaryButton(appname,"task",function onclick(e) {
                    tm.Activate(task)
