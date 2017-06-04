@@ -201,9 +201,9 @@ Module(function M() {
                    this.tasks[path.split(":")[0]]=task;
                    this.add(task);
 
-                   task.addClass("active");
-                   task.addClass("visible");
+
                    this.tm.addTask(path,task);
+                   this.Activate(task);
                  });
                  C.Def(function run(path) {  //run takes multiple args
                    var args=Array.prototype.slice.call(arguments,1)
