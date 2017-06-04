@@ -10,7 +10,8 @@ Module(function M() {
     "squishy/live",
     "squishy/system",
     "fork/wrappers",
-    function(event,basic,interactive,Req,svg,form,LM,live,system,wrappers) {
+    "spoon/windowing",
+    function(event,basic,interactive,Req,svg,form,LM,live,system,wrappers,windowing) {
       Import("spoon","apps/spoon/conf",function(spoon,conf) {
         var osroot=""
         var Request=Req.Request;
@@ -149,7 +150,8 @@ Module(function M() {
           C.Super(basic.Div);
           C.Init(function FileBrowser(path)  {
 
-            basic.Div.call(this,"FileBrowser acw");
+            windowing.AppContainer.call(this);
+            this.addClass("FileBrowser");
             var uri=system.uri(path)
 
             this.files={};
