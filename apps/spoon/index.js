@@ -204,10 +204,11 @@ Module(function M() {
                    var hw=this;
                    task.addEvent("activate","mousedown touchstart",function onactivate(e) {
                      if(!task.hasClass("active"))
-                     { //e.stopPropagation();
-                      hw.tm.Activate(task);
+                     { e.stopPropagation();
+                        hw.tm.Activate(task);
+
                      }
-                   },task.element,{capture:true})
+                   },task.element,{capture:false})
                    task.enableEvents("activate");
                    this.tm.addTask(path,task);
                    this.tm.Activate(task);
