@@ -212,9 +212,10 @@ Module(function M() {
                 if(lib.dirs[path] instanceof Object) {
 
                 } else {
-                  if(M.Self.match(instance,dirs[dirs.length-1])) {
+                  var fn=dirs[dirs.length-1];
+                  if(M.Self.match(instance,fn)) {
 
-                    var newDir=new FileList(dirs[dirs.length-1],val,function(dirloc) {
+                    var newDir=new FileList(fn,val,function(dirloc) {
                       lib.cd(dirloc);
                     });
                     lib.dirs[path]=newDir;
@@ -228,7 +229,7 @@ Module(function M() {
 
                   } else {
                     //TRY TO FIND AN APP TO OPEN THE THING WITH
-                    var matches=spoon.match(instance);
+                    var matches=spoon.match(instance,fn);
                     Object.keys(matches).forEach(function (name) {
                       var match=matches[name];
                       if(match.open instanceof Function) {
