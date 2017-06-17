@@ -10,6 +10,9 @@ Module(function M() {
     function (JSe,spoon,basic,system,live,form,windowing) {
        console.debug({"js editor loaded":JSe} );
       M.Def(function match(file,name) {
+        if(file instanceof Module) {
+          return true;
+        }
         if(typeof name=="string" && name.slice(-3)==".js") {
           return true;
         }
@@ -68,14 +71,18 @@ Module(function M() {
           live.DeviceManager.retrieve(loc,function(results) {
             Object.keys(results).forEach(function (name) {
               var instance=results[name];
-              if(instance instanceof system.File) {
-                te.File=instance;
+              if(instance instanceof Module) {
+                te.Module=instance;
                 console.debug({fileinstance:instance});
-                te.File.read(function() {
-                  te.value=te.File.value;
-                  ta.value(te.value);
-                  te.onload();
-                });
+                //te.Module.read(function() {
+                //  te.value=te.File.value;
+                //  ta.value(te.value);
+                //  te.onload();
+                //});
+                te.value="Module("+instance.def.toString()+");";
+                ta.value(te.value);
+                te.onload();
+
               }
             });
           });
