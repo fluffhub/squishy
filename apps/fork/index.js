@@ -247,6 +247,7 @@ Module(function M() {
                     //TRY TO FIND AN APP TO OPEN THE THING WITH
                     var matches=spoon.match(instance,fn);
                     var apps=[]
+                    console.debug({matches:matches});
                     Object.keys(matches).forEach(function (name) {
                       var match=matches[name];
                       if(match.open instanceof Function) {
