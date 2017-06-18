@@ -146,7 +146,23 @@ Module(function M() {
             });
           });
         });
+        var AppSelector=M.Class(function C() {
+          C.Super(windowing.AppContainer);
+          C.Init(function AppSelector(apps, val) {
+            var as=this;
+            this.value=val;
+            if(apps.length&apps.length>=1) {
+              apps.forEach(function(app) {
+                var App=new interactive.MomentaryButton(app,"appselector",function() {
+                  spoon.main.run(app,as.value);
+                  as.remove();
 
+                });
+                as.add(App);
+              });
+            }
+          })
+        });
         var FileBrowser=M.Class(function C() {
           C.Super(windowing.AppContainer);
           C.Init(function FileBrowser(path)  {
@@ -230,6 +246,7 @@ Module(function M() {
                   } else {
                     //TRY TO FIND AN APP TO OPEN THE THING WITH
                     var matches=spoon.match(instance,fn);
+                    var apps=[]
                     Object.keys(matches).forEach(function (name) {
                       var match=matches[name];
                       if(match.open instanceof Function) {
@@ -237,12 +254,19 @@ Module(function M() {
                         var appname=name;
                         if(typeof match.name=="string") {
                           appname=match.name;
+                          apps.push(appname);
 
-                        spoon.main.run(appname,val);
+
                           console.debug({opened: match,name:name})
                         }
                       }
                     });
+                    if(apps.length==1) { spoon.main.run(apps[0],val); }
+                    else if (apps.length>1) {
+                      var as=new AppSelector(apps,val);
+                      lib.parent.add(as);
+
+                    }
                   }
                 }
                 if(lib.dirs[path] instanceof Object) {
