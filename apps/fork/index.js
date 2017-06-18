@@ -264,7 +264,7 @@ Module(function M() {
                         }
                       }
                     });
-                    console.debug({apps:apps});
+                   // console.debug({apps:apps});
 
                   }
                 }
@@ -277,6 +277,7 @@ Module(function M() {
                   lib.setDir(val);
                 }
               });
+              console.debug({apps:apps});
               if(apps.length==1) { spoon.main.run(apps[0],val); }
               else if (apps.length>1) {
                 var as=new AppSelector(apps,val);
