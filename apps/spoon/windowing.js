@@ -44,7 +44,7 @@ Module(function M() {
 
             acw.element.style.top=v.position.y+"px";
             acw.element.style.left=v.position.x+"px";
-            console.debug({x:v.position.x,y:v.position.y});
+            //console.debug({x:v.position.x,y:v.position.y});
           });
           //resizable
           ///console.debug(this);

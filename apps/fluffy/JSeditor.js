@@ -400,64 +400,64 @@ Module(function M() {
         });
         C.Def(function summary(node,parent) {
           var cursor=this;
-                              function travel(item2,depth) {
-                      if(depth>0) {
-                        var items=Object.keys(item2);
-                        if(items.length>0) cursor.addClass("module");
-                        console.debug(items);
+          function travel(item2,depth) {
+            if(depth>0) {
+              var items=Object.keys(item2);
+              if(items.length>0) cursor.addClass("module");
+              console.debug(items);
 
-                        for(var j=0;j<items.length;j++) {
+              for(var j=0;j<items.length;j++) {
 
-                          var key=items[j];
+                var key=items[j];
 
-                          var existing=cursor.query("div[data-key=\""+key+"\"]");
-                          var c;
-                          if(existing.length>0) { c=existing[0]; }
-                          // if(key!="supers") {//
-                          else  {
-                            c=new basic.Link({url:"#"+key,content:key});
-                            //  for(var j=0;j<filedepth;j++) {
-                            //    c.add(new basic.Span("","branch1"));
-                            // }
-                            c.onclick=function() {
-                             // browser.change(path,item)
-                            };
-                            c.attrs({"data-key":key});
-                            c.addClass("member");
-                            var cursize=1-(depth*0.125);
-                            c.element.style["font-size"]=cursize+"em";
-                            cursor.add(c);
-                          }
+                var existing=cursor.query("div[data-key=\""+key+"\"]");
+                var c;
+                if(existing.length>0) { c=existing[0]; }
+                // if(key!="supers") {//
+                else  {
+                  c=new basic.Link({url:"#"+key,content:key});
+                  //  for(var j=0;j<filedepth;j++) {
+                  //    c.add(new basic.Span("","branch1"));
+                  // }
+                  c.onclick=function() {
+                    // browser.change(path,item)
+                  };
+                  c.attrs({"data-key":key});
+                  c.addClass("member");
+                  var cursize=1-(depth*0.125);
+                  c.element.style["font-size"]=cursize+"em";
+                  cursor.add(c);
+                }
 
 
 
-                          var member=item2[items[j]];
-                          if(member.funcall)
-                          {
-                            var linenumber=new basic.Span(":"+member.funcall.getLineNumber()+":"+member.funcall.getColumnNumber());
-                            c.add(linenumber);
-                            linenumber.element.style["font-size"]="0.5em";
-                          }
-                          if(member instanceof Object) {
+                var member=item2[items[j]];
+                if(member.funcall)
+                {
+                  var linenumber=new basic.Span(":"+member.funcall.getLineNumber()+":"+member.funcall.getColumnNumber());
+                  c.add(linenumber);
+                  linenumber.element.style["font-size"]="0.5em";
+                }
+                if(member instanceof Object) {
 
-                            var submembers=Object.keys(member);
+                  var submembers=Object.keys(member);
 
-                            if(submembers.length>0) {
+                  if(submembers.length>0) {
 
-                              if(c.parent) cursor=c;
-                              c.add(travel(member,depth-1));
-                              if(c.parent) cursor=c.parent;
-                            }
-                            //  }
-                          }
+                    if(c.parent) cursor=c;
+                    c.add(travel(member,depth-1));
+                    if(c.parent) cursor=c.parent;
+                  }
+                  //  }
+                }
 
-                        }
+              }
 
-                      }
-                    }
-                    travel(this,1);
+            }
+          }
+          travel(this,1);
 
-                  //  cursor=modulewrapper.parent;
+          //  cursor=modulewrapper.parent;
         });
         C.Def(function leaveNode(node,parent) {
           this.depth--;
