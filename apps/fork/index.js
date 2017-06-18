@@ -68,7 +68,7 @@ Module(function M() {
           if(ws instanceof Array && ws.length>0) {
             for (var i=0;i<ws.length;i++) {
               if(ws[i].open instanceof Function) {
-            return true;
+                return true;
               }
             }
           }
@@ -107,7 +107,7 @@ Module(function M() {
             }
             else {
               var F=new FileListItem(filename,loc,function() {
-                 FL.click.call(FL,loc);
+                FL.click.call(FL,loc);
               });
               FL.Contents.add(F);
               FL.contents[filename]=F;
@@ -222,7 +222,9 @@ Module(function M() {
             var dirs=path.split("/")
 
             live.DeviceManager.retrieve(val,function(mod) {
+              var apps=[]
               Object.keys(mod).forEach(function(devname) {
+
                 var instance=mod[devname];
 
                 if(lib.dirs[path] instanceof Object) {
@@ -246,7 +248,7 @@ Module(function M() {
                   } else {
                     //TRY TO FIND AN APP TO OPEN THE THING WITH
                     var matches=spoon.match(instance,fn);
-                    var apps=[]
+
                     console.debug({matches:matches});
                     Object.keys(matches).forEach(function (name) {
                       var match=matches[name];
@@ -263,12 +265,7 @@ Module(function M() {
                       }
                     });
                     console.debug({apps:apps});
-                    if(apps.length==1) { spoon.main.run(apps[0],val); }
-                    else if (apps.length>1) {
-                      var as=new AppSelector(apps,val);
-                      lib.parent.add(as);
 
-                    }
                   }
                 }
                 if(lib.dirs[path] instanceof Object) {
@@ -280,7 +277,12 @@ Module(function M() {
                   lib.setDir(val);
                 }
               });
+              if(apps.length==1) { spoon.main.run(apps[0],val); }
+              else if (apps.length>1) {
+                var as=new AppSelector(apps,val);
+                lib.parent.add(as);
 
+              }
 
             });
           });
@@ -389,7 +391,7 @@ Module(function M() {
           C.Def(function load() {
             var dir=this;
             var dev=this.obj;
-             if(dev!=null) {
+            if(dev!=null) {
               var filenames=Object.keys(dev);
 
               filenames.forEach(function(filename) {
