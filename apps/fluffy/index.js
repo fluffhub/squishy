@@ -10,7 +10,7 @@ Module(function M() {
     function (JSe,spoon,basic,system,live,form,windowing) {
        console.debug({"js editor loaded":JSe} );
       M.Def(function match(file,name) {
-        console.debug({jsmatch:file});
+        console.debug({jsmatch:file,name:name});
         if(file instanceof Module) {
 
           return true;
