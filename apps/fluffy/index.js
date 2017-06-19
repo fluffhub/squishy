@@ -107,7 +107,7 @@ Module(function M() {
           spoon.main.Activate(live_items[loc.path]);
         } else {
           var te=new CodeEditor(loc.path);
-          live_items.push[loc.path]=te;
+          live_items[loc.path]=te;
           return te;
         }
 
