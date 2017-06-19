@@ -53,6 +53,8 @@ Module(function M() {
         C.Super(windowing.AppContainer)
         C.Init(function CodeEditor(loc,items) {
           windowing.AppContainer.call(this);
+          this.element.style.width="400px";
+          this.element.style.height="300px";
           //basic.Div.call(this);
           if (loc instanceof Element) {
           } else {
