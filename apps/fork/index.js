@@ -26,6 +26,11 @@ Module(function M() {
             basic.Div.call(this,"AppSelector");
             var as=this;
             this.value=val;
+            var url=new basic.Span(val,"url")
+
+            this.add(url);
+            this.add(new basic.Span("Open With:"))
+
             if(apps.length&apps.length>=1) {
               apps.forEach(function(app) {
                 var App=new interactive.MomentaryButton(app,"appselector",function() {
@@ -287,7 +292,9 @@ Module(function M() {
               if(apps.length==1) { spoon.main.run(apps[0],val); }
               else if (apps.length>1) {
                 var as=new AppSelector(apps,val);
-                lib.parent.add(as);
+                lib.parent.contextmenu.add(as);
+                lib.parent.events.context.trigger();
+
 
               }
 
