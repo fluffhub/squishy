@@ -51,7 +51,7 @@ Module(function M() {
       });
       var CodeEditor=M.Class(function C() {
         C.Super(windowing.AppContainer)
-        C.Init(function TextEditor(loc,items) {
+        C.Init(function CodeEditor(loc,items) {
           windowing.AppContainer.call(this);
           //basic.Div.call(this);
           if (loc instanceof Element) {
@@ -92,16 +92,22 @@ Module(function M() {
           this.addClass("CodeEditor");
         });
         C.Def(function onload() {
-          this.add(new JSe.JSEditor(this.value,spoon.main));
+          this.main=new JSe.JSEditor(this.value,spoon.main);
+          this.contents.add(this.main);
         });
       });
-      var live_items=[];
+      var live_items={};
       M.Def(function open(loc) {
-        if(loc in live_items) {
+        if(loc instanceof Element) {
 
         } else {
-          var te=new CodeEditor(loc);
-          live_items.push(te);
+          loc = system.uri(loc);
+        }
+        if(loc.path in live_items) {
+          spoon.main.Activate(live_items[loc.path]);
+        } else {
+          var te=new CodeEditor(loc.path);
+          live_items.push[loc.path]=te;
           return te;
         }
 
