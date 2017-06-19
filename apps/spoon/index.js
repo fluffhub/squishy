@@ -178,6 +178,7 @@ Module(function M() {
                       e.preventDefault();
                      // e.stopPropagation();
                    }
+                   console.debug("context menuing:");
                    var pos=this.cursor;
                    var ContextMenu=EW.contextmenu
                    ContextMenu.element.style.position="absolute";
@@ -559,7 +560,7 @@ Module(function M() {
 
 
 
-             M.Def("match",function match(item) {
+             M.Def(function match(item) {
                var ret={}
                var app;
                Object.keys(conf.apps).forEach(function(name) {
