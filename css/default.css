@@ -31,7 +31,8 @@ td { }
 }
 .AppSelector {
  position:absolute;
-  padding:10px;
+  padding:10px;border-radius:1px;
+  background-color:#ddd;
 }
 .AppSelector>span{
   display:block;
