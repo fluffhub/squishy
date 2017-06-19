@@ -22,7 +22,7 @@ Module(function M() {
         M.Def("wrappers",wrappers)
         var AppSelector=M.Class(function C() {
           C.Super(basic.Div);
-          C.Init(function AppSelector(apps, val) {
+          C.Init(function AppSelector(val) {
             basic.Div.call(this,"AppSelector");
             var as=this;
             this.value=val;
@@ -30,17 +30,50 @@ Module(function M() {
 
             this.add(url);
             this.add(new basic.Span("Open With:"))
-
-            if(apps.length&apps.length>=1) {
-              apps.forEach(function(app) {
-                var App=new interactive.MomentaryButton(app,"appselector",function() {
-                  spoon.main.run(app,as.value);
-                  as.remove();
-
-                });
-                as.add(App);
-              });
+            var path;
+            if(typeof val == "string") {
+              path=val
+            } else {
+              path=val.href
             }
+            this.apps=[];
+
+            live.DeviceManager.retrieve(val,function(mod) {
+              var apps=as.apps;
+              Object.keys(mod).forEach(function(devname) {
+                var instance=mod[devname];
+
+                var matches=spoon.match(instance,path);
+
+                console.debug({matches:matches});
+                Object.keys(matches).forEach(function (name) {
+                  var match=matches[name];
+                  if(match.open instanceof Function) {
+                    //var browser=spoon.main.run("fork", system.uri(""));
+                    var appname=name;
+                    if(typeof match.name=="string") {
+                      appname=match.name;
+                      if(!(appname in apps))
+                        apps.push(appname);
+
+
+                      console.debug({opened: match,name:name})
+                    }
+                  }
+                });
+              });
+              if(apps.length&apps.length>=1) {
+                apps.forEach(function(app) {
+                  var App=new interactive.MomentaryButton(app,"appselector",function() {
+                    spoon.main.run(app,as.value);
+                    as.remove();
+
+                  });
+                  as.add(App);
+                });
+              }
+            });
+
           })
         });
         var FileListItem=M.Class(function C() {
@@ -56,10 +89,12 @@ Module(function M() {
             this.add(this.container);
             this.container.hide();
             this.references={};
+
             live.DeviceManager.retrieve(loc,function(devices) {
               var devicenames=Object.keys(devices);
               fli.addEvent("context","contextmenu",function() {
-                spoon.main.contextmenu.add(new AppSelector(devicenames,loc));
+
+                spoon.main.contextmenu.add(new AppSelector(loc));
               });
               fli.enableEvents("context");
               devicenames.forEach(function(devicename) {
@@ -268,14 +303,15 @@ Module(function M() {
                         var appname=name;
                         if(typeof match.name=="string") {
                           appname=match.name;
-                          apps.push(appname);
+                          if(!(appname in apps))
+                            apps.push(appname);
 
 
                           console.debug({opened: match,name:name})
                         }
                       }
                     });
-                   // console.debug({apps:apps});
+                    // console.debug({apps:apps});
 
                   }
                 }
@@ -291,7 +327,7 @@ Module(function M() {
               console.debug({apps:apps});
               if(apps.length==1) { spoon.main.run(apps[0],val); }
               else if (apps.length>1) {
-                var as=new AppSelector(apps,val);
+                var as=new AppSelector(val);
                 lib.parent.contextmenu.add(as);
                 lib.parent.events.context.trigger();
 
