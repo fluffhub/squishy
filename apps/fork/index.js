@@ -53,7 +53,7 @@ Module(function M() {
             this.references={};
             live.DeviceManager.retrieve(loc,function(devices) {
               var devicenames=Object.keys(devices);
-              this.addEvent("context","contextmenu",function() {
+              fli.addEvent("context","contextmenu",function() {
                 spoon.main.contextmenu.add(new AppSelector(Object.keys(devices),loc));
               });
               this.enableEvents("context");
