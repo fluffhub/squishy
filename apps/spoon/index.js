@@ -458,7 +458,7 @@ Module(function M() {
                      if(paths[0]=="") start=1;
                      var filename=paths[paths.length-1];
 
-                     for(var i=start;i<paths.length;i++) {
+                     /*for(var i=start;i<paths.length;i++) {
                        var file;
                        var key=paths[i];
                        var existingfiles=cursor.query("div[data-key=\""+key+"\"]");
@@ -500,8 +500,8 @@ Module(function M() {
                          if(callback) callback(cursor);
                        }
                        filedepth++;
-                     }
-                     if(browser.tasks.length==1) browser.load(path,item);
+                     }*/
+                     //if(browser.tasks.length==1) browser.load(path,item);
                    });
                  });
                  //  M.continue();
