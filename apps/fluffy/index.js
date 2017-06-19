@@ -82,6 +82,7 @@ Module(function M() {
                 //  te.onload();
                 //});
                 te.value="Module("+instance.def.toString()+");";
+                console.debug(te.value);
                 ta.value(te.value);
                 te.onload();
 
