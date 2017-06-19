@@ -23,6 +23,7 @@ Module(function M() {
         var AppSelector=M.Class(function C() {
           C.Super(windowing.AppContainer);
           C.Init(function AppSelector(apps, val) {
+            windowing.AppContainer.call(this);
             var as=this;
             this.value=val;
             if(apps.length&apps.length>=1) {
