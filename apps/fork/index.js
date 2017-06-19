@@ -20,7 +20,23 @@ Module(function M() {
         var theme={}
 
         M.Def("wrappers",wrappers)
+        var AppSelector=M.Class(function C() {
+          C.Super(windowing.AppContainer);
+          C.Init(function AppSelector(apps, val) {
+            var as=this;
+            this.value=val;
+            if(apps.length&apps.length>=1) {
+              apps.forEach(function(app) {
+                var App=new interactive.MomentaryButton(app,"appselector",function() {
+                  spoon.main.run(app,as.value);
+                  as.remove();
 
+                });
+                as.add(App);
+              });
+            }
+          })
+        });
         var FileListItem=M.Class(function C() {
           C.Super(interactive.MomentaryButton);
           C.Init(function FileListItem(name,loc,click) {
@@ -36,6 +52,10 @@ Module(function M() {
             this.references={};
             live.DeviceManager.retrieve(loc,function(devices) {
               var devicenames=Object.keys(devices);
+              this.addEvent("context","contextmenu",function() {
+                spoon.main.contextmenu.add(new AppSelector(Object.keys(devices),loc));
+              });
+              this.enableEvents("context");
               devicenames.forEach(function(devicename) {
                 var device=devices[devicename];
 
@@ -109,6 +129,7 @@ Module(function M() {
               var F=new FileListItem(filename,loc,function() {
                 FL.click.call(FL,loc);
               });
+
               FL.Contents.add(F);
               FL.contents[filename]=F;
               FL.contents[filename].addReference(obj);
@@ -146,23 +167,7 @@ Module(function M() {
             });
           });
         });
-        var AppSelector=M.Class(function C() {
-          C.Super(windowing.AppContainer);
-          C.Init(function AppSelector(apps, val) {
-            var as=this;
-            this.value=val;
-            if(apps.length&apps.length>=1) {
-              apps.forEach(function(app) {
-                var App=new interactive.MomentaryButton(app,"appselector",function() {
-                  spoon.main.run(app,as.value);
-                  as.remove();
 
-                });
-                as.add(App);
-              });
-            }
-          })
-        });
         var FileBrowser=M.Class(function C() {
           C.Super(windowing.AppContainer);
           C.Init(function FileBrowser(path)  {
@@ -408,6 +413,7 @@ Module(function M() {
                 F=new FileListItem(filename,dirloc,function() {
                   dir.click()
                 });
+
                 dir.contents[filename]=F;
                 dir.Contents.add(F);
 
