@@ -106,7 +106,7 @@ Module(function M() {
           loc = system.uri(loc);
         }
         if(loc.path in live_items) {
-          spoon.main.Activate(live_items[loc.path]);
+          spoon.main.tm.Activate(live_items[loc.path]);
         } else {
           var te=new CodeEditor(loc.path);
           live_items[loc.path]=te;

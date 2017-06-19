@@ -12,6 +12,18 @@ td { }
 .member.module .content {
   float:left;
 }
+
+
+.CodeEditor .acc {
+    overflow: scroll;
+    height: 100%;
+    width: 100%;
+
+  }
+}
+.CodeEditor {
+
+}
 .button.grip {
   float: left;
   line-height: 1em;
