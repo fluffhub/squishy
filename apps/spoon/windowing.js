@@ -5,7 +5,8 @@ Module(function M() {
     "squishy/transform",
     "spoon/conf",
     "squishy/events",
-    function(basic,interactive,transform,conf,events) {
+    "spoon",
+    function(basic,interactive,transform,conf,events,spoon) {
       var AppConfig=M.Class(function C() {
         C.Super(interactive.MomentaryButton);
         C.Init(function AppConfig() {
@@ -35,6 +36,14 @@ Module(function M() {
           this.add(this.contents);
           var acw=this;
 
+          this.titlebar.addEvent("context","contextmenu",function() {
+            spoon.main.contextmenu.add(new interactive.MomentaryButton("X","ui_button",function() {
+              spoon.main.close(acw);
+              spoon.main.clearContext();
+            }));
+
+          });
+            this.titlebar.enableEvents("context");
 
           //window controls
 

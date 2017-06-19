@@ -257,11 +257,16 @@ Module(function M() {
 
                  });
                  var contextitems=[];
+                 C.Def(function close(item) {
+                   item.remove;
+
+                 });
                  C.Def(function clearContext() {
                    var EW=this;
                    //////console.debug('clearing');
                    this.contextmenu.elements.forEach(function (item) {
                      item.remove();
+
                    });
                    this.contextmenu.remove();
                    this.contextactive=false;
