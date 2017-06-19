@@ -24,6 +24,21 @@ td { }
 .CodeEditor {
 
 }
+.CodeEditor .acb {
+ width:100%;
+  overflow-x:scroll;
+  overflow-y:hidden;
+}
+.AppSelector {
+ position:absolute;
+  padding:10px;
+}
+.AppSelector>span{
+  display:block;
+}
+.AppSelector>span:first-child {
+ font-size:0.5em;
+}
 .button.grip {
   float: left;
   line-height: 1em;
