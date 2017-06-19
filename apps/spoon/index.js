@@ -88,7 +88,9 @@ Module(function M() {
                C.Def(function addTask(path,task) {
                  var appname=path.split(":")[0]
                  var tm=this;
-                 this.tasks.push(task);
+
+                 if(task in this.tasks) { }
+                 else { this.tasks.push(task);
 
                  var tab=new interactive.MomentaryButton(appname,"task",function onclick(e) {
                    tm.Activate(task)
@@ -98,6 +100,7 @@ Module(function M() {
 
                  this.add(tab);
                  tab.addClass("tab");
+                      }
                });
              });
 
