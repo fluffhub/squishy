@@ -88,8 +88,12 @@ Module(function M() {
                C.Def(function addTask(path,task) {
                  var appname=path.split(":")[0]
                  var tm=this;
+                 var found=false;
+                 this.tasks.forEach(function (t) {
 
-                 if(task in this.tasks) { }
+                   if (t===task) { found=true; }
+                 });
+                 if(found) { }
                  else { this.tasks.push(task);
 
                  var tab=new interactive.MomentaryButton(appname,"task",function onclick(e) {
