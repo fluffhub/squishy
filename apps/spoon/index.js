@@ -215,10 +215,16 @@ Module(function M() {
                    this.tm.Activate(task);
 
                  });
-                 C.Def(function run(path) {  //run takes multiple args
+                 C.Def(function run(val) {  //run takes multiple args
                    var args=Array.prototype.slice.call(arguments,1)
                    var task=null;
                    var hw=this;
+                   var path;
+
+                   if(val instanceof Element)
+                     path=val.path
+                  else if (typeof val == "string")
+                    path=val;
                    if(path in conf.apps) {
 
                      task=conf.apps[path].open.apply(this,args)
