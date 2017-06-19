@@ -11,7 +11,7 @@ Module(function M() {
        console.debug({"js editor loaded":JSe} );
       M.Def(function match(file,name) {
         console.debug({jsmatch:file,name:name});
-        if(file instanceof Module) {
+        if(file instanceof Module || file instanceof Function || file instanceof Object) {
 
           return true;
         }
