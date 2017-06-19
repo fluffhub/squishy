@@ -21,9 +21,9 @@ Module(function M() {
 
         M.Def("wrappers",wrappers)
         var AppSelector=M.Class(function C() {
-          C.Super(windowing.AppContainer);
+          C.Super(basic.Div);
           C.Init(function AppSelector(apps, val) {
-            windowing.AppContainer.call(this);
+            basic.Div.call(this,"AppSelector");
             var as=this;
             this.value=val;
             if(apps.length&apps.length>=1) {
