@@ -56,7 +56,7 @@ Module(function M() {
               fli.addEvent("context","contextmenu",function() {
                 spoon.main.contextmenu.add(new AppSelector(Object.keys(devices),loc));
               });
-              this.enableEvents("context");
+              fli.enableEvents("context");
               devicenames.forEach(function(devicename) {
                 var device=devices[devicename];
 
