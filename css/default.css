@@ -89,7 +89,7 @@ a.member { text-decoration:none; }
   line-height:25px;
 }
 .TextEditor textarea { width:500px;height:300px;font-family:monospace, serif;font-size:0.75em; }
-.acw { position:absolute;display:inline-block;padding:2px;background-color:#efefef; }
+.acw { position:absolute;display:inline-block;padding:2px;background-color:#efefef;overflow:hidden;padding:5px}
 .acw>.acb, .TextEditor>.title { cursor:default;display:block; font-size:1em;font-family:monospace, serif;line-height:1.8em;text-indent:5px; }
 .acw { transition:0.1s opacity;opacity:0;z-index:0; }
 
