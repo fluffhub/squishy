@@ -78,14 +78,15 @@ table {
 }
 .user { position:absolute;}
 
-.ui-resizable-se { position:absolute;right:1px;bottom:1px;}
-.ui-resizable-sw { position:absolute;left:1px;bottom:1px; }
-.ui-resizable-nw { position:absolute;left:1px;top:1px; }
-.ui-resizable-ne { position:absolute;right:1px;top:1px; }
-.ui-resizable-n { position:absolute;right:0;top:1px; }
-.ui-resizable-e { position:absolute;right:1px;bottom:0; }
-.ui-resizable-s { position:absolute;right:0px;bottom:1px; }
-.ui-resizable-w { position:absolute;left:1px;bottom:0;}
+.ui-resizable-se { position:absolute;right:1px;bottom:1px;cursor:se-resize;}
+.ui-resizable-sw { position:absolute;left:1px;bottom:1px;cursor:sw-resize; }
+.ui-resizable-nw { position:absolute;left:1px;top:1px;cursor:nw-resize; }
+.ui-resizable-ne { position:absolute;right:1px;top:1px;cursor:ne-resize; }
+.ui-resizable-n { position:absolute;right:0;top:1px;cursor:n-resize; }
+.ui-resizable-e { position:absolute;right:1px;bottom:0;cursor:e-resize; }
+.ui-resizable-s { position:absolute;right:0px;bottom:1px;cursor:s-resize; }
+.ui-resizable-w { position:absolute;left:1px;bottom:0;cursor:w-resize;}
+.handle { width:15px;height:15px;}
 .ui-resizable-se:hover {  }
 .clickable { cursor:pointer; }
 .button { cursor:pointer; }
