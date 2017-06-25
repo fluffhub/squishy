@@ -24,6 +24,7 @@ Module(function M() {
           transform.HTMLPositionBox.call(this);
           this.addClass("acw");
           this.size={width:400,height:300}
+          this.position={x:0,y:0}
           this.drawTransform();
 
           //titlebar
