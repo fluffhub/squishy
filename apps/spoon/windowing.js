@@ -23,7 +23,7 @@ Module(function M() {
           this.parent=parent;
           transform.HTMLMatrixBox.call(this);
           this.addClass("acw");
-          this.size={width:400,height:300}
+
 
 
           //titlebar
@@ -31,7 +31,7 @@ Module(function M() {
           this.add(this.titlebar);
           this.titlebar.Mixin(transform.Draggable);
           this.Mixin(transform.Resizable);
-
+                    this.size={width:400,height:300}
           this.drawTransform();
           this.Mixin(events.HasEvents);
           //content
