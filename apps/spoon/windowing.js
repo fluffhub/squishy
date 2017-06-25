@@ -51,8 +51,10 @@ Module(function M() {
           var acw=this;
           this.titlebar.enabledrag(function ondrag(i,v) {
 
-            acw.element.style.top=v.position.y+"px";
-            acw.element.style.left=v.position.x+"px";
+           //// acw.element.style.top=v.position.y+"px";
+           // acw.element.style.left=v.position.x+"px";/
+            extend(acw.position,v.position);
+            acw.drawTransform();
             //console.debug({x:v.position.x,y:v.position.y});
           });
           //resizable
