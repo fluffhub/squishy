@@ -15,13 +15,13 @@ Module(function M() {
         });
       });
       var AppContainer=M.Class(function C() {
-        C.Super(transform.HTMLMatrixBox);
+        C.Super(transform.HTMLPositionBox);
         //C.Mixin(transform.Resizable);
         //   C.Mixin(events.HasEvents);
         //C.Mixin(transform.Draggable);
         C.Init(function AppContainer(parent) {
           this.parent=parent;
-          transform.HTMLMatrixBox.call(this);
+          transform.HTMLPositionBox.call(this);
           this.addClass("acw");
 
 
