@@ -15,23 +15,24 @@ Module(function M() {
         });
       });
       var AppContainer=M.Class(function C() {
-        C.Super(transform.HTMLPositionBox);
+        C.Super(transform.HTMLMatrixBox);
         //C.Mixin(transform.Resizable);
         //   C.Mixin(events.HasEvents);
         //C.Mixin(transform.Draggable);
         C.Init(function AppContainer(parent) {
           this.parent=parent;
-          transform.HTMLPositionBox.call(this);
+          transform.HTMLMatrixBox.call(this);
           this.addClass("acw");
           this.size={width:400,height:300}
-          this.position={x:0,y:0}
-          this.drawTransform();
+
 
           //titlebar
           this.titlebar=new basic.Div("acb")
           this.add(this.titlebar);
           this.titlebar.Mixin(transform.Draggable);
           this.Mixin(transform.Resizable);
+
+          this.drawTransform();
           this.Mixin(events.HasEvents);
           //content
           this.contents=new basic.Div("acc");
