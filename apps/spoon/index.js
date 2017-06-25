@@ -94,16 +94,17 @@ Module(function M() {
                    if (t===task) { found=true; }
                  });
                  if(found) { }
-                 else { this.tasks.push(task);
+                 else {
+                   this.tasks.push(task);
 
-                 var tab=new interactive.MomentaryButton(appname,"task",function onclick(e) {
-                   tm.Activate(task)
-                 })
+                   var tab=new interactive.MomentaryButton(appname,"task",function onclick(e) {
+                     tm.Activate(task)
+                   })
 
 
 
-                 this.add(tab);
-                 tab.addClass("tab");
+                   this.add(tab);
+                   tab.addClass("tab");
                       }
                });
              });
