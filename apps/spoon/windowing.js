@@ -15,15 +15,16 @@ Module(function M() {
         });
       });
       var AppContainer=M.Class(function C() {
-        C.Super(transform.HTMLMatrixBox);
+        C.Super(transform.HTMLPositionBox);
         //C.Mixin(transform.Resizable);
         //   C.Mixin(events.HasEvents);
         //C.Mixin(transform.Draggable);
         C.Init(function AppContainer(parent) {
           this.parent=parent;
-          transform.HTMLMatrixBox.call(this);
+          transform.HTMLPositionBox.call(this);
           this.addClass("acw");
-
+          this.size={width:400,height:300}
+          this.drawTransform();
 
           //titlebar
           this.titlebar=new basic.Div("acb")
@@ -59,7 +60,9 @@ Module(function M() {
           });
           //resizable
           ///console.debug(this);
-          this.enableresize()
+          this.enableresize(undefined,function onresize(item) {
+            extend(acw.titlebar.size,acw.size);
+          });
 
         });
       });
