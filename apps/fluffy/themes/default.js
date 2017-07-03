@@ -25,7 +25,7 @@ Module(function M() {
           c.add(new basic.Span("}","BD"));
       }},
       ExpressionStatement:{enter:function(node) {
-       // return new basic.Div("E");
+        return new basic.Div("E");
       },leave:function(node,parent,cursor) {
        // cursor.add(new basic.Span(";","EC"));
       }},
@@ -288,9 +288,10 @@ Module(function M() {
         },
         enter:function(node,parent,cursor,state) {
           state.Module=node
+          return new basic.Div("Module");
         },
         leave:function(node,parent,cursor,state) {
-          node.element.addClass("module");
+          //node.element.addClass("module");
           //node.element.element.style["background-color"]="orange";
 
         }
