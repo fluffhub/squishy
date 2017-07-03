@@ -220,11 +220,13 @@ Module(function M() {
               if(mask.match(node)) {
                 var newnode=mask.enter.call(this,node,parent,cursor,this.state);
                 if(newnode&&newnode!==true) {
-                  node.element.remove();
-                  newnode.add(node.element);
-                  cursor.add(newnode);
-                  maskapplied=true;
-                  this.cursor=newnode;
+                 // node.element.remove();
+                // newnode.add(node.element);
+                  if(newnode.element instanceof Element) {
+                    cursor.add(newnode);
+                    maskapplied=true;
+                    this.cursor=newnode;
+                  }
                 }
                 maskcursors.push({mask:mask,node:node});
               }
