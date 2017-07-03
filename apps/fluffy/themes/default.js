@@ -220,7 +220,7 @@ Module(function M() {
               name=n.arguments[0].id.name;
               c.add(new basic.Anchor(name));
               c.add(new basic.Span(name,"classname"));
-              var p2=p;
+              var p2=n.parent;
               while(!codemasks.ClassStatement.match(p2)) {
                 p2=p.parent;
               }
