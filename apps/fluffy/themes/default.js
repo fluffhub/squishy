@@ -317,7 +317,7 @@ Module(function M() {
         leave:function(node,parent,cursor) {
 
           node.element.addClass("cls");
-          node.elements.forEach(function(el) { el.remove() })
+          node.element.elements.forEach(function(el) { el.remove() })
         }
       },
       DefStatement:{
