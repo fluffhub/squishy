@@ -199,6 +199,7 @@ Module(function M() {
             var cursor=this.cursor;
             var item;
             var codemasks=this.codemasks;
+            var nodetypes=this.nodetypes;
             if(node.leadingComments&&node.type!="Program") {
               var comments=new basic.Div("Comments");
               comments.element.style["margin-left"]=(-1)+"em";
