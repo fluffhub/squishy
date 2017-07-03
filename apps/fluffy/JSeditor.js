@@ -221,7 +221,7 @@ Module(function M() {
               item=nodetypes["Unknown"].enter.call(this,node,parent,cursor,this.state);
             }
 
-            if(item) {
+            if(item.element instanceof Element) {
               item.node=node;
               node.element=item;
               cursor.add(item);
