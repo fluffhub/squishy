@@ -212,12 +212,15 @@ Module(function M() {
         leave:function(n,p,c) {
           c.addClass("init");
           var name;
+          c.clear();
           console.debug({"function":n})
           if(n.arguments&&n.arguments[0]) {
 
             if(n.arguments[0].id) {
+              name=n.arguments[0].id.name;
+              c.add(new basic.Anchor(name));
+              c.add(new basic.Span(name,"classname"));
 
-              c.add(new basic.Anchor(n.arguments[0].id.name));
             }
           }
         }
@@ -318,7 +321,13 @@ Module(function M() {
 
         },
         leave:function(node,parent,cursor) {
-
+          //node.element.elements.forEach(function(el) { el.remove() });
+         var code=new basic.Div("extended");
+          node.element.elements.forEach(function(el) { el.remove();code.add(el); });
+           cursor.extended=code;
+          var div=new basic.Div("classname");
+          div.content("Class");
+          node.element.add(div);
          // node.element.addClass("cls");
          // node.element.elements.forEach(function(el) { el.remove() })
         }

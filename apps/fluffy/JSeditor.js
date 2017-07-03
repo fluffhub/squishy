@@ -220,8 +220,8 @@ Module(function M() {
               if(mask.match(node)) {
                 var newnode=mask.enter.call(this,node,parent,cursor,this.state);
                 if(newnode&&newnode!==true) {
-                 // node.element.remove();
-                // newnode.add(node.element);
+                  // node.element.remove();
+                  // newnode.add(node.element);
                   if(newnode.element instanceof Element) {
                     cursor.add(newnode);
                     maskapplied=true;
@@ -233,20 +233,20 @@ Module(function M() {
               }
             }
             if(!maskapplied) {
-            if(nodetypes[node.type]) {
-              item=nodetypes[node.type].enter.call(this,node,parent,cursor,this.state);
-            } else {
-              item=nodetypes["Unknown"].enter.call(this,node,parent,cursor,this.state);
-            }
+              if(nodetypes[node.type]) {
+                item=nodetypes[node.type].enter.call(this,node,parent,cursor,this.state);
+              } else {
+                item=nodetypes["Unknown"].enter.call(this,node,parent,cursor,this.state);
+              }
 
-            if(item.element instanceof Element) {
-              item.node=node;
-              node.element=item;
-              cursor.add(item);
-              item.element.style["z-index"]=10000+depth;
-              //cursor.add(item);
-              this.cursor=item;
-            }
+              if(item.element instanceof Element) {
+                item.node=node;
+                node.element=item;
+                cursor.add(item);
+                item.element.style["z-index"]=10000+depth;
+                //cursor.add(item);
+                this.cursor=item;
+              }
             }
 
           });
