@@ -183,7 +183,7 @@ Module(function M() {
                  this.contextmenu.enableEvents("closeContext");
                  this.addEvent("context","contextmenu",function oncontextmenu(e) {
                    if(e) {
-                      e.preventDefault();
+                      //e.preventDefault();
                      // e.stopPropagation();
                    }
                    console.debug("context menuing:");
