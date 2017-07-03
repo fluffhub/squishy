@@ -312,7 +312,11 @@ Module(function M() {
           }
         },
         enter:function(node,parent,cursor) {
-
+          var classdiv=new basic.Div("ClassDiv");
+          node.element.parent.add(classdiv);
+          node.element.remove();
+          classdiv.add(node);
+          node.element.element.style.display="none";
         },
         leave:function(node,parent,cursor) {
 
