@@ -220,9 +220,16 @@ Module(function M() {
               name=n.arguments[0].id.name;
               c.add(new basic.Anchor(name));
               c.add(new basic.Span(name,"classname"));
+              var p2=p;
+              while(!codemasks.ClassStatement.match(p2)) {
+                p2=p.parent;
+              }
+              p2.name=name;
 
             }
+
           }
+
         }
       },
       ImportStatement:{
@@ -325,8 +332,13 @@ Module(function M() {
          var code=new basic.Div("extended");
           node.element.elements.forEach(function(el) { el.remove();code.add(el); });
            cursor.extended=code;
+
           var div=new basic.Div("classname");
-          div.content("Class");
+          if(typeof node.name=="string") {
+            div.content("Class "+node.name);
+          } else {
+            div.content("Unnamed Class");
+          }
           node.element.add(div);
          // node.element.addClass("cls");
          // node.element.elements.forEach(function(el) { el.remove() })
