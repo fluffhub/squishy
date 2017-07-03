@@ -312,15 +312,13 @@ Module(function M() {
           }
         },
         enter:function(node,parent,cursor) {
-          var classdiv=new basic.Div("ClassDiv");
-          node.element.parent.add(classdiv);
-          node.element.remove();
-          classdiv.add(node);
-          node.element.element.style.display="none";
+          return new basic.Div("ClassDiv");
+
+
         },
         leave:function(node,parent,cursor) {
 
-          node.element.addClass("cls");
+         // node.element.addClass("cls");
          // node.element.elements.forEach(function(el) { el.remove() })
         }
       },
