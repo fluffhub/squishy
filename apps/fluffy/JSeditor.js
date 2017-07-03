@@ -229,8 +229,8 @@ Module(function M() {
                 maskcursors.push({mask:mask,node:node});
               }
             }
-
-            if(nodetypes[node.type]&&!maskapplied) {
+            if(!maskapplied) {
+            if(nodetypes[node.type]) {
               item=nodetypes[node.type].enter.call(this,node,parent,cursor,this.state);
             } else {
               item=nodetypes["Unknown"].enter.call(this,node,parent,cursor,this.state);
@@ -243,6 +243,7 @@ Module(function M() {
               item.element.style["z-index"]=10000+depth;
               //cursor.add(item);
               this.cursor=item;
+            }
             }
 
           });
