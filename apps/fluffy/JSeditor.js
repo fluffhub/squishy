@@ -27,10 +27,9 @@ Module(function M() {
       Import("fluffy/themes/","fluffy/themes/default",function(themes,defaulttheme) {
 
 
-
         M.Class(function C() {
           C.Super(basic.Div);
-          C.Init(function JSEditor(raw,browser) {
+          C.Init(function JSEditor(raw,browser,theme) {
 
             basic.Div.call(this,"CodeBrowser");
             var parsed=esprima.parse(raw,{comment:true,attachComment:true,range:true,loc:true,tokens:true});
@@ -53,7 +52,8 @@ Module(function M() {
             this.state={};
             this.maskcursors=[];
             var filestate={};
-
+            if(theme!==undefined) this.setTheme(theme);
+            else this.setTheme(defaulttheme);
             this.cursor=this;
             var browser=this;
             estraverse.traverse(parsed,{
@@ -65,6 +65,21 @@ Module(function M() {
               }
             });
           });
+          C.Def(function setTheme(obj) {
+            var br=this;
+            if (obj instanceof Module) {
+              if(obj.nodetypes instanceof Object) {
+                this.nodetypes=obj.nodetypes;
+                if(obj.codemasks instanceof Object) {
+                  this.codemasks=obj.codemasks;
+                }
+              }
+            } else if (typeof ( obj) =="string") {
+              Import("fluffy/themes/"+obj,function(theme2) {
+                br.setTheme(theme2);
+              });
+            }
+          })
           C.Def(function summary(node,parent) {
             var cursor=this;
             function travel(item2,depth) {
@@ -129,6 +144,7 @@ Module(function M() {
           C.Def(function leaveNode(node,parent) {
             this.depth--;
             var depth=this.depth;
+            var nodetypes=this.nodetypes;
             var cursor=this.cursor;
             var maskcursors=this.maskcursors;
             for(var i=0;i<maskcursors.length;i++) {
@@ -182,7 +198,7 @@ Module(function M() {
             var maskcursors=this.maskcursors;
             var cursor=this.cursor;
             var item;
-
+            var codemasks=this.codemasks;
             if(node.leadingComments&&node.type!="Program") {
               var comments=new basic.Div("Comments");
               comments.element.style["margin-left"]=(-1)+"em";

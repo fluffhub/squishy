@@ -336,8 +336,8 @@ Module(function M() {
 
     };
 
-    M.Def("nodeformats",nodetypes);
-    M.Def("nodefilters",codemasks);
+    M.Def("nodetypes",nodetypes);
+    M.Def("codemasks",codemasks);
 
 
   });
