@@ -226,6 +226,7 @@ Module(function M() {
                     cursor.add(newnode);
                     maskapplied=true;
                     this.cursor=newnode;
+                    node.element=newnode;
                   }
                 }
                 maskcursors.push({mask:mask,node:node});
