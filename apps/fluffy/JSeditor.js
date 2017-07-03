@@ -24,7 +24,7 @@ Module(function M() {
       var escodegen=ESCG.escodegen;
       window.escodegen=escodegen;
       var estraverse=esv;
-      Import("fluffy/themes","themes/default",function(themes,defaulttheme) {
+      Import("fluffy/themes/","themes/default",function(themes,defaulttheme) {
 
 
 
