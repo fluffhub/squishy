@@ -207,7 +207,7 @@ Module(function M() {
           }
         },
         enter:function(n,p,c) {
-
+          return new basic.Div("InitStatement");
         },
         leave:function(n,p,c) {
           c.addClass("init");
