@@ -214,8 +214,23 @@ Module(function M() {
                 comments.add(ln);
               });
             }
+            var maskapplied=false;
+            for(var maskname in codemasks) {
+              var mask=codemasks[maskname];
+              if(mask.match(node)) {
+                var newnode=mask.enter.call(this,node,parent,cursor,this.state);
+                if(newnode&&newnode!==true) {
+                  node.element.remove();
+                  newnode.add(node.element);
+                  cursor.add(newnode);
+                  maskapplied=true;
+                  this.cursor=newnode;
+                }
+                maskcursors.push({mask:mask,node:node});
+              }
+            }
 
-            if(nodetypes[node.type]) {
+            if(nodetypes[node.type]&&!maskapplied) {
               item=nodetypes[node.type].enter.call(this,node,parent,cursor,this.state);
             } else {
               item=nodetypes["Unknown"].enter.call(this,node,parent,cursor,this.state);
@@ -229,19 +244,7 @@ Module(function M() {
               //cursor.add(item);
               this.cursor=item;
             }
-            for(var maskname in codemasks) {
-              var mask=codemasks[maskname];
-              if(mask.match(node)) {
-                var newnode=mask.enter.call(this,node,parent,cursor,this.state);
-                if(newnode&&newnode!==true) {
-                  node.element.remove();
-                  newnode.add(node.element);
-                  cursor.add(newnode);
-                  this.cursor=newnode;
-                }
-                maskcursors.push({mask:mask,node:node});
-              }
-            }
+
           });
         });
 
