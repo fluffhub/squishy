@@ -39,6 +39,7 @@ Module(function M() {
             this.curline=0;
             this.curcol=0;
             this.browser=browser;
+            var lastnode=this.lastnode=null;
             console.debug({lines:lines, comments:comments, parsed:parsed});
             var Comments=new basic.Div("comments");
             var withcomments=escodegen.attachComments(parsed,comments, parsed.tokens);
@@ -200,6 +201,9 @@ Module(function M() {
             var item;
             var codemasks=this.codemasks;
             var nodetypes=this.nodetypes;
+            Object.defineProperty(this,"parent",{editable:true,enumerable:false})
+            node.parent=this.lastnode;
+            this.lastnode=node;
             if(node.leadingComments&&node.type!="Program") {
               var comments=new basic.Div("Comments");
               comments.element.style["margin-left"]=(-1)+"em";
