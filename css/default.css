@@ -529,14 +529,6 @@ x.collapsible>h3:before {
 
 .mainmenu .tabset { float:right; }
 
-@media screen and (max-width:1024px) {
-  .pagewidth { width:98%;margin:5px auto;}
-  .message { width:65%; }
-  .modalwindow { width:auto;left:8px;right:8px;top:8px;bottom:8px; }
-}
-@media screen and (min-width:1025px) {
-  .pagewidth { width:1000px;margin:5px auto; }
-}
 .process {
   background-color: #efefef;
   margin: 5px;
