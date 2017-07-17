@@ -268,7 +268,7 @@ Module(function M() {
             var dirs=path.split("/")
 
             live.DeviceManager.retrieve(val,function(mod) {
-              var apps=[]
+              var apps=[];
               Object.keys(mod).forEach(function(devname) {
 
                 var instance=mod[devname];
