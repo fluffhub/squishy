@@ -19,6 +19,7 @@ Module(function M() {
         var main=live.DeviceManager;
         var theme={}
 
+        Import("fork/filebrowser.css");
         M.Def("wrappers",wrappers)
         var AppSelector=M.Class(function C() {
           C.Super(basic.Div);
