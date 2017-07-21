@@ -1,0 +1,23 @@
+input, select, textarea { }
+input, select, textarea { font-family: Inconsolata; }
+.CodeEditor .acc { overflow: scroll; height: 100%; width: 100%; }
+.CodeEditor .acb { width: 100%; overflow-x: scroll; overflow-y: hidden; }
+.acw.active { transition: opacity 0.5s linear; z-index: 1001; }
+.code .clears { clear: both; display: block; }
+.code .module { background: rgba(200, 200, 100, 0.5); display: block; }
+.code * { position: relative; color: rgb(85, 85, 85); border: 0px solid rgba(0, 0, 0, 0); background-color: rgba(180, 180, 180, 0.1); }
+.code div { padding-top: 0em; margin: 0px 0px 0px 0.5em; }
+.code div > span:first-child { margin-top: 0.8em; }
+.code .unknown { color: rgb(170, 85, 85); }
+.code :hover { border-color: black; }
+.code .label { background-color: rgb(85, 85, 85); color: orange; padding: 1px 3px; position: absolute; top: -14px; height: 10px; left: -9px; font-size: 9px; box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 20px 5px; }
+.Comments, .code { white-space: nowrap; }
+.code div { clear: both; }
+.code .V { }
+.V > span > span:nth-child(1) { color: pink; }
+.code .V > span:nth-child(1) { }
+.code { font-family: monospace; font-size: 0.95em; padding: 10px; }
+.code div, .code span { min-width: 2px; padding: 0px; border-bottom: 2px solid rgba(0, 0, 0, 0); }
+.code div { border-left: 2px solid rgba(0, 0, 0, 0); }
+.Comments { width: 100%; font-family: sans-serif; background-color: rgba(255, 255, 255, 0.99); color: rgb(136, 136, 136); float: left; clear: both; position: relative; font-size: 0.9em; }
+.code > div { }

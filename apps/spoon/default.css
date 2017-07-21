@@ -1,0 +1,340 @@
+body { font-family: "Lucida Grande", Calibri, sans-serif, Inconsolata; }
+td { }
+.pane { width: 100%; height: 100%; position: absolute; }
+.submitter { }
+.submitter .comments { }
+.member.module .content { float: left; }
+.AppSelector { position: absolute; padding: 10px; border-radius: 1px; background-color: rgb(221, 221, 221); }
+.AppSelector > span { display: block; }
+.AppSelector > span:first-child { font-size: 0.5em; }
+.button.grip { float: left; background: none; font-family: monospace; line-height: 1.6em; font-size: 1em; margin-left: -2em; height: 2em; padding: 0px; width: 2em; text-align: center; vertical-align: middle; text-decoration: none; }
+span.branch1 { }
+span.branch1::before { content: "|"; float: left; }
+a.member { text-decoration: none; }
+.member:last-child::before { content: "└"; text-decoration: none; font-family: monospace; font-size: 1.35em; line-height: 1em; }
+.member::before { content: "├"; font-family: monospace; font-size: 1.35em; line-height: 1em; text-decoration: none; }
+.module.member.collapsed { line-height: 1.25em; margin: 0px 0px 0px 1em; padding: 0px; }
+.submitter > span { font-size: 1.5em; line-height: 25px; }
+.TextEditor textarea { width: 500px; height: 300px; font-family: monospace, serif; font-size: 0.75em; }
+.acw { position: absolute; display: inline-block; background-color: rgb(239, 239, 239); overflow: hidden; padding: 5px; }
+.acw > .acb, .TextEditor > .title { cursor: default; display: block; font-size: 1em; font-family: monospace, serif; line-height: 1.8em; text-indent: 5px; }
+.acw { transition: opacity 0.1s; opacity: 0; z-index: 0; }
+.acw.visible { transition: opacity 0.5s linear; opacity: 1; z-index: 1000; }
+.pane * { user-select: none; }
+.submitter .button { bottom: 0px; position: absolute; width: 100%; line-height: 2em; font-size: 1.5em; }
+.submitter .comments { display: block; width: 100%; position: absolute; top: 25px; padding: 8px; bottom: 50px; left: 0px; right: 0px; }
+form.ProfileEditor { width: 400px; margin: auto; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; height: 400px; }
+.ProfileEditor .field { line-height: 1.5em; height: 2em; }
+.ProfileEditor .caption { width: 1in; text-align: right; float: left; display: block; }
+.button.saved { background-color: rgba(50, 200, 75, 0.9); }
+.template.layout { background-color: pink; }
+.modalshader { position: fixed; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000000; }
+.modalwindow { position: fixed; margin: auto; top: 0px; bottom: 0px; left: 0px; right: 0px; width: 50%; height: 50%; z-index: 10000001; background: white; }
+.TabbedTitlebar .controls { float: right; width: auto; line-height: 1.5em; height: 1.5em; }
+iframe.programinstance { width: 100%; height: 100%; margin: 0px; padding: 0px; border: none; }
+.tab, .button { box-sizing: border-box; }
+.switch.tabset .tab { border: 1px inset rgb(85, 85, 85); }
+.switch.tabset .tab.active { }
+.highlight { box-shadow: 5px 5px 5px inset; }
+svg.highlight { fill: blue; filter: drop-shadow(rgb(0, 0, 0) -5px -5px 5px); }
+.ContextItem { line-height: 4em; background-color: rgb(187, 187, 187); height: 4em; display: block; font-size: 0.5em; width: auto; float: left; padding: 0px 0.5em; }
+.TabbedTitlebar .tabset .tab { float: right; line-height: 2em; height: 2em; padding: 0px 1em; border: none; }
+.controls .button { padding: 0px 0.5em; line-height: 2.75em; font-size: 0.75em; font-weight: bold; height: 1.5em; background: none; border: none; }
+.ghost.template { opacity: 0.5; box-shadow: black 5px 5px 5px; }
+.node { overflow: visible; }
+.TabbedTitlebar .tabset { margin: 0.25em 1em; float: right; }
+.TabbedTitlebar .tab.active { background-color: rgb(187, 187, 187); box-shadow: 0px 0px 1em -5px inset; }
+.TabbedTitlebar .tab { background-color: rgb(187, 187, 187); }
+table { background-color: rgb(255, 255, 255); }
+table .even { background-color: rgb(239, 239, 239); }
+.tabset.fancy .tab.active::before, .tab.active::after, .pane, .title-bar, .tab.active { background-color: rgb(187, 187, 187); }
+.tab { background-color: rgb(85, 85, 85); }
+.node.template { margin: 0.5em 1em 1.5em; }
+.tabset.fancy { height: 28px; margin: 5px 5px 0px; padding: 0px 5px; }
+.tabset.fancy .tab { text-indent: 0px; margin: 0px 15.5px; line-height: 28px; }
+.tabset.fancy .tab::before { border-radius: 0px 5px 0px 0px; width: 19px; height: 100%; margin-right: -16px; content: ""; right: 0px; display: block; transform: skew(15deg, 0deg); border-right: 1px solid rgb(85, 85, 85); }
+a.filelink { border-bottom: 1px solid orange; margin-left: -1em; padding-left: 1em; position: absolute; right: 0px; top: 0px; left: 0px; width: 100%; display: block; transition: background-color 3s ease; background-color: rgba(255, 255, 0, 0.5); }
+a.filelink.loaded { background-color: rgba(255, 255, 255, 0.25); }
+.module.member { }
+.collapsible.dir > h3 { background: none; border-bottom: none; }
+.collapsible.dir .content { border: none; background-color: rgba(200, 200, 200, 0.25); }
+.pane > .content { border: 1px inset rgb(204, 204, 204); background-color: rgb(238, 238, 238); }
+.tabset.fancy .tab::before, .tab::after { background-color: rgb(85, 85, 85); }
+.tabset.fancy .tab > span { margin-left: -8px; }
+.tabset.fancy .tab::after { width: 20px; height: 100%; margin-left: -15px; left: 0px; border-left: 1px solid rgb(119, 119, 119); content: ""; display: block; transform: skew(-15deg, 0deg); border-radius: 5px 0px 0px; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+.codeblock { margin-left: 5px; border-left: 1px solid black; }
+.FileBrowser .member { display: block; margin-left: 1em; }
+.file.module { margin-left: 1em; color: rgb(187, 187, 85); }
+.pane > .title-bar { line-height: 35px; text-indent: 8px; }
+.code .init { border-style: solid; border-color: green; border-image: initial; background: rgba(25, 150, 25, 0.5); display: block; border-width: 2px 0px; }
+.code .cls { background: rgba(100, 200, 100, 0.5); display: block; margin: 10px 0px; }
+.m > .Identifier::before { content: "."; }
+.m > .Identifier:first-child::before { content: ""; }
+.ui-resizable-se { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: se-resize; }
+.ui-resizable-sw { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: sw-resize; }
+.ui-resizable-nw { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: nw-resize; }
+.ui-resizable-ne { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: ne-resize; }
+.ui-resizable-n { color: rgb(221, 221, 221); width: 100%; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: n-resize; }
+.ui-resizable-e { color: rgb(221, 221, 221); width: 30px; height: 100%; font-size: 12px; content: ""; font-family: icons; cursor: e-resize; }
+.ui-resizable-s { color: rgb(221, 221, 221); width: 100%; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: s-resize; }
+.ui-resizable-w { color: rgb(221, 221, 221); width: 30px; height: 100%; font-size: 12px; content: ""; font-family: icons; cursor: w-resize; }
+.ui-resizable-se:hover { color: rgb(0, 128, 0); }
+.tab { font-size: 0.75em; margin: 0px 1px 0px 0px; padding: 0px 1em; line-height: 30px; z-index: 110; text-align: center; }
+.tab.active { height: 32px; }
+.tabset { }
+.tab { text-indent: 0px; height: 30px; line-height: 30px; min-width: 32px; }
+.title-bar { line-height: 33px; text-indent: 8px; font-size: 0.8em; }
+.header-bar { background-color: rgb(68, 68, 68); }
+.buttonset { background-color: rgb(119, 119, 119); }
+.icon { font-family: icons; }
+.pane > .content { top: 27px; margin: 5px 6px 6px 7px; bottom: 0px; }
+.collapsible { margin: 1px 0px; }
+.collapsible.hidden > h3::before { content: "C"; font-family: icons; font-size: 12px; text-indent: 8px; color: rgb(85, 85, 85); float: left; line-height: 22px; vertical-align: middle; }
+.header-bar { background-color: rgb(68, 68, 68); overflow: visible; }
+x.collapsible > h3::before { content: "S"; font-family: icons; float: left; text-indent: 8px; font-size: 12px; color: rgb(85, 85, 85); line-height: 30px; vertical-align: middle; }
+.process.selector { float: none; clear: both; font-size: 12px; }
+.collapsible > h3 { text-indent: 5px; border-bottom: 1px solid rgb(170, 170, 170); font-size: 14px; font-weight: normal; margin: 0px; line-height: 30px; background-color: rgb(221, 221, 221); }
+.collapsible .content { border-bottom: 1px solid rgb(153, 153, 153); }
+.list-item { display: inline-block; background-color: rgb(238, 238, 238); margin: 0.25em; }
+.tab { float: left; white-space: nowrap; height: 30px; min-width: 12px; }
+.active.tab > span { bottom: -3px; }
+.tab > span { z-index: 115; min-width: 30px; overflow: hidden; text-overflow: ellipsis; background: inherit; }
+.composition { transition: height 0.125s ease-in-out; border-radius: 1px; text-overflow: ellipsis; overflow: hidden; margin: 5px auto; background-color: rgb(239, 239, 239); box-shadow: rgba(25, 100, 50, 0.5) 5px 5px 10px; }
+.message { border-radius: 5px; background-color: rgb(102, 102, 102); padding: 10px; margin: 10px; width: 35%; clear: both; }
+.sent.message { background-color: rgb(102, 102, 102); float: right; text-align: right; }
+.received.message { background-color: rgb(102, 221, 102); float: left; text-align: left; }
+.MenuButton { float: right; width: auto; height: 36px; position: relative; z-index: 1000; }
+.MenuButton .content { float: right; }
+.mainmenu { float: right; }
+.MenuButton .tab { float: right; }
+.Gallery .GalleryThumb > img { margin: 22.5px auto; }
+.Category > .GalleryThumb { transition: opacity 0.5s ease-in-out; height: 125px; min-width: 125px; }
+.GalleryThumb .Caption { font-size: 12px; bottom: 0px; position: absolute; left: 0px; right: 0px; margin: auto; }
+.ImagePicker { user-select: none; overflow-y: hidden; height: 125px; width: 100%; overflow-x: scroll; white-space: nowrap; }
+.Gallery .GalleryThumb > span { display: none; }
+.GalleryThumb .Caption { font-size: 12px; }
+.ImagePicker .Category { user-select: none; }
+.GalleryThumb > img { height: 80px; clear: both; width: auto; margin: 8px auto 0px; display: block; }
+.GalleryThumb { float: left; overflow: hidden; position: relative; text-align: center; transition: opacity 0.5s ease-in-out; }
+.mainmenu .tabset { float: right; }
+.process { background-color: rgb(239, 239, 239); margin: 5px; border-radius: 1px; font-size: 24px; }
+.composition.open { cursor: default; height: 100%; }
+span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; margin-top: 8px; height: 32px; width: 100%; display: block; text-indent: 12px; }
+.collapsible .content { background-color: rgb(239, 239, 239); padding: 0px; border-bottom: 1px solid rgb(153, 153, 153); overflow-y: scroll; transition: height 0.5s ease-in-out; }
+.button.processstep > .img { height: 50px; display: block; }
+.button.processstep > .title { display: block; text-align: center; }
+.collapsible .content.hidden { height: 0px; display: block; overflow: hidden; padding: 0px; transition: height 0.5s ease-in-out; }
+.collapsible.ProcessInfo { margin: 0px; }
+.process > .title { font-size: 20px; font-weight: bold; display: block; text-indent: 12px; line-height: 40px; height: 40px; vertical-align: middle; background-color: rgb(221, 221, 221); }
+@keyframes PurpleFade {
+  0% { background-color: rgb(221, 204, 221); }
+  100% { background-color: rgb(224, 204, 224); }
+}
+@keyframes OrangeFade {
+}
+.active .compositiontitle { animation: PurpleFade 0.75s ease-in-out infinite alternate; }
+.raw .compositiontitle { background-color: rgb(239, 187, 85); }
+.collapsible.ProcessInfo.pagewidth { width: 100%; }
+.transparent { opacity: 0 !important; }
+.ProcessSteps { white-space: nowrap; width: 1e+06px; }
+.ProcessSteps .button.processstep { float: left; opacity: 0.25; font-size: 25px; text-align: center; transition: opacity 0.5s ease-in-out; }
+.ProcessSteps .button.processstep.visited { opacity: 1; box-shadow: none; }
+.ProcessSteps .button.processstep.visited.active { box-shadow: blue 1px 1px 120px -30px inset; }
+.button.processstep > .title { }
+.button.processstep > img { height: 50px; }
+.button.processstep.selected { border: 2px solid rgba(0, 0, 0, 0.5); }
+.ScrollingWrapper { overflow-y: hidden; }
+.Comments div { background-color: rgba(255, 255, 255, 0.9); }
+.Comments.Block { display: block; clear: both; float: left; }
+.Comments.Line { float: left; clear: none; }
+.sitemenu { position: absolute; left: 0px; bottom: 0px; z-index: 10000000; width: 45px; height: 50px; float: left; display: inline; margin: 5px; transition: left 0.5s ease-in-out, bottom 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out, transform 0.8s ease-in-out; transform: rotate(40deg); }
+.collapsed .sitemenu { left: -45px; bottom: -45px; width: 90px; height: 90px; transform: rotate(-90deg); }
+.sitemenu > path { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
+.collapsed .sitemenu > path { fill: rgba(200, 200, 200, 0.7); }
+.TaskList { position: fixed; bottom: 0px; left: 0px; width: auto; overflow: hidden; padding-left: 50px; padding-right: 0px; text-overflow: clip; z-index: 1000; white-space: nowrap; max-width: 100%; background: none; transition: width 0.4s ease-in-out; }
+.TaskList.collapsed { width: auto; }
+.TaskList > .tabset { display: inline-block; width: auto; overflow: hidden; transition: opacity 0.25s ease-in; opacity: 1; }
+.TaskList.collapsed > .tabset { transition: opacity 0.25s ease-out 0.25s; opacity: 0; }
+.TaskList .tab { width: 50px; height: 50px; overflow: hidden; position: static; display: inline; margin: 5px; box-shadow: rgba(150, 150, 150, 0.9) 3px 3px 10px; }
+.Comments > div { float: left; clear: both; }
+.FileBrowser .dir { margin-left: 1em; }
+.FileBrowser .dir > a { margin-left: 1em; display: block; }
+.importer { position: absolute; bottom: 0px; right: 0px; }
+.pwddir .dirlink.button:hover { text-decoration: none; color: black; }
+.pwddir .dirlink { padding: 0px; }
+.button { background-color: rgb(204, 204, 204); position: relative; z-index: 2; }
+.FileBrowser > .headerbar { height: 2em; margin: 5px; overflow: hidden; border: 1px solid rgb(170, 170, 170); border-radius: 3px; }
+.FileBrowser .button.live { color: rgb(0, 255, 0); }
+.hud { position: fixed; top: 0px; bottom: 0px; right: 0px; left: 0px; }
+.FileBrowser .button.live.membrane { color: rgb(255, 170, 0); }
+body { font-family: "Lucida Grande", Calibri, sans-serif, Inconsolata; }
+td { }
+.pane { width: 100%; height: 100%; position: absolute; }
+.submitter { }
+.submitter .comments { }
+.member.module .content { float: left; }
+.AppSelector { position: absolute; padding: 10px; border-radius: 1px; background-color: rgb(221, 221, 221); }
+.AppSelector > span { display: block; }
+.AppSelector > span:first-child { font-size: 0.5em; }
+.button.grip { float: left; background: none; font-family: monospace; line-height: 1.6em; font-size: 1em; margin-left: -2em; height: 2em; padding: 0px; width: 2em; text-align: center; vertical-align: middle; text-decoration: none; }
+span.branch1 { }
+span.branch1::before { content: "|"; float: left; }
+a.member { text-decoration: none; }
+.member:last-child::before { content: "└"; text-decoration: none; font-family: monospace; font-size: 1.35em; line-height: 1em; }
+.member::before { content: "├"; font-family: monospace; font-size: 1.35em; line-height: 1em; text-decoration: none; }
+.module.member.collapsed { line-height: 1.25em; margin: 0px 0px 0px 1em; padding: 0px; }
+.submitter > span { font-size: 1.5em; line-height: 25px; }
+.TextEditor textarea { width: 500px; height: 300px; font-family: monospace, serif; font-size: 0.75em; }
+.acw { position: absolute; display: inline-block; background-color: rgb(239, 239, 239); overflow: hidden; padding: 5px; }
+.acw > .acb, .TextEditor > .title { cursor: default; display: block; font-size: 1em; font-family: monospace, serif; line-height: 1.8em; text-indent: 5px; }
+.acw { transition: opacity 0.1s; opacity: 0; z-index: 0; }
+.acw.visible { transition: opacity 0.5s linear; opacity: 1; z-index: 1000; }
+.pane * { user-select: none; }
+.submitter .button { bottom: 0px; position: absolute; width: 100%; line-height: 2em; font-size: 1.5em; }
+.submitter .comments { display: block; width: 100%; position: absolute; top: 25px; padding: 8px; bottom: 50px; left: 0px; right: 0px; }
+form.ProfileEditor { width: 400px; margin: auto; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; height: 400px; }
+.ProfileEditor .field { line-height: 1.5em; height: 2em; }
+.ProfileEditor .caption { width: 1in; text-align: right; float: left; display: block; }
+.button.saved { background-color: rgba(50, 200, 75, 0.9); }
+.template.layout { background-color: pink; }
+.modalshader { position: fixed; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000000; }
+.modalwindow { position: fixed; margin: auto; top: 0px; bottom: 0px; left: 0px; right: 0px; width: 50%; height: 50%; z-index: 10000001; background: white; }
+.TabbedTitlebar .controls { float: right; width: auto; line-height: 1.5em; height: 1.5em; }
+iframe.programinstance { width: 100%; height: 100%; margin: 0px; padding: 0px; border: none; }
+.tab, .button { box-sizing: border-box; }
+.switch.tabset .tab { border: 1px inset rgb(85, 85, 85); }
+.switch.tabset .tab.active { }
+.highlight { box-shadow: 5px 5px 5px inset; }
+svg.highlight { fill: blue; filter: drop-shadow(rgb(0, 0, 0) -5px -5px 5px); }
+.ContextItem { line-height: 4em; background-color: rgb(187, 187, 187); height: 4em; display: block; font-size: 0.5em; width: auto; float: left; padding: 0px 0.5em; }
+.TabbedTitlebar .tabset .tab { float: right; line-height: 2em; height: 2em; padding: 0px 1em; border: none; }
+.controls .button { padding: 0px 0.5em; line-height: 2.75em; font-size: 0.75em; font-weight: bold; height: 1.5em; background: none; border: none; }
+.ghost.template { opacity: 0.5; box-shadow: black 5px 5px 5px; }
+.node { overflow: visible; }
+.TabbedTitlebar .tabset { margin: 0.25em 1em; float: right; }
+.TabbedTitlebar .tab.active { background-color: rgb(187, 187, 187); box-shadow: 0px 0px 1em -5px inset; }
+.TabbedTitlebar .tab { background-color: rgb(187, 187, 187); }
+table { background-color: rgb(255, 255, 255); }
+table .even { background-color: rgb(239, 239, 239); }
+.tabset.fancy .tab.active::before, .tab.active::after, .pane, .title-bar, .tab.active { background-color: rgb(187, 187, 187); }
+.tab { background-color: rgb(85, 85, 85); }
+.node.template { margin: 0.5em 1em 1.5em; }
+.tabset.fancy { height: 28px; margin: 5px 5px 0px; padding: 0px 5px; }
+.tabset.fancy .tab { text-indent: 0px; margin: 0px 15.5px; line-height: 28px; }
+.tabset.fancy .tab::before { border-radius: 0px 5px 0px 0px; width: 19px; height: 100%; margin-right: -16px; content: ""; right: 0px; display: block; transform: skew(15deg, 0deg); border-right: 1px solid rgb(85, 85, 85); }
+a.filelink { border-bottom: 1px solid orange; margin-left: -1em; padding-left: 1em; position: absolute; right: 0px; top: 0px; left: 0px; width: 100%; display: block; transition: background-color 3s ease; background-color: rgba(255, 255, 0, 0.5); }
+a.filelink.loaded { background-color: rgba(255, 255, 255, 0.25); }
+.module.member { }
+.collapsible.dir > h3 { background: none; border-bottom: none; }
+.collapsible.dir .content { border: none; background-color: rgba(200, 200, 200, 0.25); }
+.pane > .content { border: 1px inset rgb(204, 204, 204); background-color: rgb(238, 238, 238); }
+.tabset.fancy .tab::before, .tab::after { background-color: rgb(85, 85, 85); }
+.tabset.fancy .tab > span { margin-left: -8px; }
+.tabset.fancy .tab::after { width: 20px; height: 100%; margin-left: -15px; left: 0px; border-left: 1px solid rgb(119, 119, 119); content: ""; display: block; transform: skew(-15deg, 0deg); border-radius: 5px 0px 0px; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+.codeblock { margin-left: 5px; border-left: 1px solid black; }
+.FileBrowser .member { display: block; margin-left: 1em; }
+.file.module { margin-left: 1em; color: rgb(187, 187, 85); }
+.pane > .title-bar { line-height: 35px; text-indent: 8px; }
+.code .init { border-style: solid; border-color: green; border-image: initial; background: rgba(25, 150, 25, 0.5); display: block; border-width: 2px 0px; }
+.code .cls { background: rgba(100, 200, 100, 0.5); display: block; margin: 10px 0px; }
+.m > .Identifier::before { content: "."; }
+.m > .Identifier:first-child::before { content: ""; }
+.ui-resizable-se { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: se-resize; }
+.ui-resizable-sw { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: sw-resize; }
+.ui-resizable-nw { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: nw-resize; }
+.ui-resizable-ne { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: ne-resize; }
+.ui-resizable-n { color: rgb(221, 221, 221); width: 100%; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: n-resize; }
+.ui-resizable-e { color: rgb(221, 221, 221); width: 30px; height: 100%; font-size: 12px; content: ""; font-family: icons; cursor: e-resize; }
+.ui-resizable-s { color: rgb(221, 221, 221); width: 100%; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: s-resize; }
+.ui-resizable-w { color: rgb(221, 221, 221); width: 30px; height: 100%; font-size: 12px; content: ""; font-family: icons; cursor: w-resize; }
+.ui-resizable-se:hover { color: rgb(0, 128, 0); }
+.tab { font-size: 0.75em; margin: 0px 1px 0px 0px; padding: 0px 1em; line-height: 30px; z-index: 110; text-align: center; }
+.tab.active { height: 32px; }
+.tabset { }
+.tab { text-indent: 0px; height: 30px; line-height: 30px; min-width: 32px; }
+.title-bar { line-height: 33px; text-indent: 8px; font-size: 0.8em; }
+.header-bar { background-color: rgb(68, 68, 68); }
+.buttonset { background-color: rgb(119, 119, 119); }
+.icon { font-family: icons; }
+.pane > .content { top: 27px; margin: 5px 6px 6px 7px; bottom: 0px; }
+.collapsible { margin: 1px 0px; }
+.collapsible.hidden > h3::before { content: "C"; font-family: icons; font-size: 12px; text-indent: 8px; color: rgb(85, 85, 85); float: left; line-height: 22px; vertical-align: middle; }
+.header-bar { background-color: rgb(68, 68, 68); overflow: visible; }
+x.collapsible > h3::before { content: "S"; font-family: icons; float: left; text-indent: 8px; font-size: 12px; color: rgb(85, 85, 85); line-height: 30px; vertical-align: middle; }
+.process.selector { float: none; clear: both; font-size: 12px; }
+.collapsible > h3 { text-indent: 5px; border-bottom: 1px solid rgb(170, 170, 170); font-size: 14px; font-weight: normal; margin: 0px; line-height: 30px; background-color: rgb(221, 221, 221); }
+.collapsible .content { border-bottom: 1px solid rgb(153, 153, 153); }
+.list-item { display: inline-block; background-color: rgb(238, 238, 238); margin: 0.25em; }
+.tab { float: left; white-space: nowrap; height: 30px; min-width: 12px; }
+.active.tab > span { bottom: -3px; }
+.tab > span { z-index: 115; min-width: 30px; overflow: hidden; text-overflow: ellipsis; background: inherit; }
+.composition { transition: height 0.125s ease-in-out; border-radius: 1px; text-overflow: ellipsis; overflow: hidden; margin: 5px auto; background-color: rgb(239, 239, 239); box-shadow: rgba(25, 100, 50, 0.5) 5px 5px 10px; }
+.message { border-radius: 5px; background-color: rgb(102, 102, 102); padding: 10px; margin: 10px; width: 35%; clear: both; }
+.sent.message { background-color: rgb(102, 102, 102); float: right; text-align: right; }
+.received.message { background-color: rgb(102, 221, 102); float: left; text-align: left; }
+.MenuButton { float: right; width: auto; height: 36px; position: relative; z-index: 1000; }
+.MenuButton .content { float: right; }
+.mainmenu { float: right; }
+.MenuButton .tab { float: right; }
+.Gallery .GalleryThumb > img { margin: 22.5px auto; }
+.Category > .GalleryThumb { transition: opacity 0.5s ease-in-out; height: 125px; min-width: 125px; }
+.GalleryThumb .Caption { font-size: 12px; bottom: 0px; position: absolute; left: 0px; right: 0px; margin: auto; }
+.ImagePicker { user-select: none; overflow-y: hidden; height: 125px; width: 100%; overflow-x: scroll; white-space: nowrap; }
+.Gallery .GalleryThumb > span { display: none; }
+.GalleryThumb .Caption { font-size: 12px; }
+.ImagePicker .Category { user-select: none; }
+.GalleryThumb > img { height: 80px; clear: both; width: auto; margin: 8px auto 0px; display: block; }
+.GalleryThumb { float: left; overflow: hidden; position: relative; text-align: center; transition: opacity 0.5s ease-in-out; }
+.mainmenu .tabset { float: right; }
+.process { background-color: rgb(239, 239, 239); margin: 5px; border-radius: 1px; font-size: 24px; }
+.composition.open { cursor: default; height: 100%; }
+span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; margin-top: 8px; height: 32px; width: 100%; display: block; text-indent: 12px; }
+.collapsible .content { background-color: rgb(239, 239, 239); padding: 0px; border-bottom: 1px solid rgb(153, 153, 153); overflow-y: scroll; transition: height 0.5s ease-in-out; }
+.button.processstep > .img { height: 50px; display: block; }
+.button.processstep > .title { display: block; text-align: center; }
+.collapsible .content.hidden { height: 0px; display: block; overflow: hidden; padding: 0px; transition: height 0.5s ease-in-out; }
+.collapsible.ProcessInfo { margin: 0px; }
+.process > .title { font-size: 20px; font-weight: bold; display: block; text-indent: 12px; line-height: 40px; height: 40px; vertical-align: middle; background-color: rgb(221, 221, 221); }
+@keyframes PurpleFade {
+  0% { background-color: rgb(221, 204, 221); }
+  100% { background-color: rgb(224, 204, 224); }
+}
+@keyframes OrangeFade {
+}
+.active .compositiontitle { animation: PurpleFade 0.75s ease-in-out infinite alternate; }
+.raw .compositiontitle { background-color: rgb(239, 187, 85); }
+.collapsible.ProcessInfo.pagewidth { width: 100%; }
+.transparent { opacity: 0 !important; }
+.ProcessSteps { white-space: nowrap; width: 1e+06px; }
+.ProcessSteps .button.processstep { float: left; opacity: 0.25; font-size: 25px; text-align: center; transition: opacity 0.5s ease-in-out; }
+.ProcessSteps .button.processstep.visited { opacity: 1; box-shadow: none; }
+.ProcessSteps .button.processstep.visited.active { box-shadow: blue 1px 1px 120px -30px inset; }
+.button.processstep > .title { }
+.button.processstep > img { height: 50px; }
+.button.processstep.selected { border: 2px solid rgba(0, 0, 0, 0.5); }
+.ScrollingWrapper { overflow-y: hidden; }
+.Comments div { background-color: rgba(255, 255, 255, 0.9); }
+.Comments.Block { display: block; clear: both; float: left; }
+.Comments.Line { float: left; clear: none; }
+.sitemenu { position: absolute; left: 0px; bottom: 0px; z-index: 10000000; width: 45px; height: 50px; float: left; display: inline; margin: 5px; transition: left 0.5s ease-in-out, bottom 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out, transform 0.8s ease-in-out; transform: rotate(40deg); }
+.collapsed .sitemenu { left: -45px; bottom: -45px; width: 90px; height: 90px; transform: rotate(-90deg); }
+.sitemenu > path { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
+.collapsed .sitemenu > path { fill: rgba(200, 200, 200, 0.7); }
+.TaskList { position: fixed; bottom: 0px; left: 0px; width: auto; overflow: hidden; padding-left: 50px; padding-right: 0px; text-overflow: clip; z-index: 1000; white-space: nowrap; max-width: 100%; background: none; transition: width 0.4s ease-in-out; }
+.TaskList.collapsed { width: auto; }
+.TaskList > .tabset { display: inline-block; width: auto; overflow: hidden; transition: opacity 0.25s ease-in; opacity: 1; }
+.TaskList.collapsed > .tabset { transition: opacity 0.25s ease-out 0.25s; opacity: 0; }
+.TaskList .tab { width: 50px; height: 50px; overflow: hidden; position: static; display: inline; margin: 5px; box-shadow: rgba(150, 150, 150, 0.9) 3px 3px 10px; }
+.Comments > div { float: left; clear: both; }
+.FileBrowser .dir { margin-left: 1em; }
+.FileBrowser .dir > a { margin-left: 1em; display: block; }
+.importer { position: absolute; bottom: 0px; right: 0px; }
+.pwddir .dirlink.button:hover { text-decoration: none; color: black; }
+.pwddir .dirlink { padding: 0px; }
+.button { background-color: rgb(204, 204, 204); position: relative; z-index: 2; }
+.FileBrowser > .headerbar { height: 2em; margin: 5px; overflow: hidden; border: 1px solid rgb(170, 170, 170); border-radius: 3px; }
+.FileBrowser .button.live { color: rgb(0, 255, 0); }
+.hud { position: fixed; top: 0px; bottom: 0px; right: 0px; left: 0px; }
+.FileBrowser .button.live.membrane { color: rgb(255, 170, 0); }

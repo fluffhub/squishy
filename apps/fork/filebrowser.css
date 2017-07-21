@@ -1,0 +1,31 @@
+  .FileBrowser { }
+.pwddir { line-height: 32px; }
+.FileBrowser { right: 0px; height: 100%; width: 300px; top: 0px; overflow-y: scroll; }
+.pwddir { display: inline; padding: 0px; margin: 0px; }
+.dirlink.button:hover { text-decoration: underline; color: black; }
+.pwdbar { padding: 0px 0.25em; float: right; }
+.FileBrowser .button { background: none; font-weight: 300; letter-spacing: 0.01em; font-size: 1em; }
+.FileBrowser .button.membrane { color: rgb(153, 153, 170); font-weight: 100; }
+.FileBrowser .button.string { color: rgb(85, 170, 221); }
+.FileBrowser .button.string > .value { font-size: 0.6em; margin-left: 1em; font-style: italic; }
+.FileBrowser .button.string > .value::before { content: "\""; }
+.FileBrowser .button.string > .value::after { content: "\""; }
+.FileBrowser .button.string > .value:hover { text-decoration: none; }
+.FileBrowser .button.function { color: rgb(0, 170, 221); }
+.FileBrowser .button.function.Class { color: rgb(255, 0, 255); }
+.FileBrowser .button.function::before { content: "f"; color: white; font-size: 0.6em; font-weight: 900; width: 1em; float: left; height: 1em; margin-top: 0.5em; line-height: 1.2em; text-align: center; background-color: rgb(0, 187, 255); margin-right: 0.25em; }
+.FileBrowser .button.Class.function::before { content: "C"; color: white; font-size: 0.6em; font-weight: 900; width: 1em; float: left; height: 1em; margin-top: 0.5em; line-height: 1.2em; text-align: center; background-color: rgb(221, 170, 221); margin-right: 0.25em; }
+.FileBrowser .button.Module { color: rgb(255, 170, 0); font-weight: 300; }
+.FileList { background-color: white; margin-top: 2em; min-height: 100%; }
+.FileListItem { transition: color 0.3s ease-in-out; }
+.FileBrowser .FileListItem:hover { text-decoration: underline; }
+.FileBrowser .FileListItem:hover > .value { text-decoration: none; }
+.FileBrowser .button.Directory::after { content: "/"; }
+.FileBrowser .button.Directory { color: rgb(51, 221, 51); font-weight: 300; }
+.fs_container > .button { line-height: 1.25em; float: left; clear: both; width: 100%; padding: 0px 0.25em; }
+.pwdbar > .button { display: none; }
+.pwdbar > .button:first-child { display: inline; }
+.pwdbar > .button:last-child { display: inline; }
+.longer.pwdbar > .button:nth-last-child(2) { display: inline; }
+.longer.pwdbar > .button:nth-last-child(2)::before { content: "/..."; }
+.longer.pwdbar > .button:nth-last-child(2):hover::before { text-decoration: none; }

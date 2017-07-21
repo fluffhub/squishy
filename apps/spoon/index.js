@@ -16,7 +16,7 @@ Module(function M() {
                      ub,op,
                      Ms,conf,cookies,membrane,
                      live) {
-
+Import("spoon/default.css");
              var hasEvents=events.hasEvents;
              var UserBrowser=ub.UserBrowser;
              var Frame=DOM.Frame;

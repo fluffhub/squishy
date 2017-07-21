@@ -142,8 +142,6 @@ This is required in some cases:
 
       /* this includes several default stylesheets
 */
-      Import("css/ui.css");
-      Import("css/default.css");
 
       /*
 
