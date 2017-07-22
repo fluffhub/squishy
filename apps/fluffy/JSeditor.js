@@ -51,7 +51,7 @@ Module(function M() {
             var Lines=new basic.Div("code");
             this.add(Lines);
             this.state={};
-            this.maskcursors=[];
+              this.maskcursors=[];
             var filestate={};
             if(theme!==undefined) this.setTheme(theme);
             else this.setTheme(defaulttheme);

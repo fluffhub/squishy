@@ -1,3 +1,4 @@
+
 input, select, textarea { }
 input, select, textarea { font-family: Inconsolata; }
 .CodeEditor .acc { overflow: scroll; height: 100%; width: 100%; }
@@ -5,7 +6,7 @@ input, select, textarea { font-family: Inconsolata; }
 .acw.active { transition: opacity 0.5s linear; z-index: 1001; }
 .code .clears { clear: both; display: block; }
 .code .module { background: rgba(200, 200, 100, 0.5); display: block; }
-.code * { position: relative; color: rgb(85, 85, 85); border: 0px solid rgba(0, 0, 0, 0); background-color: rgba(180, 180, 180, 0.1); }
+.code * { position: relative;  border: 0px solid rgba(0, 0, 0, 0); }
 .code div { padding-top: 0em; margin: 0px 0px 0px 0.5em; }
 .code div > span:first-child { margin-top: 0.8em; }
 .code .unknown { color: rgb(170, 85, 85); }

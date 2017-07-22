@@ -1,12 +1,12 @@
 Module(function M() {
   M.Import("squishy/basic","squishy/interactive",function(basic,interactive) {
+    Import("fluffy/themes/default.css");
     var nodetypes={
       NewExpression:{enter:function(n,p,c) {
-        var item=new basic.Span("new ","C");
+        var item=new basic.Span("","inits");
         return item;
       },leave:function(n,p,c) {
-        n.callee.element.add(new basic.Span("("));
-        c.add(new basic.Span(")"));
+        n.callee.element.addClass("ids");
         if(n.arguments.length>1) {
           for(var i=0;i<n.arguments.length;i++) {
             n.arguments[i].element.add(new basic.Span(","));
@@ -18,11 +18,13 @@ Module(function M() {
         item.add(new basic.Span("","BD"));
         return item;
       },leave:function(n,p,c) {
-        c.parent.insert(new basic.Span("{",""  ),c);
+        c.parent.insert(new basic.Span("",""  ),c);
         if(n.loc.end.line<=p.loc.end.line)
-          c.parent.add(new basic.Span("}"));
-        else
-          c.add(new basic.Span("}","BD"));
+          c.addClass("ML");
+        else {
+          c.addClass("SL");
+        }
+
       }},
       ExpressionStatement:{enter:function(node) {
         return new basic.Div("E");
@@ -32,7 +34,8 @@ Module(function M() {
       VariableDeclaration:{enter:function(node) {
         var item=new basic.Span("");
         item.addClass("V");
-        item.add(new basic.Span("var "));
+
+
         return item;
       },leave:function(node,parent,cursor) {
 
@@ -66,10 +69,9 @@ Module(function M() {
         item.add(new basic.Span("function ","F"));
         return item;
       },leave:function(n,p,c) {
-        if(n.params.length>0)
-          n.params[n.params.length-1].element.add(new basic.Span(")"));
-        c.add(new basic.Span("{"));
-        c.add(new basic.Span("}"));
+       //// if(n.params.length>0)
+       //   n.params[n.params.length-1].element.add(new basic.Span(")"));
+
       }},
       AssignmentExpression:{enter:function(n,p,c) {
         return new basic.Span("","A");
@@ -308,6 +310,7 @@ Module(function M() {
         leave:function(node,parent,cursor,state) {
           //node.element.addClass("module");
           //node.element.element.style["background-color"]="orange";
+          node.params[0].element.addClass("deffunction");
 
         }
       },
