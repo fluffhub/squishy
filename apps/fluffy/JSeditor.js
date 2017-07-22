@@ -158,6 +158,7 @@ Module(function M() {
               nodetypes["Unknown"].leave.call(this,node,parent,cursor);
             var item=cursor;
             item.Mixin(event.hasEvents);
+            /*
             var tooltip=new basic.Div("label");
             tooltip.element.style["z-index"]=10000+depth+1;
             tooltip.content(depth+" / "+node.type);
@@ -172,11 +173,6 @@ Module(function M() {
               item.element.style["border-color"]=""+PseudoRandomColor(d,0.5);
               e.stopPropagation();
             });
-            item.addEvent("select","click",function(e) {
-              console.debug(node);
-              // e.stopPropagation();
-            });
-
             item.addEvent("hidetip","mouseout",function(e) {
               tooltip.hide();
               item.removeClass("hovering");
@@ -184,6 +180,13 @@ Module(function M() {
               item.element.style["border-color"]=""+"rgba(250,250,250,0.25)";
               e.stopPropagation();
             });
+            */
+            item.addEvent("select","click",function(e) {
+              console.debug(node);
+              // e.stopPropagation();
+            });
+
+
             item.enableEvents();
             if(parent&&((parent.loc.start.line!=node.loc.start.line))) {
               item.addClass("clears");

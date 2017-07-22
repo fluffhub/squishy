@@ -18,9 +18,9 @@ Module(function M() {
         item.add(new basic.Span("","BD"));
         return item;
       },leave:function(n,p,c) {
-        c.parent.insert(new basic.Div("BlockStatement"),c);
+        c.parent.insert(new basic.Span("{",""  ),c);
         if(n.loc.end.line<=p.loc.end.line)
-          c.parent.add(new basic.Div("BlockStatement"));
+          c.parent.add(new basic.Span("}"));
         else
           c.add(new basic.Span("}","BD"));
       }},
