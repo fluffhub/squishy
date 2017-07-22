@@ -13,3 +13,6 @@
 
 .I { font-size:1.25em;font-weight:bold; }
 .param { float:left; }
+
+.obj { display:block;padding:3px;border:2px dotted rgba(0,0,255,0.5); };
+.prop { display:block; }

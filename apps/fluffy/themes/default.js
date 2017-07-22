@@ -187,12 +187,12 @@ Module(function M() {
 
       }},
       ObjectExpression:{enter:function(n,p,c) {
-        return new basic.Span("{");
+        return new basic.Span("","obj");
       },leave:function(n,p,c) {
-        c.add(new basic.Span("}"));
+
         if(n.properties&&n.properties.length>1) {
           for(var i=n.properties.length-1;i>0;i--) {
-            n.element.insert(new basic.Span(","),n.properties[i].element);
+            n.properties[i].element.addClass("prop");
           }
         }
       }},
