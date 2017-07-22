@@ -71,7 +71,7 @@ Module(function M() {
       },leave:function(n,p,c) {
        //// if(n.params.length>0)
        //   n.params[n.params.length-1].element.add(new basic.Span(")"));
-
+        n.params[0].element.addClass("ids");
       }},
       AssignmentExpression:{enter:function(n,p,c) {
         return new basic.Span("","A");
@@ -158,7 +158,7 @@ Module(function M() {
       }},
       IfStatement:{enter:function(node,parent) {
         var item=new basic.Div();
-        item.add(new basic.Span("if("));
+        item.add(new basic.Span("IF","ids"));
 
         return item;
       },leave:function(n,p,c) {
