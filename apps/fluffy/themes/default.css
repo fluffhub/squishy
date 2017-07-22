@@ -6,4 +6,6 @@
 
 .E { display:inline; }
 
-.V>.I:first-child { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5);color:white;
+.V>.I:first-child { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5);color:white; }
+
+.deffunction { display:block; }

@@ -66,7 +66,7 @@ Module(function M() {
       }},
       FunctionDeclaration:{enter:function(n,p,c) {
         var item=new basic.Div("F")
-        item.add(new basic.Span("function ","F"));
+        item.add(new basic.Span("","F"));
         return item;
       },leave:function(n,p,c) {
        //// if(n.params.length>0)
@@ -310,7 +310,7 @@ Module(function M() {
         leave:function(node,parent,cursor,state) {
           //node.element.addClass("module");
           //node.element.element.style["background-color"]="orange";
-          node.params[0].element.addClass("deffunction");
+          node.arguments[0].element.addClass("deffunction");
 
         }
       },
