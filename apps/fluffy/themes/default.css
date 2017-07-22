@@ -1,3 +1,4 @@
+.code { font-family:monospace }
 .ids { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5); color:white;}
 
 .inits::before { content:"NEW";font-size:0.5em;font-weight:bold;color:#ddbb333; }
@@ -9,3 +10,5 @@
 .V>.I:first-child { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5);color:white; }
 
 .deffunction { display:block; }
+
+.I { font-size:1.25em;font-weight:bold; }
