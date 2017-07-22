@@ -86,7 +86,7 @@ Module(function M() {
         if(n.id!==null) parampos=1;
         if(n.params&&n.params.length>0) {
           for(var i=n.params.length-1;i>0;i--) {
-            n.params.element.addClass("param");
+            n.params[i].element.addClass("param");
          //   n.params[i].element.addBefore(new basic.Span(","));
           }
         }
