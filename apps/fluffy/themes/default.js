@@ -81,20 +81,21 @@ Module(function M() {
       FunctionExpression:{enter:function(n,p,c) {
         return new basic.Span("","");
       },leave:function(n,p,c) {
-        n.element.addBefore(new basic.Span("function "));
+        n.element.addBefore(new basic.Span("F ","ids"));
         var parampos=0;
         if(n.id!==null) parampos=1;
         if(n.params&&n.params.length>0) {
           for(var i=n.params.length-1;i>0;i--) {
-            n.params[i].element.addBefore(new basic.Span(","));
+            n.params.element.addClass("param");
+         //   n.params[i].element.addBefore(new basic.Span(","));
           }
         }
         if(n.params.length>=1) {
-          n.params[0].element.addBefore(new basic.Span("("));
-          n.params[n.params.length-1].element.add(new basic.Span(")"));
+         //n.params[0].element.addBefore(new basic.Span("("));
+         // n.params[n.params.length-1].element.add(new basic.Span(")"));
         }
         else {
-          c.add(new basic.Span("() "));
+        // c.add(new basic.Span("() "));
         }
 
       }},
@@ -106,7 +107,7 @@ Module(function M() {
         }
       }},
       ReturnStatement:{enter:function(n,p,c) {
-        return new basic.Span("return ");
+        return new basic.Span("","ReturnStatement");
       },leave:function(n,p,c) {
 
       }},
