@@ -241,6 +241,10 @@ a.filelink.loaded { background-color: rgba(255, 255, 255, 0.25); }
 .code .cls { background: rgba(100, 200, 100, 0.5); display: block; margin: 10px 0px; }
 .m > .Identifier::before { content: "."; }
 .m > .Identifier:first-child::before { content: ""; }
+.ui-resizable-handle {
+    position: absolute;
+    z-index: 10000;
+}
 .ui-resizable-se { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: se-resize; }
 .ui-resizable-sw { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: sw-resize; }
 .ui-resizable-nw { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: nw-resize; }

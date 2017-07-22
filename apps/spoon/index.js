@@ -16,7 +16,8 @@ Module(function M() {
                      ub,op,
                      Ms,conf,cookies,membrane,
                      live) {
-Import("spoon/default.css");
+             Import("spoon/default.css");
+             Import("spoon/ui.css");
              var hasEvents=events.hasEvents;
              var UserBrowser=ub.UserBrowser;
              var Frame=DOM.Frame;
@@ -76,13 +77,13 @@ Import("spoon/default.css");
                  basic.Div.call(this,"tmg TaskList");
                });
                C.Def(function Activate(task) {
-                   this.tasks.forEach(function(task1) {
-                 task1.removeClass("active");
-                 //setTimeout(function() { task.addClass("active") },20);
+                 this.tasks.forEach(function(task1) {
+                   task1.removeClass("active");
+                   //setTimeout(function() { task.addClass("active") },20);
                  });
                  task.addClass("active")
                  if(!task.hasClass("visible"))
-                 task.addClass("visible");
+                   task.addClass("visible");
                });
 
                C.Def(function addTask(path,task) {
@@ -105,7 +106,7 @@ Import("spoon/default.css");
 
                    this.add(tab);
                    tab.addClass("tab");
-                      }
+                 }
                });
              });
 
@@ -183,7 +184,7 @@ Import("spoon/default.css");
                  this.contextmenu.enableEvents("closeContext");
                  this.addEvent("context","contextmenu",function oncontextmenu(e) {
                    if(e) {
-                      //e.preventDefault();
+                     //e.preventDefault();
                      // e.stopPropagation();
                    }
                    console.debug("context menuing:");
@@ -214,7 +215,7 @@ Import("spoon/default.css");
                    task.addEvent("activate","mousedown touchstart",function onactivate(e) {
                      if(!task.hasClass("active"))
                      { e.stopPropagation();
-                        hw.tm.Activate(task);
+                      hw.tm.Activate(task);
 
                      }
                    },task.element,{capture:false})
@@ -231,8 +232,8 @@ Import("spoon/default.css");
 
                    if(val instanceof Element)
                      path=val.path
-                  else if (typeof val == "string")
-                    path=val;
+                     else if (typeof val == "string")
+                       path=val;
                    if(path in conf.apps) {
 
                      task=conf.apps[path].open.apply(this,args)
@@ -242,8 +243,8 @@ Import("spoon/default.css");
                    } else {
                      Import(path,function(a) {
                        if(a.open instanceof Function) {
-                          task=a.open.apply(this,args)
-                          hw.addTask(path+":"+args.join(" "),task);
+                         task=a.open.apply(this,args)
+                         hw.addTask(path+":"+args.join(" "),task);
                        }
                      });
                      return true;
