@@ -314,7 +314,7 @@ Module(function M() {
           node.arguments[0].element.addClass("deffunction");
           node.element.elements[0].remove();
           //node.arguments[0].element.addBefore(new basic.Span("M","ids"));
-          node.arguments[0].element.elements[1].addClass("ids");
+          node.arguments[0].id.element.addClass("ids");
         }
       },
       ClassStatement:{
