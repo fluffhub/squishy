@@ -312,6 +312,8 @@ Module(function M() {
           //node.element.addClass("module");
           //node.element.element.style["background-color"]="orange";
           node.arguments[0].element.addClass("deffunction");
+          node.element.elements[0].remove();
+          node.arguments[0].element.addBefore(new basic.Span("M","ids"));
 
         }
       },
