@@ -262,20 +262,24 @@ Module(function M() {
           var nl=node.arguments.length;
           var fun = node.arguments[nl-1];
           var browser=this;
+
           node.element.addClass("Import");
+          node.element.clear();
+
           for(var i=0;i<nl-1;i++) {
             var arg=node.arguments[i];
             var farg=fun.params[i];
 
             window.Import(arg.value,function(mod) {
-              arg.element.clear();
-              arg.element.content(" ");
-              var modlink=new basic.FakeLink("?page="+mod.filename,"\""+arg.value+"\"",function click(e) {
+              //arg.element.clear();
+              //arg.element.content(" ");
+              var modlink=new basic.FakeLink("#?loc="+mod.filename,"\""+arg.value+"\ -> "+farg.id,function click(e) {
 
               });
               //  modlink.element.href="?page="+mod.filename;
               modlink.addClass("module_link")
-              arg.element.add(modlink);
+
+              node.element.add(modlink);
 
               if(fun&&fun.type=="FunctionExpression"&&fun.params) {
                 fun.params.forEach(function(farg) {
