@@ -263,9 +263,13 @@ Module(function M() {
         enter:function(node,parent,cursor,state) {},
         leave:function(node,parent,cursor,state) {
           var nl=node.arguments.length;
-          var args=node.arguments.slice(0,-1);
-          if (nl<=2&&typeof node.arguments[0].value=="string")
+          var args=node.arguments.map(function(a) {
+            return a.value!==undefined?a.value:undefined;
+          });
+
+          if (nl<=2&&typeof node.arguments[0].value=="string") {
             args=node.arguments[0].value.split(" ");
+          }
           var fun = node.arguments[nl-1];
           var browser=this;
 
@@ -281,10 +285,12 @@ Module(function M() {
           node.element.add(node.arguments[nl-1].body.element);
           for(var i=0;i<args.length;i++) {
             var arg=args[i];
+
+            if i<node.arguments.length
           node.arguments[i].element.remove();
             var farg=fun.params[i];
             var listitem=new basic.Div("imports");
-              var modlink=new basic.FakeLink(arg.value,"#?loc="+arg.value,function click(e) {
+              var modlink=new basic.FakeLink(arg,"#?loc="+arg,function click(e) {
 
               });
             listitem.add(modlink);
