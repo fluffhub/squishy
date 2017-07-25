@@ -26,3 +26,9 @@
 
 .obj { display:block;padding:3px;border:2px dotted rgba(0,0,255,0.5); };
 .prop { display:block; }
+
+.imports {
+    border: 2px solid rgba(0,0,0,0.5);
+    border-bottom-width: 0;
+    /* padding: 3px; */
+}
