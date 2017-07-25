@@ -161,13 +161,14 @@ Module(function M() {
       }},
       IfStatement:{enter:function(node,parent) {
         var item=new basic.Div();
-        item.add(new basic.Span("IF","ids"));
 
         return item;
       },leave:function(n,p,c) {
+        n.element.addBefore(new basic.Span("IF","ids"));
+
         //n.consequent.element.parent.insert(new basic.Span(")"),n.consequent.element);
         if(n.test)
-          n.test.element.add(new basic.Span(")"));
+          n.test.element.addClass("arglist");
         //c.elements[c.elements.length-1].add(new basic.Span(")"));
       }},
       Program:{enter:function(node,parent,c) {
