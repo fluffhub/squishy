@@ -129,11 +129,13 @@ Module(function M() {
 
         return item;
       },leave:function(n,p,cursor) {
-        cursor.elements[0].add(new basic.Span("("));
-        cursor.add(new basic.Span(")"));
+        //cursor.elements[0].add(new basic.Span("("));
+        //cursor.add(new basic.Span(")"));
         if(n.arguments.length>1) {
           for(var i=0;i<n.arguments.length-1;i++) {
-            n.arguments[i].element.add(new basic.Span(","));
+            if(n.arguments[i].element.element instanceof Element)
+            n.arguments[i].element.addClass("argument");
+            //n.arguments[i].element.add(new basic.Span(","));
           }
         }
       }},
