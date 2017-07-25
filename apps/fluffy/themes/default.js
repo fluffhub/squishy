@@ -29,7 +29,7 @@ Module(function M() {
       ExpressionStatement:{enter:function(node) {
         return new basic.Div("E");
       },leave:function(node,parent,cursor) {
-       // cursor.add(new basic.Span(";","EC"));
+        // cursor.add(new basic.Span(";","EC"));
       }},
       VariableDeclaration:{enter:function(node) {
         var item=new basic.Span("");
@@ -69,14 +69,14 @@ Module(function M() {
         item.add(new basic.Span("","F"));
         return item;
       },leave:function(n,p,c) {
-       //// if(n.params.length>0)
-       //   n.params[n.params.length-1].element.add(new basic.Span(")"));
+        //// if(n.params.length>0)
+        //   n.params[n.params.length-1].element.add(new basic.Span(")"));
         n.params[0].element.addClass("ids");
       }},
       AssignmentExpression:{enter:function(n,p,c) {
         return new basic.Span("","A");
       },leave:function(n,p,c) {
-     //   n.right.element.addBefore(new basic.Span(" = "));
+        //   n.right.element.addBefore(new basic.Span(" = "));
       }},
       FunctionExpression:{enter:function(n,p,c) {
         return new basic.Span("","");
@@ -87,15 +87,15 @@ Module(function M() {
         if(n.params&&n.params.length>0) {
           for(var i=n.params.length-1;i>0;i--) {
             n.params[i].element.addClass("param");
-         //   n.params[i].element.addBefore(new basic.Span(","));
+            //   n.params[i].element.addBefore(new basic.Span(","));
           }
         }
         if(n.params.length>=1) {
-         //n.params[0].element.addBefore(new basic.Span("("));
-         // n.params[n.params.length-1].element.add(new basic.Span(")"));
+          //n.params[0].element.addBefore(new basic.Span("("));
+          // n.params[n.params.length-1].element.add(new basic.Span(")"));
         }
         else {
-        // c.add(new basic.Span("() "));
+          // c.add(new basic.Span("() "));
         }
 
       }},
@@ -121,8 +121,8 @@ Module(function M() {
       VariableDeclarator:{enter:function(n,p) {
         return new basic.Span("");
       },leave:function(n,p,c) {
-      //  if(n.init!=null)
-      //    n.init.element.addBefore(new basic.Span(" = "));
+        //  if(n.init!=null)
+        //    n.init.element.addBefore(new basic.Span(" = "));
 
       }},
       CallExpression:{enter:function(n,p) {
@@ -135,7 +135,7 @@ Module(function M() {
         if(n.arguments.length>1) {
           for(var i=0;i<n.arguments.length-1;i++) {
             if(n.arguments[i].element.element instanceof Element)
-            n.arguments[i].element.addClass("argument");
+              n.arguments[i].element.addClass("argument");
             //n.arguments[i].element.add(new basic.Span(","));
           }
         }
@@ -286,23 +286,23 @@ Module(function M() {
           for(var i=0;i<args.length;i++) {
             var arg=args[i];
 
-            if i<node.arguments.length
-          node.arguments[i].element.remove();
+            if( i<node.arguments.length)
+              node.arguments[i].element.remove();
             var farg=fun.params[i];
             var listitem=new basic.Div("imports");
-              var modlink=new basic.FakeLink(arg,"#?loc="+arg,function click(e) {
+            var modlink=new basic.FakeLink(arg,"#?loc="+arg,function click(e) {
 
-              });
+            });
             listitem.add(modlink);
             listitem.add(new basic.Span(" -> "+farg.name));
-             node.arglist.add(listitem);
+            node.arglist.add(listitem);
             modlink.addClass("waiting");
             window.Import(arg.value,function(mod) {
               //arg.element.clear();
               //arg.element.content(" ");
 
               modlink.onclick=function() {
-               console.debug(mod);
+                console.debug(mod);
               }
               //  modlink.element.href="?page="+mod.filename;
               listitem.addClass("enabled")
@@ -310,7 +310,7 @@ Module(function M() {
 
 
 
-          /*    if(fun&&fun.type=="FunctionExpression"&&fun.params) {
+              /*    if(fun&&fun.type=="FunctionExpression"&&fun.params) {
                 fun.params.forEach(function(farg) {
                   farg.element.clear();
                   farg.element.content(" ");
@@ -373,9 +373,9 @@ Module(function M() {
         },
         leave:function(node,parent,cursor) {
           //node.element.elements.forEach(function(el) { el.remove() });
-         var code=new basic.Div("extended");
+          var code=new basic.Div("extended");
           node.element.elements.forEach(function(el) { el.remove();code.add(el); });
-           cursor.extended=code;
+          cursor.extended=code;
 
           var div=new basic.Div("classname");
           if(typeof node.name=="string") {
@@ -384,8 +384,8 @@ Module(function M() {
             div.content("Unnamed Class");
           }
           node.element.add(div);
-         // node.element.addClass("cls");
-         // node.element.elements.forEach(function(el) { el.remove() })
+          // node.element.addClass("cls");
+          // node.element.elements.forEach(function(el) { el.remove() })
         }
       },
       DefStatement:{
