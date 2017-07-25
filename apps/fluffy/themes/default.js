@@ -262,12 +262,15 @@ Module(function M() {
         enter:function(node,parent,cursor,state) {},
         leave:function(node,parent,cursor,state) {
           var nl=node.arguments.length;
+          var args=node.arguments.slice(0,-1);
+          if (nl<=2&&typeof node.arguments[0].value=="string")
+            args=node.arguments[0].split(" ");
           var fun = node.arguments[nl-1];
           var browser=this;
 
           node.element.addClass("Import");
-          node.element.clear();
-
+        node.callee.element.remove();
+          node.element.add(new basic.Span("I","ids"));
           for(var i=0;i<nl-1;i++) {
             var arg=node.arguments[i];
             var farg=fun.params[i];
