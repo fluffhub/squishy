@@ -279,8 +279,8 @@ Module(function M() {
           node.element.addBefore(new basic.Span("I","ids"));
           node.arguments[nl-1].element.remove();
           node.element.add(node.arguments[nl-1].body.element);
-          for(var i=0;i<nl-1;i++) {
-            var arg=node.arguments[i];
+          for(var i=0;i<args.length;i++) {
+            var arg=args[i];
             arg.element.remove();
             var farg=fun.params[i];
             var listitem=new basic.Div("imports");
