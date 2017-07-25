@@ -297,7 +297,7 @@ Module(function M() {
             listitem.add(new basic.Span(" -> "+farg.name));
             node.arglist.add(listitem);
             modlink.addClass("waiting");
-            window.Import(arg.value,function(mod) {
+            window.Import(arg,function(mod) {
               //arg.element.clear();
               //arg.element.content(" ");
 
