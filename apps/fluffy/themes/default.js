@@ -274,7 +274,7 @@ Module(function M() {
           node.callee.element.remove();
 
 
-          node.arglist=new basic.Span("","");
+          node.arglist=new basic.Div("arglist");
           node.element.addBefore(node.arglist);
           node.element.addBefore(new basic.Span("I","ids"));
           node.arguments[nl-1].element.remove();
@@ -289,7 +289,7 @@ Module(function M() {
               });
             listitem.add(modlink);
             listitem.add(new basic.Span(" -> "+farg.name));
-             node.element.add(listitem);
+             node.arglist.add(listitem);
             modlink.addClass("waiting");
             window.Import(arg.value,function(mod) {
               //arg.element.clear();
