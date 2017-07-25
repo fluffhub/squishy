@@ -289,29 +289,31 @@ Module(function M() {
 
             if( arg!==undefined&&i<node.arguments.length) {
               node.arguments[i].element.remove();
-            var farg=fun.params[i];
-            var listitem=new basic.Div("imports");
-            var modlink=new basic.FakeLink("#?loc="+arg,arg,function click(e) {
+              var farg=fun.params[i];
+              var listitem=new basic.Div("imports");
+              var modlink=new basic.FakeLink("#?loc="+arg,arg,function click(e) {
 
-            });
-            listitem.add(modlink);
-            listitem.add(new basic.Span(" -> "+farg.name));
-            node.arglist.add(listitem);
-            modlink.addClass("waiting");
-            window.Import(arg,function(mod) {
-              //arg.element.clear();
-              //arg.element.content(" ");
-
-              modlink.onclick=function() {
-                console.debug(mod);
+              });
+              listitem.add(modlink);
+              if(fun&&fun.type=="FunctionExpression"&&fun.params) {
+                listitem.add(new basic.Span(" -> "+farg.name));
               }
-              //  modlink.element.href="?page="+mod.filename;
-              listitem.addClass("enabled")
-              listitem.removeClass("waiting");
+              node.arglist.add(listitem);
+              modlink.addClass("waiting");
+              window.Import(arg,function(mod) {
+                //arg.element.clear();
+                //arg.element.content(" ");
+
+                modlink.onclick=function() {
+                  console.debug(mod);
+                }
+                //  modlink.element.href="?page="+mod.filename;
+                listitem.addClass("enabled")
+                listitem.removeClass("waiting");
 
 
 
-              /*    if(fun&&fun.type=="FunctionExpression"&&fun.params) {
+                /*    if(fun&&fun.type=="FunctionExpression"&&fun.params) {
                 fun.params.forEach(function(farg) {
                   farg.element.clear();
                   farg.element.content(" ");
@@ -324,7 +326,7 @@ Module(function M() {
                 });
               }
               browser.browser.Import(arg.value);*/
-            });
+              });
             }
           }
         }
