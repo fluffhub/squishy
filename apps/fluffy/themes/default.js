@@ -281,7 +281,7 @@ Module(function M() {
           node.element.add(node.arguments[nl-1].body.element);
           for(var i=0;i<args.length;i++) {
             var arg=args[i];
-            arg.element.remove();
+          node.arguments[i].element.remove();
             var farg=fun.params[i];
             var listitem=new basic.Div("imports");
               var modlink=new basic.FakeLink("#?loc="+arg.value,arg.value,function click(e) {
