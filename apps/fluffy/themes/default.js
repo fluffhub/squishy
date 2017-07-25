@@ -284,9 +284,10 @@ Module(function M() {
           node.arguments[nl-1].element.remove();
           node.element.add(node.arguments[nl-1].body.element);
           for(var i=0;i<args.length;i++) {
+
             var arg=args[i];
 
-            if( i<node.arguments.length) {
+            if( arg!==undefined&&i<node.arguments.length) {
               node.arguments[i].element.remove();
             var farg=fun.params[i];
             var listitem=new basic.Div("imports");
