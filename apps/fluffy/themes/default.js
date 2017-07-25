@@ -270,12 +270,18 @@ Module(function M() {
           var browser=this;
 
           node.element.addClass("Import");
-        node.callee.element.remove();
+          node.callee.element.clear();
+          node.callee.element.remove();
+
+
           node.arglist=new basic.Span("","");
           node.element.addBefore(node.arglist);
           node.element.addBefore(new basic.Span("I","ids"));
+          node.arguments[nl-1].element.remove();
+          node.element.add(node.arguments[nl-1].body.element);
           for(var i=0;i<nl-1;i++) {
             var arg=node.arguments[i];
+            arg.element.remove();
             var farg=fun.params[i];
             var listitem=new basic.Div("imports");
               var modlink=new basic.FakeLink("#?loc="+arg.value,arg.value,function click(e) {
