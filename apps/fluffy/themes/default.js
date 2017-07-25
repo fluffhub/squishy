@@ -264,7 +264,7 @@ Module(function M() {
           var nl=node.arguments.length;
           var args=node.arguments.slice(0,-1);
           if (nl<=2&&typeof node.arguments[0].value=="string")
-            args=node.arguments[0].split(" ");
+            args=node.arguments[0].value.split(" ");
           var fun = node.arguments[nl-1];
           var browser=this;
 
