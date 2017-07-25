@@ -286,7 +286,7 @@ Module(function M() {
           for(var i=0;i<args.length;i++) {
             var arg=args[i];
 
-            if( i<node.arguments.length)
+            if( i<node.arguments.length) {
               node.arguments[i].element.remove();
             var farg=fun.params[i];
             var listitem=new basic.Div("imports");
@@ -324,6 +324,7 @@ Module(function M() {
               }
               browser.browser.Import(arg.value);*/
             });
+            }
           }
         }
       },
