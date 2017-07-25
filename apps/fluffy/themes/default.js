@@ -76,7 +76,7 @@ Module(function M() {
       AssignmentExpression:{enter:function(n,p,c) {
         return new basic.Span("","A");
       },leave:function(n,p,c) {
-        n.right.element.addBefore(new basic.Span(" = "));
+     //   n.right.element.addBefore(new basic.Span(" = "));
       }},
       FunctionExpression:{enter:function(n,p,c) {
         return new basic.Span("","");
@@ -121,8 +121,9 @@ Module(function M() {
       VariableDeclarator:{enter:function(n,p) {
         return new basic.Span("");
       },leave:function(n,p,c) {
-        if(n.init!=null)
-          n.init.element.addBefore(new basic.Span(" = "));
+      //  if(n.init!=null)
+      //    n.init.element.addBefore(new basic.Span(" = "));
+
       }},
       CallExpression:{enter:function(n,p) {
         var item=new basic.Span("","EX");
@@ -270,23 +271,34 @@ Module(function M() {
 
           node.element.addClass("Import");
         node.callee.element.remove();
-          node.element.add(new basic.Span("I","ids"));
+          node.arglist=new basic.Span("","");
+          node.element.addBefore(node.arglist);
+          node.element.addBefore(new basic.Span("I","ids"));
           for(var i=0;i<nl-1;i++) {
             var arg=node.arguments[i];
             var farg=fun.params[i];
+            var listitem=new basic.Div("imports");
+              var modlink=new basic.FakeLink("#?loc="+arg.value,function click(e) {
 
+              });
+            listitem.add(modlink);
+            listitem.add(new basic.Span(" -> "+farg.name);
+             node.element.add(listitem);
+            modlink.addClass("waiting");
             window.Import(arg.value,function(mod) {
               //arg.element.clear();
               //arg.element.content(" ");
-              var modlink=new basic.FakeLink("#?loc="+mod.filename,"\""+arg.value+"\ -> "+farg.id,function click(e) {
 
-              });
+              modlink.onclick=function() {
+               console.debug(mod);
+              }
               //  modlink.element.href="?page="+mod.filename;
-              modlink.addClass("module_link")
+              listitem.addClass("enabled")
+              listitem.removeClass("waiting");
 
-              node.element.add(modlink);
 
-              if(fun&&fun.type=="FunctionExpression"&&fun.params) {
+
+          /*    if(fun&&fun.type=="FunctionExpression"&&fun.params) {
                 fun.params.forEach(function(farg) {
                   farg.element.clear();
                   farg.element.content(" ");
@@ -298,7 +310,7 @@ Module(function M() {
                   farg.element.add(funlink);
                 });
               }
-              browser.browser.Import(arg.value);
+              browser.browser.Import(arg.value);*/
             });
           }
         }
