@@ -10,12 +10,20 @@
     content: "+";
     /* font-size: 0.5em; */
     /* line-height: 2em; */
-    float: left;
+
     font-weight: bold;
     background-color: rgba(0,0,0,0.6);
     color: rgb(255,255,245);
     padding: 0 4px;
     color: #ddbb333;
+}
+.ThrowStatement::before {
+ content:"^";
+  font-weight:bold;
+  background-color:rgba(255,0,0,0.75);
+  color:white;
+  padding:0 4px;
+
 }
 .ReturnStatement::before {
     content: "<";

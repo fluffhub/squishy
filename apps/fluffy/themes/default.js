@@ -197,10 +197,10 @@ Module(function M() {
         //   c.elements[2].add(new basic.Span(","));
       }},
       Unknown:{enter:function(node,parent) {
-        var item=new basic.Span("[","unknown "+node.type);
+        var item=new basic.Span("","unknown "+node.type);
         return item;
       },leave:function(node,parent,cursor) {
-        cursor.add(new basic.Span("]"));
+      //  cursor.add(new basic.Span("]"));
 
       }},
       ObjectExpression:{enter:function(n,p,c) {
