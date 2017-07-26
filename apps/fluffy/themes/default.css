@@ -69,8 +69,10 @@
     /* display: inline-block; */
     /* float: left; */
     /* clear: both; */
-    margin: 1em;
+    /* padding: 0.1em; */
+    margin: 0.5em 0.1em;
     display: block;
+    min-height: 1.25em;
     /* padding: 3px; */
     /* margin: 0.5em 0; */
     border: 2px dashed rgba(0,0,255,0.5);
