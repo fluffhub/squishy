@@ -18,7 +18,14 @@
 .E { display:inline; }
 
 .V>.I:first-child { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5);color:white; }
+.A { margin:5px 0; }
+.A>.I:first-child {
+    margin-right: 5px;
 
+    padding: 0 5px;
+    /* float: left; */
+    background: rgba(0,0,0,0.4);
+}
 .deffunction { display:block; }
 
 .param { float:left; }
