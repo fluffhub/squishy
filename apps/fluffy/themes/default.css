@@ -34,8 +34,8 @@
 .B {
     display: block;
     border: 2px solid rgba(0,0,0,0.5);
-    padding: 1px;
-      margin: 0 0 0.25em 0;
+    /* padding: 1px; */
+    margin: 0 .1em 0.25em .1em;
 }
 .A { display:inline; }
 .E { display:inline; }
