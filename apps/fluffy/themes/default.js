@@ -44,6 +44,9 @@ Module(function M() {
           if(dec.init!==null) {
           dec.init.element.remove();
           node.element.add(dec.init.element);
+          } else {
+            // stand-alone/undefined node, like var a;
+            node.element.addClass("sa");
           }
         }
       }},

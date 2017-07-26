@@ -18,6 +18,7 @@
 .E { display:inline; }
 
 .V>.I:first-child { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5);color:white; }
+.V.sa { padding:3px;clear:both;display:block; }
 .A { margin:5px 0; }
 .A>.I:first-child {
     margin-right: 5px;
