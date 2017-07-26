@@ -38,7 +38,13 @@ Module(function M() {
 
         return item;
       },leave:function(node,parent,cursor) {
+        for (var i=0;i<node.declarations.length;i++) {
+          var dec=node.declarations[i];
+          dec.id.element.addClass("ids");
+          dec.init.element.remove();
+          node.element.add(dec.init.element);
 
+        }
       }},
       ThisExpression:{enter:function(n,p,c) {
         return new basic.Span("this");
