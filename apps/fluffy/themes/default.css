@@ -6,7 +6,17 @@
     background-color: rgba(0,0,0,0.5);
     color: white;
 }
-.inits::before { content:"NEW";font-size:0.5em;font-weight:bold;color:#ddbb333; }
+.inits::before {
+    content: "+";
+    /* font-size: 0.5em; */
+    /* line-height: 2em; */
+    float: left;
+    font-weight: bold;
+    background-color: rgba(0,0,0,0.6);
+    color: rgb(255,255,245);
+    padding: 0 4px;
+    color: #ddbb333;
+}
 
 .B {
     display: block;
@@ -18,6 +28,9 @@
 .E { display:inline; }
 
 .V>.I:first-child { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5);color:white; }
+.V>span>.ids {
+    float: right;
+}
 .V.sa { padding:3px;clear:both;display:block; }
 .A { margin:5px 0; }
 .A>.I:first-child {
