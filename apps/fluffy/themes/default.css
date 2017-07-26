@@ -17,7 +17,12 @@
     padding: 0 4px;
     color: #ddbb333;
 }
-
+.ReturnStatement::before {
+    content: "<";
+    padding: 0 5px;
+    float: left;
+    background-color: rgba(0,255,0,0.5);
+}
 .B {
     display: block;
     border: 2px solid rgba(0,0,0,0.5);
@@ -31,6 +36,7 @@
 .V>span>.ids {
     float: right;
 }
+.V.clears { display:block; }
 .V.sa { padding:3px;clear:both;display:block; }
 .A { margin:5px 0; }
 .A>.I:first-child {
