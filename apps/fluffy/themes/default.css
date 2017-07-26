@@ -26,7 +26,7 @@
 .B {
     display: block;
     border: 2px solid rgba(0,0,0,0.5);
-    padding: .75em;
+    padding: 1px;
       margin: 0 0 0.25em 0;
 }
 .A { display:inline; }
@@ -38,10 +38,18 @@
 }
 .V.clears { display:block; }
 .V.sa { padding:3px;clear:both;display:block; }
+.obj>span>.I:first-child {
+    float: left;
+    background-color: rgba(0,0,255,0.5);
+    margin: 0;
+    /* margin-top: -1em; */
+}
+
 .A { margin:5px 0; }
 .A>.I:first-child {
-    margin-right: 5px;
 
+  color:white;
+  float:right;
     padding: 0 5px;
     /* float: left; */
     background: rgba(0,0,0,0.4);
@@ -49,8 +57,16 @@
 .deffunction { display:block; }
 
 .param { float:left; }
-
-.obj { display:block;padding:3px;border:2px dotted rgba(0,0,255,0.5); };
+.obj {
+    /* display: inline-block; */
+    /* float: left; */
+    /* clear: both; */
+    margin: 1em;
+    display: block;
+    /* padding: 3px; */
+    /* margin: 0.5em 0; */
+    border: 2px dashed rgba(0,0,255,0.5);
+}
 .prop { display:block; }
 
 .imports {
