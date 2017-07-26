@@ -181,7 +181,7 @@ Module(function M() {
         if(n.test)
           n.test.element.addClass("arglist");
         if(n.alternate)
-          n.alternate.element.add(new basic.Span("ELSE","ids"));
+          n.alternate.element.addBefore(new basic.Span("ELSE","ids"));
         //c.elements[c.elements.length-1].add(new basic.Span(")"));
       }},
       Program:{enter:function(node,parent,c) {
