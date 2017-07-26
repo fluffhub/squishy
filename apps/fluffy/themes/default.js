@@ -81,6 +81,7 @@ Module(function M() {
       },leave:function(n,p,c) {
         //// if(n.params.length>0)
         //   n.params[n.params.length-1].element.add(new basic.Span(")"));
+        if(n.params.length>=1)
         n.params[0].element.addClass("ids");
       }},
       AssignmentExpression:{enter:function(n,p,c) {
