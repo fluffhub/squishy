@@ -28,7 +28,7 @@
 .ReturnStatement::before {
     content: "<";
     padding: 0 5px;
-    float: left;
+
     background-color: rgba(0,255,0,0.5);
 }
 .B {
