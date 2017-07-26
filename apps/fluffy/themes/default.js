@@ -41,9 +41,10 @@ Module(function M() {
         for (var i=0;i<node.declarations.length;i++) {
           var dec=node.declarations[i];
           dec.id.element.addClass("ids");
+          if(dec.init!==null) {
           dec.init.element.remove();
           node.element.add(dec.init.element);
-
+          }
         }
       }},
       ThisExpression:{enter:function(n,p,c) {
