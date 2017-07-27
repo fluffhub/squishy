@@ -401,8 +401,11 @@ Module(function M() {
           var code=new basic.Div("extended");
           node.element.elements.forEach(function(el) { el.remove();code.add(el); });
           cursor.extended=code;
-
-          var div=new basic.Div("classname");
+          code.addClass("hidden");
+          cursor.add(code);
+          var div=new interactive.MomentaryButton("","classname",function(e) {
+          code.toggleClass("hidden");
+          });
           if(typeof node.name=="string") {
             div.add(new basic.Span("Class","cmd"));
             div.add(new basic.Span(node.name,"ids"));
@@ -411,7 +414,9 @@ Module(function M() {
               div.add(new basic.Span("Class","cmd"));
             div.add(new basic.Span("unnamed","ids italic"));
           }
-          node.element.add(div);
+
+          node.element.addBefore(div);
+
           // node.element.addClass("cls");
           // node.element.elements.forEach(function(el) { el.remove() })
         }
