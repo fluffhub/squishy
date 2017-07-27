@@ -410,6 +410,7 @@ Module(function M() {
           var code=new basic.Div("extended");
           if(node.arguments[0].body)
           node.arguments[0].body.element.remove();
+          node.arguments[0].element.remove();
           cursor.extended=code;
           code.add(node.arguments[0].body.element);
           code.addClass("hidden");
@@ -418,6 +419,7 @@ Module(function M() {
            node.element.elements[i].remove();
 
           }
+
           var div=new interactive.MomentaryButton("","classname",function(e) {
           code.toggleClass("hidden");
           });
