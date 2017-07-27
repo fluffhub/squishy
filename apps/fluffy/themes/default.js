@@ -76,7 +76,7 @@ Module(function M() {
       }},
       FunctionDeclaration:{enter:function(n,p,c) {
         var item=new basic.Div("F")
-        item.add(new basic.Span("f","ops"));
+        item.add(new basic.Span("function","ops"));
         return item;
       },leave:function(n,p,c) {
         //// if(n.params.length>0)
@@ -92,7 +92,7 @@ Module(function M() {
       FunctionExpression:{enter:function(n,p,c) {
         return new basic.Span("","");
       },leave:function(n,p,c) {
-        n.element.addBefore(new basic.Span("f","ops"));
+        n.element.addBefore(new basic.Span("function","ops"));
         var parampos=0;
         if(n.id!==null) parampos=1;
         if(n.params&&n.params.length>0) {
@@ -294,7 +294,7 @@ Module(function M() {
 
           node.arglist=new basic.Div("arglist");
           node.element.addBefore(node.arglist);
-          node.element.addBefore(new basic.Span("I","ids"));
+          node.element.addBefore(new basic.Span("Import","cmd"));
           node.arguments[nl-1].element.remove();
           node.element.add(node.arguments[nl-1].body.element);
           for(var i=0;i<args.length;i++) {
@@ -362,6 +362,7 @@ Module(function M() {
         leave:function(node,parent,cursor,state) {
           //node.element.addClass("module");
           //node.element.element.style["background-color"]="orange";
+          node.element.add(new basic.Span("Module","cmd"));
           node.arguments[0].element.addClass("deffunction");
           node.element.elements[0].remove();
           //node.arguments[0].element.addBefore(new basic.Span("M","ids"));
@@ -397,9 +398,12 @@ Module(function M() {
 
           var div=new basic.Div("classname");
           if(typeof node.name=="string") {
-            div.content("Class "+node.name);
+            div.add(new basic.Span("Class","cmd"));
+            div.add(new basic.Span(node.name,"ids"));
+
           } else {
-            div.content("Unnamed Class");
+              div.add(new basic.Span("Class","cmd"));
+            div.add(new basic.Span("unnamed","ids italic"));
           }
           node.element.add(div);
           // node.element.addClass("cls");
