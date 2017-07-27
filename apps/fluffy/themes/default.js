@@ -298,7 +298,7 @@ Module(function M() {
           node.arguments[nl-1].element.remove();
           if(fun.type=="Literal")
             node.element.add(new basic.Span(node.arguments[nl-1].value,"literal"));
-          else
+          else {
           node.element.add(node.arguments[nl-1].body.element);
           for(var i=0;i<args.length;i++) {
 
@@ -306,6 +306,7 @@ Module(function M() {
 
             if( arg!==undefined&&i<node.arguments.length) {
               node.arguments[i].element.remove();
+
               var farg=fun.params[i];
               var listitem=new basic.Div("imports");
               var modlink=new basic.FakeLink("#?loc="+arg,arg,function click(e) {
@@ -345,6 +346,7 @@ Module(function M() {
               browser.browser.Import(arg.value);*/
               });
             }
+          }
           }
         }
       },
