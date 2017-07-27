@@ -63,7 +63,7 @@
     /* float: left; */
     background: rgba(0,0,0,0.4);
 }
-.deffunction { display:block; }
+.deffunction {  }
 
 .param { float:left; }
 .obj {

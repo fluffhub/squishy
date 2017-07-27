@@ -296,7 +296,7 @@ Module(function M() {
           node.element.addBefore(node.arglist);
           node.element.addBefore(new basic.Span("Import","cmd"));
           node.arguments[nl-1].element.remove();
-          if(fun.type=="literal")
+          if(fun.type=="Literal")
             node.element.add(new basic.Span(node.arguments[nl-1].value,"literal"));
           else
           node.element.add(node.arguments[nl-1].body.element);
