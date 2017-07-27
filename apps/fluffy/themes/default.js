@@ -143,14 +143,22 @@ Module(function M() {
       },leave:function(n,p,cursor) {
         //cursor.elements[0].add(new basic.Span("("));
         //cursor.add(new basic.Span(")"));
+
         n.callee.element.addClass("callee");
-        if(n.arguments.length>1) {
-          for(var i=0;i<n.arguments.length-1;i++) {
-            if(n.arguments[i].element.element instanceof Element)
+        var args=new basic.Span("","arglist");
+
+        if(n.arguments.length>=1) {
+          for(var i=0;i<n.arguments.length;i++) {
+            if(n.arguments[i].element.element instanceof Element) {
               n.arguments[i].element.addClass("argument");
+              n.arguments[i].element.remove();
+              args.add(n.arguments[i].element);
+
+            }
             //n.arguments[i].element.add(new basic.Span(","));
           }
         }
+        n.element.add(args);
       }},
       ForStatement:{enter:function(n,p) {
         return new basic.Span("for ","ops");
