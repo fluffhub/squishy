@@ -413,7 +413,11 @@ Module(function M() {
           cursor.extended=code;
           code.add(node.arguments[0].body.element);
           code.addClass("hidden");
-          cursor.add(code);
+
+          for(var i=0;i<node.element.elements.length;i++) {
+           node.element.elements[i].remove();
+
+          }
           var div=new interactive.MomentaryButton("","classname",function(e) {
           code.toggleClass("hidden");
           });
@@ -425,7 +429,7 @@ Module(function M() {
               div.add(new basic.Span("Class","cmd"));
             div.add(new basic.Span("unnamed","ids italic"));
           }
-
+          cursor.add(code);
           node.element.addBefore(div);
 
           // node.element.addClass("cls");
