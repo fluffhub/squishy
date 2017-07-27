@@ -416,7 +416,7 @@ Module(function M() {
           return ret;
         },
         leave:function(n,p,c) {
-          c.element.style["color"]="green";
+
         }
       },
 
