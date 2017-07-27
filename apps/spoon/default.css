@@ -146,9 +146,7 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 .button.processstep > img { height: 50px; }
 .button.processstep.selected { border: 2px solid rgba(0, 0, 0, 0.5); }
 .ScrollingWrapper { overflow-y: hidden; }
-.Comments div { background-color: rgba(255, 255, 255, 0.9); }
-.Comments.Block { display: block; clear: both; float: left; }
-.Comments.Line { float: left; clear: none; }
+
 .sitemenu { position: absolute; left: 0px; bottom: 0px; z-index: 10000000; width: 45px; height: 50px; float: left; display: inline; margin: 5px; transition: left 0.5s ease-in-out, bottom 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out, transform 0.8s ease-in-out; transform: rotate(40deg); }
 .collapsed .sitemenu { left: -45px; bottom: -45px; width: 90px; height: 90px; transform: rotate(-90deg); }
 .sitemenu > path { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
@@ -158,7 +156,7 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 .TaskList > .tabset { display: inline-block; width: auto; overflow: hidden; transition: opacity 0.25s ease-in; opacity: 1; }
 .TaskList.collapsed > .tabset { transition: opacity 0.25s ease-out 0.25s; opacity: 0; }
 .TaskList .tab { width: 50px; height: 50px; overflow: hidden; position: static; display: inline; margin: 5px; box-shadow: rgba(150, 150, 150, 0.9) 3px 3px 10px; }
-.Comments > div { float: left; clear: both; }
+
 .FileBrowser .dir { margin-left: 1em; }
 .FileBrowser .dir > a { margin-left: 1em; display: block; }
 .importer { position: absolute; bottom: 0px; right: 0px; }
@@ -316,9 +314,7 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 .button.processstep > img { height: 50px; }
 .button.processstep.selected { border: 2px solid rgba(0, 0, 0, 0.5); }
 .ScrollingWrapper { overflow-y: hidden; }
-.Comments div { background-color: rgba(255, 255, 255, 0.9); }
-.Comments.Block { display: block; clear: both; float: left; }
-.Comments.Line { float: left; clear: none; }
+
 .sitemenu { position: absolute; left: 0px; bottom: 0px; z-index: 10000000; width: 45px; height: 50px; float: left; display: inline; margin: 5px; transition: left 0.5s ease-in-out, bottom 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out, transform 0.8s ease-in-out; transform: rotate(40deg); }
 .collapsed .sitemenu { left: -45px; bottom: -45px; width: 90px; height: 90px; transform: rotate(-90deg); }
 .sitemenu > path { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
@@ -328,7 +324,7 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 .TaskList > .tabset { display: inline-block; width: auto; overflow: hidden; transition: opacity 0.25s ease-in; opacity: 1; }
 .TaskList.collapsed > .tabset { transition: opacity 0.25s ease-out 0.25s; opacity: 0; }
 .TaskList .tab { width: 50px; height: 50px; overflow: hidden; position: static; display: inline; margin: 5px; box-shadow: rgba(150, 150, 150, 0.9) 3px 3px 10px; }
-.Comments > div { float: left; clear: both; }
+
 .FileBrowser .dir { margin-left: 1em; }
 .FileBrowser .dir > a { margin-left: 1em; display: block; }
 .importer { position: absolute; bottom: 0px; right: 0px; }

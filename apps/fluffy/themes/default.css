@@ -107,3 +107,9 @@
     border-right: 2px solid rgba(0,0,0,0.7);
   border-top:2px solid rgba(0,0,0,0.7);
 }
+
+
+.Comments > div {  }
+.Comments div { background-color: rgba(255, 255, 255, 0.9);font-family:sans-serif; }
+.Comments.Block { }
+.Comments.Line { }
