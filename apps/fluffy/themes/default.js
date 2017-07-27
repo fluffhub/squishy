@@ -92,7 +92,7 @@ Module(function M() {
       FunctionExpression:{enter:function(n,p,c) {
         return new basic.Span("","");
       },leave:function(n,p,c) {
-        n.element.addBefore(new basic.Span("F ","ids"));
+        n.element.addBefore(new basic.Span("f","ops"));
         var parampos=0;
         if(n.id!==null) parampos=1;
         if(n.params&&n.params.length>0) {

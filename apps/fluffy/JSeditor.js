@@ -209,7 +209,6 @@ Module(function M() {
             this.lastnode=node;
             if(node.leadingComments&&node.type!="Program") {
               var comments=new basic.Div("Comments");
-              comments.element.style["margin-left"]=(-1)+"em";
               cursor.add(comments);
               var comment=node.leadingComments[0];
               comments.addClass(comment.type);
