@@ -296,6 +296,9 @@ Module(function M() {
           node.element.addBefore(node.arglist);
           node.element.addBefore(new basic.Span("Import","cmd"));
           node.arguments[nl-1].element.remove();
+          if(fun.type=="literal")
+            node.element.add(new basic.Span(node.arguments[nl-1].value,"literal"));
+          else
           node.element.add(node.arguments[nl-1].body.element);
           for(var i=0;i<args.length;i++) {
 
@@ -362,9 +365,10 @@ Module(function M() {
         leave:function(node,parent,cursor,state) {
           //node.element.addClass("module");
           //node.element.element.style["background-color"]="orange";
-          node.element.addBefore(new basic.Span("Module","cmd"));
+          //node.element.addBefore(new basic.Span("Module","cmd"));
           node.arguments[0].element.addClass("deffunction");
-          node.element.elements[0].remove();
+          //node.element.elements[0].remove();
+          node.callee.element.addClass("cmd");
           //node.arguments[0].element.addBefore(new basic.Span("M","ids"));
           node.arguments[0].id.element.addClass("ids");
         }
