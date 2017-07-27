@@ -77,6 +77,14 @@
     /* margin: 0.5em 0; */
     border: 2px dashed rgba(0,0,255,0.5);
 }
+.acc {
+    overflow: scroll;
+    position: absolute;
+    top: 2em;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
 .prop { display:block; }
 
 .imports {
