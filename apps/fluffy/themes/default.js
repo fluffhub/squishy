@@ -76,13 +76,13 @@ Module(function M() {
       }},
       FunctionDeclaration:{enter:function(n,p,c) {
         var item=new basic.Div("F")
-        item.add(new basic.Span("","F"));
+        item.add(new basic.Span("","f"));
         return item;
       },leave:function(n,p,c) {
         //// if(n.params.length>0)
         //   n.params[n.params.length-1].element.add(new basic.Span(")"));
         if(n.params.length>=1)
-        n.params[0].element.addClass("ids");
+        n.params[0].element.addClass("ops");
       }},
       AssignmentExpression:{enter:function(n,p,c) {
         return new basic.Span("","A");
@@ -152,7 +152,7 @@ Module(function M() {
         }
       }},
       ForStatement:{enter:function(n,p) {
-        return new basic.Span("for ","FL");
+        return new basic.Span("for ","ops");
       },leave:function(n,p,c) {
 
       }},
@@ -175,13 +175,13 @@ Module(function M() {
 
         return item;
       },leave:function(n,p,c) {
-        n.element.addBefore(new basic.Span("IF","ids"));
+        n.element.addBefore(new basic.Span("if","ops"));
 
         //n.consequent.element.parent.insert(new basic.Span(")"),n.consequent.element);
         if(n.test)
           n.test.element.addClass("arglist");
         if(n.alternate)
-          n.alternate.element.addBefore(new basic.Span("ELSE","ids"));
+          n.alternate.element.addBefore(new basic.Span("else","ops"));
         //c.elements[c.elements.length-1].add(new basic.Span(")"));
       }},
       Program:{enter:function(node,parent,c) {
