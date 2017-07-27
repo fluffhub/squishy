@@ -146,7 +146,7 @@ Module(function M() {
 
         n.callee.element.addClass("callee");
         var args=new basic.Span("","arglist");
-
+        n.arglist=args;
         if(n.arguments.length>=1) {
           for(var i=0;i<n.arguments.length;i++) {
             if(n.arguments[i].element.element instanceof Element) {
@@ -414,7 +414,8 @@ Module(function M() {
           cursor.extended=code;
           code.add(node.arguments[0].body.element);
           code.addClass("hidden");
-
+          if(node.arglist)
+          node.arglist.remove();
           for(var i=0;i<cursor.elements.length;i++) {
            cursor.elements[i].remove();
 
