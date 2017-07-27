@@ -362,7 +362,7 @@ Module(function M() {
         leave:function(node,parent,cursor,state) {
           //node.element.addClass("module");
           //node.element.element.style["background-color"]="orange";
-          node.element.add(new basic.Span("Module","cmd"));
+          node.element.addBefore(new basic.Span("Module","cmd"));
           node.arguments[0].element.addClass("deffunction");
           node.element.elements[0].remove();
           //node.arguments[0].element.addBefore(new basic.Span("M","ids"));

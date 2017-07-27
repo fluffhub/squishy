@@ -5,7 +5,7 @@
     background-color: rgba(0,0,0,0.5);
     color: white;
 }
-.cmd { color:rgba(255,125,0,0.75); }
+.cmd { color:rgba(255,125,0,0.75);background:none; }
 .ops { color:rgba(0,255,255,0.75); }
 .inits::before {
     content: "+";
