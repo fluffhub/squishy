@@ -76,13 +76,13 @@ Module(function M() {
       }},
       FunctionDeclaration:{enter:function(n,p,c) {
         var item=new basic.Div("F")
-        item.add(new basic.Span("","f"));
+        item.add(new basic.Span("f","ops"));
         return item;
       },leave:function(n,p,c) {
         //// if(n.params.length>0)
         //   n.params[n.params.length-1].element.add(new basic.Span(")"));
         if(n.params.length>=1)
-        n.params[0].element.addClass("ops");
+        n.params[0].element.addClass("ids");
       }},
       AssignmentExpression:{enter:function(n,p,c) {
         return new basic.Span("","A");
