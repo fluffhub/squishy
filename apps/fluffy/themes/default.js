@@ -415,8 +415,8 @@ Module(function M() {
           code.add(node.arguments[0].body.element);
           code.addClass("hidden");
 
-          for(var i=0;i<node.element.elements.length;i++) {
-           node.element.elements[i].remove();
+          for(var i=0;i<cursor.elements.length;i++) {
+           cursor.elements[i].remove();
 
           }
 
