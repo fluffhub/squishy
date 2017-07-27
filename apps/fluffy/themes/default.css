@@ -64,7 +64,7 @@
     background: rgba(0,0,0,0.4);
 }
 .deffunction {  }
-
+.callee { margin-right:1em;border-right:2px solid blue; }
 .param { float:left; }
 .obj {
     /* display: inline-block; */

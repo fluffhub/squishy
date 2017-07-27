@@ -143,6 +143,7 @@ Module(function M() {
       },leave:function(n,p,cursor) {
         //cursor.elements[0].add(new basic.Span("("));
         //cursor.add(new basic.Span(")"));
+        n.callee.element.addClass("callee");
         if(n.arguments.length>1) {
           for(var i=0;i<n.arguments.length-1;i++) {
             if(n.arguments[i].element.element instanceof Element)
