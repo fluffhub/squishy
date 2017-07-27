@@ -408,8 +408,10 @@ Module(function M() {
         leave:function(node,parent,cursor) {
           //node.element.elements.forEach(function(el) { el.remove() });
           var code=new basic.Div("extended");
-          node.element.elements.forEach(function(el) { el.remove();code.add(el); });
+          if(node.arguments[0].body)
+          node.arguments[0].body.element.remove();
           cursor.extended=code;
+          code.add(node.arguments[0].body.element);
           code.addClass("hidden");
           cursor.add(code);
           var div=new interactive.MomentaryButton("","classname",function(e) {
