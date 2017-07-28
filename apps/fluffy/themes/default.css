@@ -26,6 +26,11 @@
   padding:0 4px;
 
 }
+.code .init { border-style: solid; border-color: black; border-image: initial; background: rgba(125, 255, 125, 0.1); display: block; border-width: 2px; }
+.code .cls { background: rgba(100, 200, 100, 0.5); display: block; margin: 10px 0px; }
+.m > .Identifier::before { content: "."; }
+.m > .Identifier:first-child::before { content: ""; }
+
 .ReturnStatement::before {
     content: "<";
     padding: 0 5px;

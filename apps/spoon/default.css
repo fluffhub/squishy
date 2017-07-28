@@ -67,10 +67,6 @@ a.filelink.loaded { background-color: rgba(255, 255, 255, 0.25); }
 .FileBrowser .member { display: block; margin-left: 1em; }
 .file.module { margin-left: 1em; color: rgb(187, 187, 85); }
 .pane > .title-bar { line-height: 35px; text-indent: 8px; }
-.code .init { border-style: solid; border-color: green; border-image: initial; background: rgba(25, 150, 25, 0.5); display: block; border-width: 2px 0px; }
-.code .cls { background: rgba(100, 200, 100, 0.5); display: block; margin: 10px 0px; }
-.m > .Identifier::before { content: "."; }
-.m > .Identifier:first-child::before { content: ""; }
 
 .ui-resizable-se { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: se-resize; }
 .ui-resizable-sw { color: rgb(221, 221, 221); width: 30px; height: 30px; font-size: 12px; content: ""; font-family: icons; cursor: sw-resize; }
@@ -232,10 +228,7 @@ a.filelink.loaded { background-color: rgba(255, 255, 255, 0.25); }
 .tabset.fancy .tab::after { width: 20px; height: 100%; margin-left: -15px; left: 0px; border-left: 1px solid rgb(119, 119, 119); content: ""; display: block; transform: skew(-15deg, 0deg); border-radius: 5px 0px 0px; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 .pane > .title-bar { line-height: 35px; text-indent: 8px; }
-.code .init { border-style: solid; border-color: green; border-image: initial; background: rgba(25, 150, 25, 0.5); display: block; border-width: 2px 0px; }
-.code .cls { background: rgba(100, 200, 100, 0.5); display: block; margin: 10px 0px; }
-.m > .Identifier::before { content: "."; }
-.m > .Identifier:first-child::before { content: ""; }
+
 .ui-resizable-handle {
     position: absolute;
     z-index: 10000;
