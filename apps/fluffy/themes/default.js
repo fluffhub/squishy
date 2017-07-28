@@ -406,11 +406,15 @@ Module(function M() {
 
         },
         leave:function(node,parent,cursor) {
-          //node.element.elements.forEach(function(el) { el.remove() });
+
           var code=new basic.Div("extended");
+          if(node.arguments[0]) {
           if(node.arguments[0].body)
           node.arguments[0].body.element.remove();
+
           node.arguments[0].element.remove();
+          node.arguments[0].element.elements.forEach(function(el) { el.remove() });
+          }
           cursor.extended=code;
           code.add(node.arguments[0].body.element);
           code.addClass("hidden");
