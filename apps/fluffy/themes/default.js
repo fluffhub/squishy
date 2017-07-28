@@ -420,7 +420,7 @@ Module(function M() {
           code.addClass("hidden");
           if(node.arglist)
           node.arglist.remove();
-          cursor.element.clear();
+          cursor.element.Tag.clear();
 
           var div=new interactive.MomentaryButton("","classname",function(e) {
           code.toggleClass("hidden");
