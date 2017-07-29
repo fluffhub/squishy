@@ -49,9 +49,11 @@ Module(function M() {
             console.debug({code2:code2,withcomments:withcomments});
             var depth=0;
             var Lines=new basic.Div("code");
+            var Cursor=new basic.Div("cursor");
+            this.Cursor=Cursor;
             this.add(Lines);
             this.state={};
-              this.maskcursors=[];
+            this.maskcursors=[];
             var filestate={};
             if(theme!==undefined) this.setTheme(theme);
             else this.setTheme(defaulttheme);
@@ -147,6 +149,7 @@ Module(function M() {
             var depth=this.depth;
             var nodetypes=this.nodetypes;
             var cursor=this.cursor;
+            var Cursor=this.Cursor;
             var maskcursors=this.maskcursors;
             for(var i=0;i<maskcursors.length;i++) {
               if(maskcursors[i].node===node) maskcursors[i].mask.leave.call(this,node,parent,cursor,this.state);
@@ -183,6 +186,27 @@ Module(function M() {
             */
             item.addEvent("select","click",function(e) {
               console.debug(node);
+              // e.stopPropagation();
+            });
+            var hovering=false;
+            item.addEvent("cursorin","mouseover touchstart",function(e) {
+              if(!hovering) {
+                item.addClass("hovering");
+
+                //e.stopPropagation();
+                Cursor.remove();
+                Cursor.placeBefore(item);
+                hovering=true;
+              }
+            });
+            item.addEvent("cursorout","mouseout",function(e) {
+             hovering=false;
+            });
+            item.addEvent("selectstart","mousedown touchend",function(e) {
+
+              item.removeClass("hovering");
+              //item.element.style["background-color"]="rgba(180,180,180,0.25)";
+              item.element.style["border-color"]=""+"rgba(250,250,250,0.25)";
               // e.stopPropagation();
             });
 
