@@ -173,10 +173,10 @@ Module(function M() {
           }
         }
         n.element.add(args);
-        var lb=new basic.Span("","code-brace left");
-        var rb=new basic.Span("","code-brace right");
-        lb.placeBefore(args.element);
-        rb.placeAfter(args.element);
+       // var lb=new basic.Span("","code-brace left");
+       // var rb=new basic.Span("","code-brace right");
+       // lb.placeBefore(args.element);
+       // rb.placeAfter(args.element);
       }},
       ForStatement:{enter:function(n,p) {
         return new basic.Span("","ops");
