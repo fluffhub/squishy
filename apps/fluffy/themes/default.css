@@ -44,7 +44,7 @@
     margin: 0 .1em 0.25em .1em;
 }
 .A { display:inline; }
-.E { display:inline; }
+.E { display:block; }
 
 .V>.I:first-child { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5);color:white; }
 .V>span>.ids {
@@ -69,7 +69,7 @@
     background: rgba(0,0,0,0.4);
 }
 .deffunction {  }
-.callee { margin-right:1em;border-right:2px solid blue; }
+.callee {border-right:2px solid blue;padding:0.1em 0.5em 0.1em 1em; }
 .param { float:left; }
 .obj {
     /* display: inline-block; */
