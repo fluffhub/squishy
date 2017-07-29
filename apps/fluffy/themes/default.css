@@ -69,6 +69,18 @@
     background: rgba(0,0,0,0.4);
 }
 .deffunction {  }
+span.code-brace.left { border-right: none;     border-radius: 2em 0 0 2em;}
+span.code-brace.right { border-left: none; border-radius 0 2em 2em 0; }
+span.code-brace {
+    height: 100%;
+    position: absolute;
+    border: 2px solid black;
+    display: inline-block;
+
+    width: 1em;
+
+}
+
 .callee {border-right:2px solid blue;padding:0.1em 0.5em 0.1em 1em; }
 .param { float:left; }
 .obj {

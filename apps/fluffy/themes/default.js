@@ -160,6 +160,7 @@ Module(function M() {
         n.callee.element.addClass("callee");
         var args=new basic.Span("","arglist");
         n.arglist=args;
+        n.callee
         if(n.arguments.length>=1) {
           for(var i=0;i<n.arguments.length;i++) {
             if(n.arguments[i].element.element instanceof Element) {
@@ -172,6 +173,10 @@ Module(function M() {
           }
         }
         n.element.add(args);
+        var lb=new basic.Span("","code-brace left");
+        var rb=new basic.Span("","code-brace right");
+        lb.placeBefore(args.element);
+        rb.placeAfter(args.element);
       }},
       ForStatement:{enter:function(n,p) {
         return new basic.Span("","ops");
