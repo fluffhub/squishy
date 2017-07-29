@@ -126,9 +126,8 @@ span.code-brace {
 }
 .arglist {
     background-color: white;
-    padding: 0 5px;
-    border-right: 2px solid rgba(0,0,0,0.7);
-  border-top:2px solid rgba(0,0,0,0.7);
+    padding: 0 0 0 1em;
+
 }
 span.literal, .Comment, .Comments {
     white-space: normal;
