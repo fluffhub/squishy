@@ -45,9 +45,14 @@
     display: none;
 }
 .EX>.arglist {
-    background-color: white;
+
     border-radius: 1em;
     padding: 0.25em 1em;
+  display:inline-block;
+  border-style:solid;
+  border-color:rgba(125,255,190,0.5);
+  border-width:2px;
+  border-width: 2px 0;
 }
 .B {
     display: inline-block;
