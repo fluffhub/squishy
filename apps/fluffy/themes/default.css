@@ -9,6 +9,7 @@
 .cmd { color:rgba(255,125,0,0.75);background:none; }
 .ops { color:rgba(0,255,255,0.75); }
 .OP.arglist { float:left; }
+.arglist { min-height:1.25em;min-width:1.25em; }
 .callee { float:left;}
 
 .EX {
@@ -124,8 +125,9 @@ span.code-brace {
     /* padding: 3px; */
     /* margin: 0.5em 0; */
     border: 2px solid rgba(0,0,255,0.5);
-  background-color:rgba(190,190,255,0.5);
-
+  border-bottom:none;
+  border-top:none;
+  border-radius:0.5em;
 }
 span.A>*:first-child::after {
     content: " = ";
