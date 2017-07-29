@@ -30,7 +30,7 @@
   padding:0 4px;
 
 }
-.code .init { border-style: solid; border-color: black; border-image: initial; background: rgba(125, 255, 125, 0.1); display: block; border-width: 2px; }
+.code .init { display: block; border-width: 2px; }
 .code .cls { background: rgba(100, 200, 100, 0.5); display: block; margin: 10px 0px; }
 .m > .Identifier::before { content: "."; }
 .m > .Identifier:first-child::before { content: ""; }
@@ -42,8 +42,12 @@
     background-color: rgba(0,255,0,0.5);
 }
 .B {
-    display: block;
+    display: inline-block;
     border: 2px solid rgba(0,0,0,0.5);
+    border-radius: 1em;
+    padding: 1em;
+    float: left;
+    border-width: 0 2px;
     /* padding: 1px; */
     margin: 0 .1em 0.25em .1em;
 }
