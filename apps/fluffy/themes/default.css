@@ -7,6 +7,10 @@
 }
 .cmd { color:rgba(255,125,0,0.75);background:none; }
 .ops { color:rgba(0,255,255,0.75); }
+.EX {
+  display:inline-block;
+  position:relative;
+}
 .inits::before {
     content: "+";
     /* font-size: 0.5em; */
@@ -81,7 +85,7 @@ span.code-brace {
 
 }
 
-.callee {border-right:2px solid blue;padding:0.1em 0.5em 0.1em 1em; }
+.callee { padding:0.1em 0.5em 0.1em 1em; }
 .param { float:left; }
 .obj {
     /* display: inline-block; */
@@ -93,7 +97,8 @@ span.code-brace {
     min-height: 1.25em;
     /* padding: 3px; */
     /* margin: 0.5em 0; */
-    border: 2px dashed rgba(0,0,255,0.5);
+    border: 2px solid rgba(0,0,255,0.5);
+  background-color:rgba(190,190,255,0.5);
 }
 .acc {
     overflow: scroll;
