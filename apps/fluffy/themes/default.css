@@ -129,6 +129,7 @@ span.code-brace {
   border-top:none;
   border-radius:0.5em;
 }
+.Import>.arglist:last-child { display:none; }
 span.A>*:first-child::after {
     content: " = ";
 }
