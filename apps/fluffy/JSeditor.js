@@ -201,6 +201,7 @@ Module(function M() {
             });
             item.addEvent("cursorout","mouseout",function(e) {
              hovering=false;
+              item.removeClass("hovering");
             });
             item.addEvent("selectstart","mousedown touchend",function(e) {
 
