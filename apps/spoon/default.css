@@ -4,6 +4,7 @@ td { }
 .submitter { }
 .submitter .comments { }
 .member.module .content { float: left; }
+.cursor { position:absolute;width:0.1em;height:1.25em;background-color:rgba(255,200,80,0.4)}
 .AppSelector { position: absolute; padding: 10px; border-radius: 1px; background-color: rgb(221, 221, 221); }
 .AppSelector > span { display: block; }
 .AppSelector > span:first-child { font-size: 0.5em; }
