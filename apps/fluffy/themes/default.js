@@ -42,8 +42,8 @@ Module(function M() {
           var dec=node.declarations[i];
           dec.id.element.addClass("ids");
           if(dec.init!==null) {
-          dec.init.element.remove();
-          node.element.add(dec.init.element);
+            dec.init.element.remove();
+            node.element.add(dec.init.element);
           } else {
             // stand-alone/undefined node, like var a;
             node.element.addClass("sa");
@@ -67,6 +67,13 @@ Module(function M() {
           n.property.element.addBefore(new basic.Span( ".","DL"));
         }
       }},
+      ConditionalExpression:{
+        enter:function(n,p,c) {
+          return new basic.Span("","Cond");
+        },
+        leave:function(n,p,c) {
+          console.debug({conditional:n});
+        }},
       Identifier:{enter:function(node,parent) {
         var item=new basic.Span(node.name,"I");
         if(node.name&&node.name!="") { item.content(node.name) }
@@ -87,7 +94,13 @@ Module(function M() {
       AssignmentExpression:{enter:function(n,p,c) {
         return new basic.Span("","A");
       },leave:function(n,p,c) {
+
         //   n.right.element.addBefore(new basic.Span(" = "));
+      }},
+      UnaryExpression:{enter:function(n,p,c) {
+        return new basic.Span("","UE");
+      },leave:function(n,p,c) {
+
       }},
       FunctionExpression:{enter:function(n,p,c) {
         return new basic.Span("","");
@@ -161,9 +174,9 @@ Module(function M() {
         n.element.add(args);
       }},
       ForStatement:{enter:function(n,p) {
-        return new basic.Span("for ","ops");
+        return new basic.Span("","ops");
       },leave:function(n,p,c) {
-
+        n.element.addBefore(new basic.Span("for","ids"));
       }},
       LogicalExpression:{enter:function(n,p) {
         return new basic.Span("","OP");
@@ -209,7 +222,7 @@ Module(function M() {
         var item=new basic.Span("","unknown "+node.type);
         return item;
       },leave:function(node,parent,cursor) {
-      //  cursor.add(new basic.Span("]"));
+        //  cursor.add(new basic.Span("]"));
 
       }},
       ObjectExpression:{enter:function(n,p,c) {
@@ -308,39 +321,39 @@ Module(function M() {
           if(fun.type=="Literal")
             node.element.add(new basic.Span(node.arguments[nl-1].value,"literal"));
           else {
-          node.element.add(node.arguments[nl-1].body.element);
-          for(var i=0;i<args.length;i++) {
+            node.element.add(node.arguments[nl-1].body.element);
+            for(var i=0;i<args.length;i++) {
 
-            var arg=args[i];
+              var arg=args[i];
 
-            if( arg!==undefined&&i<node.arguments.length) {
-              node.arguments[i].element.remove();
+              if( arg!==undefined&&i<node.arguments.length) {
+                node.arguments[i].element.remove();
 
-              var farg=fun.params[i];
-              var listitem=new basic.Div("imports");
-              var modlink=new basic.FakeLink("#?loc="+arg,arg,function click(e) {
+                var farg=fun.params[i];
+                var listitem=new basic.Div("imports");
+                var modlink=new basic.FakeLink("#?loc="+arg,arg,function click(e) {
 
-              });
-              listitem.add(modlink);
-              if(fun&&fun.type=="FunctionExpression"&&fun.params) {
-                listitem.add(new basic.Span(" -> "+farg.name));
-              }
-              node.arglist.add(listitem);
-              modlink.addClass("waiting");
-              window.Import(arg,function(mod) {
-                //arg.element.clear();
-                //arg.element.content(" ");
-
-                modlink.onclick=function() {
-                  console.debug(mod);
+                });
+                listitem.add(modlink);
+                if(fun&&fun.type=="FunctionExpression"&&fun.params) {
+                  listitem.add(new basic.Span(" -> "+farg.name));
                 }
-                //  modlink.element.href="?page="+mod.filename;
-                listitem.addClass("enabled")
-                listitem.removeClass("waiting");
+                node.arglist.add(listitem);
+                modlink.addClass("waiting");
+                window.Import(arg,function(mod) {
+                  //arg.element.clear();
+                  //arg.element.content(" ");
+
+                  modlink.onclick=function() {
+                    console.debug(mod);
+                  }
+                  //  modlink.element.href="?page="+mod.filename;
+                  listitem.addClass("enabled")
+                  listitem.removeClass("waiting");
 
 
 
-                /*    if(fun&&fun.type=="FunctionExpression"&&fun.params) {
+                  /*    if(fun&&fun.type=="FunctionExpression"&&fun.params) {
                 fun.params.forEach(function(farg) {
                   farg.element.clear();
                   farg.element.content(" ");
@@ -353,9 +366,9 @@ Module(function M() {
                 });
               }
               browser.browser.Import(arg.value);*/
-              });
+                });
+              }
             }
-          }
           }
         }
       },
@@ -409,28 +422,28 @@ Module(function M() {
 
           var code=new basic.Div("extended");
           if(node.arguments[0]) {
-          if(node.arguments[0].body)
-          node.arguments[0].body.element.remove();
+            if(node.arguments[0].body)
+              node.arguments[0].body.element.remove();
 
-          node.arguments[0].element.remove();
-          node.arguments[0].element.elements.forEach(function(el) { el.remove() });
+            node.arguments[0].element.remove();
+            node.arguments[0].element.elements.forEach(function(el) { el.remove() });
           }
           cursor.extended=code;
           code.add(node.arguments[0].body.element);
           code.addClass("hidden");
           if(node.arglist)
-          node.arglist.remove();
+            node.arglist.remove();
           cursor.element.Tag.clear();
 
           var div=new interactive.MomentaryButton("","classname",function(e) {
-          code.toggleClass("hidden");
+            code.toggleClass("hidden");
           });
           if(typeof node.name=="string") {
             div.add(new basic.Span("Class","cmd"));
             div.add(new basic.Span(node.name,"ids"));
 
           } else {
-              div.add(new basic.Span("Class","cmd"));
+            div.add(new basic.Span("Class","cmd"));
             div.add(new basic.Span("unnamed","ids italic"));
           }
           cursor.add(code);
