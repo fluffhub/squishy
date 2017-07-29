@@ -44,6 +44,10 @@
 .Import>.arglist {
     display: none;
 }
+.ClassDiv {
+    float: none;
+    clear: both;
+}
 .EX>.arglist {
 
     border-radius: 1em;
