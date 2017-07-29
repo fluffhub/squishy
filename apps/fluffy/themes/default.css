@@ -8,7 +8,7 @@
 }
 .cmd { color:rgba(255,125,0,0.75);background:none; }
 .ops { color:rgba(0,255,255,0.75); }
-.OP.arglist { float:left; }
+.OP.arglist { float:left;    border-radius: 0 0.5em 0.5em 0; }
 .arglist { min-height:1.25em;min-width:1.25em; }
 .callee { float:left;}
 
@@ -54,22 +54,22 @@
     clear: both;
 }
 .EX>.arglist {
-
     border-radius: 1em;
     padding: 0.25em 1em;
-  display:inline-block;
-  border-style:solid;
-  border-color:rgba(125,255,190,0.5);
-  border-width:2px;
-  border-width: 2px 0;
+    display: inline-block;
+    border-style: solid;
+    border-color: rgba(25,125,25,0.9);
+    border-width: 2px;
+    border-width: 2px 0 2px 2px;
+    background: none;
 }
 .B {
     display: inline-block;
-    border: 2px solid rgba(0,0,0,0.5);
+    border: 2px solid rgba(0,0,0,0.2);
     border-radius: 1em;
-    padding: 1em;
+    padding: .25em .5em;
     float: left;
-  clear:both;
+    clear: both;
     border-width: 0 2px;
     /* padding: 1px; */
     margin: 0 .1em 0.25em .1em;
@@ -85,8 +85,8 @@
 .V.sa { padding:3px;clear:both;display:block; }
 .obj>span>.I:first-child {
     float: left;
-    background-color: rgba(0,0,255,0.5);
-    margin: 0;
+    color: rgba(0,0,255,1);
+    margin: 0 0.5em 0 0;
     /* margin-top: -1em; */
 }
 
@@ -115,6 +115,7 @@ span.code-brace {
 .callee { padding:0.1em 0.5em 0.1em 1em; }
 .param { float:left; }
 .obj {
+
     /* display: inline-block; */
     /* float: left; */
     /* clear: both; */
@@ -122,13 +123,14 @@ span.code-brace {
     margin: 0.5em 0.1em;
     display: inline-block;
     min-height: 1.25em;
-  min-width:1.5em;
-    /* padding: 3px; */
+    min-width: 1.5em;
+    padding: .25em .5em;
     /* margin: 0.5em 0; */
     border: 2px solid rgba(0,0,255,0.5);
-  border-bottom:none;
-  border-top:none;
-  border-radius:0.5em;
+    border-bottom: none;
+    border-top: none;
+    border-radius: 1em;
+
 }
 .Import>.arglist:last-child { display:none; }
 span.A>*:first-child::after {
