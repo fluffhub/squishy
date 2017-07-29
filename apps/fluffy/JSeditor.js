@@ -207,7 +207,7 @@ Module(function M() {
 
               item.removeClass("hovering");
               //item.element.style["background-color"]="rgba(180,180,180,0.25)";
-              item.element.style["border-color"]=""+"rgba(250,250,250,0.25)";
+             // item.element.style["border-color"]=""+"rgba(250,250,250,0.25)";
               // e.stopPropagation();
             });
 
