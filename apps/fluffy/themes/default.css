@@ -106,6 +106,7 @@
 .unknown { border:1px dashed red; }
 .V {
     display: block;
+  float:none;clear:both;
     position: relative;
 }
 .V.clears { display:block; }
