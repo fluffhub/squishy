@@ -73,7 +73,34 @@ Module(function M() {
         },
         leave:function(n,p,c) {
           console.debug({conditional:n});
-        }},
+        }
+      },
+      ThrowExpression:{
+        enter:function(n,p,c) {
+          return new basic.Span("","Throw");
+        },
+        leave:function(n,p,c) {
+          n.element.addBefore(new basic.Span("throw","ops"));
+        }
+      },
+      TryStatement:{
+        enter:function(n,p,c) {
+          return new basic.Span("","Try");
+        },
+        leave:function(n,p,c) {
+          n.element.addBefore(new basic.Span("try","ops"));
+        }
+
+      },
+      CatchClause:{
+        enter:function(n,p,c) {
+          return new basic.Span("","Catch");
+        },
+        leave:function(n,p,c) {
+          n.element.addBefore(new basic.Span("catch","ops"));
+        }
+
+      },
       Identifier:{enter:function(node,parent) {
         var item=new basic.Span(node.name,"I");
         if(node.name&&node.name!="") { item.content(node.name) }
@@ -173,10 +200,10 @@ Module(function M() {
           }
         }
         n.element.add(args);
-       // var lb=new basic.Span("","code-brace left");
-       // var rb=new basic.Span("","code-brace right");
-       // lb.placeBefore(args.element);
-       // rb.placeAfter(args.element);
+        // var lb=new basic.Span("","code-brace left");
+        // var rb=new basic.Span("","code-brace right");
+        // lb.placeBefore(args.element);
+        // rb.placeAfter(args.element);
       }},
       ForStatement:{enter:function(n,p) {
         return new basic.Span("","ops");
@@ -284,6 +311,7 @@ Module(function M() {
 
         }
       },
+
       ImportStatement:{
         match:function(node) {
           if(node.type=="CallExpression") {
