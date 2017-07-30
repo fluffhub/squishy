@@ -55,13 +55,14 @@
 }
 .EX>.arglist {
     border-radius: 1em;
-    padding: 0.25em 1em;
+    padding: 0 1em;
     display: inline-block;
     border-style: solid;
     border-color: rgba(25,125,25,0.9);
     border-width: 2px;
-    border-width: 2px 0 2px 2px;
+    border-width: 2px 0 2px 0px;
     background: none;
+  box-sizing: border-box;
 }
 .B {
     display: inline-block;
