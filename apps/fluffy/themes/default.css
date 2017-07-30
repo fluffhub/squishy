@@ -83,7 +83,22 @@
 }
 .V>.I:first-child { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5);color:white; }
 .V>span>.ids {
-    float: right;
+    /* float: right; */
+    position: absolute;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px 2px 2px 0;
+    background-color: rgba(0,0,0,0.1);
+    color: black;
+    border-radius: 1em;
+    padding: 0 1em;
+    right: 0;
+    /* box-sizing: border-box; */
+    /* line-height: 1.5em; */
+    /* min-height: 1.5em; */
+    top: 0;
+    /* height: 100%; */
+    z-index: 10000;
 }
 .WithStatement {
 
