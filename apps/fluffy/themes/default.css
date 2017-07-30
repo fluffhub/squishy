@@ -146,6 +146,9 @@ span.code-brace {
 .ForInStatement {
 
 }
+.classname>.ids {
+    float: none;
+}
 .obj {
     /* display: inline-block; */
     /* float: left; */
