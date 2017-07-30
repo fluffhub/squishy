@@ -75,7 +75,7 @@ Module(function M() {
           console.debug({conditional:n});
         }
       },
-      ThrowExpression:{
+      ThrowStatement:{
         enter:function(n,p,c) {
           return new basic.Span("","Throw");
         },
