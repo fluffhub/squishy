@@ -100,6 +100,17 @@
     /* height: 100%; */
     z-index: 10000;
 }
+.A>.I:first-child {
+    color: white;
+    /* float: right; */
+    padding: 0 5px;
+    float: left;
+    background: rgba(255,255,255,0.5);
+    color: black;
+    border-radius: 1em;
+    border-width: 1px 0 1px 2px;
+    border-style: solid;
+}
 .WithStatement {
 
 }
@@ -109,8 +120,12 @@
   float:none;clear:both;
     position: relative;
 }
+.clears {
+    float: none;
+    clear: both;
+}
 .V.clears { display:block; }
-.V.sa { padding:3px;clear:both;display:block; }
+.V.sa { clear:both;display:block; }
 .obj>span>.I:first-child {
     float: left;
     color: rgba(0,0,255,1);
@@ -118,15 +133,8 @@
     /* margin-top: -1em; */
 }
 
-.A { margin:5px 0; }
-.A>.I:first-child {
+.A {  }
 
-  color:white;
-  float:right;
-    padding: 0 5px;
-    /* float: left; */
-    background: rgba(0,0,0,0.4);
-}
 .deffunction {  }
 span.code-brace.left { border-right: none;     border-radius: 2em 0 0 2em;}
 span.code-brace.right { border-left: none; border-radius: 0 2em 2em 0; }
