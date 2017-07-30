@@ -81,6 +81,9 @@
 .V>span>.ids {
     float: right;
 }
+.WithStatement {
+
+}
 .unknown { border:1px dashed red; }
 .V.clears { display:block; }
 .V.sa { padding:3px;clear:both;display:block; }

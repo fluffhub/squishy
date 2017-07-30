@@ -92,6 +92,14 @@ Module(function M() {
         }
 
       },
+      WithStatement:{
+        enter:function(n,p,c) {
+          return new basic.Span("","With");
+        },
+        leave:function(n,p,c) {
+          n.element.addBefore(new basic.Span("with","ops"));
+        }
+      },
       CatchClause:{
         enter:function(n,p,c) {
           return new basic.Span("","Catch");
