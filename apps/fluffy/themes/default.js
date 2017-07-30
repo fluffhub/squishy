@@ -92,12 +92,14 @@ Module(function M() {
         }
 
       },
+
       ForInStatement: {
         enter:function(n,p,c) {
-         return new basic.Span("","ForIn");
+         return new basic.Span("","forloop forin");
         },
         leave:function(n,p,c) {
           console.debug({ForIn:n});
+          n.element.addBefore(new basic.Span("for","ops"));
         }
       },
       WithStatement:{
@@ -222,9 +224,9 @@ Module(function M() {
         // rb.placeAfter(args.element);
       }},
       ForStatement:{enter:function(n,p) {
-        return new basic.Span("","ops");
+        return new basic.Span("","forloop");
       },leave:function(n,p,c) {
-        n.element.addBefore(new basic.Span("for","ids"));
+        n.element.addBefore(new basic.Span("for","ops"));
       }},
       LogicalExpression:{enter:function(n,p) {
         return new basic.Span("","OP");
