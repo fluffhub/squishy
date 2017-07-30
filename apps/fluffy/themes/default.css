@@ -64,6 +64,7 @@
     background: none;
   box-sizing: border-box;
 }
+
 .B {
     display: inline-block;
     border: 2px solid rgba(0,0,0,0.2);
@@ -151,7 +152,8 @@ span.A>*:first-child::after {
     right: 0;
     left: 0;
 }
-.prop { display:block; }
+.prop { display:block;    float: none;
+    clear: both; }
 
 .imports {
     border: 2px solid rgba(0,0,0,0.5);
