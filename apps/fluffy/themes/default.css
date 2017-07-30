@@ -75,12 +75,13 @@
     margin: 0 .1em 0.25em .1em;
 }
 .A { display:inline; }
-.E { display:block; }
+.E { display:block;float:none;clear:both; }
 
 .V>.I:first-child { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5);color:white; }
 .V>span>.ids {
     float: right;
 }
+.unknown { border:1px dashed red; }
 .V.clears { display:block; }
 .V.sa { padding:3px;clear:both;display:block; }
 .obj>span>.I:first-child {
