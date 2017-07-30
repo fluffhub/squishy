@@ -92,6 +92,14 @@ Module(function M() {
         }
 
       },
+      ForInStatement: {
+        enter:function(n,p,c) {
+         return new basic.Span("","ForIn");
+        },
+        leave:function(n,p,c) {
+          console.debug({ForIn:n});
+        }
+      },
       WithStatement:{
         enter:function(n,p,c) {
           return new basic.Span("","With");

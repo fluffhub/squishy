@@ -142,23 +142,26 @@ span.code-brace {
 
 .callee { padding:0.1em 0.5em 0.1em 1em; }
 .param { float:left; }
-.obj {
+.unknown { border:1px dashed red; }
+.ForInStatement {
 
+}
+.obj {
     /* display: inline-block; */
     /* float: left; */
     /* clear: both; */
     /* padding: 0.1em; */
-    margin: 0.5em 0.1em;
+    /* margin: 0.5em 0.1em; */
     display: inline-block;
-    min-height: 1.25em;
+    min-height: 1em;
     min-width: 1.5em;
-    padding: .25em .5em;
+    /* padding: .25em .5em; */
     /* margin: 0.5em 0; */
     border: 2px solid rgba(0,0,255,0.5);
     border-bottom: none;
     border-top: none;
+    box-sizing: border-box;
     border-radius: 1em;
-
 }
 .Import>.arglist:last-child { display:none; }
 span.A>*:first-child::after {
