@@ -58,18 +58,18 @@ span.EX.Import {
 }
 .EX>.arglist {
     border-radius: 1em;
-    padding: 0 1em;
+    padding: .5em .5em;
     display: inline-block;
     border-style: solid;
     border-color: rgba(25,125,25,0.9);
     border-width: 2px;
     border-width: 2px 0 2px 0px;
     background: none;
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .B {
-    /*display: inline-block;*/
+    /* display: inline-block; */
     border: 2px solid rgba(0,0,0,0.5);
     border-radius: 1em;
     padding: .25em .5em;
@@ -81,7 +81,8 @@ span.EX.Import {
     margin: 0 .1em 0.25em .1em;
     box-sizing: border-box;
 }
-.A { display:inline; }
+.A { display:inline;float:left; }
+.A>* { float:left; }
 .E { display:block;float:none;clear:both; }
 .inits>.ids:first-child {
     float: none;
@@ -171,7 +172,7 @@ span.code-brace {
     display: inline-block;
     min-height: 1em;
     min-width: 1.5em;
-    /* padding: .25em .5em; */
+    padding: .5em .5em;
     /* margin: 0.5em 0; */
     border: 2px solid rgba(0,0,255,0.5);
     border-bottom: none;
