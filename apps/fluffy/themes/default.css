@@ -223,3 +223,27 @@ span.literal, .Comment, .Comments {
 .Comments div { background-color: rgba(255, 255, 255, 0.9);font-family:sans-serif; }
 .Comments.Block { }
 .Comments.Line { }
+.classname.button {
+    padding: .25em 0;
+    border-radius: 1em 0 0 1em;
+}
+
+.classname>.cmd {
+    font-size: 1.25em;
+    background-color: rgba(255,125,0,0.75);
+    color: white;
+    float: none;
+    padding: .3em;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.Module>.callee:first-child {
+    font-size: 1.25em;
+    padding: 0.25em;
+}
+
+.Import>.cmd {
+    font-size: 1.25em;
+    padding: 0.25em;
+}
