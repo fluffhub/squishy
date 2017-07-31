@@ -53,6 +53,9 @@
     float: none;
     clear: both;
 }
+span.EX.Import {
+    min-width: 100%;
+}
 .EX>.arglist {
     border-radius: 1em;
     padding: 0 1em;
@@ -73,8 +76,10 @@
     float: left;
     clear: both;
     border-width: 0 2px;
+    min-width: 100%;
     /* padding: 1px; */
     margin: 0 .1em 0.25em .1em;
+    box-sizing: border-box;
 }
 .A { display:inline; }
 .E { display:block;float:none;clear:both; }
@@ -87,12 +92,12 @@
     position: absolute;
     border-style: solid;
     border-color: black;
-    border-width: 2px 2px 2px 0;
+    border-width: 1px 2px 1px 0;
     background-color: rgba(255,255,255,0.6);
     color: black;
     border-radius: 1em;
     padding: 0 1em;
-    right: 0;
+    left: 100%;
     /* box-sizing: border-box; */
     /* line-height: 1.5em; */
     /* min-height: 1.5em; */
