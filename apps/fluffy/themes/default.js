@@ -247,14 +247,14 @@ Module(function M() {
 
         return item;
       },leave:function(n,p,c) {
-        n.element.addBefore(new basic.Span("if","ops"));
+        n.element.addBefore(new basic.Span("if","ops ifstatement"));
 
         //n.consequent.element.parent.insert(new basic.Span(")"),n.consequent.element);
         if(n.test)
           n.test.element.addClass("arglist");
         if(n.alternate) {
           var op=new basic.Span("else","ops");
-
+          n.alternate.element.addClass("elseclause");
           op.placeBefore(n.alternate.element);
         }
         //c.elements[c.elements.length-1].add(new basic.Span(")"));

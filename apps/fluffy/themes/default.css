@@ -52,6 +52,13 @@
 .ClassDiv {
     float: none;
     clear: both;
+    border: 4px solid rgba(0,0,0,0.2);
+    /* height: auto; */
+    margin: 0.5em 0 0 0;
+    min-width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 1.25em;
 }
 span.EX.Import {
     min-width: 100%;
@@ -236,9 +243,10 @@ span.literal, .Comment, .Comments {
     background-color: rgba(255,125,0,0.75);
     color: white;
     float: none;
-    padding: .25em;
+    padding: .25em 1em;
     box-sizing: border-box;
     margin: 0;
+    border-radius: 1em 0 0 1em;
 }
 
 .Module>.callee:first-child {
@@ -257,7 +265,7 @@ span.argument {
     /* border: 1px solid black; */
     /* border-width: 1px; */
 }
-
+.elseclause { float:none;clear:both; }
 .ReturnStatement {
     float: left;
     /* clear: left; */
@@ -269,4 +277,9 @@ span.argument::after {
 
 span.argument:last-child::after {
     content: "";
+}
+.ClassDiv>.arglist {
+    float: left;
+    clear: none;
+    display: none;
 }
