@@ -252,8 +252,10 @@ Module(function M() {
         //n.consequent.element.parent.insert(new basic.Span(")"),n.consequent.element);
         if(n.test)
           n.test.element.addClass("arglist");
-        if(n.alternate)
-          n.element.placeBefore(n.alternate.element,new basic.Span("else","ops"));
+        if(n.alternate) {
+          var op=new basic.Span("else","ops")
+
+          op.placeBefore(n.alternate.element);
         //c.elements[c.elements.length-1].add(new basic.Span(")"));
       }},
       Program:{enter:function(node,parent,c) {
