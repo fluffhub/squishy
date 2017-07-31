@@ -7,7 +7,7 @@
   float:left;
 }
 .cmd { color:rgba(255,125,0,0.75);background:none; }
-.ops { color:rgba(0,255,255,0.75); }
+.ops {color: rgba(200,125,50,1);background: none;font-weight: bold;}
 .OP.arglist { float:left;    border-radius: 0 0.5em 0.5em 0; }
 .arglist { min-height:1.25em;min-width:1.25em; }
 .callee { float:left;}
@@ -20,11 +20,11 @@
     content: "+";
     /* font-size: 0.5em; */
     /* line-height: 2em; */
-
     font-weight: bold;
     background-color: rgba(0,0,0,0.6);
     color: rgb(255,255,245);
     padding: 0 4px;
+    float: left;
     color: #ddbb333;
 }
 .ThrowStatement::before {
@@ -42,8 +42,8 @@
 
 .ReturnStatement::before {
     content: "<";
+    float: left;
     padding: 0 5px;
-
     background-color: rgba(0,255,0,0.5);
 }
 .Import>.arglist {
@@ -65,6 +65,7 @@ span.EX.Import {
     border-width: 2px;
     border-width: 2px 0 2px 0px;
     background: none;
+    float: left;
     box-sizing: border-box;
 }
 
@@ -85,7 +86,7 @@ span.EX.Import {
 .A>* { float:left; }
 .E { display:block;float:none;clear:both; }
 .inits>.ids:first-child {
-    float: none;
+    /* float: none; */
 }
 .V>.I:first-child { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5);color:white; }
 .V>span>.ids {
@@ -94,7 +95,7 @@ span.EX.Import {
     border-style: solid;
     border-color: black;
     border-width: 1px 2px 1px 0;
-    background-color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,1);
     color: black;
     border-radius: 1em;
     padding: 0 1em;
@@ -162,6 +163,8 @@ span.code-brace {
 }
 .classname>.ids {
     float: none;
+    font-size: 1.25em;
+    padding: 0.25em;
 }
 .obj {
     /* display: inline-block; */
@@ -233,7 +236,7 @@ span.literal, .Comment, .Comments {
     background-color: rgba(255,125,0,0.75);
     color: white;
     float: none;
-    padding: .3em;
+    padding: .25em;
     box-sizing: border-box;
     margin: 0;
 }
@@ -246,4 +249,24 @@ span.literal, .Comment, .Comments {
 .Import>.cmd {
     font-size: 1.25em;
     padding: 0.25em;
+}
+span.argument {
+    float: left;
+    border-radius: 5px;
+    background: none;
+    /* border: 1px solid black; */
+    /* border-width: 1px; */
+}
+
+.ReturnStatement {
+    float: left;
+    /* clear: left; */
+}
+
+span.argument::after {
+    content: ",";
+}
+
+span.argument:last-child::after {
+    content: "";
 }
