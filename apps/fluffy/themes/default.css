@@ -278,7 +278,7 @@ span.argument::after {
 span.argument:last-child::after {
     content: "";
 }
-.ClassDiv>.arglist {
+.ClassDiv>.arglist:last-child {
     float: left;
     clear: none;
     display: none;
