@@ -267,7 +267,7 @@ span.argument {
     /* border-width: 1px; */
 }
 .elseclause { float:none;clear:both; }
-.else { float:left:clear:left; }
+.else { float:left;clear:left; }
 .ReturnStatement {
     float: left;
     /* clear: left; */
