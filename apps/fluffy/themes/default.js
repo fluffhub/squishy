@@ -323,8 +323,6 @@ Module(function M() {
 
             if(n.arguments[0].id) {
               name=n.arguments[0].id.name;
-              c.add(new basic.Anchor(name));
-              c.addBefore(new basic.Span(name,"classname"));
 
               var p2=n;
               while(!codemasks.ClassStatement.match(p2)) {
@@ -335,6 +333,7 @@ Module(function M() {
               }
               console.debug({"codemask":p2});
               p2.name=name;
+              p2.init=n;
 
             }
 
@@ -506,6 +505,10 @@ Module(function M() {
             div.add(new basic.Span("Class","cmd"));
             div.add(new basic.Span(node.name,"ids"));
 
+            div.add(new basic.Anchor(node.name));
+            node.init.params.forEach(function(arg) {
+              div.add(new basic.Span(arg.name,"argument"));
+            });
           } else {
             div.add(new basic.Span("Class","cmd"));
             div.add(new basic.Span("unnamed","ids italic"));
