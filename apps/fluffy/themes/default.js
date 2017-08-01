@@ -133,7 +133,16 @@ Module(function M() {
       },leave:function(n,p,c) {
         //// if(n.params.length>0)
         //   n.params[n.params.length-1].element.add(new basic.Span(")"));
-        if(n.params.length>=1)n.params[0].element.addClass("ids");
+        var params=new basic.Span("","paramlist");
+        n.params.element=params;
+        if(n.params.length>=1) {
+          for (var i=0;i<n.params.length;i++) {
+            n.params[i].element.remove();
+            params.add(n.params[i].element);
+          }
+        }
+        n.element.add(params);
+
         if(n.id!==null) n.id.element.addClass("ids");
       }},
       AssignmentExpression:{enter:function(n,p,c) {
@@ -315,7 +324,7 @@ Module(function M() {
             if(n.arguments[0].id) {
               name=n.arguments[0].id.name;
               c.add(new basic.Anchor(name));
-              c.add(new basic.Span(name,"classname"));
+              c.addBefore(new basic.Span(name,"classname"));
 
               var p2=n;
               while(!codemasks.ClassStatement.match(p2)) {

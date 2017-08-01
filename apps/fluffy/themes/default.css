@@ -258,6 +258,7 @@ span.literal, .Comment, .Comments {
     font-size: 1.25em;
     padding: 0.25em;
 }
+.paramlist { float:left; clear:none; }
 span.argument {
     float: left;
     border-radius: 5px;
