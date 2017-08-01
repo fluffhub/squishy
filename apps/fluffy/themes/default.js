@@ -506,8 +506,10 @@ Module(function M() {
             div.add(new basic.Span(node.name,"ids"));
 
             div.add(new basic.Anchor(node.name));
+            var arglist=new basic.Span("","arglist");
+            div.add(arglist);
             node.init.arguments[0].params.forEach(function(arg) {
-              div.add(new basic.Span(arg.name,"argument"));
+              arglist.add(new basic.Span(arg.name,"argument"));
             });
           } else {
             div.add(new basic.Span("Class","cmd"));
