@@ -173,7 +173,7 @@ span.code-brace {
     font-size: 1.25em;
     padding: 0.25em;
 }
-.obj {
+.obj,.obj.argument {
     /* display: inline-block; */
     /* float: left; */
     /* clear: both; */
