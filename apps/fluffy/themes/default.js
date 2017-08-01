@@ -506,7 +506,7 @@ Module(function M() {
             div.add(new basic.Span(node.name,"ids"));
 
             div.add(new basic.Anchor(node.name));
-            node.init.params.forEach(function(arg) {
+            node.init.arguments[0].params.forEach(function(arg) {
               div.add(new basic.Span(arg.name,"argument"));
             });
           } else {
