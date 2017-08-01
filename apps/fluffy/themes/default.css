@@ -266,6 +266,14 @@ span.argument {
     /* border: 1px solid black; */
     /* border-width: 1px; */
 }
+.classname>.argument {
+    float: none;
+    background-color: white;
+    padding: 0.5em 0.25em;
+    border-radius: 0;
+    /* border: 1px solid rgba(0,0,0,0.2); */
+    /* margin: 1em; */
+}
 .elseclause { float:none;clear:both; }
 .else { float:left;clear:left; }
 .ReturnStatement {
