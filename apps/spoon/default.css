@@ -63,7 +63,23 @@ a.filelink.loaded { background-color: rgba(255, 255, 255, 0.25); }
 .tabset.fancy .tab::before, .tab::after { background-color: rgb(85, 85, 85); }
 .tabset.fancy .tab > span { margin-left: -8px; }
 .tabset.fancy .tab::after { width: 20px; height: 100%; margin-left: -15px; left: 0px; border-left: 1px solid rgb(119, 119, 119); content: ""; display: block; transform: skew(-15deg, 0deg); border-radius: 5px 0px 0px; }
-::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(0,0,0,0.1);
+    /* pointer-events: none; */
+    margin-bottom: 10px;
+    height: 10px;
+    margin-right: 10px;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(0,0,0,0.1);
+    /* pointer-events: none; */
+    margin-bottom: 10px;
+    height: 10px;
+    margin-right: 10px;
+}
+
 .codeblock { margin-left: 5px; border-left: 1px solid black; }
 .FileBrowser .member { display: block; margin-left: 1em; }
 .file.module { margin-left: 1em; color: rgb(187, 187, 85); }
@@ -227,7 +243,7 @@ a.filelink.loaded { background-color: rgba(255, 255, 255, 0.25); }
 .tabset.fancy .tab::before, .tab::after { background-color: rgb(85, 85, 85); }
 .tabset.fancy .tab > span { margin-left: -8px; }
 .tabset.fancy .tab::after { width: 20px; height: 100%; margin-left: -15px; left: 0px; border-left: 1px solid rgb(119, 119, 119); content: ""; display: block; transform: skew(-15deg, 0deg); border-radius: 5px 0px 0px; }
-::-webkit-scrollbar { width: 10px; height: 10px; }
+
 .pane > .title-bar { line-height: 35px; text-indent: 8px; }
 
 .ui-resizable-handle {
