@@ -1,4 +1,4 @@
-body { font-family: "Lucida Grande", Calibri, sans-serif, Inconsolata; }
+body { font-family: "Lucida Grande", Calibri, sans-serif, Inconsolata;user-select:none; }
 td { }
 .pane { width: 100%; height: 100%; position: absolute; }
 .submitter { }

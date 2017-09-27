@@ -1,4 +1,4 @@
-.code { font-family:monospace;    white-space: nowrap; }
+.code { font-family:monospace;    white-space: nowrap;user-select:none; }
 .ops,.ids,.cmd {
     font-weight: bold;
     padding: 0 0.25em;
@@ -98,6 +98,7 @@ span.EX.Import {
 .V>.I:first-child { top:-1em;font-size:0.5em;font-weight:bold;background-color:rgba(0,0,0,0.5);color:white; }
 .V>span>.ids {
     /* float: right; */
+  cursor:pointer;
     position: absolute;
     border-style: solid;
     border-color: black;

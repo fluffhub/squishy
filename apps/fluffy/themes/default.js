@@ -447,7 +447,11 @@ Module(function M() {
         },
         enter:function(node,parent,cursor,state) {
           state.Module=node
+          var M=new basic.Div("Module");
+          node.exports=new basic.Div("exports");
+
           return new basic.Div("Module");
+
         },
         leave:function(node,parent,cursor,state) {
           //node.element.addClass("module");
@@ -458,6 +462,11 @@ Module(function M() {
           node.callee.element.addClass("cmd");
           //node.arguments[0].element.addBefore(new basic.Span("M","ids"));
           node.arguments[0].id.element.addClass("ids");
+          var el=node.element;
+          while(!el.hasClass("CodeBrowser")) {
+            el=el.parent;
+          }
+          el.parent.add(node.exports);
         }
       },
       ClassStatement:{
