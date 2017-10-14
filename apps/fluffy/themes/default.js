@@ -535,8 +535,10 @@ var el = new basic.Div("Module");
           node.element.Mixin(transform.Draggable);
 
           node.element.enabledrag(function ondrag(e) {
-            spoon.main.Hold(node.element,e);
           });
+          node.element.ondragstart= function(e) {
+            spoon.main.Hold(node.element,e);
+          }
           // node.element.addClass("cls");
           // node.element.elements.forEach(function(el) { el.remove() })
         }
