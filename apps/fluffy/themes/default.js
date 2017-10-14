@@ -463,9 +463,10 @@ Module(function M() {
           //node.arguments[0].element.addBefore(new basic.Span("M","ids"));
           node.arguments[0].id.element.addClass("ids");
           var el=node.element;
-          while(!el.hasClass("CodeBrowser")) {
-            el=el.parent;
-          }
+
+         // while(el!==undefined&&el.parent!==undefined&&!el.hasClass("CodeBrowser")) {
+         ////   el=el.parent;
+         // }
           el.parent.add(node.exports);
         }
       },
