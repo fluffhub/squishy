@@ -1,5 +1,5 @@
 Module(function M() {
-  M.Import("squishy/basic","squishy/interactive","squishy/transform,apps/spoon",function(basic,interactive,transform,spoon) {
+  M.Import("squishy/basic","squishy/interactive","squishy/transform","apps/spoon",function(basic,interactive,transform,spoon) {
     Import("fluffy/themes/default.css");
 
     var nodetypes={
@@ -532,7 +532,8 @@ var el = new basic.Div("Module");
           }
           cursor.add(code);
           node.element.addBefore(div);
-                    node.element.Mixin(transform.Draggable);
+          node.element.Mixin(transform.Draggable);
+
           node.element.enabledrag(function ondrag(e) {
             spoon.main.Hold(node.element,e);
           });
