@@ -490,7 +490,7 @@ var el = new basic.Div("Module");
         },
         enter:function(node,parent,cursor) {
           var el=new basic.Div("ClassDiv");
-          el.Mixin(transform.Draggable);
+
 
           return el;
 
@@ -532,6 +532,7 @@ var el = new basic.Div("Module");
           }
           cursor.add(code);
           node.element.addBefore(div);
+                    node.element.Mixin(transform.Draggable);
           node.element.enabledrag(function ondrag(e) {
             spoon.main.Hold(node.element,e);
           });
