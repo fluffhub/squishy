@@ -331,15 +331,15 @@ Module(function M() {
                    this.add(ghost);
                    this.ghost=ghost;
                    var EW=this;
-                   this.element.style.cursor="no-drop";
+                   //this.element.style.cursor="no-drop";
                    this.addEvent('carry',"mousemove touchmove",function(ev) {
                      var P;
                      if(ev.touches)
                        P={x:ev.touches[0].clientX,y:ev.touches[0].clientY};
                      else
                        P={x:ev.clientX,y:ev.clientY};
-                     EW.ghost.element.style.top=P.y+'px';
-                     EW.ghost.element.style.left=P.x+'px';
+                     EW.ghost.element.style.top=P.y+10+'px';
+                     EW.ghost.element.style.left=P.x+10+'px';
                    });
                    this.addEvent('drop',"mouseup touchend", function(ev) {
                      EW.Drop();
