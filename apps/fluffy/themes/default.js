@@ -2,6 +2,8 @@ Module(function M() {
   M.Import("squishy/basic","squishy/interactive","squishy/transform","apps/spoon",function(basic,interactive,transform,spoon) {
     Import("fluffy/themes/default.css");
 
+
+
     var nodetypes={
       NewExpression:{enter:function(n,p,c) {
         var item=new basic.Span("","inits");
@@ -450,7 +452,7 @@ Module(function M() {
           state.Module=node
           var M=new basic.Div("Module");
           node.exports=new basic.Div("exports");
-var el = new basic.Div("Module");
+          var el = new basic.Div("Module");
 
           return  el;
 

@@ -49,6 +49,17 @@
 .Import>.arglist {
     display: none;
 }
+.ghost>.ClassDiv {
+  white-space:nowrap;
+  opacity:0.95;
+}
+.ghost>.ClassDiv>.arglist {
+  white-space:nowrap;
+}
+
+.ghost>.ClassDiv>.extended {
+  display:none;
+}
 .ClassDiv {
     float: none;
     clear: both;

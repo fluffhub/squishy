@@ -9,6 +9,11 @@ Module(function M() {
     "squishy/request",
 
     function(event,basic,interactive,esprima,ESCG,esv,Req,Spoon) {
+      function createsNewScope(node){
+        return node.type === 'FunctionDeclaration' ||
+          node.type === 'FunctionExpression' ||
+          node.type === 'Program';
+      }
       var Request=Req.Request;
 
       function PseudoRandomColor(n,a) {
@@ -30,7 +35,7 @@ Module(function M() {
         M.Class(function C() {
           C.Super(basic.Div);
           C.Init(function JSEditor(raw,browser,theme) {
-
+            Object.defineProperty(this,"scopeChain",{writable:true,value:[]});
             basic.Div.call(this,"CodeBrowser");
             var parsed=esprima.parse(raw,{comment:true,attachComment:true,range:true,loc:true,tokens:true});
             var comments=parsed.comments;
@@ -200,14 +205,14 @@ Module(function M() {
               }
             });
             item.addEvent("cursorout","mouseout",function(e) {
-             hovering=false;
+              hovering=false;
               item.removeClass("hovering");
             });
             item.addEvent("selectstart","mousedown touchend",function(e) {
 
               item.removeClass("hovering");
               //item.element.style["background-color"]="rgba(180,180,180,0.25)";
-             // item.element.style["border-color"]=""+"rgba(250,250,250,0.25)";
+              // item.element.style["border-color"]=""+"rgba(250,250,250,0.25)";
               // e.stopPropagation();
             });
 
@@ -222,6 +227,7 @@ Module(function M() {
           });
 
           C.Def(function enterNode(node,parent) {
+
             this.depth++;
             var depth=this.depth;
             var maskcursors=this.maskcursors;
@@ -229,6 +235,7 @@ Module(function M() {
             var item;
             var codemasks=this.codemasks;
             var nodetypes=this.nodetypes;
+
             Object.defineProperty(this,"parent",{editable:true,enumerable:false})
             node.parent=this.lastnode;
             this.lastnode=node;
@@ -244,6 +251,14 @@ Module(function M() {
                 ln.content(line);
                 comments.add(ln);
               });
+            }
+
+            if (createsNewScope(node)){
+              this.scopeChain.push([]);
+            }
+            if (node.type === 'VariableDeclarator'){
+              var currentScope = this.scopeChain[this.scopeChain.length - 1];
+              currentScope.push(node.id.name);
             }
             var maskapplied=false;
             for(var maskname in codemasks) {
