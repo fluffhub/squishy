@@ -32,6 +32,7 @@ Module(function M() {
       ExpressionStatement:{enter:function(node) {
         return new basic.Div("E");
       },leave:function(node,parent,cursor) {
+
         // cursor.add(new basic.Span(";","EC"));
       }},
       VariableDeclaration:{enter:function(node) {
@@ -554,7 +555,12 @@ Module(function M() {
           var ret= new basic.Div("Def");
           return ret;
         },
-        leave:function(n,p,c) {
+        leave:function(node,p,c) {
+          //var dec=node.declarations[i];
+          if(node.arguments[0].type=="literal") {
+          node.arguments[0].addClass("ids def");
+            node.arguments[0].content(node.arguments[0].value);
+          }
 
         }
       },
