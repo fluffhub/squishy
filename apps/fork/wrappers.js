@@ -89,7 +89,7 @@ Module(function M() {
       });
       Import("squishy/interactive","apps/spoon",function(interactive,spoon) {
         afliw("jsexe",function match(item,name) {
-          if(item instanceof Object && item.open instanceof Function) {
+          if(item instanceof Object && item instanceof Module && item.open instanceof Function) {
             return true;
           }
           return false;

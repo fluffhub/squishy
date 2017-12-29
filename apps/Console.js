@@ -38,7 +38,7 @@ Module(function M() {
         });
 
         form.Madd(input,output,submit);
-        f.add(form);
+        commander.add(form);
       });
 
 
