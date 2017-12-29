@@ -98,7 +98,7 @@ Module(function M() {
 
           var button=new interactive.MomentaryButton("open","opener",function() {
             var newwindow=item.open();
-            spoon.main.addTask(obj,newwindow);
+            spoon.main.addTask(obj.name,newwindow);
 
           });
           item.addBefore(button);
