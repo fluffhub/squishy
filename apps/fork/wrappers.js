@@ -87,14 +87,22 @@ Module(function M() {
       },function wrap(item) {
         item.addClass("Class");
       });
-      afliw("jsexe",function match(item,name) {
-        if(item instanceof Object && item.open instanceof Function) {
-          return true;
-        }
-        return false;
-      },function wrap(item,obj) {
-        item.addClass("jsexe");
+      Import("squishy/interactive","apps/spoon",function(interactive,spoon) {
+        afliw("jsexe",function match(item,name) {
+          if(item instanceof Object && item.open instanceof Function) {
+            return true;
+          }
+          return false;
+        },function wrap(item,obj) {
+          item.addClass("jsexe");
 
+          var button=new interactive.MomentaryButton("open","opener",function() {
+            var newwindow=item.open();
+            spoon.main.addTask(obj,newwindow);
+
+          });
+          item.addBefore(button);
+        });
       });
       Import("squishy/basic",function(basic) {
         afliw("string",function match(item,name) {
