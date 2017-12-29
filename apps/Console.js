@@ -35,7 +35,7 @@ Module(function M() {
 
                 var submit=new form.Submit();
 
-                var form=new form.Form("",function(e) {
+                var form=new form.Form("Console",function(e) {
                   e.preventDefault();
                     commander.send(input.value(),function(result) {
                       console.debug("received:"+result);
