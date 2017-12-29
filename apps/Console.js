@@ -6,7 +6,9 @@ Module(function M() {
            "squishy/request",
            "squishy/form",
            "apps/spoon/windowing",
-           function(DOM,Req,form,windowing) {
+           "squishy/membrane",
+           "squishy/system",
+           function(DOM,Req,form,windowing,membrane,system) {
              console.debug("imported");
                document.styleSheets[0].addRule(".Console>textarea","width: 100%;clear: both;min-height: 80%;");
 
@@ -16,6 +18,7 @@ Module(function M() {
                C.Def("id","pool")
                C.Super(windowing.AppContainer);
                C.Init(function  Commander(id) {
+                 this.session=new membrane.Device(system.uri("").href)
                  windowing.AppContainer.call(this);
                  this.request=new Req.Request("URI","TEXT");
                  this.request.request.timeout=60000;
@@ -51,11 +54,7 @@ Module(function M() {
 
 
                C.Def(function send(command,receive) {
-                 this.request.Get(this.url+"/membrane.cgi",{op:"w",cmd:command,id:this.id},function(result){
-                   console.debug("sending:"+command);
-                   receive(result);
-
-                 });
+                 this.session.exec(command,receive);
                });
              });
 
