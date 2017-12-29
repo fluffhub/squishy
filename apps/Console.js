@@ -2,7 +2,7 @@
 Module(function M() {
             //console.debug(Import);
             Import("squishy/DOM",  "squishy/request", "squishy/form", function(DOM,Req,form) {
-                var f=new DOM.Frame()
+                var f=new DOM.Frame();
                 console.debug("imported");
                 var Commander=Class(function C() {
                     C.Def("session",null);
@@ -22,15 +22,14 @@ Module(function M() {
                             receive(result);
 
                         });
-                    })
-
+                    });
                 });
 
                 var commander=new Commander("pool1");
 
                 var input=new form.TextInput("input","",function() {
 
-                })
+                });
 
                 var output=new form.TextBox("output")
 

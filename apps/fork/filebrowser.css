@@ -21,7 +21,8 @@
 .FileBrowser .FileListItem:hover { text-decoration: underline; }
 .FileBrowser .FileListItem:hover > .value { text-decoration: none; }
 .FileBrowser .button.Directory::after { content: "/"; }
-.FileBrowser .button.Directory { color: rgb(51, 221, 51); font-weight: 300; }
+.FileBrowser .button.Directory {     color: rgb(25, 25, 200);
+    font-weight: 700; }
 .fs_container > .button { line-height: 1.25em; float: left; clear: both; width: 100%; padding: 0px 0.25em; }
 .pwdbar > .button { display: none; }
 .pwdbar > .button:first-child { display: inline; }

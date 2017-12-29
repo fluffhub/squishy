@@ -6,6 +6,7 @@ Module(function M ()  {
           "layout/",
           "spoon/",
           "object/",
-          "text/")
+          "text/",
+         "Console")
 
 });
