@@ -1,7 +1,6 @@
 
 
 Module(function M() {
-  document.stylesheets[0].addRule(".Console>textarea","width: 100%;clear: both;min-height: 80%;");
   //console.debug(Import);
   M.Import("squishy/DOM",
            "squishy/request",
@@ -9,6 +8,8 @@ Module(function M() {
            "apps/spoon/windowing",
            function(DOM,Req,form,windowing) {
              console.debug("imported");
+               document.styleSheets[0].addRule(".Console>textarea","width: 100%;clear: both;min-height: 80%;");
+
              var Commander=M.Class(function C() {
                C.Def("session",null);
                C.Def("url","/squishy/src")
