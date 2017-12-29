@@ -87,6 +87,15 @@ Module(function M() {
       },function wrap(item) {
         item.addClass("Class");
       });
+      afliw("jsexe",function match(item,name) {
+        if(item instanceof Object && item.open instanceof Function) {
+          return true;
+        }
+        return false;
+      },function wrap(item,obj) {
+        item.addClass("jsexe");
+
+      });
       Import("squishy/basic",function(basic) {
         afliw("string",function match(item,name) {
           if (typeof item=="string") {

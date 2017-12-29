@@ -20,8 +20,11 @@ Module(function M() {
         //   C.Mixin(events.HasEvents);
         //C.Mixin(transform.Draggable);
         C.Init(function AppContainer(parent) {
-          this.parent=parent;
           transform.HTMLPositionBox.call(this);
+          this.Mixin(transform.Resizable);
+          this.Mixin(events.HasEvents);
+          this.parent=parent;
+
           this.addClass("acw");
 
 
@@ -30,10 +33,10 @@ Module(function M() {
           this.titlebar=new basic.Div("acb")
           this.add(this.titlebar);
           this.titlebar.Mixin(transform.Draggable);
-          this.Mixin(transform.Resizable);
-                    this.size={width:400,height:300}
+
+          this.size={width:400,height:300};
           this.drawTransform();
-          this.Mixin(events.HasEvents);
+
           //content
           this.contents=new basic.Div("acc");
           this.add(this.contents);
@@ -46,7 +49,7 @@ Module(function M() {
             }));
 
           });
-            this.titlebar.enableEvents("context");
+          this.titlebar.enableEvents("context");
 
           //window controls
 
@@ -54,8 +57,8 @@ Module(function M() {
           var acw=this;
           this.titlebar.enabledrag(function ondrag(i,v) {
 
-           //// acw.element.style.top=v.position.y+"px";
-           // acw.element.style.left=v.position.x+"px";/
+            //// acw.element.style.top=v.position.y+"px";
+            // acw.element.style.left=v.position.x+"px";/
             extend(acw.position,v.position);
             acw.drawTransform();
             //console.debug({x:v.position.x,y:v.position.y});

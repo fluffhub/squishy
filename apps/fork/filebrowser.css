@@ -30,3 +30,5 @@
 .longer.pwdbar > .button:nth-last-child(2) { display: inline; }
 .longer.pwdbar > .button:nth-last-child(2)::before { content: "/..."; }
 .longer.pwdbar > .button:nth-last-child(2):hover::before { text-decoration: none; }
+
+.jsexe { color:rgba(200,200,0);
