@@ -97,7 +97,7 @@ Module(function M() {
           item.addClass("jsexe");
 
           var button=new interactive.MomentaryButton("open","opener",function() {
-            var newwindow=item.open();
+            var newwindow=obj.open();
             spoon.main.addTask(obj.name,newwindow);
 
           });
