@@ -10,7 +10,7 @@ Module(function M() {
       C.Def("id","pool")
       C.Super(windowing.AppContainer);
       C.Init(function  Commander(id) {
-
+        windowing.AppContainer.call(this);
         this.request=new Req.Request("URI","TEXT");
         this.request.request.timeout=60000;
         if(id!==undefined) {
