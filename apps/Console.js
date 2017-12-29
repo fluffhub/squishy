@@ -20,7 +20,7 @@ Module(function M() {
         }
 
         //var commander=new Commander("pool1");
-
+        var commander=this;
         var input=new form.TextInput("input","",function() {
 
         });
