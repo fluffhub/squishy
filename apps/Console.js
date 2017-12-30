@@ -20,6 +20,10 @@ Module(function M() {
       document.styleSheets[0].addRule(".trans .output","padding: .5em;margin: .5em;border-radius: 1em 0 1em 1em;background-color: rgba(100,100,100,0.5);float:right;display:inline-block;");
       document.styleSheets[0].addRule(".trans .input","padding: 0.5em;margin: 0.5em;border-radius: 0em 1em 1em 1em; background-color: rgba(100,100,250,0.5);float:left;clear:right;display:inline-block;");
       document.styleSheets[0].addRule(".trans.loading","background-color:purple;");
+      document.styleSheets[0].addRule(".output p","margin:0;");
+      document.styleSheets[0].addRule(".Console","position: absolute;bottom: 0;width: 100%;");
+      document.styleSheets[0].addRule(".Console>input:first-child","position: absolute;bottom: 0;width: 100%;");
+
       var Commander=M.Class(function C() {
         C.Def("session",null);
         C.Def("url","/squishy/src")
@@ -71,7 +75,7 @@ Module(function M() {
               var update=commander.addTransaction(command);
               commander.send(command,function(result) {
                 update(result);
-
+                commander.contents.element.scrollTop=commander.contents.element.scrollHeight;
               });
             });
             myform.element.action="#";
