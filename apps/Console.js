@@ -14,6 +14,8 @@ Module(function M() {
       console.debug("imported");
       document.styleSheets[0].addRule(".Console>textarea","width: 100%;clear: both;min-height: 80%;");
 
+      document.styleSheets[0].addRule(".Console input[type=\"submit\"]", "position: absolute; right: 0;");
+
       var Commander=M.Class(function C() {
         C.Def("session",null);
         C.Def("url","/squishy/src")
