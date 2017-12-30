@@ -64,6 +64,7 @@ Module(function M() {
               e.preventDefault();
               var command=input.value();
               commander.send(command,function(result) {
+                if(result.trim()!="")
                 commander.addTransaction(command,result);
               });
             });
