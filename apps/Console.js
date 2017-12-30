@@ -14,12 +14,12 @@ Module(function M() {
     function(DOM,Req,form,windowing,membrane,system,live,basic) {
       console.debug("imported");
       document.styleSheets[0].addRule(".Console>textarea","width: 100%;clear: both;min-height: 80%;");
-
+document.styleSheets[0].addRule(".trans","display: inline-block;position: relative;box-sizing: border-box;")
       document.styleSheets[0].addRule(".Console input[type=\"submit\"]", "position: absolute; right: 0;");
 
-      document.styleSheets[0].addRule(".trans .output","padding: .5em;margin: .5em;border-radius: 1em 0 1em 1em;background-color: rgba(100,100,100,0.5);");
-      document.styleSheets[0].addRule(".trans .input","padding: 0.5em;margin: 0.5em;border-radius: 0em 1em 1em 1em; background-color: rgba(100,100,250,0.5);");
-
+      document.styleSheets[0].addRule(".trans .output","padding: .5em;margin: .5em;border-radius: 1em 0 1em 1em;background-color: rgba(100,100,100,0.5);float:right;display:inline-block;");
+      document.styleSheets[0].addRule(".trans .input","padding: 0.5em;margin: 0.5em;border-radius: 0em 1em 1em 1em; background-color: rgba(100,100,250,0.5);float:left;clear:right;display:inline-block;");
+      document.styleSheets[0].addRule(".trans.loading","background-color:purple;");
       var Commander=M.Class(function C() {
         C.Def("session",null);
         C.Def("url","/squishy/src")
@@ -66,9 +66,12 @@ Module(function M() {
             var myform=new form.Form("Console",function(e) {
               e.preventDefault();
               var command=input.value();
+              input.element.focus();
+              input.element.select();
+              var update=commander.addTransaction(command);
               commander.send(command,function(result) {
-                if(result.trim()!="")
-                commander.addTransaction(command,result);
+                update(result);
+
               });
             });
             myform.element.action="#";
@@ -78,18 +81,27 @@ Module(function M() {
           });
         });
 
-        C.Def(function addTransaction(input,output) {
+        C.Def(function addTransaction(input) {
           var commander=this;
           var trans=new basic.Div("trans");
-          var out=new basic.Div("output");
-          var outwords=output.split("\n");
-          for(var i=0;i<outwords.length;i++) {
-           out.add(new basic.P(outwords[i]));
-          }
           var inp=new basic.Div("input");
           inp.content(input);
-          trans.Madd(inp,out);
+          trans.add(inp);
+          trans.addClass("loading");
           commander.output.add(trans);
+          return function(output) {
+            trans.removeClass("loading");
+          if(output.trim()!="") {
+            var out=new basic.Div("output");
+            var outwords=output.split("\n");
+            for(var i=0;i<outwords.length;i++) {
+             out.add(new basic.P(outwords[i]));
+            }
+
+          }
+          }
+
+
         });
 
         C.Def(function send(command,receive) {
