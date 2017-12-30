@@ -82,6 +82,10 @@ Module(function M() {
           var commander=this;
           var trans=new basic.Div("trans");
           var out=new basic.Div("output");
+          var outwords=output.split("\n");
+          for(var i=0;i<outwords.length;i++) {
+           out.add(new basic.P(outwords[i]));
+          }
           out.content(output);
           var inp=new basic.Div("input");
           inp.content(input);
