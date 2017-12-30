@@ -35,54 +35,51 @@ Module(function M() {
                  } else {
                    this.id="pool";
                  }
-                  Import("squishy/live","squishy/form",function(live,form) {
-                     var  selector=new form.Selector();
-                     var manager=live.DeviceManager;
-                     var devnames=Object.keys(manager.devices);
-                     for(var i=0;i<devnames.length;i++) {
-                       var devname=devnames[i];
+                 Import("squishy/live","squishy/form",function(live,form) {
+                   var  selector=new form.Selector();
+                   var manager=live.DeviceManager;
+                   var devnames=Object.keys(manager.devices);
+                   for(var i=0;i<devnames.length;i++) {
+                     var devname=devnames[i];
 
-                     }
+                   }
 
 
-                     //var commander=new Commander("pool1");
+                   //var commander=new Commander("pool1");
 
-                     var input=new form.TextInput("input","",function() {
+                   var input=new form.TextInput("input","",function() {
 
+                   });
+                   var output=new form.TextBox("output")
+
+                   var submit=new form.Submit();
+
+                   var myform=new form.Form("Console",function(e) {
+                     e.preventDefault();
+                     commander.send(input.value(),function(result) {
+                       console.debug("received:"+result);
+                       input.content(input.content()+result);
                      });
-                     var output=new form.TextBox("output")
-
-                     var submit=new form.Submit();
-
-                     var myform=new form.Form("Console",function(e) {
-                       e.preventDefault();
-                       commander.send(input.value(),function(result) {
-                         console.debug("received:"+result);
-                         input.content(input.content()+result);
-                       });
-                     });
-
-                     myform.Madd(output,input,submit);
-                     commander.add(myform);
                    });
 
-
+                   myform.Madd(output,input,submit);
+                   commander.add(myform);
                  });
                });
-
-
-               C.Def(function send(command,receive) {
-                 this.session.exec(command,receive);
-               });
-             });
-
-             M.Def(function open() {
-               return new Commander();
-
              });
 
 
+             C.Def(function send(command,receive) {
+               this.session.exec(command,receive);
+             });
            });
 
+  M.Def(function open() {
+    return new Commander();
+
+  });
+
+
 });
+
 
