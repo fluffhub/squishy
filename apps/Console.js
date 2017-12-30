@@ -19,7 +19,7 @@ Module(function M() {
 
       document.styleSheets[0].addRule(".trans .output","padding: .5em;margin: .5em;border-radius: 1em 0 1em 1em;background-color: rgba(100,100,100,0.5);");
       document.styleSheets[0].addRule(".trans .input","padding: 0.5em;margin: 0.5em;border-radius: 0em 1em 1em 1em; background-color: rgba(100,100,250,0.5);");
-}
+
       var Commander=M.Class(function C() {
         C.Def("session",null);
         C.Def("url","/squishy/src")
