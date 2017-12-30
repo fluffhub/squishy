@@ -10,7 +10,8 @@ Module(function M() {
     "squishy/membrane",
     "squishy/system",
     "squishy/live",
-    function(DOM,Req,form,windowing,membrane,system,live) {
+    "squishy/basic",
+    function(DOM,Req,form,windowing,membrane,system,live,basic) {
       console.debug("imported");
       document.styleSheets[0].addRule(".Console>textarea","width: 100%;clear: both;min-height: 80%;");
 
@@ -38,6 +39,9 @@ Module(function M() {
           } else {
             this.id="pool";
           }
+          commander.output=new basic.Div("output");
+          commander.contents.add(commander.output);
+
           Import("squishy/live","squishy/form",function(live,form) {
             var  selector=new form.Selector();
             var manager=live.DeviceManager;
@@ -53,25 +57,33 @@ Module(function M() {
             var input=new form.TextInput("input","",function() {
 
             });
-            var output=new form.TextBox("output")
 
             var submit=new form.Submit();
 
             var myform=new form.Form("Console",function(e) {
               e.preventDefault();
-              commander.send(input.value(),function(result) {
-                console.debug("received:"+result);
-                output.content(output.content()+result);
+              var command=input.value();
+              commander.send(command,function(result) {
+                commander.addTransaction(command,result);
               });
             });
             myform.element.action="#";
 
-            myform.Madd(output,input,submit);
+            myform.Madd(input,submit);
             commander.contents.add(myform);
           });
         });
 
-
+        C.Def(function addTransaction(input,output) {
+          var commander=this;
+          var trans=new basic.Div("trans");
+          var out=new basic.Div("output");
+          out.content(output);
+          var inp=new basic.Div("input");
+          inp.content(input);
+          trans.Madd(inp,out);
+          commander.output.add(trans);
+        });
 
         C.Def(function send(command,receive) {
           this.session.exec(command,receive);
