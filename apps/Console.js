@@ -86,7 +86,6 @@ Module(function M() {
           for(var i=0;i<outwords.length;i++) {
            out.add(new basic.P(outwords[i]));
           }
-          out.content(output);
           var inp=new basic.Div("input");
           inp.content(input);
           trans.Madd(inp,out);
