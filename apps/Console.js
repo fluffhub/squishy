@@ -65,7 +65,7 @@ Module(function M() {
             myform.element.action="#";
 
             myform.Madd(output,input,submit);
-            commander.content.add(myform);
+            commander.contents.add(myform);
           });
         });
 
