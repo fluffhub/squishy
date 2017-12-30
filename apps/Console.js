@@ -59,7 +59,7 @@ Module(function M() {
               e.preventDefault();
               commander.send(input.value(),function(result) {
                 console.debug("received:"+result);
-                input.content(input.content()+result);
+                output.content(output.content()+result);
               });
             });
             myform.element.action="#";
