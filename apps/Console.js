@@ -8,7 +8,8 @@ Module(function M() {
            "apps/spoon/windowing",
            "squishy/membrane",
            "squishy/system",
-           function(DOM,Req,form,windowing,membrane,system) {
+           "squishy/live",
+           function(DOM,Req,form,windowing,membrane,system,live) {
              console.debug("imported");
              document.styleSheets[0].addRule(".Console>textarea","width: 100%;clear: both;min-height: 80%;");
 
@@ -21,7 +22,7 @@ Module(function M() {
                  try {
                    this.session=new membrane.Device(system.uri("").hostname)
                  } catch (e) {
-                   this.session=new membrane.DeviceManager.devices[system.uri("").hostname].membrane;
+                   this.session=live.DeviceManager.devices[system.uri("").hostname].membrane;
                  }
                  windowing.AppContainer.call(this);
                  this.titlebar.content("Membrane Console");
