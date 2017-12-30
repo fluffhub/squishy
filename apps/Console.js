@@ -14,7 +14,7 @@ Module(function M() {
     function(DOM,Req,form,windowing,membrane,system,live,basic) {
       console.debug("imported");
       document.styleSheets[0].addRule(".Console>textarea","width: 100%;clear: both;min-height: 80%;");
-document.styleSheets[0].addRule(".trans","display: inline-block;position: relative;box-sizing: border-box;")
+      document.styleSheets[0].addRule(".trans","display: inline-block;position: relative;box-sizing: border-box;")
       document.styleSheets[0].addRule(".Console input[type=\"submit\"]", "position: absolute; right: 0;");
 
       document.styleSheets[0].addRule(".trans .output","padding: .5em;margin: .5em;border-radius: 1em 0 1em 1em;background-color: rgba(100,100,100,0.5);float:right;display:inline-block;");
@@ -91,14 +91,15 @@ document.styleSheets[0].addRule(".trans","display: inline-block;position: relati
           commander.output.add(trans);
           return function(output) {
             trans.removeClass("loading");
-          if(output.trim()!="") {
-            var out=new basic.Div("output");
-            var outwords=output.split("\n");
-            for(var i=0;i<outwords.length;i++) {
-             out.add(new basic.P(outwords[i]));
+            if(output.trim()!="") {
+              var out=new basic.Div("output");
+              var outwords=output.split("\n");
+              for(var i=0;i<outwords.length;i++) {
+                out.add(new basic.P(outwords[i]));
+              }
+              trans.add(out);
             }
 
-          }
           }
 
 
