@@ -35,11 +35,8 @@ Module(function M() {
                  } else {
                    this.id="pool";
                  }
-
-                 Import("squishy/form",function(form) {
-
-                   this.selector=new form.Selector();
-                   Import("squishy/live",function(live) {
+                  Import("squishy/live","squishy/form",function(live,form) {
+                     var  selector=new form.Selector();
                      var manager=live.DeviceManager;
                      var devnames=Object.keys(manager.devices);
                      for(var i=0;i<devnames.length;i++) {
@@ -57,7 +54,7 @@ Module(function M() {
 
                      var submit=new form.Submit();
 
-                     var form=new form.Form("Console",function(e) {
+                     var myform=new form.Form("Console",function(e) {
                        e.preventDefault();
                        commander.send(input.value(),function(result) {
                          console.debug("received:"+result);
@@ -65,8 +62,8 @@ Module(function M() {
                        });
                      });
 
-                     form.Madd(output,input,submit);
-                     commander.add(form);
+                     myform.Madd(output,input,submit);
+                     commander.add(myform);
                    });
 
 
