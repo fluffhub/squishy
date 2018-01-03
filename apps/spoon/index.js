@@ -81,7 +81,10 @@ Module(function M() {
                    task1.removeClass("active");
                    //setTimeout(function() { task.addClass("active") },20);
                  });
-                 task.addClass("active")
+                 task.addClass("active");
+                 var parent=task.parent;
+                 task.remove();
+                 task.parent.add(task);
                  if(!task.hasClass("visible"))
                    task.addClass("visible");
                });
@@ -100,7 +103,7 @@ Module(function M() {
 
                    var tab=new interactive.MomentaryButton(appname,"task",function onclick(e) {
                      tm.Activate(task)
-                   })
+                   });
 
 
 

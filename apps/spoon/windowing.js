@@ -26,9 +26,6 @@ Module(function M() {
           this.parent=parent;
 
           this.addClass("acw");
-
-
-
           //titlebar
           this.titlebar=new basic.Div("acb")
           this.add(this.titlebar);
@@ -68,8 +65,11 @@ Module(function M() {
           this.enableresize(undefined,function onresize(item) {
             extend(acw.titlebar.size,acw.size);
           });
+         /* this.addEvent("activate","mousedown touchstart",function(e) {
 
+          });*/
         });
       });
+
     });
 });
