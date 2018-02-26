@@ -1,5 +1,12 @@
-// go build -ldflags "-s -w" -o index.cgi cgi.go
+/*
 
+Membrane initializes a SH process and pipes commands into and results out of the SH process.
+This allows RPC commands to be executed via javascript over a URL.
+
+To use, compile this file and make executable by your web server.  Membrane commands are run
+by the web server's user.
+
+*/
 package main
 
 import (
@@ -97,7 +104,7 @@ func get_or_create_proc(name string) {
       outfound=true;
     }
   }
-  if(!procfound){
+  if(!procfound) {
 
     /////THIS EXECUTES SH -C WHICH TAKES A STRING REPRESENTING THE CONSOLE COMMANDS TO RUN USING ARBITRARY SYSTEM CALLS.
     ///// I ONLY USED THIS AS A CRUTCH TO QUICKLY ADD PIPES AND DELIMITERS TO THE COMMAND STRING.
@@ -159,7 +166,6 @@ func main() {
           namefound=true
         }
       }
-
     }
 
     for k := range query {
