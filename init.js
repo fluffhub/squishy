@@ -261,6 +261,7 @@ except instead of defining HTML/XML markup you are writing function calls:
     as imports, but with a specific way to handle the results:
 */
 
+
       Import("apps/spoon/","apps/fork/","squishy/system","squishy/live",function(spoon,FSe,system,live) {
 
         var SquishyLogo=null;
@@ -277,6 +278,9 @@ except instead of defining HTML/XML markup you are writing function calls:
         //browser.load(M.Self.filename,M.Self);
         //Content.add(browser);
 
+        Import("apps/fluffbase",function(fluffbase) {
+          flu
+        });
         /*new Req("URI","TEXT").Get(page,{
         /*
            Note 2.4:  If there were GET or POST arguments for this request, they would be listed here.

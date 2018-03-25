@@ -45,7 +45,7 @@ Module(function M() {
 
              var Tile=M.Class(function C() {
                C.Super(interactive.MomentaryButton);
-               C.Init(function Tile(callback,name) {
+               C.Init(function Tile(name,callback) {
                  interactive.MomentaryButton.call(this,name,'FSTile',callback);
 
                  this.addClass('tile');
@@ -89,26 +89,25 @@ Module(function M() {
                    task.addClass("visible");
                });
 
+
+               C.Def(function addApp(name, exec) {
+
+               });
                C.Def(function addTask(path,task) {
                  var appname=path.split(":")[0]
                  var tm=this;
                  var found=false;
                  this.tasks.forEach(function (t) {
-
                    if (t===task) { found=true; }
                  });
                  if(found) { }
                  else {
                    this.tasks.push(task);
-
-                   var tab=new interactive.MomentaryButton(appname,"task",function onclick(e) {
+                   var tile=new Tile(appname,function onclick(e) {
                      tm.Activate(task)
                    });
-
-
-
-                   this.add(tab);
-                   tab.addClass("tab");
+                   task.tile=tile;
+                   this.add(tile);
                  }
                });
              });

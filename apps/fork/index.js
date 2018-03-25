@@ -74,8 +74,7 @@ Module(function M() {
                 });
               }
             });
-
-          })
+          });
         });
         var FileListItem=M.Class(function C() {
           C.Super(interactive.MomentaryButton);
@@ -389,8 +388,6 @@ Module(function M() {
 
         });
         M.Def(function open(loc) {
-
-
           return new FileBrowser(loc);
         });
 
