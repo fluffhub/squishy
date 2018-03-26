@@ -42,13 +42,38 @@ Module(function M() {
 
 
              var keyboard=kb.keyboard;
+             /* Deck and Tile are the components to the animated taskbar.
+
+
+             */
 
              var Tile=M.Class(function C() {
                C.Super(interactive.MomentaryButton);
                C.Init(function Tile(name,callback) {
-                 interactive.MomentaryButton.call(this,name,'FSTile',callback);
+                 interactive.MomentaryButton.call(this,name,'task',callback);
 
                  this.addClass('tile');
+               });
+             });
+             var Deck=M.Class(function C() {
+               C.Super(basic.Div);
+            //  C.Def("tasks",[])
+               C.Init(function Deck(appname,callback) {
+                 basic.Div.call(this,"deck")
+                 this.tasks=[]
+                 this.name=appname;
+                 var deck=this;
+                 function onclick(e) {
+                   deck.toggleClass("active");
+                   if(callback instanceof Function) {
+                     callback(e);
+                   }
+                 }
+                 this.add(new Tile(appname,onclick))
+               });
+               C.Init(function addTask(task) {
+                 this.addBefore(task);
+                 this.tasks.push(task);
                });
              });
              var EditorHome=M.Class(function C() {
@@ -73,11 +98,11 @@ Module(function M() {
                C.Init(function TaskManager(home) {
                  this.home=home;
                  var tasks=this.home.tasks;
-                 this.tasks=[];
+                 this.tiles=[];
                  basic.Div.call(this,"tmg TaskList");
                });
                C.Def(function Activate(task) {
-                 this.tasks.forEach(function(task1) {
+                 this.tiles.forEach(function(task1) {
                    task1.removeClass("active");
                    //setTimeout(function() { task.addClass("active") },20);
                  });
@@ -91,17 +116,33 @@ Module(function M() {
 
 
                C.Def(function addApp(name, exec) {
-
+                 var deck=null;
+                 var found=false;
+                 this.tiles.forEach(function(tile) {
+                   if(tile.name==name) {
+                     found=true;
+                   }
+                 });
+                 if(!found) {
+                   this.add(new Deck(name))
+                 }
                });
                C.Def(function addTask(path,task) {
                  var appname=path.split(":")[0]
                  var tm=this;
                  var found=false;
-                 this.tasks.forEach(function (t) {
+                 this.tiles.forEach(function (t) {
                    if (t===task) { found=true; }
+                   if (t.name==appname) {
+                     t.addTask(t);
+                     found=true;
+                   }
                  });
-                 if(found) { }
+                 if(found) {
+
+                 }
                  else {
+                   //add task to new deck on taskbar
                    this.tasks.push(task);
                    var tile=new Tile(appname,function onclick(e) {
                      tm.Activate(task)
