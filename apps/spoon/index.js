@@ -138,7 +138,7 @@ Module(function M() {
                  var tm=this;
                  var found=false;
                  this.tiles.forEach(function (t) {
-                   if (t===task) { found=true; }
+                   if (t.task===task) { found=true; }
                    if (t.name==appname) {
                      t.addTask(t);
                      found=true;
