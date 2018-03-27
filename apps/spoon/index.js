@@ -128,7 +128,9 @@ Module(function M() {
                    }
                  });
                  if(!found) {
-                   this.add(new Deck(name))
+                   let deck=new Deck(name);
+                   this.add(deck);
+                   this.tiles[name]=deck;
                  }
                });
                C.Def(function addTask(path,task) {
