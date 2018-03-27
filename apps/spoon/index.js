@@ -99,7 +99,8 @@ Module(function M() {
                  this.home=home;
                  var tasks=this.home.tasks;
                  this.tiles=[];
-                 tasks.forEach(function(task) {
+                 Object.keys(tasks).forEach(function(taskname) {
+                   let task=tasks[taskname];
                   this.addTask(task);
                  });
                  basic.Div.call(this,"tmg TaskList");
