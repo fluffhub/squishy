@@ -57,7 +57,7 @@ Module(function M() {
              });
              var Deck=M.Class(function C() {
                C.Super(basic.Div);
-            //  C.Def("tasks",[])
+               //  C.Def("tasks",[])
                C.Init(function Deck(appname,callback) {
                  basic.Div.call(this,"deck")
                  this.tasks=[]
@@ -101,7 +101,7 @@ Module(function M() {
                  this.tiles=[];
                  Object.keys(tasks).forEach(function(taskname) {
                    let task=tasks[taskname];
-                  this.addTask(task);
+                   this.addTask(task);
                  });
                  basic.Div.call(this,"tmg TaskList");
                });
@@ -176,9 +176,9 @@ Module(function M() {
                  Frame.call(this,window,document);
                  var W=this;
                  var EW=this;
+                 this.apps={};
 
-
-                 this.tasks={}
+                 this.tasks={};
 
                  //this.tasks=new TabbedPane()
                  //this.tasks.header.removeClass("header-bar");
@@ -487,7 +487,10 @@ Module(function M() {
                    //this.TP.tabset.change('PB');
                    //		DB.tabset.change(name);
                  });
-
+                 C.Def(function addApp(name, exec) {
+                   this.tm.addApp(name,exec);
+                   this.apps[name]=exec;
+                 });
 
                  C.Def(function activate(item) {
                    var browser=this;
