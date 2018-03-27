@@ -128,7 +128,7 @@ Module(function M() {
                    }
                  });
                  if(!found) {
-                   let deck=new Deck(name);
+                   var deck=new Deck(name);
                    this.add(deck);
                    this.tiles[name]=deck;
                  }
