@@ -99,6 +99,9 @@ Module(function M() {
                  this.home=home;
                  var tasks=this.home.tasks;
                  this.tiles=[];
+                 tasks.forEach(function(task) {
+                  this.addTask(task);
+                 });
                  basic.Div.call(this,"tmg TaskList");
                });
                C.Def(function Activate(task) {
@@ -143,13 +146,18 @@ Module(function M() {
                  }
                  else {
                    //add task to new deck on taskbar
-                   this.tasks.push(task);
+                   //this.tasks.push(task);
                    var tile=new Tile(appname,function onclick(e) {
                      tm.Activate(task)
                    });
-                   task.tile=tile;
+                   tile.task=task;
+                   this.tiles.push(tile);
                    this.add(tile);
+
                  }
+               });
+               C.Def(function insertTask(task) {
+
                });
              });
 
