@@ -97,11 +97,13 @@ Module(function M() {
                C.Super(basic.Div);
                C.Init(function TaskManager(home) {
                  this.home=home;
-                 var tasks=this.home.tasks;
+                 var apps=this.home.apps;
                  this.tiles=[];
-                 Object.keys(tasks).forEach(function(taskname) {
-                   let task=tasks[taskname];
-                   this.addTask(task);
+                 Object.keys(apps).forEach(function(appname) {
+                   var deck=new Deck(appname);
+                   this.add(deck);
+                   this.tiles.push(deck);
+
                  });
                  basic.Div.call(this,"tmg TaskList");
                });
