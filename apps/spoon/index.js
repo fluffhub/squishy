@@ -59,19 +59,18 @@ Module(function M() {
                C.Super(basic.Div);
                //  C.Def("tasks",[])
                C.Init(function Deck(appname,callback) {
-                 basic.Div.call(this,"deck")
-                 this.tasks=[]
+                 basic.Div.call(this,"deck");
+                 this.tasks=[];
                  this.name=appname;
                  var deck=this;
+                 var callback=callback || function() {};
                  function onclick(e) {
                    deck.toggleClass("active");
-                   if(callback instanceof Function) {
-                     callback(e);
-                   }
+                   callback(e);
                  }
                  this.add(new Tile(appname,onclick))
                });
-               C.Init(function addTask(task) {
+               C.Def(function addTask(task) {
                  this.addBefore(task);
                  this.tasks.push(task);
                });
