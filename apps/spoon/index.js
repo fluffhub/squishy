@@ -182,7 +182,7 @@ Module(function M() {
                  this.hud=new basic.Div("hud");
 
                  this.add(this.hud)
-                 this.tm=new TaskManager(this.tasks);
+                 this.tm=new TaskManager(this);
 
 
                  var SpoonLogo=new svg.SVG(50,50);
