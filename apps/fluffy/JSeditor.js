@@ -25,13 +25,12 @@ Module(function M() {
         else a=1;
         return "rgba("+r+","+g+","+b+","+a+")";
       }
+
       var curstate={}
       var escodegen=ESCG.escodegen;
       window.escodegen=escodegen;
       var estraverse=esv;
       Import("fluffy/themes/","fluffy/themes/default",function(themes,defaulttheme) {
-
-
         M.Class(function C() {
           C.Super(basic.Div);
           C.Init(function JSEditor(raw,browser,theme) {
@@ -50,6 +49,7 @@ Module(function M() {
             var withcomments=escodegen.attachComments(parsed,comments, parsed.tokens);
 
             var code2=escodegen.generate(withcomments);
+
             this.add(Comments);
             console.debug({code2:code2,withcomments:withcomments});
             var depth=0;
@@ -82,7 +82,7 @@ Module(function M() {
                   this.codemasks=obj.codemasks;
                 }
               }
-            } else if (typeof ( obj) =="string") {
+            } else if (typeof (obj) =="string") {
               Import("fluffy/themes/"+obj,function(theme2) {
                 br.setTheme(theme2);
               });
@@ -119,8 +119,6 @@ Module(function M() {
                     cursor.add(c);
                   }
 
-
-
                   var member=item2[items[j]];
                   if(member.funcall)
                   {
@@ -138,7 +136,6 @@ Module(function M() {
                       c.add(travel(member,depth-1));
                       if(c.parent) cursor=c.parent;
                     }
-                    //  }
                   }
 
                 }
@@ -294,11 +291,8 @@ Module(function M() {
                 this.cursor=item;
               }
             }
-
           });
         });
-
       });
     });
-
 });

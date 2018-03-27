@@ -84,7 +84,7 @@ Module(function M() {
 
         });
       });
-      M.Def(function open(loc) {
+      var opener=M.Def(function open(loc) {
         if(loc in live_items) {
 
         } else {
@@ -94,6 +94,7 @@ Module(function M() {
         }
 
       });
+      spoon.main.addApp("text",opener);
 
 
     });

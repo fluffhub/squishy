@@ -57,7 +57,6 @@ Module(function M() {
                       if(!(appname in apps))
                         apps.push(appname);
 
-
                       console.debug({opened: match,name:name})
                     }
                   }
@@ -387,9 +386,11 @@ Module(function M() {
           });
 
         });
-        M.Def(function open(loc) {
+        var open=M.Def(function open(loc) {
           return new FileBrowser(loc);
         });
+
+        spoon.main.addApp("fork",open);
 
         var Module=M.Class(function C() {
           C.Super(interactive.MomentaryButton);

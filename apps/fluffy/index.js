@@ -49,12 +49,14 @@ Module(function M() {
 
         });
       });
+
       var CodeEditor=M.Class(function C() {
         C.Super(windowing.AppContainer)
         C.Init(function CodeEditor(loc,items) {
           windowing.AppContainer.call(this);
           this.element.style.width="400px";
           this.element.style.height="300px";
+
           //basic.Div.call(this);
           if (loc instanceof Element) {
           } else {
@@ -69,6 +71,9 @@ Module(function M() {
           ta.element.style.display="none";
           this.add(ta);
           var te=this;
+
+
+
           Object.defineProperty(this,"File",{enumerable:false,writable:true,configurable:false})
           this.value=null;
 
@@ -87,7 +92,6 @@ Module(function M() {
                 console.debug(te.value);
                 ta.value(te.value);
                 te.onload();
-
               }
             });
           });
@@ -99,7 +103,8 @@ Module(function M() {
         });
       });
       var live_items={};
-      M.Def(function open(loc) {
+
+      var open=M.Def(function open(loc) {
         if(loc instanceof Element) {
 
         } else {
@@ -115,5 +120,8 @@ Module(function M() {
         }
 
       });
+
+      spoon.main.addApp("fluffy",open);
+
     });
 });

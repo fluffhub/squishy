@@ -11,7 +11,8 @@ Module(function M() {
     "squishy/system",
     "squishy/live",
     "squishy/basic",
-    function(DOM,Req,form,windowing,membrane,system,live,basic) {
+    "spoon",
+    function(DOM,Req,form,windowing,membrane,system,live,basic,spoon) {
       console.debug("imported");
       document.styleSheets[0].addRule(".Console>textarea","width: 100%;clear: both;min-height: 80%;");
       document.styleSheets[0].addRule(".trans","display: inline-block;position: relative;box-sizing: border-box;")
@@ -114,11 +115,11 @@ Module(function M() {
         });
       });
 
-      M.Def(function open() {
+      var open=M.Def(function open() {
         return new Commander();
 
       });
-
+      spoon.main.addApp("console",open);
 
     });
 
