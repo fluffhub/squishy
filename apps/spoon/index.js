@@ -263,275 +263,276 @@ Module(function M() {
 
                  },true);
                  this.enableEvents("cursorpos","context","closeContext");
-                 C.Def(function addTask(path,task) {
-                   this.tasks[path.split(":")[0]]=task;
-                   this.add(task);
-                   var hw=this;
-                   task.addEvent("activate","mousedown touchstart",function onactivate(e) {
-                     if(!task.hasClass("active"))
-                     { e.stopPropagation();
-                      hw.tm.Activate(task);
+               });
+               C.Def(function addTask(path,task) {
+                 this.tasks[path.split(":")[0]]=task;
+                 this.add(task);
+                 var hw=this;
+                 task.addEvent("activate","mousedown touchstart",function onactivate(e) {
+                   if(!task.hasClass("active"))
+                   { e.stopPropagation();
+                    hw.tm.Activate(task);
 
-                     }
-                   },task.element,{capture:false})
-                   task.enableEvents("activate");
-                   this.tm.addTask(path,task);
-                   this.tm.Activate(task);
-
-                 });
-                 C.Def(function run(val) {  //run takes multiple args
-                   var args=Array.prototype.slice.call(arguments,1)
-                   var task=null;
-                   var hw=this;
-                   var path;
-
-                   if(val instanceof Element)
-                     path=val.path
-                     else if (typeof val == "string")
-                       path=val;
-                   if(path in conf.apps) {
-
-                     task=conf.apps[path].open.apply(this,args)
-
-                     hw.addTask(path+":"+args.join(" "),task);
-                     return task;
-                   } else {
-                     Import(path,function(a) {
-                       if(a.open instanceof Function) {
-                         task=a.open.apply(this,args)
-                         hw.addTask(path+":"+args.join(" "),task);
-                       }
-                     });
-                     return true;
                    }
+                 },task.element,{capture:false})
+                 task.enableEvents("activate");
+                 this.tm.addTask(path,task);
+                 this.tm.Activate(task);
+
+               });
+               C.Def(function run(val) {  //run takes multiple args
+                 var args=Array.prototype.slice.call(arguments,1)
+                 var task=null;
+                 var hw=this;
+                 var path;
+
+                 if(val instanceof Element)
+                   path=val.path
+                   else if (typeof val == "string")
+                     path=val;
+                 if(path in conf.apps) {
+
+                   task=conf.apps[path].open.apply(this,args)
+
+                   hw.addTask(path+":"+args.join(" "),task);
+                   return task;
+                 } else {
+                   Import(path,function(a) {
+                     if(a.open instanceof Function) {
+                       task=a.open.apply(this,args)
+                       hw.addTask(path+":"+args.join(" "),task);
+                     }
+                   });
+                   return true;
+                 }
+
+               });
+               C.Def(function openFile(path) {
+                 //check what app is needed for this file
+                 //
+                 live.DeviceManager.retrieve(path,function(items) {
+                   console.debug(items);
+                 });
+               })
+               C.Def(function create(type) {
+                 var EW=this;
+                 var P;
+                 try {
+                   P=objects[type].create({ }, function (obj) {
+                     EW.open(obj);
+                   });
+                 } catch(e) {
+                   //////console.debug("can't create "+type);
+                   throw e;
+                 }
+
+               });
+               var contextitems=[];
+               C.Def(function close(item) {
+                 item.remove;
+
+               });
+               C.Def(function clearContext() {
+                 var EW=this;
+                 //////console.debug('clearing');
+                 this.contextmenu.elements.forEach(function (item) {
+                   item.remove();
 
                  });
-                 C.Def(function openFile(path) {
-                   //check what app is needed for this file
-                   //
-                   live.DeviceManager.retrieve(path,function(items) {
-                     console.debug(items);
-                   });
-                 })
-                 C.Def(function create(type) {
-                   var EW=this;
+                 this.contextmenu.remove();
+                 this.contextactive=false;
+                 var EW=this;
+               });
+               C.Def(function Context(ContextMenu) {
+                 var EW=this;
+                 return function addContext() {
+                   ////console.debug(ContextMenu);
+                   // if(!(EW.contextmenu.element.contains(ContextMenu.element)))
+                   //  contextitems[contextitems.length]=ContextMenu;
+                   EW.contextmenu.add(ContextMenu);
+                   return false;
+                 };
+               });
+               C.Def(function Hold(item,ev) {
+                 this.holding=item;
+                 //check all editor windows for droppables
+                 //enable mouseup drop action
+                 //LI.window.Drag(
+
+
+                 for (var name in this.tasks) {
+                   var editor=this.tasks[name];
+                   ////console.debug(editor);
+                   if(editor.events) {
+                     if(editor.events.drop)
+                       editor.enableEvents('drop');
+                     if(editor.events.dragenter)
+                       editor.enableEvents('dragenter');
+                   }
+                 }
+                 var ghost=new DOM.LayoutItem('div');
+                 ghost.addClass('ghost');
+                 ghost.element.style.position="fixed";
+
+                 ghost.add(item.clone());
+                 if(ev) {
                    var P;
-                   try {
-                     P=objects[type].create({ }, function (obj) {
-                       EW.open(obj);
-                     });
+                   if(ev.touches)
+                     P={x:ev.touches[0].clientX,y:ev.touches[0].clientY};
+                   else
+                     P={x:ev.clientX,y:ev.clientY};
+                   ghost.element.style.top=P.y+'px';
+                   ghost.element.style.left=P.x+'px';
+                 }
+                 this.add(ghost);
+                 this.ghost=ghost;
+                 var EW=this;
+                 //this.element.style.cursor="no-drop";
+                 this.addEvent('carry',"mousemove touchmove",function(ev) {
+                   var P;
+                   if(ev.touches)
+                     P={x:ev.touches[0].clientX,y:ev.touches[0].clientY};
+                   else
+                     P={x:ev.clientX,y:ev.clientY};
+                   EW.ghost.element.style.top=P.y+10+'px';
+                   EW.ghost.element.style.left=P.x+10+'px';
+                 });
+                 this.addEvent('drop',"mouseup touchend", function(ev) {
+                   EW.Drop();
+                   //////console.debug('dropping');
+                   EW.disableEvents('carry');
+                   EW.disableEvents('drop');
+                 });
+                 this.enableEvents('carry','drop');
+                 return item.ghost;
+               });
+               C.Def(function Drop() {
+                 if(this.holding){
+                   this.ghost.remove();
+                   delete this.ghost;
+
+                 }
+                 this.holding=null;
+                 for (var name in this.editors) {
+                   var editor=this.editors[name];
+
+                   if(editor.events) {
+                     if(editor.events.drop)
+                       editor.disableEvents('drop');
+                     if(editor.events.dragenter)
+                       editor.disableEvents('dragenter');
+                   }
+                   this.element.style.cursor="default";
+                 }
+
+               });
+               C.Def(function open(value) {
+
+                 var EW=this;
+                 var PE = null;
+                 var type="";
+
+                 if(value.cls) {
+                   if( value.cls.indexOf('#')) {
+                     var cls=value.cls.split('#');
+                     type=cls[1];
+                   }
+                   else {
+                     type=cls;
+                   }
+                 }
+                 else {
+                   try{
+                     type=value.constructor.modelname;
+
                    } catch(e) {
-                     //////console.debug("can't create "+type);
-                     throw e;
-                   }
-
-                 });
-                 var contextitems=[];
-                 C.Def(function close(item) {
-                   item.remove;
-
-                 });
-                 C.Def(function clearContext() {
-                   var EW=this;
-                   //////console.debug('clearing');
-                   this.contextmenu.elements.forEach(function (item) {
-                     item.remove();
-
-                   });
-                   this.contextmenu.remove();
-                   this.contextactive=false;
-                   var EW=this;
-                 });
-                 C.Def(function Context(ContextMenu) {
-                   var EW=this;
-                   return function addContext() {
-                     ////console.debug(ContextMenu);
-                     // if(!(EW.contextmenu.element.contains(ContextMenu.element)))
-                     //  contextitems[contextitems.length]=ContextMenu;
-                     EW.contextmenu.add(ContextMenu);
-                     return false;
-                   };
-                 });
-                 C.Def(function Hold(item,ev) {
-                   this.holding=item;
-                   //check all editor windows for droppables
-                   //enable mouseup drop action
-                   //LI.window.Drag(
-
-
-                   for (var name in this.tasks) {
-                     var editor=this.tasks[name];
-                     ////console.debug(editor);
-                     if(editor.events) {
-                       if(editor.events.drop)
-                         editor.enableEvents('drop');
-                       if(editor.events.dragenter)
-                         editor.enableEvents('dragenter');
-                     }
-                   }
-                   var ghost=new DOM.LayoutItem('div');
-                   ghost.addClass('ghost');
-                   ghost.element.style.position="fixed";
-
-                   ghost.add(item.clone());
-                   if(ev) {
-                     var P;
-                     if(ev.touches)
-                       P={x:ev.touches[0].clientX,y:ev.touches[0].clientY};
-                     else
-                       P={x:ev.clientX,y:ev.clientY};
-                     ghost.element.style.top=P.y+'px';
-                     ghost.element.style.left=P.x+'px';
-                   }
-                   this.add(ghost);
-                   this.ghost=ghost;
-                   var EW=this;
-                   //this.element.style.cursor="no-drop";
-                   this.addEvent('carry',"mousemove touchmove",function(ev) {
-                     var P;
-                     if(ev.touches)
-                       P={x:ev.touches[0].clientX,y:ev.touches[0].clientY};
-                     else
-                       P={x:ev.clientX,y:ev.clientY};
-                     EW.ghost.element.style.top=P.y+10+'px';
-                     EW.ghost.element.style.left=P.x+10+'px';
-                   });
-                   this.addEvent('drop',"mouseup touchend", function(ev) {
-                     EW.Drop();
-                     //////console.debug('dropping');
-                     EW.disableEvents('carry');
-                     EW.disableEvents('drop');
-                   });
-                   this.enableEvents('carry','drop');
-                   return item.ghost;
-                 });
-                 C.Def(function Drop() {
-                   if(this.holding){
-                     this.ghost.remove();
-                     delete this.ghost;
-
-                   }
-                   this.holding=null;
-                   for (var name in this.editors) {
-                     var editor=this.editors[name];
-
-                     if(editor.events) {
-                       if(editor.events.drop)
-                         editor.disableEvents('drop');
-                       if(editor.events.dragenter)
-                         editor.disableEvents('dragenter');
-                     }
-                     this.element.style.cursor="default";
-                   }
-
-                 });
-                 C.Def(function open(value) {
-
-                   var EW=this;
-                   var PE = null;
-                   var type="";
-
-                   if(value.cls) {
-                     if( value.cls.indexOf('#')) {
-                       var cls=value.cls.split('#');
-                       type=cls[1];
-                     }
-                     else {
-                       type=cls;
-                     }
-                   }
-                   else {
-                     try{
-                       type=value.constructor.modelname;
-
+                     //////console.debug(value);
+                     try {
+                       type=value.__proto__.constructor.name;
                      } catch(e) {
-                       //////console.debug(value);
-                       try {
-                         type=value.__proto__.constructor.name;
-                       } catch(e) {
-                         //////console.debug('full erroring');
-                       }
+                       //////console.debug('full erroring');
                      }
                    }
-                   //if(type in editors)  PE=new editors[type](value, EW);
-                   this.editors[this.editors.length]=PE;
-                   var name='Unnamed';
-                   var iid=type+value.id;
-                   if(iid in this.DB.panes) {
-                     PE=this.DB.panes[iid];
-                   }
-                   else {
-                     //var that=PE;
-                     if(value.name!='')  name=value.name;
+                 }
+                 //if(type in editors)  PE=new editors[type](value, EW);
+                 this.editors[this.editors.length]=PE;
+                 var name='Unnamed';
+                 var iid=type+value.id;
+                 if(iid in this.DB.panes) {
+                   PE=this.DB.panes[iid];
+                 }
+                 else {
+                   //var that=PE;
+                   if(value.name!='')  name=value.name;
 
-                     this.DB.addTab(iid,name,PE,'',function() {
-                       //this.draw_overlay();
-                       //open('program',{id:PE.program.id});
-                       EW.select(iid,PE);
-                       PE.redraw();
-                       //////console.debug('changing');
-                     });
-                   }
+                   this.DB.addTab(iid,name,PE,'',function() {
+                     //this.draw_overlay();
+                     //open('program',{id:PE.program.id});
+                     EW.select(iid,PE);
+                     PE.redraw();
+                     //////console.debug('changing');
+                   });
+                 }
 
-                   //select(iid,PE);
-                   //this.DB.tabset.change(iid);
-                 });
-                 C.Def(function select(name,item) {
-                   //this.TP.panes['PB'].remove();
-                   // this.TP.panes['NP'].remove();
-                   //this.TP.panes['PB']=item.editor;
+                 //select(iid,PE);
+                 //this.DB.tabset.change(iid);
+               });
+               C.Def(function select(name,item) {
+                 //this.TP.panes['PB'].remove();
+                 // this.TP.panes['NP'].remove();
+                 //this.TP.panes['PB']=item.editor;
 
-                   //this.TP.add(this.TP.panes['PB']);
-                   //item.editor.draw();
-                   //this.TP.panes['PB'].hide();
+                 //this.TP.add(this.TP.panes['PB']);
+                 //item.editor.draw();
+                 //this.TP.panes['PB'].hide();
 
-                   //this.TP.tabset.change('PB');
-                   //		DB.tabset.change(name);
-                 });
-                 C.Def(function addApp(name, exec) {
-                   this.tm.addApp(name,exec);
-                   this.apps[name]=exec;
-                 });
+                 //this.TP.tabset.change('PB');
+                 //		DB.tabset.change(name);
+               });
+               C.Def(function addApp(name, exec) {
+                 this.tm.addApp(name,exec);
+                 this.apps[name]=exec;
+               });
 
-                 C.Def(function activate(item) {
-                   var browser=this;
-                   Import("app/codebrowser",function(codebrowser) {
-                     browser.absolutefiles[path]=item;
-                     new Request("URI","TEXT").Get(item.filename,{},function(raw) {
-                       browser.tasks[path]=new codebrowser.CodeBrowser(raw,browser);
-                       browser.tasks[path].addBefore(new basic.Span(path));
-                       browser.parent.add(browser.tasks[path]);
-                     });
+               C.Def(function activate(item) {
+                 var browser=this;
+                 Import("app/codebrowser",function(codebrowser) {
+                   browser.absolutefiles[path]=item;
+                   new Request("URI","TEXT").Get(item.filename,{},function(raw) {
+                     browser.tasks[path]=new codebrowser.CodeBrowser(raw,browser);
+                     browser.tasks[path].addBefore(new basic.Span(path));
+                     browser.parent.add(browser.tasks[path]);
                    });
                  });
-                 C.Def(function change(path,item) {
-                   var browser=this;
-                   for(var windowid in browser.tasks) {
-                     browser.tasks[windowid].hide();
-                   }
-                   if(browser.tasks[path]) {
-                     browser.tasks[path].show();
+               });
+               C.Def(function change(path,item) {
+                 var browser=this;
+                 for(var windowid in browser.tasks) {
+                   browser.tasks[windowid].hide();
+                 }
+                 if(browser.tasks[path]) {
+                   browser.tasks[path].show();
 
-                   } else {
-                     browser.load(path,item);
+                 } else {
+                   browser.load(path,item);
 
-                   }
-                 });
-                 C.Def(function Import(path1,callback) {
-                   var item;
-                   var browser=this;
-                   var cursor=this;
-                   var filedepth=0;
+                 }
+               });
+               C.Def(function Import(path1,callback) {
+                 var item;
+                 var browser=this;
+                 var cursor=this;
+                 var filedepth=0;
 
-                   window.Import(path1,function(item) {
-                     var path=item.filename;
-                     var paths=path.split('/');
-                     var start=0;
-                     var children=Object.keys(item);
-                     if(paths[0]=="") start=1;
-                     var filename=paths[paths.length-1];
+                 window.Import(path1,function(item) {
+                   var path=item.filename;
+                   var paths=path.split('/');
+                   var start=0;
+                   var children=Object.keys(item);
+                   if(paths[0]=="") start=1;
+                   var filename=paths[paths.length-1];
 
-                     /*for(var i=start;i<paths.length;i++) {
+                   /*for(var i=start;i<paths.length;i++) {
                        var file;
                        var key=paths[i];
                        var existingfiles=cursor.query("div[data-key=\""+key+"\"]");
@@ -574,11 +575,11 @@ Module(function M() {
                        }
                        filedepth++;
                      }*/
-                     //if(browser.tasks.length==1) browser.load(path,item);
-                   });
+                   //if(browser.tasks.length==1) browser.load(path,item);
                  });
-                 //  M.continue();
                });
+               //  M.continue();
+               //});
              });
              //window.ew=new EditorWindow();
              var main = new HomeWindow();
