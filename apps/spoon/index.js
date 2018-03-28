@@ -71,7 +71,7 @@ Module(function M() {
                  this.add(new Tile(appname,onclick))
                });
                C.Def(function addTask(name,task) {
-                 var tm=this.parent;
+                 var deck=this;
                  var found=false;
                  this.tasks.forEach(function(task2) {
                    if(task2===task)
@@ -79,7 +79,7 @@ Module(function M() {
                  });
                  if(!found) {
                    var tile=new Tile(name,function onclick(e) {
-                     tm.Activate(task);
+                     deck.Activate(task);
                    });
                    tile.task=task;
 
@@ -87,7 +87,9 @@ Module(function M() {
                    this.tasks.push(task);
                  }
                });
-
+               C.Def(function Activate(task) {
+                 this.parent.Activate(task);
+               });
              });
              var EditorHome=M.Class(function C() {
                C.Super(Pane);
