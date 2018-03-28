@@ -51,7 +51,7 @@ Module(function M() {
                C.Super(interactive.MomentaryButton);
                C.Init(function Tile(name,callback) {
                  interactive.MomentaryButton.call(this,name,'task',callback);
-
+                 this.name=name;
                  this.addClass('tile');
                });
              });
