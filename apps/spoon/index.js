@@ -70,10 +70,24 @@ Module(function M() {
                  }
                  this.add(new Tile(appname,onclick))
                });
-               C.Def(function addTask(task) {
-                 this.addBefore(task);
-                 this.tasks.push(task);
+               C.Def(function addTask(name,task) {
+                 var tm=this.parent;
+                 var found=false;
+                 this.tasks.forEach(function(task2) {
+                   if(task2===task)
+                     found=true;
+                 });
+                 if(!found) {
+                   var tile=new Tile(name,function onclick(e) {
+                     tm.Activate(task);
+                   });
+                   tile.task=task;
+
+                   this.addBefore(tile);
+                   this.tasks.push(task);
+                 }
                });
+
              });
              var EditorHome=M.Class(function C() {
                C.Super(Pane);
@@ -140,9 +154,11 @@ Module(function M() {
                  var found=false;
                  this.tiles.forEach(function (t) {
                    if (t.task===task) { found=true; }
-                   if (t.name==appname) {
-                     t.addTask(t);
+                   if (t.name==appname && t instanceof Deck) {
+
+                     t.addTask(path,task);
                      found=true;
+
                    }
                  });
                  if(found) {
@@ -151,12 +167,10 @@ Module(function M() {
                  else {
                    //add task to new deck on taskbar
                    //this.tasks.push(task);
-                   var tile=new Tile(appname,function onclick(e) {
-                     tm.Activate(task)
-                   });
-                   tile.task=task;
-                   this.tiles.push(tile);
-                   this.add(tile);
+                   var deck = new Deck(appname);
+                   deck.addTask(path,task);
+                   this.tiles.push(deck);
+                   this.add(deck);
 
                  }
                });
