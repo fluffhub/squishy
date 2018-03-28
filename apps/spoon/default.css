@@ -345,3 +345,19 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 .FileBrowser .button.live { color: rgb(0, 255, 0); }
 .hud { position: fixed; top: 0px; bottom: 0px; right: 0px; left: 0px; }
 .FileBrowser .button.live.membrane { color: rgb(255, 170, 0); }
+
+.deck {
+    display: table-cell;
+    width: 75px;
+    vertical-align: bottom;
+    background: none;
+
+}
+.deck .tile {
+    width: 75px;
+    height: 75px;
+  padding:0.25em;
+  box-sizing:border-box;
+      line-height: 75px;
+    background: rgba(100,100,100,1)
+}
