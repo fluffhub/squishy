@@ -89,7 +89,7 @@ Module(function M() {
                    });
                    tile.task=task;
 
-                   this.addBefore(tile);
+                   this.wrapper.addBefore(tile);
                    this.tasks.push(task);
                  }
                });
