@@ -66,16 +66,17 @@ Module(function M() {
 
                  this.wrapper=new basic.Div();
                  this.add(this.wrapper);
+
                  var callback=callback || function() {};
                  function onclick(e) {
                    deck.toggleClass("active");
                    callback(e);
                  }
-                 this.add(new Tile(appname,onclick))
+                 this.wrapper.add(new Tile(appname,onclick))
                });
-               C.Def(function add(item){
+           /*   C.Def(function add(item){
                  this.wrapper.add(item);
-               })
+               })*/
                C.Def(function addTask(name,task) {
                  var deck=this;
                  var found=false;
