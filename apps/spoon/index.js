@@ -63,6 +63,9 @@ Module(function M() {
                  this.tasks=[];
                  this.name=appname;
                  var deck=this;
+
+                 this.wrapper=new basic.Div();
+                 this.add(this.wrapper);
                  var callback=callback || function() {};
                  function onclick(e) {
                    deck.toggleClass("active");
@@ -70,6 +73,9 @@ Module(function M() {
                  }
                  this.add(new Tile(appname,onclick))
                });
+               C.Def(function add(item){
+                 this.wrapper.add(item);
+               })
                C.Def(function addTask(name,task) {
                  var deck=this;
                  var found=false;

@@ -347,17 +347,28 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 .FileBrowser .button.live.membrane { color: rgb(255, 170, 0); }
 
 .deck {
-    display: table-cell;
+ width:75px;
+  height:75px;
+    background: none;
+overflow:hidden;
+  position:relative;
+  transition:height 1s ease-in-out;
+}
+.deck.active {
+  height:500px;
+}
+.deck>div {
+     display: table-cell;
     width: 75px;
     vertical-align: bottom;
-    background: none;
-
 }
 .deck .tile {
     width: 75px;
     height: 75px;
   padding:0.25em;
+  margin:1px;
   box-sizing:border-box;
-      line-height: 75px;
-    background: rgba(100,100,100,1)
+      display:table-cell;
+  vertical-align:top;
+    background: rgba(200,200,200,1)
 }
