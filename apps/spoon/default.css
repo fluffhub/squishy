@@ -352,6 +352,7 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
     background: none;
 overflow:hidden;
   position:relative;
+  float:left;
   transition:height 1s ease-in-out;
 }
 .deck.active {
