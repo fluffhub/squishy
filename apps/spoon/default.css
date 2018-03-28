@@ -361,14 +361,14 @@ overflow:hidden;
      display: table-cell;
     width: 75px;
     vertical-align: bottom;
+  position:absolute;
+  bottom:0;
 }
 .deck .tile {
     width: 75px;
     height: 75px;
   padding:0.25em;
   margin:1px;
-  box-sizing:border-box;
-      display:table-cell;
-  vertical-align:top;
+  display:block;
     background: rgba(200,200,200,1)
 }

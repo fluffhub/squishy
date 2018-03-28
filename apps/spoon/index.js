@@ -118,11 +118,14 @@ Module(function M() {
              var TaskManager=M.Class(function C() {
                C.Super(basic.Div);
                C.Init(function TaskManager(home) {
+                 var tm=this;
                  this.home=home;
                  var apps=this.home.apps;
                  this.tiles=[];
                  Object.keys(apps).forEach(function(appname) {
-                   var deck=new Deck(appname);
+                   var deck=new Deck(appname,function() {
+                     tm.home.run(appname);
+                   });
                    this.add(deck);
                    this.tiles.push(deck);
 
