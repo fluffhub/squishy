@@ -158,7 +158,7 @@ Module(function M() {
                  if(!found) {
                    var deck=new Deck(name);
                    this.add(deck);
-                   this.tiles[name]=deck;
+                   this.tiles.push(deck);
                  }
                });
                C.Def(function addTask(path,task) {
