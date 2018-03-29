@@ -359,11 +359,11 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
     position: relative;
     /* float: left; */
     display: inline-block;
-    transition: height 1s ease-in-out;
+    transition: height 0.33s linear;
 }
 
 .deck.active {
-  height:500px;
+  height:5000px;
 }
 .deck>div {
     /* display: table-cell; */
