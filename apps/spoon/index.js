@@ -72,7 +72,8 @@ Module(function M() {
                    deck.toggleClass("active");
                    callback(e);
                  }
-                 this.wrapper.add(new Tile(appname,onclick))
+                 this.header=new Tile(appname,onclick);
+                 this.add(this.header)
                });
            /*   C.Def(function add(item){
                  this.wrapper.add(item);
