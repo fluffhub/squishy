@@ -346,24 +346,31 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 .hud { position: fixed; top: 0px; bottom: 0px; right: 0px; left: 0px; }
 .FileBrowser .button.live.membrane { color: rgb(255, 170, 0); }
 
-.deck {
- width:75px;
-  height:75px;
-    background: none;
-overflow:hidden;
-  position:relative;
-  float:left;
-  transition:height 1s ease-in-out;
+.deck>div:first-child {
+    padding-bottom: 76px;
 }
+
+
+.deck {
+    width: 75px;
+    height: 75px;
+    background: none;
+    overflow: hidden;
+    position: relative;
+    /* float: left; */
+    display: inline-block;
+    transition: height 1s ease-in-out;
+}
+
 .deck.active {
   height:500px;
 }
 .deck>div {
-     display: table-cell;
+    /* display: table-cell; */
     width: 75px;
     vertical-align: bottom;
-  position:absolute;
-  bottom:0;
+    position: absolute;
+    bottom: 0;
 }
 .deck .tile {
     width: 75px;
