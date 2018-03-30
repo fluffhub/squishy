@@ -64,8 +64,6 @@ Module(function M() {
                  this.name=appname;
                  var deck=this;
 
-                 this.wrapper=new basic.Div();
-                 this.add(this.wrapper);
 
                  var callback=callback || function() {};
                  function onclick(e) {
@@ -74,8 +72,11 @@ Module(function M() {
                  }
                  this.header=new Tile(appname,onclick);
                  this.add(this.header)
+                 this.wrapper=new basic.Div();
+                 this.add(this.wrapper);
+
                });
-           /*   C.Def(function add(item){
+               /*   C.Def(function add(item){
                  this.wrapper.add(item);
                })*/
                C.Def(function addTask(name,task) {
@@ -521,7 +522,7 @@ Module(function M() {
                  this.apps[name]=exec;
                });
 
-               C.Def(function activate(item) {
+               /*   C.Def(function activate(item) {
                  var browser=this;
                  Import("app/codebrowser",function(codebrowser) {
                    browser.absolutefiles[path]=item;
@@ -544,7 +545,7 @@ Module(function M() {
                    browser.load(path,item);
 
                  }
-               });
+               });*/
                C.Def(function Import(path1,callback) {
                  var item;
                  var browser=this;
