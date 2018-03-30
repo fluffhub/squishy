@@ -134,7 +134,7 @@ Module(function M() {
                  basic.Div.call(this,"tmg TaskList");
                });
                C.Def(function Activate(task) {
-                 this.tiles.forEach(function(task1) {
+                 this.decks.forEach(function(task1) {
                    task1.removeClass("active");
                    //setTimeout(function() { task.addClass("active") },20);
                  });
@@ -150,7 +150,7 @@ Module(function M() {
                C.Def(function addApp(name, exec) {
                  var deck=null;
                  var found=false;
-                 this.tiles.forEach(function(tile) {
+                 this.decks.forEach(function(tile) {
                    if(tile.name==name) {
                      found=true;
                    }
@@ -158,14 +158,14 @@ Module(function M() {
                  if(!found) {
                    var deck=new Deck(name);
                    this.add(deck);
-                   this.tiles.push(deck);
+                   this.decks.push(deck);
                  }
                });
                C.Def(function addTask(path,task) {
                  var appname=path.split(":")[0]
                  var tm=this;
                  var found=false;
-                 this.tiles.forEach(function (t) {
+                 this.decks.forEach(function (t) {
                    if (t.task===task) { found=true; }
                    if (t.name==appname && t instanceof Deck) {
 
@@ -182,7 +182,7 @@ Module(function M() {
                    //this.tasks.push(task);
                    var deck = new Deck(appname);
                    deck.addTask(path,task);
-                   this.tiles.push(deck);
+                   this.decks.push(deck);
                    this.add(deck);
 
                  }
