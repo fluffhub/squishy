@@ -366,11 +366,8 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
   height:5000px;
 }
 .deck>div {
-    /* display: table-cell; */
     width: 75px;
-    vertical-align: bottom;
-    position: absolute;
-    bottom: 0;
+
 }
 .deck .tile {
     width: 75px;
