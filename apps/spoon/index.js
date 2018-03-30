@@ -58,7 +58,7 @@ Module(function M() {
              var Deck=M.Class(function C() {
                C.Super(basic.Div);
                //  C.Def("tasks",[])
-               C.Def("tileheight",75);
+               C.Def("tileheight",76);
                C.Def("opened", false);
                C.Init(function Deck(appname,callback) {
                  basic.Div.call(this,"deck");
@@ -107,6 +107,7 @@ Module(function M() {
 
                    this.wrapper.add(tile);
                    this.tasks.push(task);
+                   this.expand();
                  }
                });
                C.Def(function Activate(task) {
