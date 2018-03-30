@@ -86,7 +86,7 @@ Module(function M() {
                  this.open=true;
                });
                C.Def(function contract() {
-                 this.element.style['height']='inherit';
+                 delete this.element.style.removeProperty('height')
                  this.open=false;
                });
                /*   C.Def(function add(item){
