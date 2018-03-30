@@ -91,7 +91,7 @@ Module(function M() {
                    });
                    tile.task=task;
 
-                   this.wrapper.addBefore(tile);
+                   this.wrapper.add(tile);
                    this.tasks.push(task);
                  }
                });
@@ -122,13 +122,13 @@ Module(function M() {
                  var tm=this;
                  this.home=home;
                  var apps=this.home.apps;
-                 this.tiles=[];
+                 this.decks=[];
                  Object.keys(apps).forEach(function(appname) {
                    var deck=new Deck(appname,function() {
                      tm.home.run(appname);
                    });
-                   this.add(deck);
-                   this.tiles.push(deck);
+                   tm.add(deck);
+                   tm.decks.push(deck);
 
                  });
                  basic.Div.call(this,"tmg TaskList");
