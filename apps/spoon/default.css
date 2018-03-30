@@ -346,7 +346,7 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 .hud { position: fixed; top: 0px; bottom: 0px; right: 0px; left: 0px; }
 .FileBrowser .button.live.membrane { color: rgb(255, 170, 0); }
 
-.deck>div:first-child {
+.deck>div:last-child {
     padding-bottom: 76px;
 }
 
