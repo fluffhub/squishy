@@ -58,6 +58,8 @@ Module(function M() {
              var Deck=M.Class(function C() {
                C.Super(basic.Div);
                //  C.Def("tasks",[])
+               C.Def("tileheight",75);
+               C.Def("opened", false);
                C.Init(function Deck(appname,callback) {
                  basic.Div.call(this,"deck");
                  this.tasks=[];
@@ -67,14 +69,25 @@ Module(function M() {
 
                  var callback=callback || function() {};
                  function onclick(e) {
-                   deck.toggleClass("active");
+                   if(!deck.open) deck.expand();
+                   else deck.contract();
                    callback(e);
                  }
+
                  this.header=new Tile(appname,onclick);
                  this.add(this.header)
                  this.wrapper=new basic.Div();
                  this.add(this.wrapper);
 
+               });
+               C.Def(function expand() {
+
+                 this.element.style['height']=(this.tileheight*(this.tasks.length+1))+"px"
+                 this.open=true;
+               });
+               C.Def(function contract() {
+                 this.element.style['height']='inherit';
+                 this.open=false;
                });
                /*   C.Def(function add(item){
                  this.wrapper.add(item);
