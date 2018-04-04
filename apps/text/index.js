@@ -1,6 +1,6 @@
 Module(function M() {
   M.Import(
-    "spoon","basic","system","live","form","spoon/windowing",
+    "apps/spoon","basic","system","live","form","apps/spoon/windowing",
     //  context actions
     //  list view
     //  tile view
