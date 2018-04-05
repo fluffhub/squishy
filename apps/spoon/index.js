@@ -149,16 +149,18 @@ Module(function M() {
                  basic.Div.call(this,"tmg TaskList");
                });
                C.Def(function Activate(task) {
-                 this.decks.forEach(function(task1) {
-                   task1.removeClass("active");
-                   //setTimeout(function() { task.addClass("active") },20);
-                 });
-                 task.addClass("active");
-                 var parent=task.parent;
-                 task.remove();
-                 task.parent.add(task);
-                 if(!task.hasClass("visible"))
-                   task.addClass("visible");
+                 if(!task.hasClass("active")) {
+                   this.decks.forEach(function(task1) {
+                     task1.removeClass("active");
+                     //setTimeout(function() { task.addClass("active") },20);
+                   });
+                   task.addClass("active");
+                   var parent=task.parent;
+                   task.remove();
+                   task.parent.add(task);
+                   if(!task.hasClass("visible"))
+                     task.addClass("visible");
+                 }
                });
 
 
@@ -311,10 +313,9 @@ Module(function M() {
                  this.add(task);
                  var hw=this;
                  task.addEvent("activate","mousedown touchstart",function onactivate(e) {
-                   if(!task.hasClass("active"))
-                   { e.stopPropagation();
-                    hw.tm.Activate(task);
-
+                   if(!task.hasClass("active")) {
+                     e.stopPropagation();
+                     hw.tm.Activate(task);
                    }
                  },task.element,{capture:false})
                  task.enableEvents("activate");
