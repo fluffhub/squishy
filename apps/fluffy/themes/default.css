@@ -6,6 +6,8 @@
     color: white;
   float:left;
 }
+
+
 .cmd { color:rgba(255,125,0,0.75);background:none; }
 .ops {color: rgba(200,125,50,1);background: none;font-weight: bold;}
 .OP.arglist { float:left;    border-radius: 0 0.5em 0.5em 0; }
@@ -46,9 +48,15 @@
     padding: 0 5px;
     background-color: rgba(0,255,0,0.5);
 }
-.Import>.arglist {
-    display: none;
+.Import>.cmd {
+    font-size: 1.25em;
+    /* padding: 0.25em; */
+    display: block;
+    float: none;
+    color: white;
+    background-color: rgb(100,100,100);
 }
+
 .ghost>.ClassDiv {
   white-space:nowrap;
   opacity:0.95;
@@ -74,29 +82,35 @@ span.EX.Import {
     min-width: 100%;
 }
 .EX>.arglist {
-    border-radius: 1em;
-    padding: .5em .5em;
+    /* border-radius: 1em; */
+    /* padding: .5em .5em; */
     display: inline-block;
-    border-style: solid;
+    /* border-style: solid; */
     border-color: rgba(25,125,25,0.9);
     border-width: 2px;
-    border-width: 2px 0 2px 0px;
+    border-width: 0 2px 0 2px;
     background: none;
     float: left;
     box-sizing: border-box;
+}
+.EX>.arglist:before {
+  content:"("
+}
+.EX>.aglist:after {
+ content:")"
 }
 
 .B {
     /* display: inline-block; */
     border: 2px solid rgba(0,0,0,0.5);
-    border-radius: 1em;
-    padding: .25em .5em;
+    /* border-radius: 1em; */
+    padding: 1px;
     float: left;
     clear: both;
     border-width: 0 2px;
-    /*min-width: 100%;*/
+    /* min-width: 100%; */
     /* padding: 1px; */
-    margin: 0 .1em 0.25em .1em;
+    /* margin: 0 .1em 0.25em .1em; */
     box-sizing: border-box;
 }
 .A { display:inline;float:left; }
@@ -173,7 +187,9 @@ span.code-brace {
 
 }
 
-.callee { padding:0.1em 0.5em 0.1em 1em; }
+.callee {
+    /* padding: 0.1em 0.5em 0.1em 1em; */
+}
 .param { float:left; }
 .unknown { border:1px dashed red; }
 .ForInStatement {
@@ -202,11 +218,15 @@ span.code-brace {
     border-bottom: none;
     border-top: none;
     box-sizing: border-box;
-    border-radius: 1em;
+   /*border-radius: 1em;*/
 }
 .Import>.arglist:last-child { display:none; }
 span.A>*:first-child::after {
     content: " = ";
+}
+.Import>.arglist {
+    display: block;
+    float: none;
 }
 .acc {
     overflow: scroll;
@@ -264,18 +284,18 @@ font-size: 1.25em;
     display: inline-block;
      line-height: 2em;
     margin: 0;
-    border-radius: 1em 0 0 1em;
+ /*   border-radius: 1em 0 0 1em;*/
 }
 
 .Module>.callee:first-child {
     font-size: 1.25em;
     padding: 0.25em;
+    float: none;
+    display: block;
+    clear: both;
 }
 
-.Import>.cmd {
-    font-size: 1.25em;
-    padding: 0.25em;
-}
+
 .paramlist { float:left; clear:none; }
 span.argument {
     float: left;

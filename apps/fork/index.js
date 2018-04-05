@@ -6,18 +6,17 @@ Module(function M() {
     "squishy/request",
     "squishy/svg",
     "squishy/form",
-    "lib/squishy_ext/LocalModel",
     "squishy/live",
     "squishy/system",
     "fork/wrappers",
     "apps/spoon/",
     "apps/spoon/windowing",
-    function(event,basic,interactive,Req,svg,form,LM,live,system,wrappers,spoon,windowing) {
+    function(event,basic,interactive,Req,svg,form,live,system,wrappers,spoon,windowing) {
       Import("spoon","apps/spoon/conf",function(spoon,conf) {
         var osroot=""
         var Request=Req.Request;
         var main=live.DeviceManager;
-        var theme={}
+        var theme={};
 
         Import("fork/filebrowser.css");
         M.Def("wrappers",wrappers)

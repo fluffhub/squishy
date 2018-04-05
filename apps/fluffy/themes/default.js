@@ -132,7 +132,7 @@ Module(function M() {
       }},
       FunctionDeclaration:{enter:function(n,p,c) {
         var item=new basic.Div("F")
-        item.add(new basic.Span("function","ops"));
+        item.add(new basic.Span("f","ops"));
         return item;
       },leave:function(n,p,c) {
         //// if(n.params.length>0)
@@ -185,7 +185,7 @@ Module(function M() {
         return new basic.Span("","OP");
       },leave:function(n,p,c) {
         if(n.operator) {
-          n.argument.element.add(new basic.Span(n.operator));
+          n.argument.element.parent.add(new basic.Span(n.operator));
         }
       }},
       ReturnStatement:{enter:function(n,p,c) {
@@ -245,14 +245,14 @@ Module(function M() {
         return new basic.Span("","OP");
       },leave:function(n,p,c) {
         if(n.operator) {
-          n.left.element.add(new basic.Span(n.operator));
+          n.left.parent.element.addBefore(new basic.Span(n.operator),n.right.element);
         }
       }},
       BinaryExpression:{enter:function(n,p) {
         return new basic.Span("","OP");
       },leave:function(n,p,c) {
         if(n.operator) {
-          n.left.element.add(new basic.Span(n.operator));
+          n.left.parent.element.addBefore(new basic.Span(n.operator),n.right.element);
         }
       }},
       IfStatement:{enter:function(node,parent) {
