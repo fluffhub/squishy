@@ -1,12 +1,13 @@
 Module(function M() {
   M.Import(
     "apps/spoon","basic","system","live","form","apps/spoon/windowing",
-    //  context actions
-    //  list view
-    //  tile view
-    //  editor
-    //  viewer
     function (spoon,basic,system,live,form,windowing) {
+      //  context actions
+      //  list view
+      //  tile view
+      //  editor
+      //  viewer
+
       M.Def(function match(file,name) {
         if (file instanceof system.File) {// || typeof file=="string" ) {
           return true;
@@ -14,6 +15,9 @@ Module(function M() {
         }
 
       });
+      ".TextEditor textarea { width: 500px; height: 300px; font-family: monospace, serif; font-size: 0.75em; }"+
+        ".acw > .acb, .TextEditor > .title { cursor: default; display: block; font-size: 1em; font-family: monospace, serif; line-height: 1.8em; text-indent: 5px; }";
+
       var TextEditor=M.Class(function C() {
         C.Super(windowing.AppContainer)
         C.Init(function TextEditor(loc,items) {

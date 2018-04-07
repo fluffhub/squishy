@@ -99,7 +99,7 @@ Module(function M() {
 
       ForInStatement: {
         enter:function(n,p,c) {
-         return new basic.Span("","forloop forin");
+          return new basic.Span("","forloop forin");
         },
         leave:function(n,p,c) {
           console.debug({ForIn:n});
@@ -469,9 +469,9 @@ Module(function M() {
           node.arguments[0].id.element.addClass("ids");
           var el=node.element;
 
-         // while(el!==undefined&&el.parent!==undefined&&!el.hasClass("CodeBrowser")) {
-         ////   el=el.parent;
-         // }
+          // while(el!==undefined&&el.parent!==undefined&&!el.hasClass("CodeBrowser")) {
+          ////   el=el.parent;
+          // }
           el.parent.add(node.exports);
         }
       },
@@ -493,11 +493,7 @@ Module(function M() {
         },
         enter:function(node,parent,cursor) {
           var el=new basic.Div("ClassDiv");
-
-
           return el;
-
-
         },
         leave:function(node,parent,cursor) {
 
@@ -558,7 +554,7 @@ Module(function M() {
         leave:function(node,p,c) {
           //var dec=node.declarations[i];
           if(node.arguments[0].type=="literal") {
-          node.arguments[0].addClass("ids def");
+            node.arguments[0].addClass("ids def");
             node.arguments[0].content(node.arguments[0].value);
           }
 

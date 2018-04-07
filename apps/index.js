@@ -8,6 +8,8 @@ Module(function M ()  {
           "spoon/",
           "object/",
           "text/",
-         "Console")
+         "Console",
+          "ticker/",
+         );
 
 });

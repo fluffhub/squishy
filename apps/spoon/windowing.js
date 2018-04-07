@@ -27,8 +27,6 @@ Module(function M() {
 
           this.addClass("acw");
 
-
-
           //titlebar
           this.titlebar=new basic.Div("acb")
           this.add(this.titlebar);
@@ -46,6 +44,7 @@ Module(function M() {
             spoon.main.contextmenu.add(new interactive.MomentaryButton("X","ui_button",function() {
               spoon.main.close(acw);
               spoon.main.clearContext();
+
             }));
 
           });
