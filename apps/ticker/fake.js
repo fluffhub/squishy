@@ -42,7 +42,7 @@ Module(function M() {
             this.past_values.push([value]);
             pn=0;
           }
-          this.onmessage(JSON.stringify({id:value});
+          this.onmessage(JSON.stringify({id:value}));
 
         }
       });
