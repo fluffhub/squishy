@@ -22,7 +22,7 @@ Module(function M() {
           var id="";
           var value;
           for (var i=0;i<3;i++) {
-            var chars=Math.round(Math.rand()*max/n)*n;
+            var chars=Math.round(Math.random()*max/n)*n;
             id+=String.fromCharCode(97 + chars%26);
             chars=chars/26;
           }
