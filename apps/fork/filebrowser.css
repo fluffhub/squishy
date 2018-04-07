@@ -23,6 +23,7 @@
 .FileBrowser .button.Directory::after { content: "/"; }
 .FileBrowser .button.Directory {     color: rgb(25, 25, 200);
     font-weight: 700; }
+.fs_container { height:100%;position:absolute; }
 .fs_container > .button { line-height: 1.25em; float: left; clear: both; width: 100%; padding: 0px 0.25em; }
 .pwdbar > .button { display: none; }
 .pwdbar > .button:first-child { display: inline; }

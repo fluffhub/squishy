@@ -149,9 +149,12 @@ Module(function M() {
                  basic.Div.call(this,"tmg TaskList");
                });
                C.Def(function Activate(task) {
+                 console.debug({activated:task});
                  if(!task.hasClass("active")) {
-                   this.decks.forEach(function(task1) {
-                     task1.removeClass("active");
+                   this.decks.forEach(function(deck) {
+                     deck.tasks.forEach(function(task1) {
+                       task1.removeClass("active");
+                     });
                      //setTimeout(function() { task.addClass("active") },20);
                    });
                    task.addClass("active");
@@ -321,7 +324,6 @@ Module(function M() {
                  task.enableEvents("activate");
                  this.tm.addTask(path,task);
                  this.tm.Activate(task);
-
                });
                C.Def(function run(val) {  //run takes multiple args
                  var args=Array.prototype.slice.call(arguments,1)
