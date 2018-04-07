@@ -1,5 +1,5 @@
 Module(function M() {
-  M.Import("spoon/realtime",function(rt) {
+  M.Import("squishy/realtime",function(rt) {
 
     var FakeSocket=M.Class(function C() {
       C.Init(function FakeSocket() {
