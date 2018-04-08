@@ -16,7 +16,8 @@ Module(function M() {
       });
       C.Def(function start_messaging() {
         var max=456976;
-        var n=1000;
+        var avgtime=500;
+        var n=100;
         var lt=performance.now();
         while(this.active) {
           var id="";
@@ -42,8 +43,9 @@ Module(function M() {
             this.past_values.push([value]);
             pn=0;
           }
-
+          setTimeout(function() {
           this.onmessage(JSON.stringify({id:id, value:value}));
+          },Math.round(avgtime*Math.random()))
 
         }
       });
