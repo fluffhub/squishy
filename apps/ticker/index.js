@@ -28,8 +28,8 @@ Module(function M() {
             this.path.element.style.stroke="1px solid black";
 
             this.def=new svg.PathDefinition("M0,0z");
-            this.add(this.Chart.path);
-            this.path.define(this.Chart.def);
+            this.add(this.path);
+            this.path.define(this.def);
             this.st=performance.now();
             this.lt=this.st;
             this.lp=0;
