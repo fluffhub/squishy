@@ -103,7 +103,7 @@ Module(function M() {
               this.tickers=[];
               this.tickersocket=new fake.Remote();
               this.entry=new form.TextInput();
-              this.submit=new interactive.MomentaryButton("y",function() {
+              this.submit=new interactive.MomentaryButton("y","addticker",function() {
                 tm.addTicker(tm.entry.value());
               });
               this.form=new basic.Div("tickerentry");
