@@ -29,7 +29,7 @@ Module(function M() {
 
             this.def=new svg.PathDefinition("M0,0z");
             this.add(this.path);
-            this.path.define(this.def.toString());
+            this.path.define(this.def);
             this.st=performance.now();
             this.lt=this.st;
             this.lp=0;
@@ -54,7 +54,7 @@ Module(function M() {
             }
 
             this.lt=tn;
-            this.path.define(this.def.toString());
+            this.path.define(this.def);
           });
         });
         var Ticker=M.Class(function C() {
