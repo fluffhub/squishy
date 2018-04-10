@@ -31,7 +31,7 @@ Module(function M() {
         var keys=value.split(" ");
         if(keys[0]=="start") {
           this.active=true;
-          this.start_messaging(keys[1],-50,50);
+          this.start_messaging(keys[1],-50,50,1);
         }
       });
       C.Def(function start_messaging(id, min, max, freq) {
