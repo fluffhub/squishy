@@ -82,7 +82,7 @@ Module(function M() {
                 else cls="new down";
                 var newValue=new basic.Span(v.value, cls);
                 if(ticker.Value.oldValue) ticker.Value.oldValue.remove();
-                this.Value.add(newValue);
+                ticker.Value.add(newValue);
                 newValue.removeClass("new");
                 newValue.removeClass("up");
                 newValue.removeClass("down");
