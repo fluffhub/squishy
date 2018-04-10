@@ -110,14 +110,14 @@ Module(function M() {
               this.form=new basic.Div("tickerentry");
               this.form.add(this.entry);
               this.form.add(this.submit);
-              this.add(this.form);
+              this.addBefore(this.form);
 
             });
             C.Def(function addTicker(symbol) {
               this.tickersocket.send("start "+symbol);
               var t=new Ticker(symbol,this.tickersocket);
               this.tickers.push(t);
-              this.addBefore(t);
+              this.contents.addBefore(t);
             });
           });
 
