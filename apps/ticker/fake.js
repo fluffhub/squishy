@@ -47,6 +47,7 @@ Module(function M() {
           pn=0;
 
           var speed, sign, tpv, value, nt;
+          function go() {
           while(this.active) {
             speed=Math.round(Math.random()*max);
             sign=Math.round(Math.random()*10000)>4999?-1:1;
@@ -63,6 +64,8 @@ Module(function M() {
             }
             this.onmessage({id,value});
           }
+          }
+          setTimeout(go,0);
         }
       });
       C.Def(function stop_messaging() {
