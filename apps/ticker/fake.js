@@ -81,7 +81,11 @@ Module(function M() {
       C.Super(rt.Remote);
       C.Init(function Remote() {
         rt.Remote.call(this);
+        var remote=this;
         this.socket=new FakeSocket();
+        this.socket.onmessage=function(e) {
+          remote.onmessage(e);
+        }
         this.ready=true;
       });
     });
