@@ -41,6 +41,7 @@ Module(function M() {
 
         var lt=performance.now();
         var pn = this.past_ids.indexOf(id);
+        var msger=this;
         if(pn==-1) {
           this.past_ids.push(id);
           this.past_values.push([Math.round(Math.random()*this.max_initial_value)]);
@@ -48,7 +49,7 @@ Module(function M() {
 
           var speed, sign, tpv, value, nt;
           function go() {
-          while(this.active) {
+          while(msger.active) {
             speed=Math.round(Math.random()*max);
             sign=Math.round(Math.random()*10000)>4999?-1:1;
             tpv=this.past_values[pn];
@@ -62,7 +63,7 @@ Module(function M() {
             while(lt<nt) {
               lt=performance.now();
             }
-            this.onmessage({id,value});
+            msger.onmessage({id,value});
           }
           }
           setTimeout(go,0);
