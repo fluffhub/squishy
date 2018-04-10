@@ -23,7 +23,7 @@ Module(function M() {
       C.Init(function FakeSocket() {
         this.past_ids=[];
         this.past_values=[];
-        this.ready=true;
+
         this.max_speed=100;
         this.max_initial_value=1000;
       });
@@ -78,6 +78,7 @@ Module(function M() {
       C.Init(function Remote() {
         rt.Remote.call(this);
         this.socket=new FakeSocket();
+        this.ready=true;
       });
     });
   });
