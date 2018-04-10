@@ -60,7 +60,7 @@ Module(function M() {
             while(lt<nt) {
               lt=performance.now();
             }
-            this.onmessage({id:value});
+            this.onmessage({id,value});
           }
         }
       });
