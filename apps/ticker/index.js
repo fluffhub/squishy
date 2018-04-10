@@ -91,7 +91,6 @@ Module(function M() {
                 if(v.value>ticker.max) ticker.max=v.value;
                 if(v.value<ticker.min) ticker.min=v.value;
                 ticker.Chart.addPoint(v.value)
-                console.debug({value:v.value})
               }
             });
           });
