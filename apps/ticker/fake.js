@@ -52,7 +52,7 @@ Module(function M() {
           while(msger.active) {
             speed=Math.round(Math.random()*max);
             sign=Math.round(Math.random()*10000)>4999?-1:1;
-            tpv=this.past_values[pn];
+            tpv=msger.past_values[pn];
             value=tpv[tpv.length-1]+speed*sign;
             if (tpv.length > 1000)
               tpv.shift();
