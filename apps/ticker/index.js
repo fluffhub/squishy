@@ -16,7 +16,7 @@ Module(function M() {
         "text-align: center;"
       )
       document.styleSheets[0].addRule(".ticker>svg",
-                                      "stroke-width:1px;stroke:orange;height:2.5em.");
+                                      "stroke-width:1px;stroke:orange;height:2.5em;float:left;");
             document.styleSheets[0].addRule(".ticker>.sym",
                                             "line-height:1.25em;font-family:monospace;");
 
@@ -134,14 +134,15 @@ Module(function M() {
               this.form.add(new basic.Span("Add ticker: "));
               this.form.add(this.entry);
               this.form.add(this.submit);
+              this.tickers=new basic.Div("tickerlist");
               this.contents.add(this.form);
-
+              this.contents.add(this.tickers);
             });
             C.Def(function addTicker(symbol) {
               this.tickersocket.send("start "+symbol);
               var t=new Ticker(symbol,this.tickersocket);
               this.tickers.push(t);
-              this.contents.addBefore(t);
+              this.tickers.addBefore(t);
             });
           });
 
