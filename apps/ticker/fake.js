@@ -49,7 +49,7 @@ Module(function M() {
 
           var speed, sign, tpv, value, nt;
           function go() {
-          while(msger.active) {
+
             speed=Math.round(Math.random()*max);
             sign=Math.round(Math.random()*10000)>4999?-1:1;
             tpv=msger.past_values[pn];
@@ -64,7 +64,7 @@ Module(function M() {
               lt=performance.now();
             }
             msger.onmessage({id,value});
-          }
+            if(msger.active) setTimeout(go,0);
           }
           setTimeout(go,0);
         }
