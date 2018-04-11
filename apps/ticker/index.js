@@ -89,26 +89,29 @@ Module(function M() {
             this.Symbol=new basic.Span(symbol, "sym");
             this.Value=new basic.Div("vals");
             this.Chart=new MiniChart(this.width,this.height);
-            this.add(this.Symbol);
+            this.Info=new basic.Div("info");
+            this.Info.add(this.Symbol);
+            this.Info.add(this.Value);
+            this.add(this.Info);
             this.add(this.Value);
             this.add(this.Chart);
             this.cursor=0;
             this.value=0;
-            this.max=10;
-            this.min=-10;
+            this.max=.0001;
+            this.min=-.0001;
             socket.subscribe(function onupdate(v) {
               if(v.id===symbol) {
                 ticker.Value.addClass("updated");
                 var cls="new";
                 if(v.value>ticker.value) cls="up";
                 else cls="down";
+                ticker.value=v.value;
                 var newValue=new basic.Span(v.value, cls);
                 if(ticker.Value.oldValue) ticker.Value.oldValue.remove();
                 ticker.Value.add(newValue);
                 setTimeout(function() {
-                newValue.removeClass("new");
-                newValue.removeClass("up");
-                newValue.removeClass("down");
+                  newValue.removeClass("up");
+                  newValue.removeClass("down");
                 }, 0);
                 ticker.Value.removeClass("updated");
                 ticker.Value.oldValue=newValue;
