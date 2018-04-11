@@ -134,15 +134,15 @@ Module(function M() {
               this.form.add(new basic.Span("Add ticker: "));
               this.form.add(this.entry);
               this.form.add(this.submit);
-              this.tickers=new basic.Div("tickerlist");
+              this.tickerlist=new basic.Div("tickerlist");
               this.contents.add(this.form);
-              this.contents.add(this.tickers);
+              this.contents.add(this.tickerlist);
             });
             C.Def(function addTicker(symbol) {
               this.tickersocket.send("start "+symbol);
               var t=new Ticker(symbol,this.tickersocket);
               this.tickers.push(t);
-              this.tickers.addBefore(t);
+              this.tickerlist.addBefore(t);
             });
           });
 
