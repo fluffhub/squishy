@@ -55,7 +55,7 @@ Module(function M() {
             this.path=new svg.Path("");
             this.path.element.style.stroke="1px solid black";
 
-            this.def=new svg.PathDefinition("M0,0z");
+            this.def=new svg.PathDefinition("M0,0");
             this.add(this.path);
             this.path.define(this.def);
             this.st=performance.now();
