@@ -18,13 +18,14 @@ Module(function M() {
       document.styleSheets[0].addRule(".ticker>svg",
                                       "stroke-width:1px;stroke:orange;height:2.5em;float:left;");
       document.styleSheets[0].addRule(".ticker>.sym",
+                                      "line-height:1.25em;font-family:monospace;font-size:1.25em;");
+      document.styleSheets[0].addRule(".ticker>.sym",
                                       "line-height:1.25em;font-family:monospace;");
-
       document.styleSheets[0].addRule(".vals",
                                       "position:relative;overflow:hidden;font-family:monospace;width:4em;height:1.25em;font-size:1em;");
       document.styleSheets[0].addRule(".vals span",
-                                      "transition:top 0.5s linear, color 1s linear;top:0;color:black;position:absolute;");
-      document.styleSheets[0].addRule(".vals span.down",
+                                      "transition:top 0.8s linear, color 1s linear 0.5s;top:0;color:black;position:absolute;");
+      document.styleSheets[0].addRule(".vals span.down;transform:translateZ(0);",
                                       "top:-1.25em;color:red;");
       document.styleSheets[0].addRule(".vals span.up",
                                       "top:1.25em;color:green;");
