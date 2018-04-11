@@ -16,14 +16,17 @@ Module(function M() {
         "text-align: center;"
       )
       document.styleSheets[0].addRule(".ticker>svg",
-                                      "stroke-width:1px;stroke-color:orange;");
+                                      "stroke-width:1px;stroke:orange;height:2.5em.");
+            document.styleSheets[0].addRule(".ticker>.sym",
+                                            "line-height:1.25em;font-family:monospace;");
+
                  document.styleSheets[0].addRule(".vals",
-                                                 "position:relative;font-family:monospace;width:4em;height:1.25em;font-size:1em;");
-                  document.styleSheets[0].addRule(".vals>span",
-                                                  "top:0;color:black;position:absolute;transition:top 0.5s linear, color 1s linear;");
-            document.styleSheets[0].addRule(".vals>span.down",
+                                                 "position:relative;overflow:hidden;font-family:monospace;width:4em;height:1.25em;font-size:1em;");
+                  document.styleSheets[0].addRule(".vals span",
+                                                  "transition:top 0.5s linear, color 1s linear;top:0;color:black;position:absolute;");
+            document.styleSheets[0].addRule(".vals span.down",
                                             "top:-1.25em;color:red;");
-                  document.styleSheets[0].addRule(".vals>span.up",
+                  document.styleSheets[0].addRule(".vals span.up",
                                             "top:1.25em;color:green;");
       Import("ticker/fake",function(fake) {
 
@@ -97,8 +100,8 @@ Module(function M() {
               if(v.id===symbol) {
                 ticker.Value.addClass("updated");
                 var cls="new";
-                if(v.value>ticker.value) cls="new up";
-                else cls="new down";
+                if(v.value>ticker.value) cls="up";
+                else cls="down";
                 var newValue=new basic.Span(v.value, cls);
                 if(ticker.Value.oldValue) ticker.Value.oldValue.remove();
                 ticker.Value.add(newValue);
