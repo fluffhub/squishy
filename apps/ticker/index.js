@@ -63,7 +63,7 @@ Module(function M() {
             this.lp=0;
           });
           C.Def(function resetSize() {
-            this.NSattrs({viewbox:"0 "+this.min+" "+this.maxtime+" "+(this.max-this.min)});
+            this.NSattrs({viewBox:"0 "+this.min+" "+this.maxtime+" "+(this.max-this.min)});
 
           });
           C.Def(function addPoint(value) {
