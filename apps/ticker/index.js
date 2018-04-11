@@ -119,7 +119,7 @@ Module(function M() {
                 else cls="new down";
                 ticker.value=v.value;
                 ticker.oldValue.setClass(cls);
-                ticker.oldValue.contents(v.value);
+                ticker.oldValue.content(v.value);
                 //var newValue=new basic.Span(v.value, cls);
                 //if(ticker.Value.oldValue) ticker.Value.oldValue.remove();
                 //delete ticker.Value.oldValue;
