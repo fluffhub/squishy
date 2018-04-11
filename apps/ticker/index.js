@@ -17,6 +17,8 @@ Module(function M() {
       )
       document.styleSheets[0].addRule(".ticker>svg",
                                       "stroke-width:1px;stroke-color:orange;");
+            document.styleSheets[0].addRule(".ticker>svg",
+                                      "stroke-width:1px;stroke-color:orange;");
       Import("ticker/fake",function(fake) {
 
         var MiniChart=M.Class(function C() {
@@ -70,6 +72,7 @@ Module(function M() {
         var Ticker=M.Class(function C() {
           C.Super(basic.Div);
           C.Init(function Ticker(symbol, socket) {
+
             basic.Div.call(this,"ticker");
             var ticker=this;
             this.id=symbol;
@@ -108,7 +111,9 @@ Module(function M() {
           var TickerMaker=M.Class(function C() {
             C.Super(windowing.AppContainer);
             C.Init(function() {
+
               windowing.AppContainer.call(this,"tickermaker");
+              this.titlebar.content("ticker");
               var tm=this;
               this.tickers=[];
               this.tickersocket=new fake.Remote();
@@ -119,7 +124,7 @@ Module(function M() {
               this.form=new basic.Div("tickerentry");
               this.form.add(this.entry);
               this.form.add(this.submit);
-              this.addBefore(this.form);
+              this.addBefore(this.form,this.contents);
 
             });
             C.Def(function addTicker(symbol) {
