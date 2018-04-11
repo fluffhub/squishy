@@ -105,9 +105,11 @@ Module(function M() {
                 var newValue=new basic.Span(v.value, cls);
                 if(ticker.Value.oldValue) ticker.Value.oldValue.remove();
                 ticker.Value.add(newValue);
+                setTimeout(function() {
                 newValue.removeClass("new");
                 newValue.removeClass("up");
                 newValue.removeClass("down");
+                }, 0);
                 ticker.Value.removeClass("updated");
                 ticker.Value.oldValue=newValue;
                 if(v.value>ticker.max) ticker.max=v.value;
