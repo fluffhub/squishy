@@ -51,7 +51,7 @@ Module(function M() {
             var tn = performance.now();
             var dt=tn-this.st;
 
-            this.def.addPoint("L",[dt*this.timescale,value]);
+            this.def.addPoint("L",[[dt*this.timescale,value]]);
             if(this.max==null||value>this.max) {
               this.max=value;
               this.resetSize();
