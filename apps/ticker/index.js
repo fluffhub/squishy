@@ -117,9 +117,10 @@ Module(function M() {
                 var cls="new";
                 if(v.value>ticker.value) cls="new up";
                 else cls="new down";
+                var newValue=ticker.oldValue;
                 ticker.value=v.value;
-                ticker.oldValue.setClass(cls);
-                ticker.oldValue.content(v.value);
+                newValue.setClass(cls);
+                newValue.content(v.value);
                 //var newValue=new basic.Span(v.value, cls);
                 //if(ticker.Value.oldValue) ticker.Value.oldValue.remove();
                 //delete ticker.Value.oldValue;
