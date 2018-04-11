@@ -15,6 +15,8 @@ Module(function M() {
         "display: inline-block;"+
         "text-align: center;"
       )
+      document.styleSheets[0].addRule(".ticker>svg",
+                                      "stroke-width:1px;stroke-color:orange;");
       Import("ticker/fake",function(fake) {
 
         var MiniChart=M.Class(function C() {
@@ -43,7 +45,7 @@ Module(function M() {
             this.lp=0;
           });
           C.Def(function resetSize() {
-            this.attrs({height:2+this.max-this.min});
+            this.NSattrs({viewbox:"0 "+this.min+" "+this.maxtime+" "+(this.max-this.min)});
 
           });
           C.Def(function addPoint(value) {
@@ -60,7 +62,7 @@ Module(function M() {
               this.min=value;
               this.resetSize();
             }
-
+            this.maxtime=dt;
             this.lt=tn;
             this.path.define(this.def);
           });

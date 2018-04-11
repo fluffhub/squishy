@@ -58,13 +58,10 @@ Module(function M() {
               tpv.shift();
             tpv.push(value);
 
-            nt=lt+(mintime);//*1000;
+           ;//*1000;
 
-            while(lt<nt) {
-              lt=performance.now();
-            }
             msger.onmessage({id,value});
-            if(msger.active) setTimeout(go,0);
+            if(msger.active) setTimeout(go,mintime);
           }
           setTimeout(go,0);
         }
