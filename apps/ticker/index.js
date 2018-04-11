@@ -17,15 +17,17 @@ Module(function M() {
       )
       document.styleSheets[0].addRule(".ticker",
                                       "padding:0.1em 0.5em;");
-      document.styleSheets[0].addRule(".ticker>svg",
+      document.styleSheets[0].addRule(".ticker svg",
                                       "stroke-width:5px;stroke:orange;height:2.5em;width:100px;");
       document.styleSheets[0].addRule(".tickerentry",
                                       "padding:0.5em;");
-      document.styleSheets[0].addRule(".ticker>.sym",
+      document.styleSheets[0].addRule(".ticker .sym",
                                       "line-height:1.25em;font-family:monospace;font-size:1.25em;");
-      document.styleSheets[0].addRule(".ticker>.sym",
+      document.styleSheets[0].addRule(".ticker .sym",
                                       "line-height:1.25em;font-family:monospace;");
-      document.styleSheets[0].addRule(".ticker>.info",
+            document.styleSheets[0].addRule(".vals span.new",
+                                            "transition:unset;");
+      document.styleSheets[0].addRule(".ticker .info",
                                       "display:inline-block;");
       document.styleSheets[0].addRule(".vals",
                                       "position:relative;overflow:hidden;font-family:monospace;width:4em;height:1.25em;font-size:1em;");
@@ -111,14 +113,16 @@ Module(function M() {
               if(v.id===symbol) {
                 ticker.Value.addClass("updated");
                 var cls="new";
-                if(v.value>ticker.value) cls="up";
-                else cls="down";
+                if(v.value>ticker.value) cls="new up";
+                else cls="new down";
                 ticker.value=v.value;
-                var newValue=new basic.Span(v.value, cls);
-                if(ticker.Value.oldValue) ticker.Value.oldValue.remove();
-                delete ticker.Value.oldValue;
-                ticker.Value.add(newValue);
+                this.oldvalue.setClass(cls);
+                //var newValue=new basic.Span(v.value, cls);
+                //if(ticker.Value.oldValue) ticker.Value.oldValue.remove();
+                //delete ticker.Value.oldValue;
+                //ticker.Value.add(newValue);
                 setTimeout(function() {
+                  newValue.removeClass("new");
                   newValue.removeClass("up");
                   newValue.removeClass("down");
                 }, 0);
