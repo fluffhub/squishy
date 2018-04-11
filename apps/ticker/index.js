@@ -15,8 +15,12 @@ Module(function M() {
         "display: inline-block;"+
         "text-align: center;"
       )
-      document.styleSheets[0].addRule(".ticker>svg",
-                                      "stroke-width:1px;stroke:orange;height:2.5em;");
+      document.styleSheets[0].addRule(".ticker",
+                                      "padding:0.1em 0.5em;");
+            document.styleSheets[0].addRule(".ticker>svg",
+                                            "stroke-width:1px;stroke:orange;height:2.5em;width:100px;");
+            document.styleSheets[0].addRule(".tickerentry",
+                                            "padding:0.5em;");
       document.styleSheets[0].addRule(".ticker>.sym",
                                       "line-height:1.25em;font-family:monospace;font-size:1.25em;");
       document.styleSheets[0].addRule(".ticker>.sym",
