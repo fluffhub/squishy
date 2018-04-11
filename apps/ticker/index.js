@@ -17,8 +17,14 @@ Module(function M() {
       )
       document.styleSheets[0].addRule(".ticker>svg",
                                       "stroke-width:1px;stroke-color:orange;");
-            document.styleSheets[0].addRule(".ticker>svg",
-                                      "stroke-width:1px;stroke-color:orange;");
+                 document.styleSheets[0].addRule(".vals",
+                                                 "position:relative;font-family:monospace;width:4em;height:1.25em;font-size:1em;");
+                  document.styleSheets[0].addRule(".vals>span",
+                                                  "top:0;color:black;position:absolute;transition:top 0.5s linear, color 1s linear;");
+            document.styleSheets[0].addRule(".vals>span.down",
+                                            "top:-1.25em;color:red;");
+                  document.styleSheets[0].addRule(".vals>span.up",
+                                            "top:1.25em;color:green;");
       Import("ticker/fake",function(fake) {
 
         var MiniChart=M.Class(function C() {
