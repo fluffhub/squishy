@@ -113,7 +113,7 @@ Module(function M() {
             C.Init(function() {
 
               windowing.AppContainer.call(this,"tickermaker");
-              this.titlebar.content("ticker");
+              this.titlebar.content("add ticker:");
               var tm=this;
               this.tickers=[];
               this.tickersocket=new fake.Remote();
@@ -124,7 +124,7 @@ Module(function M() {
               this.form=new basic.Div("tickerentry");
               this.form.add(this.entry);
               this.form.add(this.submit);
-              this.addBefore(this.form,this.contents);
+              this.titlebar.add(this.form);
 
             });
             C.Def(function addTicker(symbol) {
