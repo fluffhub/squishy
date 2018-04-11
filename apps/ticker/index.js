@@ -99,6 +99,8 @@ Module(function M() {
 
             this.Symbol=new basic.Span(symbol, "sym");
             this.Value=new basic.Div("vals");
+            this.oldValue=new basic.Span("");
+            this.Value.add(this.oldValue);
             this.Chart=new MiniChart(this.width,this.height);
             this.Info=new basic.Div("info");
             this.Info.add(this.Symbol);
@@ -116,7 +118,8 @@ Module(function M() {
                 if(v.value>ticker.value) cls="new up";
                 else cls="new down";
                 ticker.value=v.value;
-                this.oldvalue.setClass(cls);
+                this.oldValue.setClass(cls);
+                this.oldValue.contents(v.value);
                 //var newValue=new basic.Span(v.value, cls);
                 //if(ticker.Value.oldValue) ticker.Value.oldValue.remove();
                 //delete ticker.Value.oldValue;
@@ -127,7 +130,7 @@ Module(function M() {
                   newValue.removeClass("down");
                 }, 0);
                 ticker.Value.removeClass("updated");
-                ticker.Value.oldValue=newValue;
+                //ticker.Value.oldValue=newValue;
                 if(v.value>ticker.max) ticker.max=v.value;
                 if(v.value<ticker.min) ticker.min=v.value;
                 ticker.Chart.addPoint(v.value)
