@@ -7,6 +7,14 @@ Module(function M() {
               svg,form,windowing,
               interactive) {
       M.Index("fake");
+      document.StyleSheets[0].addRule(
+        ".button.addticker.enabled", ""+
+        "width: 1em;"+
+        "height: 1.3em;"+
+        "line-height: 1.3em;"+
+        "display: inline-block;"+
+        "text-align: center;"
+      )
       Import("ticker/fake",function(fake) {
 
         var MiniChart=M.Class(function C() {
