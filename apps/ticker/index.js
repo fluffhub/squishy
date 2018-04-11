@@ -128,7 +128,7 @@ Module(function M() {
                 tm.addTicker(tm.entry.value());
               });
               this.form=new basic.Div("tickerentry");
-              this.form.add(new Span("Add ticker: "));
+              this.form.add(new basic.Span("Add ticker: "));
               this.form.add(this.entry);
               this.form.add(this.submit);
               this.contents.add(this.form);
