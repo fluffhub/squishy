@@ -70,7 +70,7 @@ Module(function M() {
 
             var tn = performance.now();
             var dt=tn-this.st;
-            this.maxtime=dt*this.timescale;
+            this.maxtime=dt;
 
             this.def.addPoint("L",[[this.maxtime,value]]);
             if(this.max==null||value>this.max) {
