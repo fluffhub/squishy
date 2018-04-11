@@ -17,16 +17,16 @@ Module(function M() {
       )
       document.styleSheets[0].addRule(".ticker",
                                       "padding:0.1em 0.5em;");
-            document.styleSheets[0].addRule(".ticker>svg",
-                                            "stroke-width:1px;stroke:orange;height:2.5em;width:100px;");
-            document.styleSheets[0].addRule(".tickerentry",
-                                            "padding:0.5em;");
+      document.styleSheets[0].addRule(".ticker>svg",
+                                      "stroke-width:1px;stroke:orange;height:2.5em;width:100px;");
+      document.styleSheets[0].addRule(".tickerentry",
+                                      "padding:0.5em;");
       document.styleSheets[0].addRule(".ticker>.sym",
                                       "line-height:1.25em;font-family:monospace;font-size:1.25em;");
       document.styleSheets[0].addRule(".ticker>.sym",
                                       "line-height:1.25em;font-family:monospace;");
-            document.styleSheets[0].addRule(".ticker>.info",
-                                            "display:inline-block;");
+      document.styleSheets[0].addRule(".ticker>.info",
+                                      "display:inline-block;");
       document.styleSheets[0].addRule(".vals",
                                       "position:relative;overflow:hidden;font-family:monospace;width:4em;height:1.25em;font-size:1em;");
       document.styleSheets[0].addRule(".vals span",
@@ -70,8 +70,9 @@ Module(function M() {
 
             var tn = performance.now();
             var dt=tn-this.st;
+            this.maxtime=dt*this.timescale;
 
-            this.def.addPoint("L",[[dt*this.timescale,value]]);
+            this.def.addPoint("L",[[this.maxtime,value]]);
             if(this.max==null||value>this.max) {
               this.max=value;
               this.resetSize();
@@ -80,7 +81,6 @@ Module(function M() {
               this.min=value;
               this.resetSize();
             }
-            this.maxtime=dt;
             this.lt=tn;
             this.path.define(this.def);
           });
