@@ -70,17 +70,19 @@ Module(function M() {
 
             var tn = performance.now();
             var dt=tn-this.st;
-            this.maxtime=dt;
+            this.maxtime=dt*this.timescale;
 
             this.def.addPoint("L",[[this.maxtime,value]]);
             if(this.max==null||value>this.max) {
               this.max=value;
-              this.resetSize();
+       //       this.resetSize();
             }
             if(this.min==null||value<this.min) {
               this.min=value;
-              this.resetSize();
+           //   this.resetSize();
             }
+            this.resetSize();
+
             this.lt=tn;
             this.path.define(this.def);
           });
