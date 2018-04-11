@@ -118,8 +118,8 @@ Module(function M() {
                 if(v.value>ticker.value) cls="new up";
                 else cls="new down";
                 ticker.value=v.value;
-                this.oldValue.setClass(cls);
-                this.oldValue.contents(v.value);
+                ticker.oldValue.setClass(cls);
+                ticker.oldValue.contents(v.value);
                 //var newValue=new basic.Span(v.value, cls);
                 //if(ticker.Value.oldValue) ticker.Value.oldValue.remove();
                 //delete ticker.Value.oldValue;
