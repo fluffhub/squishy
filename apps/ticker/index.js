@@ -7,7 +7,7 @@ Module(function M() {
               svg,form,windowing,
               interactive) {
       M.Index("fake");
-      document.StyleSheets[0].addRule(
+      document.styleSheets[0].addRule(
         ".button.addticker.enabled", ""+
         "width: 1em;"+
         "height: 1.3em;"+
