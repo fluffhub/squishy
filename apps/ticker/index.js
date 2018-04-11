@@ -119,18 +119,19 @@ Module(function M() {
             C.Init(function() {
 
               windowing.AppContainer.call(this,"tickermaker");
-              this.titlebar.content("add ticker:");
+              this.titlebar.content("tickers");
               var tm=this;
               this.tickers=[];
               this.tickersocket=new fake.Remote();
               this.entry=new form.TextInput();
-              this.submit=new interactive.MomentaryButton("y","addticker",function() {
+              this.submit=new interactive.MomentaryButton("+","addticker",function() {
                 tm.addTicker(tm.entry.value());
               });
               this.form=new basic.Div("tickerentry");
+              this.form.add(new Span("Add ticker: "));
               this.form.add(this.entry);
               this.form.add(this.submit);
-              this.titlebar.add(this.form);
+              this.contents.add(this.form);
 
             });
             C.Def(function addTicker(symbol) {
