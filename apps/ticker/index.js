@@ -55,7 +55,7 @@ Module(function M() {
             this.path=new svg.Path("");
             this.path.element.style.stroke="1px solid black";
 
-            this.def=new svg.PathDefinition("M0,0");
+            this.def=new svg.PathDefinition("M0,0 ");
             this.add(this.path);
             this.path.define(this.def);
             this.st=performance.now();
@@ -116,6 +116,7 @@ Module(function M() {
                 ticker.value=v.value;
                 var newValue=new basic.Span(v.value, cls);
                 if(ticker.Value.oldValue) ticker.Value.oldValue.remove();
+                delete ticker.Value.oldValue;
                 ticker.Value.add(newValue);
                 setTimeout(function() {
                   newValue.removeClass("up");
