@@ -34,7 +34,6 @@ Module(function M() {
             this.st=performance.now();
             this.lt=this.st;
             this.starttime=0;
-
             this.lp=0;
           });
           C.Def(function resetSize() {
@@ -50,7 +49,7 @@ Module(function M() {
             if(this.def.points.length>100) {
               this.def.points.splice(1,1);
               this.def.commands.splice(1,1);
-              this.starttime=(this.starttime+dt);
+              this.starttime=(this.maxtime-this.timewidth);
             }
             this.def.addPoint("L",[[this.maxtime,value]]);
             if(this.max==null||value>this.max) {
