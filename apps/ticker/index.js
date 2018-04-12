@@ -34,6 +34,7 @@ Module(function M() {
             this.st=performance.now();
             this.lt=this.st;
             this.starttime=0;
+            this.timewidth=10;
             this.lp=0;
           });
           C.Def(function resetSize() {
@@ -45,7 +46,7 @@ Module(function M() {
             var tn = performance.now();
             var dt=(tn-this.st)*this.timescale;
             this.maxtime=tn*this.timescale;
-            this.timewidth=dt*100;
+            //this.timewidth=dt*100;
             if(this.def.points.length>100) {
               this.def.points.splice(1,1);
               this.def.commands.splice(1,1);
