@@ -168,7 +168,7 @@ Module(function M() {
   document.styleSheets[0].addRule(".ticker",
                                   "padding:0.1em 0.5em;");
   document.styleSheets[0].addRule(".ticker svg",
-                                  "stroke-width:0.25px;stroke:orange;height:2.5em;width:100px;");
+                                  "stroke-width:1px;stroke:orange;height:2.5em;width:100px;");
   document.styleSheets[0].addRule(".tickerentry",
                                   "padding:0.5em;");
   document.styleSheets[0].addRule(".ticker .sym",
