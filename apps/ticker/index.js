@@ -24,7 +24,7 @@ Module(function M() {
             this.scaleheight=100;
             this.min=-.000001;
             this.max=.000001;
-            this.timescale=0.0001;
+            this.timescale=0.001;
             this.path=new svg.Path("");
             this.path.element.style.stroke="1px solid black";
 
@@ -34,7 +34,7 @@ Module(function M() {
             this.st=performance.now();
             this.lt=this.st;
             this.starttime=0;
-            this.timewidth=10;
+            this.timewidth=100;
             this.lp=0;
           });
           C.Def(function resetSize() {
