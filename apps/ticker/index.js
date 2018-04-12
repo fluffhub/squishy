@@ -48,7 +48,7 @@ Module(function M() {
             if(this.def.points.length>100) {
               this.def.points.splice(1,1);
               this.def.commands.splice(1,1);
-              this.starttime=this.starttime+dt;
+              this.starttime=(this.starttime+dt)*this.timescale;
             }
             this.def.addPoint("L",[[this.maxtime,value]]);
             if(this.max==null||value>this.max) {
