@@ -24,7 +24,7 @@ Module(function M() {
             this.scaleheight=100;
             this.min=-.000001;
             this.max=.000001;
-            this.timescale=0.001;
+            this.timescale=0.0001;
             this.path=new svg.Path("");
             this.path.element.style.stroke="1px solid black";
 
@@ -34,21 +34,23 @@ Module(function M() {
             this.st=performance.now();
             this.lt=this.st;
             this.starttime=0;
+
             this.lp=0;
           });
           C.Def(function resetSize() {
-            this.NSattrs({viewBox:this.starttime+" "+this.min+" "+(this.maxtime-this.starttime)+" "+(this.max-this.min),preserveAspectRatio:"none"});
+            this.NSattrs({viewBox:this.starttime+" "+this.min+" "+this.timewidth+" "+(this.max-this.min),preserveAspectRatio:"none"});
 
           });
           C.Def(function addPoint(value) {
 
             var tn = performance.now();
-            var dt=tn-this.st;
+            var dt=(tn-this.st)*this.timescale;
             this.maxtime=tn*this.timescale;
+            this.timewidth=dt*100;
             if(this.def.points.length>100) {
               this.def.points.splice(1,1);
               this.def.commands.splice(1,1);
-              this.starttime=(this.starttime+dt)*this.timescale;
+              this.starttime=(this.starttime+dt);
             }
             this.def.addPoint("L",[[this.maxtime,value]]);
             if(this.max==null||value>this.max) {
