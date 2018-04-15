@@ -1,6 +1,6 @@
 Module(function M() {
   M.Import("squishy/basic","squishy/interactive","squishy/transform","apps/spoon",function(basic,interactive,transform,spoon) {
-    Import("fluffy/themes/default.css");
+    Import("fluffy/views/default.css");
 
 
 
@@ -154,6 +154,7 @@ Module(function M() {
       },
       Unknown:{
         enter:function(node,parent) {
+          return {}
         },leave:function(node,parent,cursor) {
 
         }},
