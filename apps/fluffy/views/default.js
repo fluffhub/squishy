@@ -32,8 +32,8 @@ Module(function M() {
 
       ExpressionStatement:{
         enter:function(node) {},
-        leave:function(node,parent,cursor) {
-        }},
+        leave:function(node,parent,cursor) {}
+      },
       VariableDeclaration:{enter:function(node) {
         var item=new basic.Span("");
         item.addClass("V");
@@ -140,23 +140,27 @@ Module(function M() {
       IfStatement:{enter:function(node,parent) {
       },leave:function(n,p,c) {
       }},
-      Program:{enter:function(node,parent,c) {
-        return new basic.Div("code");
+      Program:{
+        enter:function(node,parent,c) {
+          return new basic.Div("code");
 
-      },leave:function(node,parent) {
+        },leave:function(node,parent) {
 
-      }},
-      Property:{enter:function(node,parent,c) {
-      },leave:function(n,p,c) {
-      }},
-      Unknown:{enter:function(node,parent) {
-      },leave:function(node,parent,cursor) {
+        }
+      },
+      Property:{
+        enter:function(node,parent,c) {},
+        leave:function(n,p,c) {}
+      },
+      Unknown:{
+        enter:function(node,parent) {
+        },leave:function(node,parent,cursor) {
 
-      }},
-      ObjectExpression:{enter:function(n,p,c) {
-      },leave:function(n,p,c) {
-      }
-                       },
+        }},
+      ObjectExpression:{
+        enter:function(n,p,c) {},
+        leave:function(n,p,c) {}
+      },
     };
 
     var codemasks={

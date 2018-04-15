@@ -30,7 +30,7 @@ Module(function M() {
       var escodegen=ESCG.escodegen;
       window.escodegen=escodegen;
       var estraverse=esv;
-      Import("fluffy/themes/","fluffy/themes/default",function(themes,defaulttheme) {
+      Import("fluffy/views/","fluffy/views/default",function(themes,defaulttheme) {
         M.Class(function C() {
           C.Super(basic.Div);
           C.Init(function JSEditor(raw,browser,theme) {
