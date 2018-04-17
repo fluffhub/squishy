@@ -220,7 +220,8 @@ Module(function M() {
             if(parent&&((parent.loc.start.line!=node.loc.start.line))) {
               item.addClass("clears");
             }
-            this.cursor=cursor.parent;
+            if(cursor)
+              this.cursor=cursor.parent;
             this.curline=node.loc.end.line;
 
           });
