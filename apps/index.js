@@ -1,15 +1,17 @@
 Module(function M ()  {
 
-  M.Index("fluffy/",
-          "fluffbase/",
-          "fork/",
-          "graphics/",
-          "layout/",
-          "spoon/",
-          "object/",
-          "text/",
-         "Console",
-          "ticker/",
-         );
+  M.Index(
+    "spoon/",
+    "fluffy/",
+    "fluffbase/",
+    "fork/",
+    "graphics/",
+    "layout/",
+
+    "object/",
+    "text/",
+    "Console",
+    "ticker/"
+  );
 
 });
