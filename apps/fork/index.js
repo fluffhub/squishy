@@ -9,10 +9,10 @@ Module(function M() {
     "squishy/live",
     "squishy/system",
     "fork/wrappers",
-    "apps/spoon/",
-    "apps/spoon/windowing",
+    "spoon/",
+    "spoon/windowing",
     function(event,basic,interactive,Req,svg,form,live,system,wrappers,spoon,windowing) {
-      Import("spoon","apps/spoon/conf",function(spoon,conf) {
+      Import("spoon/conf",function(conf) {
         var osroot=""
         var Request=Req.Request;
         var main=live.DeviceManager;
@@ -26,7 +26,7 @@ Module(function M() {
             basic.Div.call(this,"AppSelector");
             var as=this;
             this.value=val;
-            var url=new basic.Span(val,"url")
+            var url=new basic.Span(val,"url");
 
             this.add(url);
             this.add(new basic.Span("Open With:"))

@@ -1,5 +1,5 @@
 Module(function M() {
-  M.Import("fluffy/JSeditor","apps/spoon","basic","system","live","form", "apps/spoon/windowing",
+  M.Import("fluffy/JSeditor","spoon","basic","system","live","form", "spoon/windowing",
 
     //  context actions
     //  list view
