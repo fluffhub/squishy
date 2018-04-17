@@ -4,26 +4,22 @@ Module(function M() {
     "squishy/DOM","squishy/basic","squishy/layout",
     "squishy/interactive","squishy/keyboard","squishy/events","squishy/svg",
 
-    "spoon/UserBrowser","spoon/Library",
     "spoon/Models","spoon/conf", "squishy/cookies","squishy/membrane",
     "squishy/live",
     function(
     DOM,basic,layout,
      interactive,kb,events,svg,
-     ub,op,
+     ub,
      Ms,conf,cookies,membrane,
      live) {
 
       Import("spoon/default.css");
       Import("spoon/ui.css");
       var hasEvents=events.hasEvents;
-      var UserBrowser=ub.UserBrowser;
       var Frame=DOM.Frame;
       var TabbedPane=interactive.TabbedPane;
       var GridLayout=layout.GridLayout;
       var Pane=basic.Pane;
-      // var Library=op.Library;
-
       var theme={}
 
       new svg.SVG({
