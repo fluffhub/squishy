@@ -218,7 +218,7 @@ Module(function M() {
             item.enableEvents();
             */
 
-            if(cursor)
+            if(cursor.parent)
               this.cursor=cursor.parent;
             this.curline=node.loc.end.line;
 
