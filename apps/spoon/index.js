@@ -4,13 +4,13 @@ Module(function M() {
     "squishy/DOM","squishy/basic","squishy/layout",
     "squishy/interactive","squishy/keyboard","squishy/events","squishy/svg",
 
-    "spoon/Models","spoon/conf", "squishy/cookies","squishy/membrane",
+    "spoon/Models", "squishy/cookies","squishy/membrane",
     "squishy/live",
     function(
     DOM,basic,layout,
      interactive,kb,events,svg,
      ub,
-     Ms,conf,cookies,membrane,
+     Ms,cookies,membrane,
      live) {
 
       Import("spoon/default.css");
@@ -330,6 +330,7 @@ Module(function M() {
             path=val.path
             else if (typeof val == "string")
               path=val;
+          Import("spoon/conf",function(conf) {
           if(path in conf.apps) {
 
             task=conf.apps[path].open.apply(this,args)
@@ -344,6 +345,7 @@ Module(function M() {
               }
             });
             return true;
+          }
           }
 
         });
