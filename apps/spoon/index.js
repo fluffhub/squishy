@@ -147,8 +147,9 @@ Module(function M() {
           basic.Div.call(this,"tmg TaskList");
         });
         C.Def(function Activate(task) {
-          console.debug({activated:task});
+
           if(!task.hasClass("active")) {
+                      console.debug({activated:task});
             this.decks.forEach(function(deck) {
               deck.tasks.forEach(function(task1) {
                 task1.removeClass("active");
