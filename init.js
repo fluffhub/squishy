@@ -267,7 +267,7 @@ except instead of defining HTML/XML markup you are writing function calls:
         var SquishyLogo=null;
 
         //var browser=new FSe.FileBrowser("/var/www/html/squishy");
-        var browser=spoon.main.run("apps/fork", system.uri(""));
+        var browser=spoon.main.run("apps/fork/", system.uri(""));
 
         //M.Def("browser",browser);
         window.live=live;
