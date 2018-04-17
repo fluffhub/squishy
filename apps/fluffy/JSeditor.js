@@ -161,7 +161,7 @@ Module(function M() {
               nodetypes[node.type].leave.call(this,node,parent,cursor);
             else
               nodetypes["Unknown"].leave.call(this,node,parent,cursor);
-            var item=cursor;
+            /*var item=cursor;
             item.Mixin(event.hasEvents);
             /*
             var tooltip=new basic.Div("label");
@@ -186,6 +186,7 @@ Module(function M() {
               e.stopPropagation();
             });
             */
+            /*
             item.addEvent("select","click",function(e) {
               console.debug(node);
               // e.stopPropagation();
@@ -215,11 +216,12 @@ Module(function M() {
 
 
             item.enableEvents();
+            */
             if(parent&&((parent.loc.start.line!=node.loc.start.line))) {
               item.addClass("clears");
             }
             this.cursor=cursor.parent;
-            curline=node.loc.end.line;
+            this.curline=node.loc.end.line;
 
           });
 
