@@ -223,7 +223,10 @@ Module(function M() {
           }
           return false;
         },
-        enter:function(node,parent,cursor,state) {},
+        enter:function(node,parent,cursor,state) {
+                  var el=new basic.Div("ImportDiv");
+          return el;
+        },
         leave:function(node,parent,cursor,state) {
           var nl=node.arguments.length;
           var args=node.arguments.map(function(a) {
@@ -236,7 +239,7 @@ Module(function M() {
           var fun = node.arguments[nl-1];
           var browser=this;
 
-          node.element.addClass("Import");
+          //node.element.addClass("Import");
           node.callee.element.clear();
           node.callee.element.remove();
 
