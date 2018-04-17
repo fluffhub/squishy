@@ -10,12 +10,12 @@ Module(function M() {
         item.add(new basic.Span("","BD"));
         return item;
       },leave:function(n,p,c) {
-        c.parent.insert(new basic.Span("",""  ),c);
-        if(n.loc.end.line<=p.loc.end.line)
-          c.addClass("ML");
-        else {
-          c.addClass("SL");
-        }
+    //    c.parent.insert(new basic.Span("",""  ),c);
+     //   if(n.loc.end.line<=p.loc.end.line)
+     //     c.addClass("ML");
+    //    else {
+    //      c.addClass("SL");
+    //    }
 
       }},
       NewExpression:{enter:function(n,p,c) {
