@@ -35,11 +35,11 @@ Module(function M() {
         leave:function(node,parent,cursor) {}
       },
       VariableDeclaration:{enter:function(node) {
-        var item=new basic.Span("");
-        item.addClass("V");
-        return item;
+       // var item=new basic.Span("");
+       // item.addClass("V");
+       // return item;
       },leave:function(node,parent,cursor) {
-        for (var i=0;i<node.declarations.length;i++) {
+      /*  for (var i=0;i<node.declarations.length;i++) {
           var dec=node.declarations[i];
           dec.id.element.addClass("ids");
           if(dec.init!==null) {
@@ -49,7 +49,7 @@ Module(function M() {
             // stand-alone/undefined node, like var a;
             node.element.addClass("sa");
           }
-        }
+        }*/
       }},
       ThisExpression:{
         enter:function(n,p,c) {},
