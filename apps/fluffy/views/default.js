@@ -324,18 +324,18 @@ Module(function M() {
         leave:function(node,parent,cursor,state) {
           //node.element.addClass("module");
           //node.element.element.style["background-color"]="orange";
-          //node.element.addBefore(new basic.Span("Module","cmd"));
-          node.arguments[0].element.addClass("deffunction");
+          cursor.addBefore(new basic.Span("Module","cmd"));
+          //node.arguments[0].element.addClass("deffunction");
           //node.element.elements[0].remove();
-          node.callee.element.addClass("cmd");
+          //node.callee.element.addClass("cmd");
           //node.arguments[0].element.addBefore(new basic.Span("M","ids"));
-          node.arguments[0].id.element.addClass("ids");
-          var el=node.element;
+          //node.arguments[0].id.element.addClass("ids");
+          //var el=node.element;
 
           // while(el!==undefined&&el.parent!==undefined&&!el.hasClass("CodeBrowser")) {
           ////   el=el.parent;
           // }
-          el.parent.add(node.exports);
+          //el.parent.add(node.exports);
         }
       },
       ClassStatement:{
@@ -361,13 +361,13 @@ Module(function M() {
         leave:function(node,parent,cursor) {
 
           var code=new basic.Div("extended");
-          if(node.arguments[0]) {
+          /*if(node.arguments[0]) {
             if(node.arguments[0].body)
               node.arguments[0].body.element.remove();
 
             node.arguments[0].element.remove();
             node.arguments[0].element.elements.forEach(function(el) { el.remove() });
-          }
+          }*/
           cursor.extended=code;
           code.add(node.arguments[0].body.element);
           code.addClass("hidden");
@@ -393,12 +393,12 @@ Module(function M() {
             div.add(new basic.Span("unnamed","ids italic"));
           }
           cursor.add(code);
-          node.element.addBefore(div);
-          node.element.Mixin(transform.Draggable);
+          cursor.addBefore(div);
+          cursor.Mixin(transform.Draggable);
 
-          node.element.enabledrag(function ondrag(e) {
+          cursor.enabledrag(function ondrag(e) {
           });
-          node.element.ondragstart= function(e) {
+          cursor.ondragstart= function(e) {
             spoon.main.Hold(node.element,e);
           }
           // node.element.addClass("cls");
@@ -418,10 +418,10 @@ Module(function M() {
         },
         leave:function(node,p,c) {
           //var dec=node.declarations[i];
-          if(node.arguments[0].type=="literal") {
+         /* if(node.arguments[0].type=="literal") {
             node.arguments[0].addClass("ids def");
             node.arguments[0].content(node.arguments[0].value);
-          }
+          }*/
 
         }
       },
