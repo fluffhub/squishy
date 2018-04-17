@@ -262,7 +262,7 @@ except instead of defining HTML/XML markup you are writing function calls:
 */
 
 
-      Import("apps/spoon/","apps/fork/","squishy/system","squishy/live",function(spoon,FSe,system,live) {
+      Import("apps/spoon/","squishy/system","squishy/live",function(spoon,system,live) {
 
         var SquishyLogo=null;
 
@@ -279,7 +279,7 @@ except instead of defining HTML/XML markup you are writing function calls:
         //Content.add(browser);
 
         Import("apps/fluffbase",function(fluffbase) {
-          flu
+
         });
         /*new Req("URI","TEXT").Get(page,{
         /*
