@@ -224,7 +224,7 @@ Module(function M() {
           return false;
         },
         enter:function(node,parent,cursor,state) {
-                  var el=new basic.Div("ImportDiv");
+          var el=new basic.Div("ImportDiv");
           return el;
         },
         leave:function(node,parent,cursor,state) {
@@ -240,18 +240,18 @@ Module(function M() {
           var browser=this;
 
           //node.element.addClass("Import");
-          node.callee.element.clear();
-          node.callee.element.remove();
+          //node.callee.element.clear();
+          //node.callee.element.remove();
 
 
           node.arglist=new basic.Div("arglist");
-          node.element.addBefore(node.arglist);
-          node.element.addBefore(new basic.Span("Import","cmd"));
+          cursor.addBefore(node.arglist);
+          cursor.addBefore(new basic.Span("Import","cmd"));
           node.arguments[nl-1].element.remove();
           if(fun.type=="Literal")
-            node.element.add(new basic.Span(node.arguments[nl-1].value,"literal"));
+            cursor.add(new basic.Span(node.arguments[nl-1].value,"literal"));
           else {
-            node.element.add(node.arguments[nl-1].body.element);
+            cursor.add(node.arguments[nl-1].body.element);
             for(var i=0;i<args.length;i++) {
 
               var arg=args[i];
