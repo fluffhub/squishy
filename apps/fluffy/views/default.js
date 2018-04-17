@@ -257,7 +257,7 @@ Module(function M() {
               var arg=args[i];
 
               if( arg!==undefined&&i<node.arguments.length) {
-                node.arguments[i].element.remove();
+                //node.arguments[i].element.remove();
 
                 var farg=fun.params[i];
                 var listitem=new basic.Div("imports");
