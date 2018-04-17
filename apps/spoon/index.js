@@ -346,7 +346,7 @@ Module(function M() {
             });
             return true;
           }
-          }
+          });
 
         });
         C.Def(function openFile(path) {
