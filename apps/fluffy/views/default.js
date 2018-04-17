@@ -247,7 +247,7 @@ Module(function M() {
           node.arglist=new basic.Div("arglist");
           cursor.addBefore(node.arglist);
           cursor.addBefore(new basic.Span("Import","cmd"));
-          node.arguments[nl-1].element.remove();
+          //node.arguments[nl-1].element.remove();
           if(fun.type=="Literal")
             cursor.add(new basic.Span(node.arguments[nl-1].value,"literal"));
           else {
