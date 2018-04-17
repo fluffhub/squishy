@@ -145,7 +145,7 @@ Module(function M() {
         C.Def(function Activate(task) {
 
           if(!task.hasClass("active")) {
-                      console.debug({activated:task});
+            console.debug({activated:task});
             this.decks.forEach(function(deck) {
               deck.tasks.forEach(function(task1) {
                 task1.removeClass("active");
@@ -331,21 +331,21 @@ Module(function M() {
             else if (typeof val == "string")
               path=val;
           Import("spoon/conf",function(conf) {
-          if(path in conf.apps) {
+            if(path in conf.apps) {
 
-            task=conf.apps[path].open.apply(this,args)
+              task=conf.apps[path].open.apply(this,args)
 
-            hw.addTask(path+":"+args.join(" "),task);
-            return task;
-          } else {
-            Import(path,function(a) {
-              if(a.open instanceof Function) {
-                task=a.open.apply(this,args)
-                hw.addTask(path+":"+args.join(" "),task);
-              }
-            });
-            return true;
-          }
+              hw.addTask(path+":"+args.join(" "),task);
+              return task;
+            } else {
+              Import(path,function(a) {
+                if(a.open instanceof Function) {
+                  task=a.open.apply(this,args)
+                  hw.addTask(path+":"+args.join(" "),task);
+                }
+              });
+              return true;
+            }
           });
 
         });
@@ -681,21 +681,22 @@ Module(function M() {
 
 
 
-      M.Def(function match(item) {
-        var ret={}
-        var app;
-        Object.keys(conf.apps).forEach(function(name) {
-          if(name!=="dir") {
-            app=conf.apps[name];
-            if(app.match!==match&&app.match instanceof Function) //eliminate infinite loop & missing match function failure
-              if(app.match(item))
-                ret[name]=app;
-          }
+      Import("spoon/conf",function(conf) {
+        M.Def(function match(item) {
+          var ret={}
+          var app;
+          Object.keys(conf.apps).forEach(function(name) {
+            if(name!=="dir") {
+              app=conf.apps[name];
+              if(app.match!==match&&app.match instanceof Function) //eliminate infinite loop & missing match function failure
+                if(app.match(item))
+                  ret[name]=app;
+            }
+          });
+          return ret;
         });
-        return ret;
+
       });
-
-
       var id="pool"
 
 
@@ -704,11 +705,11 @@ Module(function M() {
       });
 
     });
-        M.Index(
+  M.Index(
 
-        'Library',
-        'Models',
-        'UserBrowser'
-      );
+    'Library',
+    'Models',
+    'UserBrowser'
+  );
 });
 
