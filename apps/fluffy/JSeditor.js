@@ -217,9 +217,7 @@ Module(function M() {
 
             item.enableEvents();
             */
-            if(parent&&((parent.loc.start.line!=node.loc.start.line))) {
-              item.addClass("clears");
-            }
+
             if(cursor)
               this.cursor=cursor.parent;
             this.curline=node.loc.end.line;
@@ -273,6 +271,9 @@ Module(function M() {
                     maskapplied=true;
                     this.cursor=newnode;
                     node.element=newnode;
+                    if(parent&&((parent.loc.start.line!=node.loc.start.line))) {
+                      newnode.addClass("clears");
+                    }
                   }
                 }
                 maskcursors.push({mask:mask,node:node});
