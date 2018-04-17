@@ -19,15 +19,15 @@ Module(function M() {
 
       }},
       NewExpression:{enter:function(n,p,c) {
-        var item=new basic.Span("","inits");
-        return item;
+    //    var item=new basic.Span("","inits");
+    //    return item;
       },leave:function(n,p,c) {
-        n.callee.element.addClass("ids");
-        if(n.arguments.length>1) {
-          for(var i=0;i<n.arguments.length;i++) {
-            n.arguments[i].element.add(new basic.Span(","));
-          }
-        }
+//n.callee.element.addClass("ids");
+    ///    if(n.arguments.length>1) {
+    //      for(var i=0;i<n.arguments.length;i++) {
+    //        n.arguments[i].element.add(new basic.Span(","));
+    //      }
+    //    }
       }},
 
       ExpressionStatement:{
