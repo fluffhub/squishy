@@ -12,7 +12,7 @@ Module(function M() {
     "squishy/styles",
     "spoon",
     "spoon/windowing",
-    function(DOM,Req,form,windowing,membrane,system,live,basic,styles,spoon) {
+    function(DOM,Req,form,membrane,system,live,basic,styles,spoon,windowing) {
 
 
       M.Style(function S() {
