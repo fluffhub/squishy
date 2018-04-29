@@ -16,9 +16,9 @@ Module(function M() {
 
 
       M.Style(function S() {
-        S.addRule(".Console>textarea",{width: "100%",clear: "both",min-height: "80%"});
+        S.addRule(".Console>textarea",{width: "100%",clear: "both",'min-height': "80%"});
         S.addRule(".Console>input:first-child",{position: "absolute",bottom: 0,width: "100%"});
-        S.addRule(".trans",{display: "inline-block",position: "relative",box-sizing: "border-box"});
+        S.addRule(".trans",{display: "inline-block",position: "relative",'box-sizing': "border-box"});
         S.addRule(".Console input[type=\"submit\"]", "position: absolute; right: 0;");
         S.addRule(".output p","margin:0;");
         S.addRule(".Console","position: absolute;bottom: 0;width: 100%;");
