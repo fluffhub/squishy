@@ -636,11 +636,6 @@ Module(function M() {
 
 
 
-      M.Def(function match(item) {
-        Object.keys(Types).forEach(function(name) {
-
-        });
-      });
 
       var defaultType=Module(function M2 () {
         M.Class(function C() {
