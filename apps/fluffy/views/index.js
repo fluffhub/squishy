@@ -1,4 +1,4 @@
 Module(function M() {
-  M.Index("default","detailed")
+  M.Index("dom", "default","detailed","Editor/")
 
 });

@@ -1,5 +1,10 @@
 Module(function M() {
-  M.Import("fluffy/JSeditor","spoon","basic","system","live","form", "spoon/windowing",
+  M.Import(
+    "fluffy/JSeditor",
+           "apps/spoon",
+    "squishy/basic","squishy/system",
+    "squishy/live","squishy/form",
+    "spoon/windowing","squishy/interactive",
 
     //  context actions
     //  list view
@@ -7,7 +12,7 @@ Module(function M() {
     //  editor
     //  viewer
 
-    function (JSe,spoon,basic,system,live,form,windowing) {
+    function (JSe,spoon,basic,system,live,form,windowing,interactive) {
        console.debug({"js editor loaded":JSe} );
       M.Def(function match(file,name) {
         console.debug({jsmatch:file,name:name});
@@ -54,8 +59,11 @@ Module(function M() {
         C.Super(windowing.AppContainer)
         C.Init(function CodeEditor(loc,items) {
           windowing.AppContainer.call(this);
+
           this.element.style.width="400px";
           this.element.style.height="300px";
+
+          this.main=new interactive.TabbedPane("CodeSelector");
 
           //basic.Div.call(this);
           if (loc instanceof Element) {
@@ -70,6 +78,7 @@ Module(function M() {
           var ta=new form.TextBox();
           ta.element.style.display="none";
           this.add(ta);
+          this.formvalue=ta;
           var te=this;
 
 

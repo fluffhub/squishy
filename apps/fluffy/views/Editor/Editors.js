@@ -1,12 +1,13 @@
 Module(function M() {
   /* @TODO:  Do something better with these ad hoc style shets*/
-Import("object/default.css")
 
-  /* M.Import('squishy/DOM',function(DOM) {
-  M.Import('squishy/events',function(events) {
-  M.Import('squishy/interactive',function(interactive) {
-  M.Import('squishy/form',function(form) {*/
-  M.Import('squishy/DOM squishy/events squishy/interactive squishy/form',function(DOM,events,interactive,form) {
+
+  M.Import(
+    'squishy/DOM',
+    'squishy/events',
+    'squishy/interactive',
+    'squishy/form',
+    function(DOM,events,interactive,form) {
     //var future=document.currentScript.src;
 
     var StringEditor=M.Class(function C() {
@@ -64,7 +65,7 @@ Import("object/default.css")
                 LI.ghost=LI.window.Hold(LI,ev);
               },200);
             }
-          },this.caption.element,{passive:true});
+          },this.caption.element);
           this.addEvent('leave',"mouseup touchend",function(ev) {
             clearTimeout(LI.timer);
             LI.disableEvents('leave');
@@ -177,7 +178,59 @@ Import("object/default.css")
       });
     });
   });
+  M.Import("squishy/styles", function(styles) {
+    M.Style(function S() {
+      S.addRule(".object.editor:before",
+        ""
+      );
+      S.addRule(".EditorItem",
+        "min-height:1em;min-width:50px;overflow:visible;"+
+        "width:auto;height:auto;margin:0.2em;"+
+        "background-color:rgba(100,100,100,0.5)"+
+        "margin-left:1px;"+
+        "white-space:no-wrap;float:left;position:relative;"
+      );
+      S.addRule(".object.editor .caption",
+        "padding:0 0.25em;font-size:1em;"+
+        "line-height:1.5em;float:left;clear:both;"+
+        "background-color:black;color:white;"
+      )
+      S.addRule(".object.editor", 
+        "clear:both;float:left;height:auto;"
+      );
+      S.addRule(".EditorItem input",
+        "font-size:1em;line-height:1.5em;height:1.5em;"
+      );
+      S.addRule(".editor.array", 
+        "clear:both;min-width:6em;"
+      );
+
+      S.addRule(".editor.array:before", 
+        "position:absolute;content:'[';left:-0.1em;"+
+        "font-size:1.5em;line-height:1.5em;width:0.1em;"
+      );
+      S.addRule(".editor.array:after",
+         "position:absolute;content:']';"+
+         "font-size:1.5em;line-height:1.5em;"+
+         "width:0.1em;right:-0.1em;"
+        );
+
+      S.addRule(".number.editor",
+        "width:2em;position:relative;float:left;"
+      );
+      S.addRule(".string.editor",
+        "float:left;clear:both;position:relative;"
+      );
+      S.addRule(".array>.EditorItem:after",
+        "content:',';float:left;display:block;"+
+         "width:1em;height:1em;"
+      );
+      S.addRule(".array.empty",
+        "width:2em;height:2em;");
+      S.addRule(".object.editor .object.editor",
+        "transform:scale(0.45);opacity:0.8;transform-origin:top left;-webkit-transform-origin:top left;");
+      S.addRule(".EditorItem",
+        "border:1px solid #555;border-left:3px solid black;overflow:hidden;");
+  });
 });
-/*});
 });
-});*/
