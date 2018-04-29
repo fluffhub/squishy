@@ -69,7 +69,7 @@ Module(function M() {
     });
     var NumericEditor=M.Class(function C() {
       C.Super(form.TextInput);
-      C.Init(function StringEditor(name,val,address,callback) {
+      C.Init(function NumericEditor(name,val,address,callback) {
         form.TextInput.call(this,name,val,callback);
 
         this.addClass("number editor");
