@@ -148,6 +148,7 @@ Module(function M() {
               this.tickers.push(t);
               this.tickerlist.addBefore(t);
             });
+
           });
 
           M.Def(function open() {
@@ -157,6 +158,8 @@ Module(function M() {
         });
       });
     });
+
+    M.Import("squishy/styles",function(styles) {
   document.styleSheets[0].addRule(
     ".button.addticker.enabled", ""+
     "width: 1em;"+
@@ -165,26 +168,29 @@ Module(function M() {
     "display: inline-block;"+
     "text-align: center;"
   )
-  document.styleSheets[0].addRule(".ticker",
+M.Style(function S() {
+  S.addRule(".ticker",
                                   "padding:0.1em 0.5em;");
-  document.styleSheets[0].addRule(".ticker svg",
+  S.addRule(".ticker svg",
                                   "stroke-width:1px;stroke:orange;height:2.5em;width:100px;");
-  document.styleSheets[0].addRule(".tickerentry",
+  S.addRule(".tickerentry",
                                   "padding:0.5em;");
-  document.styleSheets[0].addRule(".ticker .sym",
+  S.addRule(".ticker .sym",
                                   "line-height:1.25em;font-family:monospace;font-size:1.25em;");
-  document.styleSheets[0].addRule(".ticker .sym",
+  S.addRule(".ticker .sym",
                                   "line-height:1.25em;font-family:monospace;");
-  document.styleSheets[0].addRule(".vals span.new",
+  S.addRule(".vals span.new",
                                   "transition:unset;");
-  document.styleSheets[0].addRule(".ticker .info",
+  S.addRule(".ticker .info",
                                   "display:inline-block;");
-  document.styleSheets[0].addRule(".vals",
+  S.addRule(".vals",
                                   "position:relative;overflow:hidden;font-family:monospace;width:4em;height:1.25em;font-size:1em;");
-  document.styleSheets[0].addRule(".vals span",
+  S.addRule(".vals span",
                                   "transform:translateZ(0);transition:top 0.2s linear, color 1s linear 0.5s;top:0;color:black;position:absolute;");
-  document.styleSheets[0].addRule(".vals span.down",
+  S.addRule(".vals span.down",
                                   "top:-1.25em;color:red;");
-  document.styleSheets[0].addRule(".vals span.up",
+  S.addRule(".vals span.up",
                                   "top:1.25em;color:green;");
-});
+                                });
+                                });
+                                });
