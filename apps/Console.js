@@ -18,7 +18,7 @@ Module(function M() {
       M.Style(function S() {
         S.addRule(".Console>textarea",{width: "100%",clear: "both",'min-height': "80%"});
         S.addRule(".Console>input:first-child",{position: "absolute",bottom: 0,width: "100%"});
-        S.addRule(".trans",{display: "inline-block",position: "relative",'box-sizing': "border-box"});
+        S.addRule(".trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
         S.addRule(".Console input[type=\"submit\"]", "position: absolute; right: 0;");
         S.addRule(".output p","margin:0;");
         S.addRule(".Console","position: absolute;bottom: 0;width: 100%;");
@@ -31,7 +31,7 @@ Module(function M() {
 
         C.Super(windowing.AppContainer);
 
-        C.Init(function  Commander(id) {
+        C.Init(function Commander(id) {
           try {
             this.session=new membrane.Device(system.uri("").hostname)
           } catch (e) {
@@ -57,12 +57,7 @@ Module(function M() {
             var devnames=Object.keys(manager.devices);
             for(var i=0;i<devnames.length;i++) {
               var devname=devnames[i];
-
             }
-
-
-            //var commander=new Commander("pool1");
-
             var input=new form.TextInput("input","",function() {
 
             });
@@ -105,10 +100,7 @@ Module(function M() {
               }
               trans.add(out);
             }
-
           }
-
-
         });
 
         C.Def(function send(command,receive) {
@@ -118,7 +110,6 @@ Module(function M() {
 
       var open=M.Def(function open() {
         return new Commander();
-
       });
       spoon.main.addApp("console",open);
 
