@@ -111,7 +111,7 @@ func get_or_create_proc(name string) {
     ///// THIS COULD BE RE-WRITTEN IN NATIVE GO SYSTEM CALLS USING THE PIPE ATTRIBUTES TO PROCESS OBJECTS.  BUT IT WOULD BE A LOT LONGER.
     /////RUNNING THIS ON *NIX IS TRIVIAL, AND ON WINDOWS IT REQUIRES INSTALLING SOME BASH CLONE, BUT GO NATIVE CALLS WOULD BE MORE TOTALLY CROSS PLATFORM
 
-    session= exec.Command("sh","-c","tail -f .in_"+name+" | (sh  2>&1 >> .out_"+name +" ) & (echo $! > .session2_"+name+"  & pwd > .~_"+name+")" )
+    session= exec.Command("sh","-c","tail -f .in_"+name+" | (/bin/bash  2>&1 >> .out_"+name +" ) & (echo $! > .session2_"+name+"  & pwd > .~_"+name+")" )
     // sh -c "tail -f .in_name | (sh +e  >> .out_name * 2>> .err_name) & (echo $! > .session2_name)  & pwd > .~_name"
 
     ///// POSSIBLE ALTERNATIVE SHELL INSTANCE CREATION STRING:
