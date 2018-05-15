@@ -7,7 +7,7 @@ To use, compile this file and make executable by your web server.  Membrane comm
 by the web server's user.
 
 */
-package main
+package membrane
 
 import (
   "fmt"
@@ -18,11 +18,11 @@ import (
   "io/ioutil"
   "io"
   "log"
+  "bytes"
   "os"
   "syscall"
   "github.com/kr/pty"
   "github.com/gorilla/websocket"
-  "membrane"
 )
 
 var upgrader = websocket.Upgrader{} // use default options
@@ -107,7 +107,6 @@ func main() {
         Sh.ReadTo(w)
       }
     }
-  }
   })); err != nil {
     dump(err)
   }
