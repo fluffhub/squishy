@@ -10,17 +10,18 @@ by the web server's user.
 package membrane
 
 import (
-  "fmt"
+//  "fmt"
+//  "os/exec"
+//  "strings"
+//  "io/ioutil"
+//  "io"
+//  "log"
+//  "syscall"
   "net/http"
   "net/http/cgi"
-  "os/exec"
-  "strings"
-  "io/ioutil"
-  "io"
-  "log"
   "bytes"
   "os"
-  "syscall"
+  "./static"
   "github.com/kr/pty"
   "github.com/gorilla/websocket"
 )
