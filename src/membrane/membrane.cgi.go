@@ -7,7 +7,7 @@ To use, compile this file and make executable by your web server.  Membrane comm
 by the web server's user.
 
 */
-package membrane
+package main
 
 import (
 //  "fmt"
@@ -17,13 +17,13 @@ import (
 //  "io"
 //  "log"
 //  "syscall"
+//"github.com/kr/pty"
   "net/http"
   "net/http/cgi"
-  "bytes"
+ // "bytes"
   "os"
-  "./static"
-  "github.com/kr/pty"
   "github.com/gorilla/websocket"
+  "membrane/interfaces"
 )
 
 var upgrader = websocket.Upgrader{} // use default options
@@ -101,9 +101,9 @@ func main() {
       }
       if(op=="w") {
         cmd:=data
-        cmd=bytes.Replace(cmd,"¶",";",-1)
+       /* cmd=bytes.Replace(cmd,"¶",";",-1)
         cmd=bytes.Replace(cmd,"Ɛ","&",-1)
-        cmd=bytes.Replace(cmd,"¬","\n",-1)
+        cmd=bytes.Replace(cmd,"¬","\n",-1)*/
         Sh.Write(cmd)
         Sh.ReadTo(w)
       }
