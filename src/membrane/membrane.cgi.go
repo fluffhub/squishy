@@ -18,6 +18,7 @@ import (
 //  "log"
 //  "syscall"
 //"github.com/kr/pty"
+"encoding/base64"
   "net/http"
   "net/http/cgi"
  // "bytes"
@@ -83,13 +84,14 @@ func main() {
     }
 
     if(op=="tty") {
-      ttyname:="tty"
-      if(namefound) {
-        ttyname=name
-      }
+      //ttyname:="tty"
+      //if(namefound) {
+      //  ttyname=name
+      //}
+
       
     } else if(namefound) {
-      var Sh = StaticShell{}
+      var Sh = interfaces.StaticShell{}
 
       Sh.Init(name)
 
@@ -100,10 +102,10 @@ func main() {
         w.Write([]byte("{\"home\":\""+Sh.Pwd+"\"}"))
       }
       if(op=="w") {
-        cmd:=data
-       /* cmd=bytes.Replace(cmd,"¶",";",-1)
-        cmd=bytes.Replace(cmd,"Ɛ","&",-1)
-        cmd=bytes.Replace(cmd,"¬","\n",-1)*/
+        
+        var cmd []byte
+
+        base64.URLEncoding.WithPadding(NoPadding).Decode(cmd,[]byte(data))
         Sh.Write(cmd)
         Sh.ReadTo(w)
       }
