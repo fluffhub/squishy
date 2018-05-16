@@ -24,17 +24,17 @@ const PROCFOUND = 16
 const PWDFOUND = 32
 
 type StaticShell struct {
-	name string
+	Name string
 	pos int64
 	leng int64
-	pwd string
+	Pwd string
 	pid int
 	status byte
 
 }
 
 func (ss *StaticShell) ReadAll(writer io.Writer) {
-	os.Chdir(ss.name)
+	os.Chdir(ss.Name)
 	o,_:=os.Open(".out")
 
 	for {
@@ -50,7 +50,7 @@ func (ss *StaticShell) ReadAll(writer io.Writer) {
 	os.Chdir("..")
 }
 func (ss *StaticShell) ReadTo(writer io.Writer) {
-	os.Chdir(ss.name)
+	os.Chdir(ss.Name)
 	o,_:=os.Open(".out")
 	pos:=ss.pos
 	o.Seek(pos,0)
@@ -72,10 +72,10 @@ func (ss *StaticShell) ReadTo(writer io.Writer) {
 func (ss *StaticShell) Check() byte {
 	var status byte = 0
 	var fn string
-	if files, err := ioutil.ReadDir(ss.name); err != nil {
+	if files, err := ioutil.ReadDir(ss.Name); err != nil {
 		panic(err)
 	} else {
-		os.Chdir(ss.name)
+		os.Chdir(ss.Name)
 		status = DIRFOUND | status
 		for _, f := range files {
 			fn=f.Name()
@@ -89,7 +89,7 @@ func (ss *StaticShell) Check() byte {
 				if pwdf,err:=os.Open(".~"); err != nil {
 					panic(err)
 				} else {
-					fmt.Fscanf(pwdf,"%s",ss.pwd)
+					fmt.Fscanf(pwdf,"%s",ss.Pwd)
 					status = PWDFOUND | status 
 				} 
 			}
@@ -113,14 +113,14 @@ func (ss *StaticShell) Check() byte {
 }
 
 func (ss *StaticShell) Init(name string) {
-	ss.name=name
+	ss.Name=name
 	status:=ss.Check()
 	if status & DIRFOUND != 0 {
 		os.Mkdir(name, 0777)
 	}
 	os.Chdir(name)
 	
-	ss.pwd,_=os.Getwd()
+	ss.Pwd,_=os.Getwd()
 
 	if status & INFOUND != 0 {
 		syscall.Mkfifo(".in",0777) 
@@ -141,13 +141,13 @@ func (ss *StaticShell) Destroy() {
 	
 }
 func (ss *StaticShell) Write(data []byte) {
-	os.Chdir(ss.name);
+	os.Chdir(ss.Name);
 	///// CREATE HOLD & Write the LENGTH of the output file to .pos_name immediately before the command starts
-	before_cmd:="touch "+ss.pwd+"/.hold;\n (wc -c < "+ss.pwd+"/.out > "+ss.pwd+"/.pos);\n"
+	before_cmd:="touch "+ss.Pwd+"/.hold;\n (wc -c < "+ss.Pwd+"/.out > "+ss.Pwd+"/.pos);\n"
 	///// Write the LENGTH of the output file to .len_name immediately after the command starts.
-	after_cmd:=";\n (wc -c < "+ss.pwd+"/.out > "+ss.pwd+"/.len)";
+	after_cmd:=";\n (wc -c < "+ss.Pwd+"/.out > "+ss.Pwd+"/.len)";
 	///// REMOVE .hold_name thereby triggering the next step
-	after_cmd=after_cmd+";\nrm "+ss.pwd+"/.hold; \n"
+	after_cmd=after_cmd+";\nrm "+ss.Pwd+"/.hold; \n"
 
 	for {
 		/////  Wait for any other holds to be removed to continue

@@ -23,7 +23,7 @@ import (
  // "bytes"
   "os"
   "github.com/gorilla/websocket"
-  "membrane/interfaces"
+  "./interfaces"
 )
 
 var upgrader = websocket.Upgrader{} // use default options
@@ -97,7 +97,7 @@ func main() {
         Sh.ReadAll(w)
       }
       if(op=="status") {
-        w.Write([]byte("{\"home\":\""+ss.pwd+"\"}"))
+        w.Write([]byte("{\"home\":\""+Sh.Pwd+"\"}"))
       }
       if(op=="w") {
         cmd:=data
