@@ -37,15 +37,10 @@ func dump(err error) {
   }
 }
 
-
-
 func main() {
-  logue,err:=os.Create("logue")
-  dump(err)
-
   if err := cgi.Serve(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
     header := w.Header()
-    header.Set("Content-Type", "text/plain; charset=utf-8")
+    header.Set("Content-Type", "text/plain; farset=utf-8")
 
     r.ParseForm()
     form := r.Form
@@ -92,7 +87,6 @@ func main() {
       
     } else if(namefound) {
       var Sh = interfaces.StaticShell{}
-
       Sh.Init(name)
 
       if(op=="r") {
@@ -102,17 +96,18 @@ func main() {
         w.Write([]byte("{\"home\":\""+Sh.Pwd+"\"}"))
       }
       if(op=="w") {
-        
-        var cmd []byte
-
-        base64.URLEncoding.WithPadding(NoPadding).Decode(cmd,[]byte(data))
-        Sh.Write(cmd)
-        Sh.ReadTo(w)
+       // var cmd = make([]byte, base64.URLEncoding.DecodedLen(len(data)))
+        if cmd,err:=base64.URLEncoding.WithPadding(base64.NoPadding).DecodeString(data); err!=nil {
+          dump(err)
+        } else {
+          Sh.Write(cmd)
+          Sh.Await(false)
+          Sh.ReadTo(w)
+        }
       }
     }
   })); err != nil {
     dump(err)
   }
-  logue.Close()
 }
 
