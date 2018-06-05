@@ -181,7 +181,21 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 }
 .sitemenu > path { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
 .collapsed .sitemenu > path { fill: rgba(121, 206, 128, 0.7); }
-.TaskList { position: fixed; bottom: 0px; left: 0px; width: auto; overflow: hidden; padding-left: 50px; padding-right: 0px; text-overflow: clip; z-index: 1000; white-space: nowrap; max-width: 100%; background: none; transition: width 0.4s ease-in-out; }
+.TaskList {
+    position: fixed;
+    bottom: 0px;
+    left: 60px;
+    width: auto;
+    overflow: hidden;
+    /* padding-left: 50px; */
+    padding-right: 0px;
+    text-overflow: clip;
+    z-index: 1000;
+    white-space: nowrap;
+    max-width: 100%;
+    background: none;
+    transition: width 0.4s ease-in-out;
+}
 .TaskList.collapsed { width: auto; }
 .TaskList > .tabset { display: inline-block; width: auto; overflow: hidden; transition: opacity 0.25s ease-in; opacity: 1; }
 .TaskList.collapsed > .tabset { transition: opacity 0.25s ease-out 0.25s; opacity: 0; }
@@ -358,11 +372,6 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
     transform: rotateZ(90deg);
 }
 
-.TaskList { position: fixed; bottom: 0px; left: 0px; width: auto; overflow: hidden; padding-left: 50px; padding-right: 0px; text-overflow: clip; z-index: 1000; white-space: nowrap; max-width: 100%; background: none; transition: width 0.4s ease-in-out; }
-.TaskList.collapsed { width: auto; }
-.TaskList > .tabset { display: inline-block; width: auto; overflow: hidden; transition: opacity 0.25s ease-in; opacity: 1; }
-.TaskList.collapsed > .tabset { transition: opacity 0.25s ease-out 0.25s; opacity: 0; }
-.TaskList .tab { width: 50px; height: 50px; overflow: hidden; position: static; display: inline; margin: 5px; box-shadow: rgba(150, 150, 150, 0.9) 3px 3px 10px; }
 
 .FileBrowser .dir { margin-left: 1em; }
 .FileBrowser .dir > a { margin-left: 1em; display: block; }
