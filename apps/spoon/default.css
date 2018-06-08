@@ -209,7 +209,19 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 .button { background-color: rgb(204, 204, 204); position: relative; z-index: 2; }
 .FileBrowser > .headerbar { height: 2em; margin: 5px; overflow: hidden; border: 1px solid rgb(170, 170, 170); border-radius: 3px; }
 .FileBrowser .button.live { color: rgb(0, 255, 0); }
-.hud { position: fixed; top: 0px; bottom: 0px; right: 0px; left: 0px; }
+.hud {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    z-index: 10000000;
+    background: none;
+    pointer-events: none;
+}
+.hud>* {
+    pointer-events:all;
+}
 .FileBrowser .button.live.membrane { color: rgb(255, 170, 0); }
 body { font-family: "Lucida Grande", Calibri, sans-serif, Inconsolata; }
 td { }
