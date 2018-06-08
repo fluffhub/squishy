@@ -157,37 +157,39 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 .button.processstep > img { height: 50px; }
 .button.processstep.selected { border: 2px solid rgba(0, 0, 0, 0.5); }
 .ScrollingWrapper { overflow-y: hidden; }
-
 .sitemenu {
     position: absolute;
-    left: -5px;
-    bottom: -20px;
-    z-index: 10000000;
-    width: 80px;
+    /* left: -4px; */
+    bottom: 0;
+    /* z-index: 10000000; */
+    width: 75px;
     z-index: -10;
-    height: 100px;
-    float: left;
-    display: inline;
-    margin: 5px;
-    transition: left 0.4s linear, bottom 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out, transform 0.8s ease-in-out;
-    transform: rotate(40deg);
+    left: 0;
+    height: 75px;
+    /* float: left; */
+    /* display: inline; */
+    /* margin: 5px; */
+    transition: transform 0.4s linear, left 0.4s linear;
+    transform: rotate(0deg);
+    transform-origin: bottom right;
 }
 .collapsed .sitemenu {
-    left: -45px;
+    left: -70px;
     /* bottom: -45px; */
     /* width: 90px; */
     /* height: 90px; */
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
 }
-.sitemenu > path { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
+x.sitemenu > path { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
 .collapsed .sitemenu > path { fill: rgba(121, 206, 128, 0.7); }
-.TaskList {
-    position: fixed;
+.hud .TaskList {
+    pointer-events: none;
+    position: absolute;
     bottom: 0px;
-    left: 60px;
+    left: 73px;
     width: auto;
     overflow: hidden;
-    /* padding-left: 50px; */
+    /* padding-left: 80px; */
     padding-right: 0px;
     text-overflow: clip;
     z-index: 1000;
@@ -195,6 +197,14 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
     max-width: 100%;
     background: none;
     transition: width 0.4s ease-in-out;
+}
+.collapsed .tmg.TaskList {
+    transform: rotateZ(90deg);
+    left: 5px;
+}
+.tmg.TaskList {
+    transition: transform 0.4s linear, left 0.4s linear;
+    transform-origin: bottom left;
 }
 .TaskList.collapsed { width: auto; }
 .TaskList > .tabset { display: inline-block; width: auto; overflow: hidden; transition: opacity 0.25s ease-in; opacity: 1; }
@@ -220,7 +230,7 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
     pointer-events: none;
 }
 .hud>* {
-    pointer-events:all;
+    pointer-events:all;`
 }
 .FileBrowser .button.live.membrane { color: rgb(255, 170, 0); }
 body { font-family: "Lucida Grande", Calibri, sans-serif, Inconsolata; }
@@ -373,8 +383,8 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
     transform: rotate(-90deg); 
 }
 
-.sitemenu path { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
-.collapsed .sitemenu path { fill: rgba(200, 200, 200, 0.7); }
+.sitemenu path, .sitemenu circle { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
+.collapsed .sitemenu path, .collapsed .sitemenu circle { fill: rgba(200, 200, 200, 0.7); }
 
 .tmg.TaskList {
     transition: transform 0.4s linear;
