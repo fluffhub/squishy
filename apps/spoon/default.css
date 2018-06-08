@@ -181,7 +181,7 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
     transform: rotate(90deg);
 }
 x.sitemenu > path { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
-.collapsed .sitemenu > path { fill: rgba(121, 206, 128, 0.7); }
+x.collapsed .sitemenu > path { fill: rgba(121, 206, 128, 0.7); }
 .hud .TaskList {
     pointer-events: none;
     position: absolute;
@@ -377,11 +377,7 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 .ScrollingWrapper { overflow-y: hidden; }
 
 
-.collapsed .sitemenu { 
-    left: -45px; bottom: -45px; 
-    width: 90px; height: 90px; 
-    transform: rotate(-90deg); 
-}
+
 
 x.sitemenu path, x.sitemenu circle { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
 x.collapsed .sitemenu path, x.collapsed .sitemenu circle { fill: rgba(200, 200, 200, 0.7); }
