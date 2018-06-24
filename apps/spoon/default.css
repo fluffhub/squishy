@@ -215,7 +215,7 @@ x.collapsed .sitemenu > path { fill: rgba(121, 206, 128, 0.7); }
     left: 5px;
 }
 .tmg.TaskList {
-    transition: transform 0.4s linear, left 0.4s linear;
+    transition: transform 0.4s ease-out, left 0.4s linear;
     transform-origin: bottom left;
 }
 .TaskList.collapsed { width: auto; }
