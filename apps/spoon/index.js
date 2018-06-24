@@ -2,13 +2,14 @@ Module(function M() {
 
   M.Import(
     "squishy/DOM","squishy/basic","squishy/layout",
-    "squishy/interactive","squishy/keyboard","squishy/events","squishy/svg",
+    "squishy/interactive","squishy/keyboard","squishy/events",
+    "squishy/svg","squishy/styles",
 
     "spoon/Models", "squishy/cookies","squishy/membrane",
     "squishy/live",
     function(
     DOM,basic,layout,
-     interactive,kb,events,svg,
+     interactive,kb,events,svg,styles,
      ub,
      Ms,cookies,membrane,
      live) {
@@ -31,9 +32,6 @@ Module(function M() {
           });
         }
       });
-
-
-
 
       var keyboard=kb.keyboard;
       /* Deck and Tile are the components to the animated taskbar.
@@ -226,10 +224,10 @@ Module(function M() {
           //this.tasks=new TabbedPane()
           //this.tasks.header.removeClass("header-bar");
           this.hud=new basic.Div("hud");
-
+          this.hud.Mixin(events.hasEvents);
           this.add(this.hud)
           this.tm=new TaskManager(this);
-
+          
 
           var SpoonLogo=new svg.SVG(50,50);
           //.Def("homebutton",SpoonLogo);
