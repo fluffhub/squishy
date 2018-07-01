@@ -2,14 +2,15 @@ package main
 
 import(
 	"fmt"
-	"os/exec"
+	// "os/exec"
 	"io/ioutil"
 	"io"
 	"os"
-	"syscall"
+	"time"
+	// "syscall"
 	"github.com/gorilla/websocket"
-	"github.com/kr/pty"
-	zmq "github.com/pebbe/zmq4/draft"
+	// "github.com/kr/pty"
+	// zmq "github.com/pebbe/zmq4/draft"
 	
 )
 
@@ -38,12 +39,7 @@ const (
 
 var upgrader = websocket.Upgrader{} // use default options
 
-const NAMEFOUND = 1
-const DIRFOUND = 2
-const INFOUND = 4
-const PORTFOUND = 8
-const PROCFOUND = 16
-const PWDFOUND = 32
+const PORTFOUND = 64
 
 type TtyShell struct {
 	Name string
