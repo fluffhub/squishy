@@ -132,7 +132,7 @@ func (ss *TtyShell) Check() byte {
 	var status byte = 0
 	var fn string
 
-	if inf,err:=os.Open(".tty"); err!=nil{
+	if _,err:=os.Open(".tty"); err!=nil{
 		return status;
 	} else {
 		status = INFOUND | status
