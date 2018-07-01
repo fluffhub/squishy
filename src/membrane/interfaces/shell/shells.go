@@ -20,7 +20,7 @@ type Shell interface {
 
 func Shells() {
 	return map[string]Shell {
-	"static":&StaticShell{}
-	"tty":&TtyShell{}
+	"static":&StaticShell{},
+	"tty":&TtyShell{},
 	}
 }
