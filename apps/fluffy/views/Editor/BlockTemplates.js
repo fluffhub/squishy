@@ -1,12 +1,12 @@
 Module(function M () {
 M.Import("squishy/interactive", "squishy/DOM", "squishy/basic",
         "squishy/svg", "squishy/events", "squishy/transform",
-         "fluff", "fluff/io", "/apps/Editor/js/Models", 
-         "/apps/Editor/js/DiagramBlock", "/apps/Editor/js/Editors",
+         "fluff", "fluff/io", "Editor/js/Models", 
+         "Editor/js/DiagramBlock", "Editor/js/Editors",
          function(interactive,DOM,basic,svg,events,
           transform,fluff,blocks,models,DB,editors) {
-console.debug("Blocks");
-  console.debug(blocks);
+
+  console.debug({Blocks:blocks});
   var Template=M.Class(function C() {
     C.Init(function Template(obj) {
       this.obj=obj;

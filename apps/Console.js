@@ -16,6 +16,7 @@ Module(function M() {
 
 
       M.Style(function S() {
+        S.addRule(".Console","font-face:monospace")
         S.addRule(".Console>textarea",{width: "100%",clear: "both",'min-height': "80%"});
         S.addRule(".Console>input:first-child",{position: "absolute",bottom: 0,width: "100%"});
         S.addRule(".trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});

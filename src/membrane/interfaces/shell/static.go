@@ -2,18 +2,12 @@ package interfaces
 
 import (
   "fmt"
-//  "net/http"
-//  "net/http/cgi"
   "os/exec"
-//  "strings"
   "io/ioutil"
-	"io"
-//	"bytes"
-//  "log"
+  "io"
   "os"
   "syscall"
-//  "github.com/kr/pty"
-//  "github.com/gorilla/websocket"
+  "net/http"
 )
 
 const NAMEFOUND = 1
@@ -31,15 +25,20 @@ type StaticShell struct {
 	pid int
 	status byte
 	log *os.File
+	w http.ResponseWriter
+	r *http.Request
 }
+
 func (ss *StaticShell) Dump(err error) {
 	if(err!=nil) {
-	 	ss.log.WriteString(err.Error())
+		ss.log.WriteString(err.Error())
 	}
-  }
+}
+
 func (ss *StaticShell) Log(value string) {
 	ss.log.WriteString(value)
 }
+
 func (ss *StaticShell) ReadAll(writer io.Writer) {
 	out:=ss.getpath(".out")
 	o,_:=os.Open(out)
@@ -53,12 +52,14 @@ func (ss *StaticShell) ReadAll(writer io.Writer) {
 	}
 	o.Close()
 }
+
 func (ss *StaticShell) getpath(path string) string {
 	if path=="" {
 		return ss.Pwd
 	}
 	return ss.Pwd+"/"+path
 }
+
 func (ss *StaticShell) cursorinfo() (int64, int64) {
 	var pos int64
 	var len int64
@@ -80,18 +81,19 @@ func (ss *StaticShell) cursorinfo() (int64, int64) {
 			fmt.Fscanf(lenfile,"%d",&len)
 		}
 	}
-	ss.Log(fmt.Sprintf("pos/len: %d %d",pos,len))
+	//ss.Log(fmt.Sprintf("pos/len: %d %d",pos,len))
 
 	ss.pos=pos
 	ss.leng=len
 	return pos, len
 }
+
 func (ss *StaticShell) ReadTo(writer io.Writer) {
 	o,_:=os.Open(ss.getpath(".out"))
 	pos, len:=ss.cursorinfo()
 	o.Seek(pos,0)
 	bn:=make([]byte,1)
-	ss.Log(fmt.Sprintf("Reading from %d to %d\n", pos, len))
+	// ss.Log(fmt.Sprintf("Reading from %d to %d\n", pos, len))
 	for {
 	  n,_:=o.Read(bn)
 	  pos=pos+int64(n)
@@ -147,8 +149,10 @@ func (ss *StaticShell) Check() byte {
 	return status
 }
 
-func (ss *StaticShell) Init(name string) {
+func (ss *StaticShell) Init(name string, w http.ResponseWriter, r *http.Request) {
 	ss.Name=name
+	ss.w=w
+	ss.r=r
 	if log,err:=os.OpenFile(name+"_log", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0666);err!=nil {
 		panic(err)
 	} else {
@@ -192,9 +196,11 @@ func (ss *StaticShell) Init(name string) {
 	}
 	os.Chdir("-")
 }
+
 func (ss *StaticShell) Destroy() {
 	
 }
+
 func (ss *StaticShell) Await(interrupt bool) {
 	hold:=ss.getpath(".hold")
 
@@ -210,11 +216,12 @@ func (ss *StaticShell) Await(interrupt bool) {
 		}
 	}
 }
+
 func (ss *StaticShell) Unhold() {
 	os.Remove(ss.getpath(".hold"))
 }
 
-func (ss *StaticShell) Write(data []byte) {
+func (ss *StaticShell) Exec(data []byte) {
 	///// CREATE HOLD & Write the LENGTH of the output file to .pos_name immediately before the command starts
 	before_cmd:="touch "+ss.Pwd+"/.hold;\n (wc -c < "+ss.Pwd+"/.out > "+ss.Pwd+"/.pos);\n"
 	///// Write the LENGTH of the output file to .len_name immediately after the command starts.
@@ -228,14 +235,12 @@ func (ss *StaticShell) Write(data []byte) {
 	if in,err:=os.OpenFile(ss.getpath(".in"), os.O_RDWR, 0666); err!=nil {
 		ss.Dump(err)
 	} else {
+	///// WRITING THE COMMAND TO THE INPUT STREAM
 		in.Write([]byte(before_cmd))
 		in.Write(data)
 		in.Write([]byte(after_cmd))
 		in.Close()
+		ss.Await(false)
+		ss.ReadTo(ss.w)
 	}
-	///// WRITING THE COMMAND TO THE INPUT STREAM
-
-	///// WAIT FOR HOLD (COMMAND HAS FINISHED)
-
-
 }

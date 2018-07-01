@@ -10,24 +10,12 @@ by the web server's user.
 package main
 
 import (
-//  "fmt"
-//  "os/exec"
-//  "strings"
-//  "io/ioutil"
-//  "io"
-//  "log"
-//  "syscall"
-//"github.com/kr/pty"
-"encoding/base64"
+  "encoding/base64"
   "net/http"
   "net/http/cgi"
- // "bytes"
   "os"
-  "github.com/gorilla/websocket"
   "./interfaces"
 )
-
-var upgrader = websocket.Upgrader{} // use default options
 
 func dump(err error) {
   if(err!=nil) {
@@ -47,23 +35,15 @@ func main() {
     query := r.URL.Query()
     var name string
     var namefound=false
+    var interface string
     var op string
     var data=""
-    if name=query.Get("name"); name!="" {
-      //try to find name in cookie
-      for _, cookie := range r.Cookies() {
-        if cookie.Name=="session_id" {
-          name=cookie.Value;
-          namefound=true
-        }
-      }
-    }
+    var device="static"
 
     for k := range query {
       if(k=="id") {
         name=query.Get(k)
         namefound=true
-
       }
       if(k=="op") {
         op=query.Get(k)
@@ -77,32 +57,21 @@ func main() {
         data=form.Get(k)
       }
     }
-
-    if(op=="tty") {
-      //ttyname:="tty"
-      //if(namefound) {
-      //  ttyname=name
-      //}
-
-      
-    } else if(namefound) {
-      var Sh = interfaces.StaticShell{}
-      Sh.Init(name)
-
-      if(op=="r") {
-        Sh.ReadAll(w)
-      }
-      if(op=="status") {
-        w.Write([]byte("{\"home\":\""+Sh.Pwd+"\"}"))
-      }
-      if(op=="w") {
-       // var cmd = make([]byte, base64.URLEncoding.DecodedLen(len(data)))
-        if cmd,err:=base64.URLEncoding.WithPadding(base64.NoPadding).DecodeString(data); err!=nil {
-          dump(err)
-        } else {
-          Sh.Write(cmd)
-          Sh.Await(false)
-          Sh.ReadTo(w)
+    if(op=="status") {
+      w.Write([]byte("{\"home\":\""+os.Getwd()+"\"}"))
+    } else {
+      if(namefound) {
+         else {
+          if Sh,ok:=Interfaces[op]; ok {
+            Sh.Init(name, r, w)
+            if cmd,err:=base64.URLEncoding.WithPadding(base64.NoPadding).DecodeString(data); err!=nil {
+              dump(err)
+            } else {
+              Sh.Exec(cmd)
+            }
+          } else {
+            // Interface not found
+          }
         }
       }
     }
