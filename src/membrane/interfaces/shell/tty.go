@@ -51,7 +51,8 @@ type TtyShell struct {
 	log *os.File
 	w http.ResponseWriter
 	r *http.Request
-
+	pos int
+	len int
 }
 
 const default_port = 3000
