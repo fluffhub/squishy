@@ -7,6 +7,7 @@ import(
 	"io"
 	"os"
 	"time"
+	"http"
 	// "syscall"
 	"github.com/gorilla/websocket"
 	// "github.com/kr/pty"
