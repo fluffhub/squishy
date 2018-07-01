@@ -1,4 +1,4 @@
-package interfaces
+package main
 import(
 	"io"
 	"net/http"
@@ -17,7 +17,10 @@ type Shell interface {
 	Exec(data []byte)
 }
 
-Interfaces=map[string]Shell {
+
+func Shells() {
+	return map[string]Shell {
 	"static":&StaticShell{}
 	"tty":&TtyShell{}
+	}
 }
