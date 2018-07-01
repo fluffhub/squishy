@@ -16,7 +16,7 @@ import(
 )
 
 var (
-	addr    = flag.String("addr", "127.0.0.1:8080", "http service address")
+	// addr    = flag.String("addr", "127.0.0.1:8080", "http service address")
 	cmdPath string
 )
 
@@ -51,8 +51,8 @@ type TtyShell struct {
 	log *os.File
 	w http.ResponseWriter
 	r *http.Request
-	pos int
-	len int
+	pos int64
+	leng int64
 }
 
 const default_port = 3000
