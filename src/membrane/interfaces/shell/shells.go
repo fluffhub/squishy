@@ -18,7 +18,7 @@ type Shell interface {
 }
 
 
-func Shells() {
+func Shells() map[string]Shell {
 	return map[string]Shell {
 	"static":&StaticShell{},
 	"tty":&TtyShell{},
