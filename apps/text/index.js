@@ -98,7 +98,7 @@ Module(function M() {
         }
 
       });
-      spoon.main.addApp("text",opener);
+      spoon.main.addApp("text",M.self);
 
 
     });

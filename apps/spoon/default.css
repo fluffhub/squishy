@@ -191,6 +191,19 @@ span.compositiontitle { font-size: 20px; font-weight: bold; line-height: 32px; m
 
 x.sitemenu > path { fill: rgba(90, 90, 90, 0.5); transition: fill 0.5s ease-in-out; }
 x.collapsed .sitemenu > path { fill: rgba(121, 206, 128, 0.7); }
+.button.app_adder {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 1.5em;
+    height: 1.5em;
+    /* border-radius: 1em; */
+    background-color: rgba(50,105,50,1);
+    text-align: center;
+    line-height: 1.5em;
+    color: white;
+    font-weight: bold;
+}
 .hud .TaskList>* { 
     pointer-events:all;
 }

@@ -76,6 +76,8 @@ Module(function M() {
         });
         var FileListItem=M.Class(function C() {
           C.Super(interactive.MomentaryButton);
+          M.Def("container",null)
+         
           C.Init(function FileListItem(name,loc,click) {
             var fli=this;
             interactive.MomentaryButton.call(this,name,"",click)
@@ -135,6 +137,8 @@ Module(function M() {
         });
         var FileList=M.Class(function C() {
           C.Super(basic.Div);
+          M.Def("contents",null)
+          M.Def("Contents",null)
           C.Init(function FileList(name,loc,click) {
             basic.Div.call(this);
             var dir=this;
@@ -209,6 +213,8 @@ Module(function M() {
 
         var FileBrowser=M.Class(function C() {
           C.Super(windowing.AppContainer);
+          M.Def("headerbar",null);
+          M.Def("presentdir",null);
           C.Init(function FileBrowser(path)  {
 
             windowing.AppContainer.call(this);
@@ -327,7 +333,7 @@ Module(function M() {
               else if (apps.length>1) {
                 var as=new AppSelector(val);
                 lib.parent.contextmenu.add(as);
-                lib.parent.events.context.trigger();
+                lib.parent.events.context[0].trigger();
 
 
               }
@@ -389,7 +395,7 @@ Module(function M() {
           return new FileBrowser(loc);
         });
 
-        spoon.main.addApp("fork",open);
+        spoon.main.addApp("fork",M.self);
 
         var Module=M.Class(function C() {
           C.Super(interactive.MomentaryButton);

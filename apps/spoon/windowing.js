@@ -23,6 +23,7 @@ Module(function M() {
           transform.HTMLPositionBox.call(this);
           this.Mixin(transform.Resizable);
           this.Mixin(events.HasEvents);
+          if(parent)
           this.parent=parent;
 
           this.addClass("acw");
@@ -44,7 +45,7 @@ Module(function M() {
             spoon.main.contextmenu.add(new interactive.MomentaryButton("X","ui_button",function() {
               spoon.main.close(acw);
               spoon.main.clearContext();
-
+              
             }));
 
           });

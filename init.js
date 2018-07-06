@@ -266,18 +266,8 @@ except instead of defining HTML/XML markup you are writing function calls:
 
         var SquishyLogo=null;
 
-        //var browser=new FSe.FileBrowser("/var/www/html/squishy");
-        var browser=spoon.main.run("apps/fork/", system.uri(""));
-
-        //M.Def("browser",browser);
         window.live=live;
-        console.debug({M:M});
-        console.debug({browser:browser});
-        //browser.Import("..");
-        //browser.Import("app");
-        //browser.load(M.Self.filename,M.Self);
-        //Content.add(browser);
-
+      
         Import("apps/fluffbase",function(fluffbase) {
 
         });

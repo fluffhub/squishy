@@ -130,7 +130,7 @@ Module(function M() {
 
       });
 
-      spoon.main.addApp("fluffy",open);
+      spoon.main.addApp("fluffy",M.self);
 
     });
 });

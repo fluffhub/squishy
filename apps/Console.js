@@ -112,7 +112,7 @@ Module(function M() {
       var open=M.Def(function open() {
         return new Commander();
       });
-      spoon.main.addApp("console",open);
+      spoon.main.addApp("console",M.self);
 
     });
 

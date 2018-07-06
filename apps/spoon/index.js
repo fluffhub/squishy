@@ -6,13 +6,13 @@ Module(function M() {
     "squishy/svg","squishy/styles",
 
     "spoon/Models", "squishy/cookies","squishy/membrane",
-    "squishy/live",
+    "squishy/live","apps/spoon/conf",
     function(
     DOM,basic,layout,
      interactive,kb,events,svg,styles,
      ub,
      Ms,cookies,membrane,
-     live) {
+     live,conf) {
 
       Import("spoon/default.css");
       Import("spoon/ui.css");
@@ -52,28 +52,33 @@ Module(function M() {
         //  C.Def("tasks",[])
         C.Def("tileheight",76);
         C.Def("opened", false);
-        C.Init(function Deck(appname,callback) {
+        C.Init(function Deck(app) {
           basic.Div.call(this,"deck");
           this.tasks=[];
-          this.name=appname;
+          this.name=app.name;
           var deck=this;
-
-
-          var callback=callback || function() {};
+          this.app=app;
           function onclick(e) {
             if(!deck.open) deck.expand();
             else deck.contract();
-            callback(e);
+          
           }
 
-          this.header=new Tile(appname,onclick);
-          this.add(this.header)
+          this.header=new Tile(app.name,onclick);
+          this.adder=new interactive.MomentaryButton("+","app_adder",function(e) {
+            Import("apps/spoon","squishy/system",function(spoon,system) {
+              spoon.main.run(deck.app);
+            });
+            e.stopPropagation();
+          });
+          this.add(this.header);
+          
+          this.header.add(this.adder);
           this.wrapper=new basic.Div();
           this.add(this.wrapper);
 
         });
         C.Def(function expand() {
-
           this.element.style['height']=(this.tileheight*(this.tasks.length+1))+"px"
           this.open=true;
         });
@@ -131,8 +136,9 @@ Module(function M() {
           var apps=this.home.apps;
           this.decks=[];
           Object.keys(apps).forEach(function(appname) {
-            var deck=new Deck(appname,function() {
-              tm.home.run(appname);
+            var app=apps[appname];
+            var deck=new Deck(app,function() {
+              tm.home.run(app.name);
             });
             tm.add(deck);
             tm.decks.push(deck);
@@ -160,7 +166,7 @@ Module(function M() {
         });
 
 
-        C.Def(function addApp(name, exec) {
+        C.Def(function addApp(name, app) {
           var deck=null;
           var found=false;
           this.decks.forEach(function(tile) {
@@ -169,7 +175,7 @@ Module(function M() {
             }
           });
           if(!found) {
-            var deck=new Deck(name);
+            var deck=new Deck(app);
             this.add(deck);
             this.decks.push(deck);
           }
@@ -323,28 +329,39 @@ Module(function M() {
           var task=null;
           var hw=this;
           var path;
+          var fun;
+          var appname;
 
           if(val instanceof Element)
-            path=val.path
-            else if (typeof val == "string")
-              path=val;
-          Import("spoon/conf",function(conf) {
-            if(path in conf.apps) {
-
-              task=conf.apps[path].open.apply(this,args)
-
-              hw.addTask(path+":"+args.join(" "),task);
-              return task;
+            path=val.path;
+          else if (typeof val == "string") {
+            if(val in conf.apps) {
+              appname=val;
+              fun = conf.apps[appname].open;
             } else {
-              Import(path,function(a) {
-                if(a.open instanceof Function) {
-                  task=a.open.apply(this,args)
-                  hw.addTask(path+":"+args.join(" "),task);
-                }
-              });
-              return true;
+              path=val;
             }
-          });
+          }
+          else if (val instanceof Function) {
+            fun=val;
+            appname=val.name;
+          } else if (val instanceof Module && val.open instanceof Function) {
+            fun=val.open;
+            appname=val.name;
+          }
+          
+          if(path) {
+            Import(path,function(a) {
+              if(a.open instanceof Function) {
+                task=a.open.apply(hw,args);
+                hw.addTask(path+":"+args.join(" "),task);
+               
+              }
+            });
+          } else {
+            task=fun.apply(this,args);
+            hw.addTask(appname, task)
+          }
 
         });
         C.Def(function openFile(path) {
@@ -529,9 +546,11 @@ Module(function M() {
           //this.TP.tabset.change('PB');
           //		DB.tabset.change(name);
         });
-        C.Def(function addApp(name, exec) {
-          this.tm.addApp(name,exec);
-          this.apps[name]=exec;
+        C.Def(function addApp(name, mod) {
+          if(mod.open instanceof Function) {
+            this.tm.addApp(name,mod);
+          }
+          this.apps[name]=mod;
         });
 
         /*   C.Def(function activate(item) {
