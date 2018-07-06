@@ -395,7 +395,7 @@ Module(function M() {
           return new FileBrowser(loc);
         });
 
-        spoon.main.addApp("fork",M.self);
+        spoon.main.addApp("fork",M.Self);
 
         var Module=M.Class(function C() {
           C.Super(interactive.MomentaryButton);
