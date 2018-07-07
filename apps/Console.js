@@ -33,9 +33,9 @@ Module(function M() {
 
         C.Init(function Commander(id) {
           try {
-            Object.defineProperty(this, "session", new membrane.Device(system.uri("").hostname));
+            Object.defineProperty(this, "session", {value:new membrane.Device(system.uri("").hostname) });
           } catch (e) {
-            Object.defineProperty(this,"session",live.DeviceManager.devices[system.uri("").hostname].membrane;
+            Object.defineProperty(this,"session", {value:live.DeviceManager.devices[system.uri("").hostname].membrane});
           }
           windowing.AppContainer.call(this);
           this.titlebar.content("Membrane Console");
