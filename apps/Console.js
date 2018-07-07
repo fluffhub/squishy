@@ -26,7 +26,6 @@ Module(function M() {
       });
 
       var Commander=M.Class(function C() {
-        C.Def("session",null);
         C.Def("url","/squishy/src")
         C.Def("id","pool")
 
@@ -34,9 +33,9 @@ Module(function M() {
 
         C.Init(function Commander(id) {
           try {
-            this.session=new membrane.Device(system.uri("").hostname)
+            Object.defineProperty(this, "session", new membrane.Device(system.uri("").hostname));
           } catch (e) {
-            this.session=live.DeviceManager.devices[system.uri("").hostname].membrane;
+            Object.defineProperty(this,"session",live.DeviceManager.devices[system.uri("").hostname].membrane;
           }
           windowing.AppContainer.call(this);
           this.titlebar.content("Membrane Console");
