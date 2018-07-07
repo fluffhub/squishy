@@ -23,17 +23,17 @@ Module(function M() {
           transform.HTMLPositionBox.call(this);
           this.Mixin(transform.Resizable);
           this.Mixin(events.HasEvents);
-          if(parent)
           this.parent=parent;
 
           this.addClass("acw");
 
           //titlebar
           this.titlebar=new basic.Div("acb")
-          this.add(this.titlebar);
           this.titlebar.Mixin(transform.Draggable);
-
-          this.size={width:400,height:300};
+          this.add(this.titlebar);
+          
+          this.size.width=400;
+          this.size.height=300;
           this.drawTransform();
 
           //content
@@ -45,7 +45,7 @@ Module(function M() {
             spoon.main.contextmenu.add(new interactive.MomentaryButton("X","ui_button",function() {
               spoon.main.close(acw);
               spoon.main.clearContext();
-              
+
             }));
 
           });
