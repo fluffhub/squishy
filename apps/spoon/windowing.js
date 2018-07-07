@@ -58,8 +58,8 @@ Module(function M() {
 
             //// acw.element.style.top=v.position.y+"px";
             // acw.element.style.left=v.position.x+"px";/
-            acw.position.x=acw.position.x-v.delta.x
-            acw.position.y=acw.position.y-v.delta.y
+            acw.position.x=acw.position.x-i.delta.x
+            acw.position.y=acw.position.y-i.delta.y
           
             acw.drawTransform();
             //console.debug({x:v.position.x,y:v.position.y});
