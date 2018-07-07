@@ -16,24 +16,23 @@ Module(function M() {
       });
       var AppContainer=M.Class(function C() {
         C.Super(transform.HTMLPositionBox);
-        //C.Mixin(transform.Resizable);
-        //   C.Mixin(events.HasEvents);
+        C.Mixin(transform.Resizable);
+           C.Mixin(events.HasEvents);
         //C.Mixin(transform.Draggable);
         C.Init(function AppContainer(parent) {
           transform.HTMLPositionBox.call(this);
-          this.Mixin(transform.Resizable);
-          this.Mixin(events.HasEvents);
+          //this.Mixin(transform.Resizable);
+          //this.Mixin(events.HasEvents);
           this.parent=parent;
 
           this.addClass("acw");
 
           //titlebar
           this.titlebar=new basic.Div("acb")
-          this.titlebar.Mixin(transform.Draggable);
           this.add(this.titlebar);
-          
-          this.size.width=400;
-          this.size.height=300;
+          this.titlebar.Mixin(transform.Draggable);
+
+          this.size={width:400,height:300};
           this.drawTransform();
 
           //content
