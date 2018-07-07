@@ -45,6 +45,7 @@ Module(function M() {
           interactive.MomentaryButton.call(this,name,'task',callback);
           this.name=name;
           this.addClass('tile');
+          Object.defineProperty(this,"task",{value:null,writable:true});
         });
       });
       var Deck=M.Class(function C() {
