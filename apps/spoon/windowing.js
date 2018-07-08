@@ -32,7 +32,7 @@ Module(function M() {
           this.titlebar=new basic.Div("acb")
           this.add(this.titlebar);
           this.titlebar.Mixin(events.hasEvents);
-          this.position={x:0,y:0}
+          this.position={x:0,y:0};
           this.size={width:400,height:300};
           
 
