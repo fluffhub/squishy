@@ -31,7 +31,7 @@ Module(function M() {
           //titlebar
           this.titlebar=new basic.Div("acb")
           this.add(this.titlebar);
-          this.titlebar.Mixin(events.HasEvents);
+          this.titlebar.Mixin(events.hasEvents);
           this.size={width:400,height:300};
           this.drawTransform();
 
