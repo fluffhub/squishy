@@ -32,8 +32,9 @@ Module(function M() {
           this.titlebar=new basic.Div("acb")
           this.add(this.titlebar);
           this.titlebar.Mixin(events.hasEvents);
+          this.position={x:0,y:0}
           this.size={width:400,height:300};
-          this.drawTransform();
+          
 
           //content
           this.contents=new basic.Div("acc");
@@ -49,7 +50,7 @@ Module(function M() {
 
           });
           this.titlebar.enableEvents("context");
-
+          this.drawTransform();
           //window controls
 
           //draggable
@@ -60,10 +61,10 @@ Module(function M() {
             // acw.element.style.left=v.position.x+"px";/
           ///  i.parent.position.x=i.parent.position.x+i.delta.x
           //  i.parent.position.y=i.parent.position.y+i.delta.y
-            i.drawTransform();
+            acw.drawTransform();
           //  i.parent.drawTransform();
             //console.debug({x:v.position.x,y:v.position.y});
-          });
+          },this.titlebar.element);
           //resizable
           ///console.debug(this);
           this.enableresize(undefined,function onresize(item) {
