@@ -67,7 +67,7 @@ Module(function M() {
           //resizable
           ///console.debug(this);
           this.enableresize(undefined,function onresize(item) {
-            extend(acw.titlebar.size,acw.size);
+           
           });
 
         });
