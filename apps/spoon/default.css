@@ -16,9 +16,6 @@ a.member { text-decoration: none; }
 .member::before { content: "├"; font-family: monospace; font-size: 1.35em; line-height: 1em; text-decoration: none; }
 .module.member.collapsed { line-height: 1.25em; margin: 0px 0px 0px 1em; padding: 0px; }
 .submitter > span { font-size: 1.5em; line-height: 25px; }
-.acw { position: absolute; display: inline-block; background-color: rgb(239, 239, 239); overflow: hidden; padding: 5px;     box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.5);}
-.acw { transition: opacity 0.1s; opacity: 0; z-index: 0; }
-.acw.visible { transition: opacity 0.5s linear; opacity: 1; z-index: 1000; }
 .pane * { user-select: none; }
 .submitter .button { bottom: 0px; position: absolute; width: 100%; line-height: 2em; font-size: 1.5em; }
 .submitter .comments { display: block; width: 100%; position: absolute; top: 25px; padding: 8px; bottom: 50px; left: 0px; right: 0px; }
@@ -275,6 +272,9 @@ a.member { text-decoration: none; }
 .member::before { content: "├"; font-family: monospace; font-size: 1.35em; line-height: 1em; text-decoration: none; }
 .module.member.collapsed { line-height: 1.25em; margin: 0px 0px 0px 1em; padding: 0px; }
 .submitter > span { font-size: 1.5em; line-height: 25px; }
+.acw { position: absolute; display: inline-block; background-color: rgb(239, 239, 239); overflow: hidden; }
+.acw { transition: opacity 0.1s; opacity: 0; z-index: 0; }
+.acw.visible { transition: opacity 0.5s linear; opacity: 1; z-index: 1000; }
 .pane * { user-select: none; }
 .acb { display:block; width:100%; padding:0.5em; }
 .submitter .button { bottom: 0px; position: absolute; width: 100%; line-height: 2em; font-size: 1.5em; }
