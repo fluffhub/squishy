@@ -35,7 +35,7 @@ Module(function M() {
         theme.offset=5;
         for (var i=0;i<dirs.length;i++) {
           var handleconfig = config[i];
-          var dir=dirs[i];
+          var dir=config[i];
           var size = theme.side_handle_size;
           if(dir[0].length==2) size=theme.corner_handle_size;
           var style={};
