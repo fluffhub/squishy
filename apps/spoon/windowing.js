@@ -15,7 +15,7 @@ Module(function M() {
         });
       });
       var theme = M.Def("Theme", {});
-      Style(function S() {
+      M.Style(function S() {
        
         var pos = ["top","right","bottom","left"];
         var dim = ["height","width"]
