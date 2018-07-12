@@ -13,6 +13,8 @@ Module(function M() {
     "spoon/windowing",
     function(DOM,Req,form,membrane,system,live,basic,styles,spoon,windowing) {
       M.Style(function S() {
+        S.addRule(".Console form", "position:fixed;bottom:0;height:30px;width:100%;")
+        
         S.addRule(".Console","font-face:monospace")
         S.addRule(".Console>textarea",{width: "100%",clear: "both",'min-height': "80%"});
         S.addRule(".Console>input:first-child",{position: "absolute",bottom: 0,width: "100%"});
