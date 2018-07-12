@@ -4,7 +4,6 @@ Module(function M() {
     "squishy/DOM",
     "squishy/request",
     "squishy/form",
-
     "squishy/membrane",
     "squishy/system",
     "squishy/live",
@@ -13,8 +12,6 @@ Module(function M() {
     "spoon",
     "spoon/windowing",
     function(DOM,Req,form,membrane,system,live,basic,styles,spoon,windowing) {
-
-
       M.Style(function S() {
         S.addRule(".Console","font-face:monospace")
         S.addRule(".Console>textarea",{width: "100%",clear: "both",'min-height': "80%"});
@@ -33,9 +30,9 @@ Module(function M() {
 
         C.Init(function Commander(id) {
           try {
-            Object.defineProperty(this, "session", {value:new membrane.Device(system.uri("").hostname) });
+            Object.defineProperty(this, "session", { value:new membrane.Device(system.uri("").hostname) });
           } catch (e) {
-            Object.defineProperty(this,"session", {value:live.DeviceManager.devices[system.uri("").hostname].membrane});
+            Object.defineProperty(this,"session", { value:live.DeviceManager.devices[system.uri("").hostname].membrane});
           }
           windowing.AppContainer.call(this);
           this.titlebar.content("Membrane Console");
@@ -58,7 +55,7 @@ Module(function M() {
             for(var i=0;i<devnames.length;i++) {
               var devname=devnames[i];
             }
-            var input=new form.TextInput("input","",function() {
+            var input=new form.TextInput("input","",function() { 
 
             });
 
@@ -78,7 +75,7 @@ Module(function M() {
             myform.element.action="#";
 
             myform.Madd(input,submit);
-            commander.add(myform);
+            commander.contents.add(myform);
           });
         });
 
@@ -112,8 +109,5 @@ Module(function M() {
         return new Commander();
       });
       spoon.main.addApp("console",M.Self);
-
     });
-
-
 });

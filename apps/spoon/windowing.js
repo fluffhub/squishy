@@ -67,7 +67,7 @@ Module(function M() {
           },this.titlebar.element);
           //resizable
           ///console.debug(this);
-          this.enableresize(undefined,function onresize(item) {
+          this.enableresize("nw,n,ne,e,se,s,sw,w",function onresize(item) {
            
           });
 
