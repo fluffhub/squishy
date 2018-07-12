@@ -14,6 +14,44 @@ Module(function M() {
 
         });
       });
+      var theme = M.Def("Theme", {});
+      Style(function S() {
+       
+        var pos = ["top","right","bottom","left"];
+        var dim = ["height","width"]
+        var dirs = ["n","e","s","w","nw","ne","se","sw"]
+        var config=[
+        [[0], [0]],
+        [[1], [1]],
+        [[2], [0]],
+        [[3], [1]],
+        [[0,2],[0,1]],
+        [[0,1],[0,1]],
+        [[1,2],[0,1]],
+        [[2,3],[0,1]]
+        ];
+        theme.corner_handle_size=30;
+        theme.side_handle_size=10;
+        theme.offset=5;
+        for (var i=0;i<dirs.length;i++) {
+          var handleconfig = config[i];
+          var dir=dirs[i];
+          var size = theme.side_handle_size;
+          if(dir[0].length==2) size=theme.corner_handle_size;
+          var style={};
+          for(var x=0;x<dir[0].length;x++) {
+            style[pos[dir[0][x]]]="-"+theme.handle_offset+"px";
+          }
+          for(var y=0;y<dir[1].length;y++) {
+            style[dim[dir[1][y]]]=size+"px";
+          }
+          S.addRule(".acw .ui-resizable-"+dir, style)
+
+        }
+              
+
+      });
+
       var AppContainer=M.Class(function C() {
         C.Super(transform.HTMLPositionBox);
         C.Mixin(transform.Resizable);
