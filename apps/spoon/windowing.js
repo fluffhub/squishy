@@ -32,7 +32,7 @@ Module(function M() {
         ];
         theme.corner_handle_size=30;
         theme.side_handle_size=10;
-        theme.offset=5;
+        theme.handle_offset=5;
         for (var i=0;i<dirs.length;i++) {
           var handleconfig = config[i];
           var dir=config[i];
