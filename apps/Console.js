@@ -20,8 +20,8 @@ Module(function M() {
         S.addRule(".Console>input:first-child",{position: "absolute",bottom: 0,width: "100%"});
         S.addRule(".trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
         S.addRule(".Console input[type=\"submit\"]", "line-height:1.2em;font-family:monospace serif;position: absolute; right: 0;");
-        S.addRule(".output p","margin:0;margin-left:0.5em;display:inline-block;float:left;clear:both;");
-        S.addRule(".output", "padding-bottom:1.2em;width:100%;top:0;bottom:1.2em;overflow:scroll;")
+        S.addRule(".tty p","margin:0;margin-left:0.5em;display:inline-block;float:left;clear:both;");
+        S.addRule(".tty", "padding-bottom:1.2em;width:100%;top:0;bottom:1.2em;overflow:scroll;")
         S.addRule(".Console","position: absolute;bottom: 0;width: 100%;");
       });
 
@@ -48,7 +48,7 @@ Module(function M() {
           } else {
             this.id="pool";
           }
-          commander.output=new basic.Div("output");
+          commander.output=new basic.Div("tty");
           commander.contents.add(commander.output);
 
           Import("squishy/live","squishy/form",function(live,form) {
