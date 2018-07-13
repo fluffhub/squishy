@@ -13,14 +13,15 @@ Module(function M() {
     "spoon/windowing",
     function(DOM,Req,form,membrane,system,live,basic,styles,spoon,windowing) {
       M.Style(function S() {
-        S.addRule(".Console .acc form ", "height:2em;width:100%;display:flex;")
+        S.addRule(".Console .acc form ", "position:absolute;bottom:0;height:2em;width:100%;display:flex;")
         S.addRule(".Console .acc textarea",{width: "100%",clear: "both",'min-height': "80%"});
-        S.addRule(".Console .acc form input:first-child",{flex:"1 1 auto", border:"none","font-family":"monospace, serif"});
         S.addRule(".Console .acc .trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
-        S.addRule(".Console>form .acc form input[type=\"submit\"]", "flex:0 0 2em;border:none; display:block;width:2em;bottom:0px;line-height:2em;font-family:monospace serif;position: absolute; right: 0;");
+        S.addRule(".Console .acc form input[type=\"submit\"]", "flex:0 0 2em;border:none; display:block;width:2em;bottom:0px;line-height:2em;font-family:monospace serif;position: absolute; right: 0;");
+        S.addRule(".Console .acc form input:first-child",{flex:"1 1 auto", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
+       
         S.addRule(".Console .acc .tty p","margin:0;display:inline-block;float:left;clear:both;");
         S.addRule(".Console .acc .tty", "position:absolute;left:0;right:0;top:0;bottom:2em;overflow:scroll;")
-        S.addRule(".Console","position: absolute;bottom: 0;width: 100%;");
+        S.addRule(".Console","position: absolute;");
       });
 
       var Commander=M.Class(function C() {
