@@ -17,7 +17,7 @@ Module(function M() {
       });
       M.Style(function S() {
 
-        S.addRule(".TextEditor .acc textarea", "left:0;right:0;top:2.5em;bottom:0;position:absolute;font-family:monospace, serif; font-size:0.75em; ");
+        S.addRule(".TextEditor .acc textarea", "left:0;right:0;top:0;bottom:0;position:absolute;font-family:monospace, serif; font-size:0.75em; ");
         S.addRule(".TextEditor .acc", {          overflow: "hidden"    });
       });
       
