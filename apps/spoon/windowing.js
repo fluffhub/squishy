@@ -51,7 +51,7 @@ Module(function M() {
           S.addRule(".acw", { transition: "opacity 0.1s, box-shadow 0.15s ease-out","border-radius":"1px", opacity: 0, "z-index":0 });
           S.addRule(".acw .visible", {  opacity: 1, "z-index": 1000,"box-shadow":"0px 0px 3px 0px rgba(0,0,0,0.7)" });
           S.addRule(".acw .active", {  transition:"opacity 0.1s, box-shadow 0.2s ease-in", "box-shadow":"1px 1px 6px 1px rgba(0,0,0,0.5)","z-index":1000000});
-          S.addRule(".acc", { overflow:"hidden",left: 0, right: 0, top: "2.5em", bottom: 0, position: "absolute"        });
+          S.addRule(".acc", { overflow:"hidden",left: 0, right: 0, top: "2.2em", bottom: 0, position: "absolute"        });
         }
               
 
