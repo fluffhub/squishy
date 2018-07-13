@@ -33,10 +33,11 @@ Module(function M() {
           //this.add(title);
           title.content(loc);
           var ta=new form.TextBox();
-          this.add(ta);
+          this.contents.add(ta);
+          Object.defineProperty(this, "textarea",{value:ta})
           var te=this;
           Object.defineProperty(this,"File",{enumerable:false,writable:true,configurable:false})
-          this.value=null;
+          this.value="";
 
           live.DeviceManager.retrieve(loc,function(results) {
             Object.keys(results).forEach(function (name) {
