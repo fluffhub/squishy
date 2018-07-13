@@ -21,7 +21,7 @@ Module(function M() {
        
         S.addRule(".Console .acc .tty .trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
         S.addRule(".Console .acc .tty", "padding:0.5em 0;position:absolute;left:0;right:0;top:0;bottom:1.5em;overflow:scroll;font-family:monospace serif;")
-
+        S.addRule(".Console .tty .trans p", "padding:0;margin:0;")
         S.addRule(".Console","position: absolute;");
       });
 
