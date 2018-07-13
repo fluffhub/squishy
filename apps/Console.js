@@ -14,7 +14,7 @@ Module(function M() {
     function(DOM,Req,form,membrane,system,live,basic,styles,spoon,windowing) {
       M.Style(function S() {
         S.addRule(".Console .acc form ", "position:absolute;bottom:0;height:1.5em;width:100%;display:flex;")
-        S.addRule(".Console .acc textarea",{width: "100%",clear: "both",});
+        S.addRule(".Console .acc textarea",{width: "100%",clear: "both",border:"none", "background-color":"#eee"});
         S.addRule(".Console .acc .trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
         S.addRule(".Console .acc form input[type=\"submit\"]", "flex:0 0 3.5em;border:none; display:block;width:3em;bottom:0px;line-height:1.5em;font-family:monospace serif;");
         S.addRule(".Console .acc form input:first-child",{flex:"1 1 auto", "line-height":"1.5em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
@@ -22,6 +22,8 @@ Module(function M() {
         S.addRule(".Console .acc .tty .trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
         S.addRule(".Console .acc .tty", "padding:0.5em 0;position:absolute;left:0;right:0;top:0;bottom:1.5em;overflow:scroll;font-family:monospace serif;")
         S.addRule(".Console .tty .trans p", "padding:0;margin:0;font-family:monospace;")
+        S.addRule(".Console .tty .input", "font-family:monospace;")
+        S.addRule(".Console .tty .input:before", "content:\"> \";")
         S.addRule(".Console","position: absolute;");
       });
 
