@@ -20,7 +20,7 @@ Module(function M() {
         S.addRule(".Console .acc form input:first-child",{flex:"1 1 auto", "line-height":"1.5em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
        
         S.addRule(".Console .acc .tty p","padding:0 0.5em; display:inline-block;float:left;clear:both;");
-        S.addRule(".Console .acc .tty", "padding:0.5em 0;position:absolute;left:0;right:0;top:0;bottom:2em;overflow:scroll;font-family:monospace serif;")
+        S.addRule(".Console .acc .tty", "padding:0.5em 0;position:absolute;left:0;right:0;top:0;bottom:1.5em;overflow:scroll;font-family:monospace serif;")
 
         S.addRule(".Console","position: absolute;");
       });
