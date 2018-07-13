@@ -46,7 +46,12 @@ Module(function M() {
             style[dim[config[1][y]]]=size+"px";
           }
           S.addRule(".acw .ui-resizable-"+dir, style)
-
+          S.addRule(".acb", { display:"block", width:"100%","background-color": "#eee","line-height": "2em","text-indent": "0.5em" });
+          S.addRule(".acw", { position: "absolute", display: "inline-block", "background-color": "rgb(239, 239, 239)"  });
+          S.addRule(".acw", { transition: "opacity 0.1s, box-shadow 0.15s ease-out","border-radius":"1px", opacity: 0, "z-index":0 });
+          S.addRule(".acw .visible", {  opacity: 1, "z-index": 1000,"box-shadow":"0px 0px 3px 0px rgba(0,0,0,0.7)" });
+          S.addRule(".acw .active", {  transition:"opacity 0.1s, box-shadow 0.2s ease-in", "box-shadow":"1px 1px 6px 1px rgba(0,0,0,0.5)","z-index":1000000});
+          S.addRule(".acc", { overflow:"hidden", });
         }
               
 

@@ -278,7 +278,7 @@ a.member { text-decoration: none; }
 .acw.active {  transition:opacity 0.1s, box-shadow 0.2s ease-in; box-shadow:1px 1px 6px 1px rgba(0,0,0,0.5);z-index:1000000;}
 .acc { overflow:hidden; }
 .pane * { user-select: none; }
-.acb { display:block; width:100%; padding:0.5em; }
+
 .submitter .button { bottom: 0px; position: absolute; width: 100%; line-height: 2em; font-size: 1.5em; }
 .submitter .comments { display: block; width: 100%; position: absolute; top: 25px; padding: 8px; bottom: 50px; left: 0px; right: 0px; }
 form.ProfileEditor { width: 400px; margin: auto; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; height: 400px; }

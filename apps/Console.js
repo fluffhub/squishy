@@ -17,9 +17,9 @@ Module(function M() {
         S.addRule(".Console .acc", "overflow:hidden;");
         S.addRule(".Console","font-face:monospace")
         S.addRule(".Console>textarea",{width: "100%",clear: "both",'min-height': "80%"});
-        S.addRule(".Console>input:first-child",{position: "absolute",bottom: 0,left:"0px",right:"2em"});
+        S.addRule(".Console>input:first-child",{position: "absolute",bottom: "0px",left:"0px",right:"2em"});
         S.addRule(".trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
-        S.addRule(".Console input[type=\"submit\"]", "display:block;width:2em;line-height:1.2em;font-family:monospace serif;position: absolute; right: 0;");
+        S.addRule(".Console input[type=\"submit\"]", "display:block;width:2em;bottom:0px;line-height:1.2em;font-family:monospace serif;position: absolute; right: 0;");
         S.addRule(".tty p","margin:0;margin-left:0.5em;display:inline-block;float:left;clear:both;");
         S.addRule(".tty", "padding-bottom:1.2em;left:0;right:0;top:0;bottom:1.2em;overflow:scroll;")
         S.addRule(".Console","position: absolute;bottom: 0;width: 100%;");
