@@ -13,14 +13,15 @@ Module(function M() {
     "spoon/windowing",
     function(DOM,Req,form,membrane,system,live,basic,styles,spoon,windowing) {
       M.Style(function S() {
-        S.addRule(".Console form", "position:fixed;bottom:0;height:30px;width:100%;")
-        
+        S.addRule(".Console form", "position:absolute;bottom:0;height:30px;width:100%;")
+        S.addRule(".Console .acc", "overflow:hidden;");
         S.addRule(".Console","font-face:monospace")
         S.addRule(".Console>textarea",{width: "100%",clear: "both",'min-height': "80%"});
         S.addRule(".Console>input:first-child",{position: "absolute",bottom: 0,width: "100%"});
         S.addRule(".trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
-        S.addRule(".Console input[type=\"submit\"]", "position: absolute; right: 0;");
-        S.addRule(".output p","margin:0;");
+        S.addRule(".Console input[type=\"submit\"]", "line-height:1.2em;font-family:monospace serif;position: absolute; right: 0;");
+        S.addRule(".output p","margin:0;margin-left:0.5em;display:inline-block;float:left;clear:both;");
+        S.addRule(".output", "padding-bottom:1.2em;width:100%;top:0;bottom:1.2em;overflow:scroll;")
         S.addRule(".Console","position: absolute;bottom: 0;width: 100%;");
       });
 
