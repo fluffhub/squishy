@@ -14,45 +14,55 @@ Module(function M() {
 
         });
       });
-      var theme = M.Def("Theme", {});
+
       M.Style(function S() {
-       
+        S.Theme({
+          corner_handle_size__px:30,
+          side_handle_size__px:10,
+          handle_offset__px:5,
+          frame_bg_color__color:[0.5,0.5,0.5,0.5],
+          frame_fg_color__color:[0.8,0.8,0.8,0.5],
+          bar_height__px:25,
+          bar_font_size__px:12.5,
+        });
         var pos = ["top","right","bottom","left"];
         var dim = ["height","width"]
         var dirs = ["n","e","s","w","nw","ne","se","sw"]
         var configs=[
-        [[0], [0]],
-        [[1], [1]],
-        [[2], [0]],
-        [[3], [1]],
-        [[0,2],[0,1]],
-        [[0,1],[0,1]],
-        [[1,2],[0,1]],
-        [[2,3],[0,1]]
+          [[0], [0]],
+          [[1], [1]],
+          [[2], [0]],
+          [[3], [1]],
+          [[0,2],[0,1]],
+          [[0,1],[0,1]],
+          [[1,2],[0,1]],
+          [[2,3],[0,1]]
         ];
-        theme.corner_handle_size=30;
-        theme.side_handle_size=10;
-        theme.handle_offset=5;
-        for (var i=0;i<dirs.length;i++) {
-          var config = configs[i];
-          var dir=dirs[i];
-          var size = theme.side_handle_size;
-          if(config[0].length==2) size=theme.corner_handle_size;
-          var style={};
-          for(var x=0;x<config[0].length;x++) {
-            style[pos[config[0][x]]]="-"+theme.handle_offset+"px";
+        var theme = S.theme;
+        S.Init(function() {
+          for (var i=0;i<dirs.length;i++) {
+            var config = configs[i];
+            var dir=dirs[i];
+            var size = theme.side_handle_size;
+            if(config[0].length==2) size=theme.corner_handle_size;
+            var style={};
+            for(var x=0;x<config[0].length;x++) {
+              style[pos[config[0][x]]]="-"+theme.handle_offset;
+            }
+            for(var y=0;y<config[1].length;y++) {
+              style[dim[config[1][y]]]=size;
+            }
+            S.addRule(".acw .ui-resizable-"+dir, style)
           }
-          for(var y=0;y<config[1].length;y++) {
-            style[dim[config[1][y]]]=size+"px";
-          }
-          S.addRule(".acw .ui-resizable-"+dir, style)
-          S.addRule(".acb", { display:"block", overflow:"hidden",width:"100%","background-color": "#eee","line-height": "2em","text-indent": "0.5em" });
+
+          S.addRule(".align_button", { position:"absolute",top:0,bottom:0,margin:"auto",height:"20px",width:"20px",left:0,right:0,"background-color":"blue",})
           S.addRule(".acw", { position: "absolute", display: "inline-block", "background-color": "rgb(239, 239, 239)"  });
           S.addRule(".acw", { transition: "opacity 0.1s, box-shadow 0.15s ease-out","border-radius":"1px", opacity: 0, "z-index":0 });
           S.addRule(".acw .visible", {  opacity: 1, "z-index": 1000,"box-shadow":"0px 0px 3px 0px rgba(0,0,0,0.7)" });
           S.addRule(".acw .active", {  transition:"opacity 0.1s, box-shadow 0.2s ease-in", "box-shadow":"1px 1px 6px 1px rgba(0,0,0,0.5)","z-index":1000000});
           S.addRule(".acc", { overflow:"hidden",left: 0, right: 0, top: "2.2em", bottom: 0, position: "absolute"        });
-        }
+      
+        });
               
 
       });
@@ -113,7 +123,59 @@ Module(function M() {
           this.enableresize("n,e,s,w,nw,ne,se,sw",function onresize(item) {
            
           });
+          this.onresizestart=function onresizestart(handle) {
+            var dir=handle.dir;
+            if(dir=="n" || dir=="s") {
+              this.find_edges(true, handle);
+            } 
+            if(dir=="e" || dir=="w") {
+              this.find_edges(false, handle);
+            }
 
+          };
+
+          this.onresizestop=function onresizestop(handle) {
+            this.hide_edges();
+          };
+
+        });
+        C.Def(function hide_edges() {
+          var task_names = Object.keys(this.parent.tasks)
+          task_names.forEach(function(task_name) {
+            var task=this.parent.tasks[task_name];
+            Object.keys(task.handles).forEach(function(handlename) {
+              var handle=task.handles[handlename];
+              if(handle.align_button) handle.align_button.hide();
+
+            })
+          });
+        });
+        C.Def(function find_edges(horizontal) {
+          var task_names = Object.keys(this.parent.tasks)
+          var dirs=["e","w"];
+          if(horizontal) dirs=["n","s"];
+          task_names.forEach(function(task_name) {
+            var task=this.parent.tasks[task_name];
+            var handles = [task.handles[dirs[0]],task.handles[dirs[1]]];
+            handles.forEach(function(handle) {
+              if(handle.align_button) { 
+                handle.align_button.onclick=function() {
+
+                }
+              } else {
+                var classname;
+                if(horizontal) classname="horizontal "
+                else classname="vertical "
+                var align_button=new interactive.MomentaryButton(" ", classname+"align_button", function(e) {
+                  console.debug({"alignment":handle});
+                });
+                Object.defineProperty(handle,"align_button", {value:align_button})
+                handle.add(align_button);
+              }
+              handle.align_button.show();
+            });
+          
+          });
         });
       });
     });

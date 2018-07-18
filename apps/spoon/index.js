@@ -15,7 +15,21 @@ Module(function M() {
      live,conf) {
 
       Import("spoon/default.css");
-      Import("spoon/ui.css");
+      M.Style(function S()  {
+        S.addStyle(".hud", {
+          position: "fixed",
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          "z-index": 10000000,
+          background: "none",
+          "pointer-events": "none",
+        });
+        S.addStyle(".hud>*", {
+            "pointer-events":"all" });
+        });
+      })
       var hasEvents=events.hasEvents;
       var Frame=DOM.Frame;
       var TabbedPane=interactive.TabbedPane;
