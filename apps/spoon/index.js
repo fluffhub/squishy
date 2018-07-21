@@ -27,9 +27,9 @@ Module(function M() {
           "pointer-events": "none",
         });
         S.addStyle(".hud>*", {
-            "pointer-events":"all" });
+            "pointer-events":"all" 
         });
-      })
+      });
       var hasEvents=events.hasEvents;
       var Frame=DOM.Frame;
       var TabbedPane=interactive.TabbedPane;
