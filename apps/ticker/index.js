@@ -161,6 +161,7 @@ Module(function M() {
 
     M.Import("squishy/styles",function(styles) {
 M.Style(function S() {
+  var S=this;
   S.addStyle(    ".button.addticker.enabled", ""+
   "width: 1em;"+
   "height: 1.3em;"+
