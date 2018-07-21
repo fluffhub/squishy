@@ -58,8 +58,8 @@ Module(function M() {
           S.addStyle(".align_button", { position:"absolute",top:0,bottom:0,margin:"auto",height:"20px",width:"20px",left:0,right:0,"background-color":"blue",})
           S.addStyle(".acw", { position: "absolute", display: "inline-block", "background-color": "rgb(239, 239, 239)"  });
           S.addStyle(".acw", { transition: "opacity 0.2s ease-out, box-shadow 0.1s ease-out","border-radius":"1px", opacity: 0, "z-index":0 });
-          S.addStyle(".acw .visible", {  opacity: 1, "z-index": 1000,"box-shadow":"0px 0px 3px 0px rgba(0,0,0,0.7)" });
-          S.addStyle(".acw .active", {  transition:"opacity 0.1s, box-shadow 0.2s ease-in", "box-shadow":"1px 1px 6px 1px rgba(0,0,0,0.5)","z-index":1000000});
+          S.addStyle(".acw.visible", {  opacity: 1, "z-index": 1000,"box-shadow":"0px 0px 3px 0px rgba(0,0,0,0.7)" });
+          S.addStyle(".acw.active", {  transition:"opacity 0.1s, box-shadow 0.2s ease-in", "box-shadow":"1px 1px 6px 1px rgba(0,0,0,0.5)","z-index":1000000});
           S.addStyle(".acc", { overflow:"hidden",left: 0, right: 0, top: "2.2em", bottom: 0, position: "absolute"        });
       
         });
