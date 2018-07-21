@@ -738,5 +738,3 @@ Module(function M() {
     'UserBrowser'
   );
 });
-
-
