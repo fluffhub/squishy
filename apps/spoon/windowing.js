@@ -142,8 +142,9 @@ Module(function M() {
         });
         C.Def(function hide_edges() {
           var task_names = Object.keys(this.parent.tasks)
+          var parent=this.parent;
           task_names.forEach(function(task_name) {
-            var task=this.parent.tasks[task_name];
+            var task=parent.tasks[task_name];
             Object.keys(task.handles).forEach(function(handlename) {
               var handle=task.handles[handlename];
               if(handle.align_button) handle.align_button.hide();
