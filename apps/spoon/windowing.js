@@ -123,19 +123,20 @@ Module(function M() {
           this.enableresize("n,e,s,w,nw,ne,se,sw",function onresize(item) {
            
           });
+
           this.onresizestart=function onresizestart(handle) {
             var dir=handle.dir;
             if(dir=="n" || dir=="s") {
-              this.find_edges(true, handle);
+              acw.find_edges(true, handle);
             } 
             if(dir=="e" || dir=="w") {
-              this.find_edges(false, handle);
+              acw.find_edges(false, handle);
             }
 
           };
 
           this.onresizestop=function onresizestop(handle) {
-            this.hide_edges();
+            acw.hide_edges();
           };
 
         });
