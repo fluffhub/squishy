@@ -16,7 +16,7 @@ Module(function M() {
       });
 
       M.Style(function S() {
-        S.Theme({
+        var theme = S.Theme({
           corner_handle_size__px:30,
           side_handle_size__px:10,
           handle_offset__px:5,
@@ -147,7 +147,7 @@ Module(function M() {
               var handle=task.handles[handlename];
               if(handle.align_button) handle.align_button.hide();
 
-            })
+            });
           });
         });
         C.Def(function find_edges(horizontal) {
