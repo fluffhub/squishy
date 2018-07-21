@@ -9,7 +9,6 @@ Module(function M() {
     "squishy/live",
     "squishy/basic",
     "squishy/styles",
-    "squishy/events",
     "spoon",
     "spoon/windowing",
     "squishy/events",
