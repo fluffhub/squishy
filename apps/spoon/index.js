@@ -10,7 +10,6 @@ Module(function M() {
     function(
     DOM,basic,layout,
      interactive,kb,events,svg,styles,
-     ub,
      Ms,cookies,membrane,
      live,conf) {
 
@@ -739,4 +738,5 @@ Module(function M() {
     'UserBrowser'
   );
 });
+
 
