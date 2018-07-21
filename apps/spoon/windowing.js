@@ -39,7 +39,6 @@ Module(function M() {
           [[1,2],[0,1]],
           [[2,3],[0,1]]
         ];
-        var theme = S.theme;
         S.Init(function() {
           for (var i=0;i<dirs.length;i++) {
             var config = configs[i];
