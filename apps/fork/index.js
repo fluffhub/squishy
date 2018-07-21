@@ -33,7 +33,7 @@ Module(function M() {
             var path;
             if(typeof val == "string") {
               path=val
-            } else {
+            } else if (val instanceof Element) {
               path=val.href
             }
             this.apps=[];
@@ -278,7 +278,7 @@ Module(function M() {
                 var instance=mod[devname];
 
                 if(lib.dirs[path] instanceof Object) {
-
+                  //pass
                 } else {
                   var fn=dirs[dirs.length-1];
                   if(M.Self.match(instance,fn)) {

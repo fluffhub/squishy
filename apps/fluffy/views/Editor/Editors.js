@@ -180,56 +180,57 @@ Module(function M() {
   });
   M.Import("squishy/styles", function(styles) {
     M.Style(function S() {
-      S.addRule(".object.editor:before",
+      var S=this;
+      S.addStyle(".object.editor:before",
         ""
       );
-      S.addRule(".EditorItem",
+      S.addStyle(".EditorItem",
         "min-height:1em;min-width:50px;overflow:visible;"+
         "width:auto;height:auto;margin:0.2em;"+
         "background-color:rgba(100,100,100,0.5)"+
         "margin-left:1px;"+
         "white-space:no-wrap;float:left;position:relative;"
       );
-      S.addRule(".object.editor .caption",
+      S.addStyle(".object.editor .caption",
         "padding:0 0.25em;font-size:1em;"+
         "line-height:1.5em;float:left;clear:both;"+
         "background-color:black;color:white;"
       )
-      S.addRule(".object.editor", 
+      S.addStyle(".object.editor", 
         "clear:both;float:left;height:auto;"
       );
-      S.addRule(".EditorItem input",
+      S.addStyle(".EditorItem input",
         "font-size:1em;line-height:1.5em;height:1.5em;"
       );
-      S.addRule(".editor.array", 
+      S.addStyle(".editor.array", 
         "clear:both;min-width:6em;"
       );
 
-      S.addRule(".editor.array:before", 
+      S.addStyle(".editor.array:before", 
         "position:absolute;content:'[';left:-0.1em;"+
         "font-size:1.5em;line-height:1.5em;width:0.1em;"
       );
-      S.addRule(".editor.array:after",
+      S.addStyle(".editor.array:after",
          "position:absolute;content:']';"+
          "font-size:1.5em;line-height:1.5em;"+
          "width:0.1em;right:-0.1em;"
         );
 
-      S.addRule(".number.editor",
+      S.addStyle(".number.editor",
         "width:2em;position:relative;float:left;"
       );
-      S.addRule(".string.editor",
+      S.addStyle(".string.editor",
         "float:left;clear:both;position:relative;"
       );
-      S.addRule(".array>.EditorItem:after",
+      S.addStyle(".array>.EditorItem:after",
         "content:',';float:left;display:block;"+
          "width:1em;height:1em;"
       );
-      S.addRule(".array.empty",
+      S.addStyle(".array.empty",
         "width:2em;height:2em;");
-      S.addRule(".object.editor .object.editor",
+      S.addStyle(".object.editor .object.editor",
         "transform:scale(0.45);opacity:0.8;transform-origin:top left;-webkit-transform-origin:top left;");
-      S.addRule(".EditorItem",
+      S.addStyle(".EditorItem",
         "border:1px solid #555;border-left:3px solid black;overflow:hidden;");
   });
 });

@@ -9,24 +9,54 @@ Module(function M() {
     "squishy/live",
     "squishy/basic",
     "squishy/styles",
+    "squishy/events",
     "spoon",
     "spoon/windowing",
-    function(DOM,Req,form,membrane,system,live,basic,styles,spoon,windowing) {
+    "squishy/events",
+    "squishy/transform",
+    function(DOM,Req,form,membrane,system,live,basic,styles,spoon,windowing,events,transform) {
       M.Style(function S() {
-        S.addRule(".Console .acc form ", "position:absolute;bottom:0;height:1.5em;width:100%;display:flex;")
-        S.addRule(".Console .acc textarea",{width: "100%",clear: "both",border:"none", "background":"none"});
-        S.addRule(".Console .acc .trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
-        S.addRule(".Console .acc form input[type=\"submit\"]", "flex:0 0 3.5em;border:none; display:block;width:3em;bottom:0px;line-height:1.5em;font-family:monospace serif;");
-        S.addRule(".Console .acc form input:first-child",{flex:"1 1 auto", "line-height":"1.5em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
+        var S=this; 
+        S.addStyle(".Console .acc form ", "position:absolute;bottom:0;height:1.5em;width:100%;display:flex;")
+        S.addStyle(".Console .acc textarea",{width: "100%",clear: "both",border:"none", "background":"none"});
+        S.addStyle(".Console .acc .trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
+        S.addStyle(".Console .acc form input[type=\"submit\"]", "flex:0 0 3.5em;border:none; display:block;width:3em;bottom:0px;line-height:1.5em;font-family:monospace serif;");
+        S.addStyle(".Console .acc form input:first-child",{flex:"1 1 auto", "line-height":"1.5em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
        
-        S.addRule(".Console .acc .tty .trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
-        S.addRule(".Console .acc .tty", "padding:0.5em 0;position:absolute;left:0;right:0;top:0;bottom:1.5em;overflow:scroll hidden;font-family:monospace serif;")
-        S.addRule(".Console .tty .trans p", "padding:0;margin:0;font-family:monospace;")
-        S.addRule(".Console .tty .input", "font-family:monospace;")
-        S.addRule(".Console .tty .input:before", "content:\"> \";")
-        S.addRule(".Console","position: absolute;");
+        S.addStyle(".Console .acc .tty .trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
+        S.addStyle(".Console .acc .tty", "padding:0.5em 0;position:absolute;left:0;right:0;top:0;bottom:1.5em;overflow:scroll hidden;font-family:monospace serif;")
+        S.addStyle(".Console .tty .trans p", "padding:0;margin:0;font-family:monospace;")
+        S.addStyle(".Console .tty .input", "font-family:monospace;")
+        S.addStyle(".Console .tty .input:before", "content:\"> \";")
+        S.addStyle(".Console","position: absolute;");
       });
 
+      
+      var ScrollContainer = M.Class(function C() {
+        C.Mixin(events.hasEvents)
+        C.Def(function ondrag() {  })
+        C.Def(function enableScroll(config) {
+          var config = config || {};
+          var anchor = config.anchor || null;
+          var handle = config.handle || null;
+          var ondrag = config.ondrag || this.ondrag;
+          if(handle) {
+            //pass
+
+          } else {
+            handle = new basic.Div()
+          }
+          //make middle-click drag function
+          this.addEvent()
+          if(handle.enableDrag instanceof Function) {
+
+          } else {
+            handle.Mixin(transform.Draggable)
+          }
+
+        });
+        
+      });
       var Commander=M.Class(function C() {
         C.Def("url","/squishy/src")
         C.Def("id","pool")

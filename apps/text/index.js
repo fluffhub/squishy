@@ -11,17 +11,15 @@ Module(function M() {
       M.Def(function match(file,name) {
         if (file instanceof system.File) {// || typeof file=="string" ) {
           return true;
-
         }
-
-      });
-      M.Style(function S() {
-
-        S.addRule(".TextEditor .acc textarea", "width:100%;left:0;right:0;top:0;bottom:0;position:absolute;font-family:monospace, serif; font-size:0.75em; ");
-        S.addRule(".TextEditor .acc", {            });
       });
       
-       
+      M.Style(function S() {
+        var S=this;
+        S.addStyle(".TextEditor .acc textarea", "width:100%;left:0;right:0;top:0;bottom:0;position:absolute;font-family:monospace, serif; font-size:0.75em; ");
+        S.addStyle(".TextEditor .acc", {            });
+      });
+      
       var TextEditor=M.Class(function C() {
         C.Super(windowing.AppContainer)
         C.Init(function TextEditor(loc,items) {

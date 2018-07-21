@@ -15,7 +15,8 @@ Module(function M() {
 
       Import("spoon/default.css");
       M.Style(function S()  {
-        S.addRule(".hud", {
+        var S=this;
+        S.addStyle(".hud", {
           position: "fixed",
           top: 0,
           bottom: 0,
@@ -25,7 +26,7 @@ Module(function M() {
           background: "none",
           "pointer-events": "none",
         });
-        S.addRule(".hud>*", {
+        S.addStyle(".hud>*", {
             "pointer-events":"all" 
         });
       });

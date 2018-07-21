@@ -160,36 +160,35 @@ Module(function M() {
     });
 
     M.Import("squishy/styles",function(styles) {
-  document.styleSheets[0].addRule(
-    ".button.addticker.enabled", ""+
-    "width: 1em;"+
-    "height: 1.3em;"+
-    "line-height: 1.3em;"+
-    "display: inline-block;"+
-    "text-align: center;"
-  )
 M.Style(function S() {
-  S.addRule(".ticker",
+  S.addStyle(    ".button.addticker.enabled", ""+
+  "width: 1em;"+
+  "height: 1.3em;"+
+  "line-height: 1.3em;"+
+  "display: inline-block;"+
+  "text-align: center;"
+);
+  S.addStyle(".ticker",
                                   "padding:0.1em 0.5em;");
-  S.addRule(".ticker svg",
+  S.addStyle(".ticker svg",
                                   "stroke-width:1px;stroke:orange;height:2.5em;width:100px;");
-  S.addRule(".tickerentry",
+  S.addStyle(".tickerentry",
                                   "padding:0.5em;");
-  S.addRule(".ticker .sym",
+  S.addStyle(".ticker .sym",
                                   "line-height:1.25em;font-family:monospace;font-size:1.25em;");
-  S.addRule(".ticker .sym",
+  S.addStyle(".ticker .sym",
                                   "line-height:1.25em;font-family:monospace;");
-  S.addRule(".vals span.new",
+  S.addStyle(".vals span.new",
                                   "transition:unset;");
-  S.addRule(".ticker .info",
+  S.addStyle(".ticker .info",
                                   "display:inline-block;");
-  S.addRule(".vals",
+  S.addStyle(".vals",
                                   "position:relative;overflow:hidden;font-family:monospace;width:4em;height:1.25em;font-size:1em;");
-  S.addRule(".vals span",
+  S.addStyle(".vals span",
                                   "transform:translateZ(0);transition:top 0.2s linear, color 1s linear 0.5s;top:0;color:black;position:absolute;");
-  S.addRule(".vals span.down",
+  S.addStyle(".vals span.down",
                                   "top:-1.25em;color:red;");
-  S.addRule(".vals span.up",
+  S.addStyle(".vals span.up",
                                   "top:1.25em;color:green;");
                                 });
                                 });
