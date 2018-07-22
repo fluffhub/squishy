@@ -32,18 +32,20 @@ Module(function M() {
 
       
       var ScrollContainer = M.Class(function C() {
-        C.Mixin(events.hasEvents)
-        C.Def(function ondrag() {  })
+        C.Super(basic.Div);
+        C.Mixin(events.hasEvents);
+        C.Def(function ondrag() {  });
         C.Def(function enableScroll(config) {
           var config = config || {};
           var anchor = config.anchor || null;
           var handle = config.handle || null;
           var ondrag = config.ondrag || this.ondrag;
+
           if(handle) {
             //pass
 
           } else {
-            handle = new basic.Div()
+            handle = new basic.Div("handle");
           }
           //make middle-click drag function
           this.addEvent()

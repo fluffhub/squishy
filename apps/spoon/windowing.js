@@ -61,7 +61,7 @@ Module(function M() {
           S.addStyle(".acw.visible", {  opacity: 1, "z-index": 1000,"box-shadow":"0px 0px 3px 0px rgba(0,0,0,0.7)" });
           S.addStyle(".acw.active", {  transition:"opacity 0.1s, box-shadow 0.2s ease-in", "box-shadow":"1px 1px 6px 1px rgba(0,0,0,0.5)","z-index":1000000});
           S.addStyle(".acc", { overflow:"hidden",left: 0, right: 0, top: "2.2em", bottom: 0, position: "absolute"        });
-      
+          S.addStyle(".acc .acb", { height:theme.bar_height,"text-indent":"0.5em" });
         });
               
 
