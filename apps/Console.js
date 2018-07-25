@@ -124,15 +124,20 @@ Module(function M() {
               origin.y=cy;
               
               var scrolled=false;
-              if(mh > ph && my > ph - mh && my <= 10) {
+              if(mh > ph) {
+                if(my < ph - mh) cursor.y = ph-mh;
+                else if(my > 0) cursor.y=0;
+                else cursor.y=cursor.y-delta.y;
                 //can scroll in Y - callback with change in pos for mousemove
-                cursor.y=cursor.y-delta.y;
+                
                 scrolled=true;
               }
 
-              if(mw > pw && mx <= 10 && mx > pw - mw) {
+              if(mw > pw ) {
                 //can scroll in X - callback with change in pos for mousemove
-                cursor.x=cursor.x-delta.x;
+                if(mx < pw - mw) cursor.x = pw-mw;
+                else if(mx > 0) cursor.x=0;
+                else cursor.x=cursor.x-delta.x;
                 scrolled=true;
                 
               }
