@@ -44,6 +44,8 @@ Module(function M() {
         });
 
         C.Def(function enableScroll(config) {
+          
+          this.element.style.position="absolute";
           var config = config || {};
           var anchor = config.anchor || null;
           var handle = config.handle || null;
