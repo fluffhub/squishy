@@ -39,7 +39,8 @@ Module(function M() {
       
         });
         C.Def(function drawTransform() {
-            
+            this.element.style.top=this.scrollcursor.y+"px";
+            this.element.style.left=this.scrollcursor.x+"px";    
         });
 
         C.Def(function enableScroll(config) {
@@ -47,7 +48,7 @@ Module(function M() {
           var anchor = config.anchor || null;
           var handle = config.handle || null;
           var ondrag = config.ondrag || this.ondrag;
-          var sense = config.sense || -1;
+          this.scroll_sense = config.sense || -1;
 
           var mousebuttons = config.mousebuttons || [2];
           var touchfingers = config.touchfingers || [1, 2, 3];
