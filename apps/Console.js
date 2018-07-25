@@ -44,9 +44,9 @@ Module(function M() {
         });
 
         C.Def(function enableScroll(config) {
-          Object.defineProperty(this,"scrolldelta",{ value:{x:0, y:0}, writable:false })
+          Object.defineProperty(this,"scrolldelta",{ value:{x:0, y:0} })
           
-          Object.defineProperty(this,"scrollorigin",{ value:{x:0, y:0}, writable:false })
+          Object.defineProperty(this,"scrollorigin",{ value:{x:0, y:0} })
 
           Object.defineProperty(this,"scrollcursor",{value:{x:0,y:0}, enumerable:true });
           this.element.style.position="absolute";
