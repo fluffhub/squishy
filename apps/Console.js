@@ -114,6 +114,7 @@ Module(function M() {
                 delta.x=scroller.scrollorigin.x-P.x;
 
               }
+              console.debug({delta,cursor})
               cursor.x=cursor.x-delta.x;
               cursor.y=cursor.y-delta.y;
               scroller.onscroll.call(scroller, e);
