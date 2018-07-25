@@ -155,7 +155,7 @@ Module(function M() {
           }
           commander.output=new ScrollContainer("tty");
           commander.contents.add(commander.output);
-
+          commander.output.enableScroll();
           Import("squishy/live","squishy/form",function(live,form) {
             var  selector=new form.Selector();
             var manager=live.DeviceManager;
