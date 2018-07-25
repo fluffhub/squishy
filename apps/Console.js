@@ -118,12 +118,12 @@ Module(function M() {
               if(mh > ph && my > ph - mh && my <= 0) {
                 //can scroll in Y - callback with change in pos for mousemove
 
-                delta.y=P.y-scroller.scrollorigin.y;
+                delta.y=scroller.scrollorigin.y-P.y;
               }
 
               if(mw > pw && mx <= 0 && mx > pw - mw) {
                 //can scroll in X - callback with change in pos for mousemove
-                delta.x=P.x-scroller.scrollorigin.x;
+                delta.x=scroller.scrollorigin.x-P.x;
 
               }
               console.debug({delta,cursor})
