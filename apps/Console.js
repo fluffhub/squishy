@@ -23,7 +23,7 @@ Module(function M() {
         S.addStyle(".Console .acc form input:first-child",{flex:"1 1 auto", "line-height":"1.5em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
        
         S.addStyle(".Console .acc .tty .trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
-        S.addStyle(".Console .acc .tty", "padding:0.5em 0;position:absolute;left:0;right:0;top:0;bottom:1.5em;overflow:scroll hidden;font-family:monospace serif;")
+        S.addStyle(".Console .acc .tty", "padding:0.5em 0;position:relative;font-family:monospace serif;")
         S.addStyle(".Console .tty .trans p", "padding:0;margin:0;font-family:monospace;")
         S.addStyle(".Console .tty .input", "font-family:monospace;")
         S.addStyle(".Console .tty .input:before", "content:\"> \";")
@@ -49,8 +49,7 @@ Module(function M() {
           Object.defineProperty(this,"scrollorigin",{ value:{x:0, y:0} })
 
           Object.defineProperty(this,"scrollcursor",{value:{x:0,y:0}, enumerable:true });
-          this.element.style.position="absolute";
-          var config = config || {};
+           var config = config || {};
           var anchor = config.anchor || null;
           var handle = config.handle || null;
           var ondrag = config.ondrag || this.ondrag;
