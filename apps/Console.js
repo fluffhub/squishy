@@ -108,14 +108,21 @@ Module(function M() {
               var ph=scroller.parent.height();
               var mx=cursor.x;
               var my=cursor.y;
-             
+             var cx, cy;
               if(e.touches) {
-                delta.x=origin.x-e.touches[0].clientX;
-                delta.y=origin.y-e.touches[0].clientY;
+                cx=e.touches[0].clientX;
+                cy=e.touches[0].clientY;
+
+
               } else {
-                delta.x=origin.x-e.clientX;
-                delta.y=origin.y-e.clientY;
+                cx=e.clientX;
+                cy=e.clientY;
               }
+              delta.x=origin.x-cx;
+              delta.y=origin.y-cy;
+              origin.x=cx;
+              origin.y=cy;
+              
               var scrolled=false;
               if(mh > ph && my > ph - mh && my <= 0) {
                 //can scroll in Y - callback with change in pos for mousemove
