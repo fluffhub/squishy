@@ -97,15 +97,7 @@ Module(function M() {
           this.addEvent("scroll", "mouseover touchmove", function(e) {
             if(scroller.scrolling) {
               //test bounds
-              var P={};
-              if(e.touches) {
-                P.x=e.touches[0].clientX;
-                P.y=e.touches[0].clientY;
-              } else {
-                P.x=e.clientX;
-                P.y=e.clientY;
-              }
-
+              
               var delta = scroller.scrolldelta;
               console.debug({parent:scroller.parent.height(), me:scroller.height()});
               var cursor = scroller.scrollcursor;
@@ -116,23 +108,34 @@ Module(function M() {
               var ph=scroller.parent.height();
               var mx=scroller.scrollcursor.x;
               var my=scroller.scrollcursor.y;
+             
+              if(e.touches) {
+                delta.x=origin.x-e.touches[0].clientX;
+                delta.y=origin.y-e.touches[0].clientY;
+              } else {
+                delta.x=origin.x-e.clientX;
+                delta.y=origin.y-e.clientY;
+              }
+              var scrolled=false;
               if(mh > ph && my > ph - mh && my <= 0) {
                 //can scroll in Y - callback with change in pos for mousemove
-
-                delta.y=origin.y-P.y;
+                cursor.x=cursor.x-delta.x;
+                scrolled=true;
               }
 
               if(mw > pw && mx <= 0 && mx > pw - mw) {
                 //can scroll in X - callback with change in pos for mousemove
-                delta.x=origin.x-P.x;
-
+                cursor.y=cursor.y-delta.y;
+                scrolled=true;
+                
               }
               console.debug({delta,cursor})
-              origin.x=cursor.x=cursor.x+delta.x;
-              origin.y=cursor.y=cursor.y+delta.y;
-              
-              scroller.onscroll.call(scroller, e);
-              scroller.drawTransform();
+              if(scrolled) {
+                scroller.onscroll.call(scroller, e);
+                scroller.drawTransform();
+              }
+              origin.x=cursor.x;
+              origin.y=cursor.y;
             }
           }, this.parent);
           this.addEvent("scrollstop", "mouseup touchend touchcancel", function(e) {
