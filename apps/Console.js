@@ -109,6 +109,7 @@ Module(function M() {
               var delta = scroller.scrolldelta;
               console.debug({parent:scroller.parent.height(), me:scroller.height()});
               var cursor = scroller.scrollcursor;
+              var origin=scroller.scrollorigin;
               var mw=scroller.width();
               var pw=scroller.parent.width();
               var mh=scroller.height();
@@ -127,8 +128,9 @@ Module(function M() {
 
               }
               console.debug({delta,cursor})
-              cursor.x=cursor.x-delta.x;
-              cursor.y=cursor.y-delta.y;
+              origin.x=cursor.x=cursor.x-delta.x;
+              origin.y=cursor.y=cursor.y-delta.y;
+              
               scroller.onscroll.call(scroller, e);
               scroller.drawTransform();
             }
