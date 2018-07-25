@@ -109,12 +109,17 @@ Module(function M() {
               var delta = scroller.scrolldelta;
               console.debug({parent:scroller.parent.height(), me:scroller.height()});
               var cursor = scroller.scrollcursor;
-              if(scroller.height() > scroller.parent.height()) {
+              var mw=scroller.width();
+              var pw=scroller.parent.width();
+              var mh=scroller.height();
+              var ph=scroller.parent.height();
+              if(mh > ph && scroller.scrollcursor.x > ph - mh) {
                 //can scroll in Y - callback with change in pos for mousemove
 
                 delta.y=scroller.scrollorigin.y-P.y;
               }
-              if(scroller.width() > scroller.parent.width()) {
+
+              if(mw > pw && scroller.scrollcursor.x > pw - mw) {
                 //can scroll in X - callback with change in pos for mousemove
                 delta.x=scroller.scrollorigin.x-P.x;
 
