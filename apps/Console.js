@@ -23,7 +23,7 @@ Module(function M() {
         S.addStyle(".Console .acc form input:first-child",{flex:"1 1 auto", "line-height":"1.5em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
        
         S.addStyle(".Console .acc .tty .trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
-        S.addStyle(".Console .acc .tty", "padding:0.5em 0;position:relative;font-family:monospace serif;")
+        S.addStyle(".Console .acc .tty", "display:inline-block;padding:0.5em 0;padding-bottom:1.5em;position:relative;font-family:monospace serif;")
         S.addStyle(".Console .tty .trans p", "padding:0;margin:0;font-family:monospace;")
         S.addStyle(".Console .tty .input", "font-family:monospace;")
         S.addStyle(".Console .tty .input:before", "content:\"> \";")
