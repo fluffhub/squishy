@@ -129,13 +129,14 @@ Module(function M() {
                 scrolled=true;
                 
               }
-              console.debug({delta,cursor})
+              console.debug({delta});
+              console.debug({cursor})
               if(scrolled) {
                 scroller.onscroll.call(scroller, e);
                 scroller.drawTransform();
               }
-              origin.x=cursor.x;
-              origin.y=cursor.y;
+              origin.x=origin.x-delta.x;
+              origin.y=origin.y-delta.y;
             }
           }, this.parent);
           this.addEvent("scrollstop", "mouseup touchend touchcancel", function(e) {
