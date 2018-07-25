@@ -74,12 +74,12 @@ Module(function M() {
             if(startscroll) {
               scroller.scrolling=true;
               var P={};
-              if(ev.touches) {
-                P.x=ev.touches[0].clientX;
-                P.y=ev.touches[0].clientY;
+              if(e.touches) {
+                P.x=e.touches[0].clientX;
+                P.y=e.touches[0].clientY;
               } else {
-                P.x=ev.clientX;
-                P.y=ev.clientY;
+                P.x=e.clientX;
+                P.y=e.clientY;
               }
                 
               scroller.scrollorigin=P;
