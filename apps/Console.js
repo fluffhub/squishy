@@ -115,13 +115,13 @@ Module(function M() {
               var ph=scroller.parent.height();
               var mx=scroller.scrollcursor.x;
               var my=scroller.scrollcursor.y;
-              if(mh > ph && my > ph - mh && my < 0) {
+              if(mh > ph && my > ph - mh && my <= 0) {
                 //can scroll in Y - callback with change in pos for mousemove
 
                 delta.y=P.y-scroller.scrollorigin.y;
               }
 
-              if(mw > pw && mx < 0 && mx > pw - mw) {
+              if(mw > pw && mx <= 0 && mx > pw - mw) {
                 //can scroll in X - callback with change in pos for mousemove
                 delta.x=P.x-scroller.scrollorigin.x;
 
