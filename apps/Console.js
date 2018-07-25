@@ -124,7 +124,7 @@ Module(function M() {
             this.removeClass("scrolling");
             this.disableEvents("scrollstop");
             scroller.scrolling=false;
-          });
+          },document);
           if(handle) {
               if(handle.enableDrag instanceof Function) {
 
