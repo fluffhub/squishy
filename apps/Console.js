@@ -48,6 +48,7 @@ Module(function M() {
           
           Object.defineProperty(this,"scrollorigin",{ value:{x:0, y:0}, writable:false })
 
+          Object.defineProperty(this,"scrollcursor",{value:{x:0,y:0}, enumerable:true });
           this.element.style.position="absolute";
           var config = config || {};
           var anchor = config.anchor || null;
