@@ -44,7 +44,10 @@ Module(function M() {
         });
 
         C.Def(function enableScroll(config) {
-          Object.defineProperty(this,"scrolldelta",{ value:{}, writable:false })
+          Object.defineProperty(this,"scrolldelta",{ value:{x:0, y:0}, writable:false })
+          
+          Object.defineProperty(this,"scrollorigin",{ value:{x:0, y:0}, writable:false })
+
           this.element.style.position="absolute";
           var config = config || {};
           var anchor = config.anchor || null;
@@ -56,9 +59,6 @@ Module(function M() {
           var touchfingers = config.touchfingers || [1, 2, 3];
           
           //make middle-click drag function
-          if(this.scrollcursor === undefined) {
-            this.scrollcursor = { x:0, y:0 }
-          }
           var scroller=this;
           this.scrolling=false;
           this.addEvent("scrollstart", "mousedown touchstart", function(e) {
@@ -74,14 +74,15 @@ Module(function M() {
               }
             }
             if(startscroll) {
+              var origin=scroller.scrollorigin;
               scroller.scrolling=true;
               var P={};
               if(e.touches) {
-                scroller.scrollorigin.x=e.touches[0].clientX;
-                scroller.scrollorigin.y=e.touches[0].clientY;
+                origin.x=e.touches[0].clientX;
+                origin.y=e.touches[0].clientY;
               } else {
-                scroller.scrollorigin.x=e.clientX;
-                scroller.scrollorigin.y=e.clientY;
+                origin.x=e.clientX;
+                origin.y=e.clientY;
               }
               scroller.enableEvents('scrollstop')
               this.addClass("scrolling");
