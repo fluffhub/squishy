@@ -31,11 +31,11 @@ Module(function M() {
       });
 
       
-      var LineScrollContainer = M.Class(function C() {
+      var ScrollContainer = M.Class(function C() {
         C.Super(basic.Div);
         C.Mixin(events.hasEvents);
-        C.Init(function LineScrollContainer() {
-          basic.Div.call(this, "LineScrollContainer");
+        C.Init(function ScrollContainer() {
+          basic.Div.call(this, "ScrollContainer");
       
         });
         C.Def(function drawTransform() {
@@ -153,7 +153,7 @@ Module(function M() {
           } else {
             this.id="pool";
           }
-          commander.output=new basic.Div("tty");
+          commander.output=new ScrollContainer("tty");
           commander.contents.add(commander.output);
 
           Import("squishy/live","squishy/form",function(live,form) {
