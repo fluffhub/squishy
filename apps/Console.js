@@ -130,6 +130,7 @@ Module(function M() {
             if(this.scrollbar)
             this.scrollbar.add(handle);
           }
+          this.enableEvents("scrollstart","scroll","scrollstop")
 
         });
         
