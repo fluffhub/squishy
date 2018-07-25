@@ -52,7 +52,7 @@ Module(function M() {
           var ondrag = config.ondrag || this.ondrag;
           this.scroll_sense = config.sense || -1;
 
-          var mousebuttons = config.mousebuttons || [2];
+          var mousebuttons = config.mousebuttons || [1];
           var touchfingers = config.touchfingers || [1, 2, 3];
           
           //make middle-click drag function
