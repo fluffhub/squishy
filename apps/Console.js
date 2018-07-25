@@ -124,13 +124,13 @@ Module(function M() {
               origin.y=cy;
               
               var scrolled=false;
-              if(mh > ph && my > ph - mh && my <= 0) {
+              if(mh > ph && my > ph - mh && my <= 10) {
                 //can scroll in Y - callback with change in pos for mousemove
                 cursor.y=cursor.y-delta.y;
                 scrolled=true;
               }
 
-              if(mw > pw && mx <= 0 && mx > pw - mw) {
+              if(mw > pw && mx <= 10 && mx > pw - mw) {
                 //can scroll in X - callback with change in pos for mousemove
                 cursor.x=cursor.x-delta.x;
                 scrolled=true;
@@ -142,8 +142,6 @@ Module(function M() {
                 scroller.onscroll.call(scroller, e);
                 scroller.drawTransform();
               }
-              origin.x=origin.x-delta.x;
-              origin.y=origin.y-delta.y;
             }
           }, this.parent);
           this.addEvent("scrollstop", "mouseup touchend touchcancel", function(e) {
