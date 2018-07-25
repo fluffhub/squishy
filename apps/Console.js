@@ -106,8 +106,8 @@ Module(function M() {
               var pw=scroller.parent.width();
               var mh=scroller.height();
               var ph=scroller.parent.height();
-              var mx=scroller.scrollcursor.x;
-              var my=scroller.scrollcursor.y;
+              var mx=cursor.x;
+              var my=cursor.y;
              
               if(e.touches) {
                 delta.x=origin.x-e.touches[0].clientX;
@@ -119,13 +119,13 @@ Module(function M() {
               var scrolled=false;
               if(mh > ph && my > ph - mh && my <= 0) {
                 //can scroll in Y - callback with change in pos for mousemove
-                cursor.x=cursor.x-delta.x;
+                cursor.y=cursor.y-delta.y;
                 scrolled=true;
               }
 
               if(mw > pw && mx <= 0 && mx > pw - mw) {
                 //can scroll in X - callback with change in pos for mousemove
-                cursor.y=cursor.y-delta.y;
+                cursor.x=cursor.x-delta.x;
                 scrolled=true;
                 
               }
