@@ -44,11 +44,17 @@ Module(function M() {
         });
 
         C.Def(function enableScroll(config) {
+          if(this.parent) {
+
+          } else {
+            throw new TypeError("Need a parent to scroll inside.");
+          }
           Object.defineProperty(this,"scrolldelta",{ value:{x:0, y:0} })
           
           Object.defineProperty(this,"scrollorigin",{ value:{x:0, y:0} })
 
           Object.defineProperty(this,"scrollcursor",{value:{x:0,y:0}, enumerable:true });
+          
            var config = config || {};
           var anchor = config.anchor || null;
           var handle = config.handle || null;
@@ -87,7 +93,7 @@ Module(function M() {
               scroller.enableEvents('scrollstop')
               this.addClass("scrolling");
             }
-          });
+          }, this.parent);
           this.addEvent("scroll", "mouseover touchmove", function(e) {
             if(scroller.scrolling) {
               //test bounds
@@ -119,7 +125,7 @@ Module(function M() {
               scroller.onscroll.call(scroller, e);
               scroller.drawTransform();
             }
-          });
+          }, this.parent);
           this.addEvent("scrollstop", "mouseup touchend touchcancel", function(e) {
             this.removeClass("scrolling");
             this.disableEvents("scrollstop");
