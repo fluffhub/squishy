@@ -121,10 +121,14 @@ Module(function M() {
             this.disableEvents("scrollstop");
             scroller.scrolling=false;
           });
-          if(handle.enableDrag instanceof Function) {
+          if(handle) {
+              if(handle.enableDrag instanceof Function) {
 
-          } else {
-            handle.Mixin(transform.Draggable)
+            } else {
+              handle.Mixin(transform.Draggable)
+            }
+            if(this.scrollbar)
+            this.scrollbar.add(handle);
           }
 
         });
