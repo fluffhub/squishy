@@ -160,7 +160,8 @@ Module(function M() {
           } else {
             this.id="pool";
           }
-          commander.output=new ScrollContainer("tty");
+          commander.output=new ScrollContainer();
+          commander.output.addClass("tty");
           commander.contents.add(commander.output);
           commander.output.enableScroll();
           Import("squishy/live","squishy/form",function(live,form) {
