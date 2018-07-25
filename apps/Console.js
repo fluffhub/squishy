@@ -62,12 +62,12 @@ Module(function M() {
           this.addEvent("scrollstart", "mousedown touchstart", function(e) {
             var startscroll;
             if(e.touches) {
-              if(config.touchfingers.indexOf(e.touches.length)>=0) {
+              if(touchfingers.indexOf(e.touches.length)>=0) {
                 startscroll=true;
               }
             } 
             if(e.button) {
-              if(config.mousebuttons.indexOf(e.button)>=0) {
+              if(mousebuttons.indexOf(e.button)>=0) {
                 startscroll=true;
               }
             }
