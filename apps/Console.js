@@ -31,24 +31,95 @@ Module(function M() {
       });
 
       
-      var ScrollContainer = M.Class(function C() {
+      var LineScrollContainer = M.Class(function C() {
         C.Super(basic.Div);
         C.Mixin(events.hasEvents);
-        C.Def(function ondrag() {  });
+        C.Init(function LineScrollContainer() {
+          basic.Div.call(this, "LineScrollContainer");
+      
+        });
+        C.Def(function drawTransform() {
+            
+        });
+
         C.Def(function enableScroll(config) {
           var config = config || {};
           var anchor = config.anchor || null;
           var handle = config.handle || null;
           var ondrag = config.ondrag || this.ondrag;
+          var sense = config.sense || -1;
 
-          if(handle) {
-            //pass
-
-          } else {
-            handle = new basic.Div("handle");
-          }
+          var mousebuttons = config.mousebuttons || [2];
+          var touchfingers = config.touchfingers || [1, 2, 3];
+          
           //make middle-click drag function
-          this.addEvent()
+          if(this.scrollcursor === undefined) {
+            this.scrollcursor = { x:0, y:0 }
+          }
+          var scroller=this;
+          this.scrolling=false;
+          this.addEvent("scrollstart", "mousedown touchstart", function(e) {
+            var startscroll;
+            if(e.touches) {
+              if(config.touchfingers.indexOf(e.touches.length)>=0) {
+                startscroll=true;
+              }
+            } 
+            if(e.button) {
+              if(config.mousebuttons.indexOf(e.button)>=0) {
+                startscroll=true;
+              }
+            }
+            if(startscroll) {
+              scroller.scrolling=true;
+              var P={};
+              if(ev.touches) {
+                P.x=ev.touches[0].clientX;
+                P.y=ev.touches[0].clientY;
+              } else {
+                P.x=ev.clientX;
+                P.y=ev.clientY;
+              }
+                
+              scroller.scrollorigin=P;
+              scroller.enableEvents('scrollstop')
+              this.addClass("scrolling");
+            }
+          });
+          this.addEvent("scroll", "mouseover touchmove", function(e) {
+            if(scroller.scrolling) {
+              //test bounds
+              var P={};
+              if(ev.touches) {
+                P.x=ev.touches[0].clientX;
+                P.y=ev.touches[0].clientY;
+              } else {
+                P.x=ev.clientX;
+                P.y=ev.clientY;
+              }
+
+              var delta = { x:0, y:0 }
+              if(this.height() > this.parent.height()) {
+                //can scroll in Y - callback with change in pos for mousemove
+
+                delta.y=this.scrollorigin.y-P.y;
+              }
+              if(this.width() > this.parent.width()) {
+                //can scroll in X - callback with change in pos for mousemove
+                delta.x=this.scrollorigin.x-P.x;
+
+              }
+              this.scrolldelta=delta;
+              this.scrollcursor={x:this.scrollcursor.x-delta.x,y:this.scrollcursor.y-delta.y};
+              scroller.onscroll.call(this, e);
+
+            }
+          });
+          this.addEvent("scrollstop", "mouseup touchend touchcancel", function(e) {
+            this.removeClass("scrolling");
+            this.disableEvents("scrollstop");
+            scroller.scrolling=false;
+          });
           if(handle.enableDrag instanceof Function) {
 
           } else {
