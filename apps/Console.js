@@ -128,8 +128,8 @@ Module(function M() {
 
               }
               console.debug({delta,cursor})
-              origin.x=cursor.x=cursor.x-delta.x;
-              origin.y=cursor.y=cursor.y-delta.y;
+              origin.x=cursor.x=cursor.x+delta.x;
+              origin.y=cursor.y=cursor.y+delta.y;
               
               scroller.onscroll.call(scroller, e);
               scroller.drawTransform();
