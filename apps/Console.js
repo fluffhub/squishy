@@ -68,6 +68,7 @@ Module(function M() {
                 startscroll=true;
               }
             } 
+            console.debug(e.button);
             if(e.button) {
               if(mousebuttons.indexOf(e.button)>=0) {
                 startscroll=true;
