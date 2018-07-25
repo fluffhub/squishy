@@ -164,6 +164,10 @@ Module(function M() {
           commander.output.addClass("tty");
           commander.contents.add(commander.output);
           commander.output.enableScroll();
+          commander.output.onscroll=function(e) {
+            console.debug(commander.output.scrollcursor);
+
+          }
           Import("squishy/live","squishy/form",function(live,form) {
             var  selector=new form.Selector();
             var manager=live.DeviceManager;
