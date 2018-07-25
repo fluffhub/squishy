@@ -115,7 +115,7 @@ Module(function M() {
               this.scrolldelta=delta;
               this.scrollcursor={x:this.scrollcursor.x-delta.x,y:this.scrollcursor.y-delta.y};
               scroller.onscroll.call(this, e);
-
+              this.drawTransform();
             }
           });
           this.addEvent("scrollstop", "mouseup touchend touchcancel", function(e) {
