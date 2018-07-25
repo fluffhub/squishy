@@ -44,7 +44,7 @@ Module(function M() {
         });
 
         C.Def(function enableScroll(config) {
-          
+          Object.defineProperty(this,"scrolldelta",{ value:{}, writable:false })
           this.element.style.position="absolute";
           var config = config || {};
           var anchor = config.anchor || null;
@@ -68,7 +68,6 @@ Module(function M() {
                 startscroll=true;
               }
             } 
-            console.debug(e.button);
             if(e.button) {
               if(mousebuttons.indexOf(e.button)>=0) {
                 startscroll=true;
@@ -78,14 +77,12 @@ Module(function M() {
               scroller.scrolling=true;
               var P={};
               if(e.touches) {
-                P.x=e.touches[0].clientX;
-                P.y=e.touches[0].clientY;
+                scroller.scrollorigin.x=e.touches[0].clientX;
+                scroller.scrollorigin.y=e.touches[0].clientY;
               } else {
-                P.x=e.clientX;
-                P.y=e.clientY;
+                scroller.scrollorigin.x=e.clientX;
+                scroller.scrollorigin.y=e.clientY;
               }
-                
-              scroller.scrollorigin=P;
               scroller.enableEvents('scrollstop')
               this.addClass("scrolling");
             }
@@ -102,21 +99,23 @@ Module(function M() {
                 P.y=e.clientY;
               }
 
-              var delta = { x:0, y:0 }
-              if(this.height() > this.parent.height()) {
+              var delta = scroller.scrolldelta;
+              console.debug({parent:scroller.parent.height(), me:scroller.height()});
+              var cursor = scroller.scrollcursor;
+              if(scroller.height() > scroller.parent.height()) {
                 //can scroll in Y - callback with change in pos for mousemove
 
-                delta.y=this.scrollorigin.y-P.y;
+                delta.y=scroller.scrollorigin.y-P.y;
               }
-              if(this.width() > this.parent.width()) {
+              if(scroller.width() > scroller.parent.width()) {
                 //can scroll in X - callback with change in pos for mousemove
-                delta.x=this.scrollorigin.x-P.x;
+                delta.x=scroller.scrollorigin.x-P.x;
 
               }
-              this.scrolldelta=delta;
-              this.scrollcursor={x:this.scrollcursor.x-delta.x,y:this.scrollcursor.y-delta.y};
-              scroller.onscroll.call(this, e);
-              this.drawTransform();
+              cursor.x=cursor.x-delta.x;
+              cursor.y=cursor.y-delta.y;
+              scroller.onscroll.call(scroller, e);
+              scroller.drawTransform();
             }
           });
           this.addEvent("scrollstop", "mouseup touchend touchcancel", function(e) {
