@@ -21,13 +21,13 @@ Module(function M() {
         S.addStyle(".Console .acc .trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
         S.addStyle(".Console .acc form input[type=\"submit\"]", "flex:0 0 3.5em;border:none; display:none;width:3em;bottom:0px;line-height:1.5em;font-family:monospace serif;");
         S.addStyle(".Console .acc form input:first-child",{background:"none","font-weight":"bold",flex:"1 1 auto", "line-height":"1.4em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
-        S.addStyle(".Console .acc form:before",{"font-family":"monospace", content:"\"> \""});
+        S.addStyle(".Console .acc form::before",{"font-family":"monospace", "font-size":"1.5em", "line-height":"1.4em", "font-weight":"bold", content:"\"> \""});
         S.addStyle(".ScrollContainer", {"transition-property":"top left bottom right", "transition-duration":"0.1s","transition-timing-function":"ease-out"})
         S.addStyle(".Console .acc .tty .trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
         S.addStyle(".Console .acc .tty", "display:inline-block;padding:0.5em 0;padding-bottom:1.5em;position:absolute;font-family:monospace serif;")
         S.addStyle(".Console .tty .trans p", "padding:0;margin:0;font-family:monospace;")
         S.addStyle(".Console .tty .input", "font-family:monospace;")
-        S.addStyle(".Console .tty .input:before", "content:\"> \";")
+        S.addStyle(".Console .tty .input::before", "content:\"> \";")
         S.addStyle(".Console","position: absolute;");
       });
 
