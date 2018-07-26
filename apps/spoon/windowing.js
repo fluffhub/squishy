@@ -56,7 +56,7 @@ Module(function M() {
             }
             S.addStyle(".acw .ui-resizable-"+dir, style)
           }
-
+          console.debug({bar_height:theme.bar_height,bar_heightpx:theme.bar_height__px})
           S.addStyle(".align_button", { position:"absolute",top:0,bottom:0,margin:"auto",height:"20px",width:"20px",left:0,right:0,"background-color":"blue",})
           S.addStyle(".acw", { position: "absolute", display: "inline-block", "background-color": "rgb(239, 239, 239)"  });
           S.addStyle(".acw", { transition: "opacity 0.2s ease-out, box-shadow 0.1s ease-out","border-radius":"1px", opacity: 0, "z-index":0 });
