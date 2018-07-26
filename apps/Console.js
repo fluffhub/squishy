@@ -209,6 +209,7 @@ Module(function M() {
           this.request=new Req.Request("URI","TEXT");
           this.request.request.timeout=60000;
           var commander=this;
+
           this.addClass("Console");
           if(id!==undefined) {
             this.id=id;
@@ -221,6 +222,11 @@ Module(function M() {
           commander.output.enableScroll();
           commander.output.onscroll=function(e) {
       
+          }
+          var scroller=commander.output;
+          var cursor=commander.output.scrollcursor;
+          this.onresize=function(e) {
+            scroller.events["scroll"].trigger();
           }
           Import("squishy/live","squishy/form",function(live,form) {
             var  selector=new form.Selector();
