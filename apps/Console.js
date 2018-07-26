@@ -56,8 +56,11 @@ Module(function M() {
           if(typeof pos==="object") {
             var x=pos.x;
             var y=pos.y;
-            if(typeof pos.y==="number") {
-        
+            if(typeof y==="number") {
+              scroller.scrollcursor.y=y;
+            }
+            if(typeof x==="number") {
+              scroller.scrollcursor.x=x;
             }
           } 
           if(typeof pos==="string") {
@@ -75,8 +78,9 @@ Module(function M() {
                 scroller.scrollcursor.x=scroller.parent.width()-scroller.width();
               }
             })[pos]();
-            this.drawTransform();
           }
+          
+          this.drawTransform();
         });
         C.Def(function enableScroll(config) {
           if(this.parent) {
@@ -119,9 +123,12 @@ Module(function M() {
               if(e.touches) {
                 origin.x=e.touches[0].clientX;
                 origin.y=e.touches[0].clientY;
-              } else {
+              } else if (typeof e.clientX ==="number") {
                 origin.x=e.clientX;
                 origin.y=e.clientY;
+              } else {
+                origin.x=0;
+                origin.y=0;
               }
               scroller.enableEvents('scroll', 'scrollstop')
               this.addClass("scrolling");
@@ -143,9 +150,12 @@ Module(function M() {
               if(e.touches) {
                 cx=e.touches[0].clientX;
                 cy=e.touches[0].clientY;
-              } else {
+              } else if(typeof e.clientX ==="number") {
                 cx=e.clientX;
                 cy=e.clientY;
+              } else {
+                cx=origin.x;
+                cy=origin.y;
               }
               delta.x=origin.x-cx;
               delta.y=origin.y-cy;
