@@ -273,7 +273,7 @@ Module(function M() {
                 out.add(new basic.P(outwords[i]));
               }
               trans.add(out);
-              commander.scrollTo("bottom");
+              commander.output.scrollTo("bottom");
             }
           }
         });
