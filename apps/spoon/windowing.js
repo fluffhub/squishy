@@ -44,13 +44,15 @@ Module(function M() {
             var config = configs[i];
             var dir=dirs[i];
             var size = theme.side_handle_size;
-            if(config[0].length==2) size=theme.corner_handle_size;
+            var c0=config[0];
+            var c1=config[1];
+            if(c0.length==2) size=theme.corner_handle_size;
             var style={};
-            for(var x=0;x<config[0].length;x++) {
-              style[pos[config[0][x]]]="-"+theme.handle_offset;
+            for(var x=0;x<c0.length;x++) {
+              style[pos[c0[x]]]="-"+theme.handle_offset;
             }
-            for(var y=0;y<config[1].length;y++) {
-              style[dim[config[1][y]]]=size;
+            for(var y=0;y<c1.length;y++) {
+              style[dim[c1[y]]]=size;
             }
             S.addStyle(".acw .ui-resizable-"+dir, style)
           }
@@ -60,8 +62,8 @@ Module(function M() {
           S.addStyle(".acw", { transition: "opacity 0.2s ease-out, box-shadow 0.1s ease-out","border-radius":"1px", opacity: 0, "z-index":0 });
           S.addStyle(".acw.visible", {  opacity: 1, "z-index": 1000,"box-shadow":"0px 0px 3px 0px rgba(0,0,0,0.7)" });
           S.addStyle(".acw.active", {  transition:"opacity 0.1s, box-shadow 0.2s ease-in", "box-shadow":"1px 1px 6px 1px rgba(0,0,0,0.5)","z-index":1000000});
-          S.addStyle(".acc", { overflow:"hidden",left: 0, right: 0, top: "2.2em", bottom: 0, position: "absolute"        });
-          S.addStyle(".acc .acb", { height:theme.bar_height,"text-indent":"0.5em" });
+          S.addStyle(".acc", { overflow:"hidden",left: 0, right: 0, top:theme.bar_height, bottom: 0, position: "absolute"        });
+          S.addStyle(".acb", { height:theme.bar_height,"text-indent":"0.5em","line-height":theme.bar_height });
         });
               
 
@@ -95,11 +97,6 @@ Module(function M() {
           var acw=this;
 
           this.titlebar.addEvent("context","contextmenu",function() {
-            spoon.main.contextmenu.add(new interactive.MomentaryButton("X","ui_button",function() {
-              spoon.main.close(acw);
-              spoon.main.clearContext();
-
-            }));
 
           });
           this.titlebar.enableEvents("context");
