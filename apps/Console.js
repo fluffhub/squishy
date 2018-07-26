@@ -164,12 +164,12 @@ Module(function M() {
                 scroller.drawTransform();
               }
             }
-          }, document);
+          }, document.body);
           this.addEvent("scrollstop", "mouseup touchend touchcancel", function(e) {
             this.removeClass("scrolling");
             this.disableEvents("scroll", "scrollstop");
             scroller.scrolling=false;
-          },document);
+          },document.body);
           if(handle) {
             if(handle.enableDrag instanceof Function) {
 
