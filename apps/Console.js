@@ -20,8 +20,8 @@ Module(function M() {
         S.addStyle(".Console .acc textarea",{width: "100%",clear: "both",border:"none", "background":"none"});
         S.addStyle(".Console .acc .trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
         S.addStyle(".Console .acc form input[type=\"submit\"]", "flex:0 0 3.5em;border:none; display:none;width:3em;bottom:0px;line-height:1.5em;font-family:monospace serif;");
-        S.addStyle(".Console .acc form input:first-child",{background:"none","font-weight":"bold",flex:"1 1 auto", "line-height":"1.4em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
-        S.addStyle(".Console .acc form::before",{"font-family":"monospace", "font-size":"1.5em", "line-height":"1.4em", "font-weight":"bold", content:"\"> \""});
+        S.addStyle(".Console .acc form input:first-child",{background:"none",outline:"none", "font-weight":"bold",flex:"1 1 auto", "line-height":"1.4em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
+        S.addStyle(".Console .acc form::before",{"font-family":"monospace", "font-size":"1.5em", "line-height":"1.4em", "font-weight":"bold", "text-indent":"0.5em",content:"\"> \""});
         S.addStyle(".ScrollContainer", {"transition-property":"top left bottom right", "transition-duration":"0.1s","transition-timing-function":"ease-out"})
         S.addStyle(".Console .acc .tty .trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
         S.addStyle(".Console .acc .tty", "display:inline-block;padding:0.5em 0;padding-bottom:1.5em;position:absolute;font-family:monospace serif;")
@@ -77,10 +77,8 @@ Module(function M() {
             throw new TypeError("Need a parent to scroll inside.");
           }
           Object.defineProperty(this,"scrolldelta",{ value:{x:0, y:0} })
-          
           Object.defineProperty(this,"scrollorigin",{ value:{x:0, y:0} })
-
-          Object.defineProperty(this,"scrollcursor",{value:{x:0,y:0}, enumerable:true });
+          this.scrollcursor={x:0,y:0};
           
            var config = config || {};
           var anchor = config.anchor || null;
@@ -123,10 +121,8 @@ Module(function M() {
           }, this.parent);
           this.addEvent("scroll", "mouseover touchmove", function(e) {
             if(scroller.scrolling) {
-              //test bounds
-              
+              //test bounds 
               var delta = scroller.scrolldelta;
-              console.debug({parent:scroller.parent.height(), me:scroller.height()});
               var cursor = scroller.scrollcursor;
               var origin=scroller.scrollorigin;
               var mw=scroller.width();
@@ -139,8 +135,6 @@ Module(function M() {
               if(e.touches) {
                 cx=e.touches[0].clientX;
                 cy=e.touches[0].clientY;
-
-
               } else {
                 cx=e.clientX;
                 cy=e.clientY;
@@ -155,21 +149,16 @@ Module(function M() {
                 if(my < ph - mh) cursor.y = ph-mh;
                 else if(my > 0) cursor.y=0;
                 else cursor.y=cursor.y-delta.y;
-                //can scroll in Y - callback with change in pos for mousemove
-                
+                //can scroll in Y - callback with change in pos for mousemove   
                 scrolled=true;
               }
-
               if(mw > pw ) {
                 //can scroll in X - callback with change in pos for mousemove
                 if(mx < pw - mw) cursor.x = pw-mw;
                 else if(mx > 0) cursor.x=0;
                 else cursor.x=cursor.x-delta.x;
-                scrolled=true;
-                
+                scrolled=true; 
               }
-              console.debug({delta});
-              console.debug({cursor})
               if(scrolled) {
                 scroller.onscroll.call(scroller, e);
                 scroller.drawTransform();
@@ -182,13 +171,13 @@ Module(function M() {
             scroller.scrolling=false;
           },document);
           if(handle) {
-              if(handle.enableDrag instanceof Function) {
+            if(handle.enableDrag instanceof Function) {
 
             } else {
               handle.Mixin(transform.Draggable)
             }
             if(this.scrollbar)
-            this.scrollbar.add(handle);
+              this.scrollbar.add(handle);
           }
           this.enableEvents("scrollstart","scroll","scrollstop")
 
@@ -233,7 +222,7 @@ Module(function M() {
             for(var i=0;i<devnames.length;i++) {
               var devname=devnames[i];
             }
-            var input=new form.TextInput("input","",function() { 
+            var input=new form.TextInput(null,"console_input",function() { 
 
             });
 
