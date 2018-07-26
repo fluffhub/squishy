@@ -254,7 +254,7 @@ Module(function M() {
           inp.content(input);
           trans.add(inp);
           trans.addClass("loading");
-          commander.output.addBefore(trans,commander.form);
+          commander.output.insert(trans,commander.form);
           return function(output) {
             trans.removeClass("loading");
             if(output.trim()!="") {
