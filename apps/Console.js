@@ -157,6 +157,7 @@ Module(function M() {
                 cx=origin.x;
                 cy=origin.y;
               }
+              console.debug({cx,cy})
               delta.x=origin.x-cx;
               delta.y=origin.y-cy;
               origin.x=cx;
@@ -183,7 +184,7 @@ Module(function M() {
               }
             }
           }, document.body);
-          this.addEvent("scrollstop", "mouseup touchend touchcancel", function(e) {
+          this.addEvent("scrollstop", "mouseup touchend touchcancel mouseleave", function(e) {
             this.removeClass("scrolling");
             this.disableEvents("scroll", "scrollstop");
             scroller.scrolling=false;
