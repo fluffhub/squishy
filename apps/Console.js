@@ -20,7 +20,7 @@ Module(function M() {
         S.addStyle(".Console .acc textarea",{width: "100%",clear: "both",border:"none", "background":"none"});
         S.addStyle(".Console .acc .trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
         S.addStyle(".Console .acc form input[type=\"submit\"]", "flex:0 0 3.5em;border:none; display:none;width:3em;bottom:0px;line-height:1.5em;font-family:monospace serif;");
-        S.addStyle(".Console .acc form input:first-child",{background:"none",outline:"none", "font-weight":"bold",flex:"1 1 auto", "line-height":"1.4em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
+        S.addStyle(".Console .acc form input:first-child",{background:"none",outline:"none", "font-weight":"bold",flex:"1 1 auto", "line-height":"1.6em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
         S.addStyle(".Console .acc form::before",{"font-family":"monospace", "font-size":"1.5em", "line-height":"1.4em", "font-weight":"bold", "text-indent":"0.5em",content:"\"> \""});
         S.addStyle(".ScrollContainer", {"transition-property":"top left bottom right", "transition-duration":"0.1s","transition-timing-function":"ease-out"})
         S.addStyle(".Console .acc .tty .trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
@@ -242,7 +242,8 @@ Module(function M() {
             myform.element.action="#";
 
             myform.Madd(input,submit);
-            commander.contents.add(myform);
+            commander.form=myform;
+            commander.output.add(myform);
           });
         });
 
@@ -253,7 +254,7 @@ Module(function M() {
           inp.content(input);
           trans.add(inp);
           trans.addClass("loading");
-          commander.output.add(trans);
+          commander.output.addBefore(trans,commander.form);
           return function(output) {
             trans.removeClass("loading");
             if(output.trim()!="") {
