@@ -16,19 +16,25 @@ Module(function M() {
     function(DOM,Req,form,membrane,system,live,basic,styles,spoon,windowing,events,transform) {
       M.Style(function S() {
         var S=this; 
+        var theme=S.Theme({
+          wrap:false,
+          font_size__px=13,
+        })
+        S.Init(function () {
         S.addStyle(".Console .acc form ", "position:absolute;bottom:0;height:1.5em;width:100%;display:flex;margin:0;")
         S.addStyle(".Console .acc textarea",{width: "100%",clear: "both",border:"none", "background":"none"});
         S.addStyle(".Console .acc .trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
         S.addStyle(".Console .acc form input[type=\"submit\"]", "flex:0 0 3.5em;border:none; display:none;width:3em;bottom:0px;line-height:1.5em;font-family:monospace serif;");
         S.addStyle(".Console .acc form input:first-child",{background:"none",outline:"none", "font-weight":"bold",flex:"1 1 auto", "line-height":"1.6em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
-        S.addStyle(".Console .acc form::before",{"font-family":"monospace", "font-size":"1.5em", "line-height":"1.4em", "font-weight":"bold", "text-indent":"0.5em",content:"\"> \""});
+        S.addStyle(".Console .acc form::before",{"font-family":"monospace", "font-size__px":theme.font_size*1.5, "line-height__px":theme.font_size*1.4, "font-weight":"bold", "text-indent__px":theme.font_size*0.4,content:"\"> \""});
         S.addStyle(".ScrollContainer", {"transition-property":"top left bottom right", "transition-duration":"0.1s","transition-timing-function":"ease-out"})
         S.addStyle(".Console .acc .tty .trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
         S.addStyle(".Console .acc .tty", "display:inline-block;padding:0.5em 0;padding-bottom:1.5em;position:absolute;font-family:monospace serif;")
-        S.addStyle(".Console .tty .trans p", "padding:0;margin:0;font-family:monospace;")
+        S.addStyle(".Console .tty .trans p", "padding:0;margin:0;font-family:monospace;white-space:")
         S.addStyle(".Console .tty .input", "font-family:monospace;")
         S.addStyle(".Console .tty .input::before", "content:\"> \";")
         S.addStyle(".Console","position: absolute;");
+      });
       });
 
       
