@@ -134,7 +134,7 @@ Module(function M() {
               this.addClass("scrolling");
             }
           }, this.parent);
-          this.addEvent("scroll", "mouseover touchmove", function(e) {
+          this.addEvent("scroll", "mousemove touchmove", function(e) {
             if(scroller.scrolling) {
               //test bounds 
               var delta = scroller.scrolldelta;
