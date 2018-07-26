@@ -221,9 +221,10 @@ Module(function M() {
             for(var i=0;i<devnames.length;i++) {
               var devname=devnames[i];
             }
-            var input=new form.TextInput(null,"console_input",function() { 
+            var input=new form.TextInput(null,"",function() { 
 
             });
+            input.addClass("console_input");
 
             var submit=new form.Submit();
 
