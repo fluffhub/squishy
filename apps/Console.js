@@ -21,7 +21,7 @@ Module(function M() {
         S.addStyle(".Console .acc .trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
         S.addStyle(".Console .acc form input[type=\"submit\"]", "flex:0 0 3.5em;border:none; display:block;width:3em;bottom:0px;line-height:1.5em;font-family:monospace serif;");
         S.addStyle(".Console .acc form input:first-child",{flex:"1 1 auto", "line-height":"1.5em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
-       
+       S.addStyle(".ScrollContainer", {"transition-property":"top left bottom right", "transition-duration":"0.1s","transition-timing-function":"ease-out"})
         S.addStyle(".Console .acc .tty .trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
         S.addStyle(".Console .acc .tty", "display:inline-block;padding:0.5em 0;padding-bottom:1.5em;position:absolute;font-family:monospace serif;")
         S.addStyle(".Console .tty .trans p", "padding:0;margin:0;font-family:monospace;")
@@ -55,7 +55,6 @@ Module(function M() {
             ({
               "bottom":function to_bottom() {
                 scroller.scrollcursor.y=scroller.parent.height()-scroller.height();
-                
               },
               "top":function to_top() {
                 scroller.scrollcursor.y=0;
