@@ -47,15 +47,27 @@ Module(function M() {
             var x=pos.x;
             var y=pos.y;
             if(typeof pos.y==="number") {
-              if(y>) {
-
-              }
+        
             }
           } 
           if(typeof pos==="string") {
-
+            ({
+              "bottom":function to_bottom() {
+                this.scrollcursor.y=this.parent.height()-this.height();
+                
+              },
+              "top":function to_top() {
+                this.scrollcursor.y=0;
+              },
+              "left":function to_left() {
+                this.scrollcursor.x=0;
+              },
+              "right":function to_right() {
+                this.scrollcursor.x=this.parent.width()-this.width();
+              }
+            })[pos]();
+            this.drawTransform();
           }
-        }
         });
         C.Def(function enableScroll(config) {
           if(this.parent) {
@@ -261,6 +273,7 @@ Module(function M() {
                 out.add(new basic.P(outwords[i]));
               }
               trans.add(out);
+              commander.scrollTo("bottom");
             }
           }
         });
