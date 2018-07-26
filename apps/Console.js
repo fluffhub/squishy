@@ -236,7 +236,8 @@ Module(function M() {
           var scroller=commander.output;
           var cursor=commander.output.scrollcursor;
           commander.onresize=function(e) {
-            scroller.trigger("scroll");
+            console.debug({resizing:e});
+            scroller.scrollTo("bottom");
           }
           Import("squishy/live","squishy/form",function(live,form) {
             var  selector=new form.Selector();
