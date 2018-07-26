@@ -225,8 +225,8 @@ Module(function M() {
           }
           var scroller=commander.output;
           var cursor=commander.output.scrollcursor;
-          this.onresize=function(e) {
-            scroller.events["scroll"].trigger();
+          commander.onresize=function(e) {
+            scroller.trigger("scroll");
           }
           Import("squishy/live","squishy/form",function(live,form) {
             var  selector=new form.Selector();
