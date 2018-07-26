@@ -42,7 +42,21 @@ Module(function M() {
             this.element.style.top=this.scrollcursor.y+"px";
             this.element.style.left=this.scrollcursor.x+"px";    
         });
+        C.Def(function scrollTo(pos) {
+          if(typeof pos==="object") {
+            var x=pos.x;
+            var y=pos.y;
+            if(typeof pos.y==="number") {
+              if(y>) {
 
+              }
+            }
+          } 
+          if(typeof pos==="string") {
+
+          }
+        }
+        });
         C.Def(function enableScroll(config) {
           if(this.parent) {
 
@@ -90,7 +104,7 @@ Module(function M() {
                 origin.x=e.clientX;
                 origin.y=e.clientY;
               }
-              scroller.enableEvents('scrollstop')
+              scroller.enableEvents('scroll', 'scrollstop')
               this.addClass("scrolling");
             }
           }, this.parent);
@@ -148,10 +162,10 @@ Module(function M() {
                 scroller.drawTransform();
               }
             }
-          }, this.parent);
+          }, document);
           this.addEvent("scrollstop", "mouseup touchend touchcancel", function(e) {
             this.removeClass("scrolling");
-            this.disableEvents("scrollstop");
+            this.disableEvents("scroll", "scrollstop");
             scroller.scrolling=false;
           },document);
           if(handle) {
