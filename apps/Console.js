@@ -43,6 +43,7 @@ Module(function M() {
             this.element.style.left=this.scrollcursor.x+"px";    
         });
         C.Def(function scrollTo(pos) {
+          var scroller=this;
           if(typeof pos==="object") {
             var x=pos.x;
             var y=pos.y;
@@ -53,17 +54,17 @@ Module(function M() {
           if(typeof pos==="string") {
             ({
               "bottom":function to_bottom() {
-                this.scrollcursor.y=this.parent.height()-this.height();
+                scroller.scrollcursor.y=scroller.parent.height()-scroller.height();
                 
               },
               "top":function to_top() {
-                this.scrollcursor.y=0;
+                scroller.scrollcursor.y=0;
               },
               "left":function to_left() {
-                this.scrollcursor.x=0;
+                scroller.scrollcursor.x=0;
               },
               "right":function to_right() {
-                this.scrollcursor.x=this.parent.width()-this.width();
+                scroller.scrollcursor.x=scroller.parent.width()-scroller.width();
               }
             })[pos]();
             this.drawTransform();
