@@ -212,8 +212,7 @@ Module(function M() {
           commander.contents.add(commander.output);
           commander.output.enableScroll();
           commander.output.onscroll=function(e) {
-            console.debug(commander.output.scrollcursor);
-
+      
           }
           Import("squishy/live","squishy/form",function(live,form) {
             var  selector=new form.Selector();
@@ -244,6 +243,8 @@ Module(function M() {
             myform.Madd(input,submit);
             commander.form=myform;
             commander.output.add(myform);
+            
+          commander.output.scrollTo("bottom");
           });
         });
 
