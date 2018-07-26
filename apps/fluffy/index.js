@@ -85,7 +85,7 @@ Module(function M() {
 
           Object.defineProperty(this,"File",{enumerable:false,writable:true,configurable:false})
           this.value=null;
-
+          try {
           live.DeviceManager.retrieve(loc,function(results) {
             Object.keys(results).forEach(function (name) {
               var instance=results[name];
@@ -104,6 +104,11 @@ Module(function M() {
               }
             });
           });
+        } catch(e) {
+          if(e instanceof membrane.MembraneError) {
+            console.debug({e:e, "Failed to load":loc})
+          }
+        }
           this.addClass("CodeEditor");
         });
         C.Def(function onload() {
