@@ -1,6 +1,6 @@
 Module(function M() {
   /* @TODO:  Do something better with these ad hoc style shets*/
-  document.styleSheets[0].addRule(".object.editor:before",
+  document.styleSheets[0].addRule(".object.editor::before",
                                   "");
 
   document.styleSheets[0].addRule(".EditorItem",
@@ -22,7 +22,7 @@ Module(function M() {
   document.styleSheets[0].addRule(".editor.array",
                                   "clear:both;min-width:6em;");
 
-  document.styleSheets[0].addRule(".editor.array:before",
+  document.styleSheets[0].addRule(".editor.array::before",
                                   "position:absolute;content:'[';left:-0.1em;"+
                                   "font-size:1.5em;line-height:1.5em;width:0.1em;");
   document.styleSheets[0].addRule(".editor.array:after",

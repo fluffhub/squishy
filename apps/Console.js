@@ -1,5 +1,4 @@
 Module(function M() {
-  //console.debug(Import);
   M.Import(
     "squishy/DOM",
     "squishy/request",
@@ -22,23 +21,26 @@ Module(function M() {
         })
         S.Init(function () {
           S.Prefix(".Console .acc",function() {
-              S.addStyle(" form", "height:1.5em;width:100%;display:flex;margin:0;")
-              S.addStyle(" form input[type=\"submit\"]", "flex:0 0 3.5em;border:none; display:none;width:3em;bottom:0px;line-height:1.5em;font-family:monospace serif;");
-              S.addStyle(" form input:first-child",{background:"none",outline:"none", "font-weight":"bold",flex:"1 1 auto", "line-height":"1.6em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
-              S.addStyle(" form::before",{"font-family":"monospace", "font-size__px":theme.font_size*1.5, "line-height__px":theme.font_size*1.4, "font-weight":"bold", "text-indent__px":theme.font_size*0.4,content:"\"> \""});
-              S.Prefix(" .tty ", function() {
-                S.addStyle("", {"font-size":theme.font_size__px,display:"inline-block","padding":"0.5em 0","padding-bottom":"1.5em",position:"absolute","font-family":"monospace serif","white-space":theme.wrap?"normal":"nowrap"})
-                S.addStyle(".trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
-                S.addStyle(".trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
-                S.addStyle(".trans p", "padding:0;margin:0;font-family:monospace;white-space:")
-                S.addStyle(".input", "font-family:monospace;")
-                S.addStyle(".input::before", "content:\"> \";")
-              });
+            S.addStyle()
+            S.Prefix(" form", function() {
+              S.addStyle("::before",{"font-family":"monospace", "font-size__px":theme.font_size*1.5, "line-height__px":theme.font_size*1.4, "font-weight":"bold", "text-indent__px":theme.font_size*0.4,content:"\"> \""});
+              S.addStyle("", "height:1.5em;width:100%;display:flex;margin:0;")
+              S.addStyle(" input[type=\"submit\"]", "flex:0 0 3.5em;border:none; display:none;width:3em;bottom:0px;line-height:1.5em;font-family:monospace serif;");
+              S.addStyle(" input:first-child",{background:"none",outline:"none", "font-weight":"bold",flex:"1 1 auto", "line-height":"1.6em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
+            });
+            S.Prefix(" .tty ", function() {
+              S.addStyle("", {"font-size":theme.font_size__px,display:"inline-block","padding":"0.5em 0",position:"absolute","font-family":"monospace serif","white-space":theme.wrap?"normal":"nowrap"})
+              S.addStyle(".trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
+              S.addStyle(".trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
+              S.addStyle(".trans p", "padding:0;margin:0;font-family:monospace;white-space:")
+              S.addStyle(".input", "font-family:monospace;")
+              S.addStyle(".input::before", "content:\"> \";")
+            });
           });
         S.addStyle(".ScrollContainer", {"transition-property":"top left bottom right", "transition-duration":"0.1s","transition-timing-function":"ease-out"})
         
       });
-      });
+    });
 
       
       var ScrollContainer = M.Class(function C() {
@@ -46,12 +48,14 @@ Module(function M() {
         C.Mixin(events.hasEvents);
         C.Init(function ScrollContainer() {
           basic.Div.call(this, "ScrollContainer");
-      
+          
         });
+
         C.Def(function drawTransform() {
             this.element.style.top=this.scrollcursor.y+"px";
             this.element.style.left=this.scrollcursor.x+"px";    
         });
+
         C.Def(function scrollTo(pos) {
           var scroller=this;
           if(typeof pos==="object") {
@@ -147,7 +151,7 @@ Module(function M() {
               var ph=scroller.parent.height();
               var mx=cursor.x;
               var my=cursor.y;
-             var cx, cy;
+              var cx, cy;
               if(e.touches) {
                 cx=e.touches[0].clientX;
                 cy=e.touches[0].clientY;
@@ -158,7 +162,6 @@ Module(function M() {
                 cx=origin.x;
                 cy=origin.y;
               }
-              console.debug({cx,cy})
               delta.x=origin.x-cx;
               delta.y=origin.y-cy;
               origin.x=cx;
@@ -200,16 +203,12 @@ Module(function M() {
               this.scrollbar.add(handle);
           }
           this.enableEvents("scrollstart","scroll","scrollstop")
-
         });
-        
       });
       var Commander=M.Class(function C() {
         C.Def("url","/squishy/src")
         C.Def("id","pool")
-
         C.Super(windowing.AppContainer);
-
         C.Init(function Commander(id) {
           try {
             Object.defineProperty(this, "session", { value:new membrane.Device(system.uri("").hostname) });
@@ -238,7 +237,6 @@ Module(function M() {
           var scroller=commander.output;
           var cursor=commander.output.scrollcursor;
           commander.onresize=function(e) {
-            console.debug({resizing:e});
             scroller.scrollTo("bottom");
           }
           Import("squishy/live","squishy/form",function(live,form) {

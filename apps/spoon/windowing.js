@@ -46,8 +46,10 @@ Module(function M() {
             var size = theme.side_handle_size;
             var c0=config[0];
             var c1=config[1];
-            if(c0.length==2) size=theme.corner_handle_size;
             var style={};
+            
+            if(c0.length==2) size=theme.corner_handle_size;
+            else style[dim[1-c1]] = "100%"          
             for(var x=0;x<c0.length;x++) {
               style[pos[c0[x]]]="-"+theme.handle_offset;
             }
@@ -56,14 +58,28 @@ Module(function M() {
             }
             S.addStyle(".acw .ui-resizable-"+dir, style)
           }
-          console.debug({bar_height:theme.bar_height,bar_heightpx:theme.bar_height__px})
-          S.addStyle(".align_button", { position:"absolute",top:0,bottom:0,margin:"auto",height:"20px",width:"20px",left:0,right:0,"background-color":"blue",})
-          S.addStyle(".acw", { position: "absolute", display: "inline-block", "background-color": "rgb(239, 239, 239)"  });
-          S.addStyle(".acw", { transition: "opacity 0.2s ease-out, box-shadow 0.1s ease-out","border-radius":"1px", opacity: 0, "z-index":0 });
-          S.addStyle(".acw.visible", {  opacity: 1, "z-index": 1000,"box-shadow":"0px 0px 3px 0px rgba(0,0,0,0.7)" });
-          S.addStyle(".acw.active", {  transition:"opacity 0.1s, box-shadow 0.2s ease-in", "box-shadow":"1px 1px 6px 1px rgba(0,0,0,0.5)","z-index":1000000});
-          S.addStyle(".acc", { overflow:"hidden",left: 0, right: 0, top:theme.bar_height__px, bottom: 0, position: "absolute"        });
-          S.addStyle(".acb", { height:theme.bar_height__px,"line-height":theme.bar_height__px,"text-indent__px":theme.bar_height/2, });
+          S.addStyle(".align_button", { position:"absolute",top:0,bottom:0,
+            margin:"auto",height:"20px",width:"20px",left:0,right:0,
+            background_color:"blue",
+          })
+          S.Prefix(".acw", function() {
+            S.addStyle("", { position: "absolute", display: "inline-block", background_color: "rgb(239, 239, 239)",
+             transition: "opacity 0.2s ease-out, box-shadow 0.1s ease-out",border_radius:"1px", opacity: 0, "z-index":0 
+            });
+            S.addStyle(".visible", {  opacity: 1, z_index: 1000,
+              box_shadow:"0px 0px 3px 0px rgba(0,0,0,0.7)" 
+            });
+            S.addStyle(".active", {  transition:"opacity 0.1s, box-shadow 0.2s ease-in", 
+            box_shadow:"1px 1px 6px 1px rgba(0,0,0,0.5)",z_index:1000000
+          });
+            S.addStyle(" .acc", { overflow:"hidden",left: 0, right: 0, 
+            top:theme.bar_height__px, bottom: 0, position: "absolute"        
+          });
+            S.addStyle(" .acb", { font_size:theme.font_size__px, 
+              height:theme.bar_height__px,line_height:theme.bar_height__px,
+              text_indent__px:theme.bar_height/2, 
+            });
+          });
         });
               
 

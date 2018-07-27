@@ -1,4 +1,4 @@
-.object.editor:before {}
+
 .header-bar.TaskList { position:fixed;bottom:0;left:0; }
 .header-bar.TaskList .tab { width:100px;height:100px; overflow:hidden; }
    .EditorItem {
@@ -20,10 +20,10 @@
    .editor.array {
                                    clear:both;min-width:6em;  }
 
-   .editor.array:before {
+   .editor.array::before {
                                    position:absolute;content:'[';left:-0.1em;
                                    font-size:1.5em;line-height:1.5em;width:0.1em;  }
-   .editor.array:after {
+   .editor.array::after {
                                    position:absolute;content:']';
                                    font-size:1.5em;line-height:1.5em;width:0.1em;right:-0.1em;  }
 

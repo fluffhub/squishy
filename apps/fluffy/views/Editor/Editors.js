@@ -181,7 +181,7 @@ Module(function M() {
   M.Import("squishy/styles", function(styles) {
     M.Style(function S() {
       var S=this;
-      S.addStyle(".object.editor:before",
+      S.addStyle(".object.editor::before",
         ""
       );
       S.addStyle(".EditorItem",
@@ -206,7 +206,7 @@ Module(function M() {
         "clear:both;min-width:6em;"
       );
 
-      S.addStyle(".editor.array:before", 
+      S.addStyle(".editor.array::before", 
         "position:absolute;content:'[';left:-0.1em;"+
         "font-size:1.5em;line-height:1.5em;width:0.1em;"
       );
