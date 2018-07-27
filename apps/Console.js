@@ -16,6 +16,7 @@ Module(function M() {
       M.Style(function S() {
         var S=this; 
         var theme=S.Theme({
+          font:"monospace",
           wrap:false,
           font_size__px:13,
         })
@@ -23,21 +24,44 @@ Module(function M() {
           S.Prefix(".Console .acc",function() {
             S.addStyle()
             S.Prefix(" form", function() {
-              S.addStyle("::before",{"font-family":"monospace", "font-size__px":theme.font_size*1.5, "line-height__px":theme.font_size*1.4, "font-weight":"bold", "text-indent__px":theme.font_size*0.4,content:"\"> \""});
-              S.addStyle("", "height:1.5em;width:100%;display:flex;margin:0;")
-              S.addStyle(" input[type=\"submit\"]", "flex:0 0 3.5em;border:none; display:none;width:3em;bottom:0px;line-height:1.5em;font-family:monospace serif;");
-              S.addStyle(" input:first-child",{background:"none",outline:"none", "font-weight":"bold",flex:"1 1 auto", "line-height":"1.6em", "text-indent":"0.5em", border:"none","font-family":"monospace, serif"});
+              S.addStyle("::before",{
+                font_family:theme.font, font_size__px:theme.font_size*1.2, 
+                line_height__px:theme.font_size*1.4, 
+                font_weight:"bold", text_indent__px:theme.font_size*0.4,
+                content__string:">"
+              });
+              S.addStyle("", { height__px:theme.font_size*1.2,width__p:100,
+                display:"flex",margin:0
+              });
+              S.addStyle(" input[type=\"submit\"]", { display:"none" });
+              S.addStyle(" input:first-child",{
+                background:"none",outline:"none", border:"none",
+                font_weight:"bold",flex:"1 1 auto", line_height__px:theme.font_size*1.6, 
+                text_indent__px:theme.font_size*0.5, font_family:theme.font
+              });
             });
             S.Prefix(" .tty ", function() {
-              S.addStyle("", {"font-size":theme.font_size__px,display:"inline-block","padding":"0.5em 0",position:"absolute","font-family":"monospace serif","white-space":theme.wrap?"normal":"nowrap"})
-              S.addStyle(".trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
-              S.addStyle(".trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
-              S.addStyle(".trans p", "white-space:pre;padding:0;margin:0;font-family:monospace;white-space:")
-              S.addStyle(".input", "font-family:monospace;")
-              S.addStyle(".input::before", "content:\"> \";")
+              S.addStyle("", {
+                font_size:theme.font_size__px,
+                display:"inline-block",padding:"0.5em 0",
+                position:"absolute",font_family:theme.font,
+                white_space:theme.wrap?"normal":"nowrap"
+              });
+              S.addStyle(".trans",{
+                display: "block",width__p:100,position: "relative",
+                box_sizing: "border-box"
+              });
+              S.addStyle(".trans",{ padding:"0 0.5em", display:"inline-block"});
+              S.addStyle(".trans p", {white_space:pre,padding:0,margin:0,
+                font_family:theme.font})
+              S.addStyle(".input", {font_family:theme.font});
+              S.addStyle(".input::before", {content__string:">"});
             });
           });
-        S.addStyle(".ScrollContainer", {"transition-property":"top left bottom right", "transition-duration":"0.1s","transition-timing-function":"ease-out"})
+        S.addStyle(".ScrollContainer", {transition_property:"top left bottom right", 
+        transition_duration:"0.1s",
+        transition_timing_function:"ease-out"
+      });
         
       });
     });
