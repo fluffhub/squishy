@@ -63,7 +63,7 @@ Module(function M() {
             background_color:"blue",
           })
           S.Prefix(".acw", function() {
-            S.addStyle("", { position: "absolute", display: "inline-block", background_color: "rgb(239, 239, 239)",
+            S.addStyle("", { position: "absolute", display: "inline-block", background_color__color: [239, 239, 239],
              transition: "opacity 0.2s ease-out, box-shadow 0.1s ease-out",border_radius:"1px", opacity: 0, "z-index":0 
             });
             S.addStyle(".visible", {  opacity: 1, z_index: 1000,
