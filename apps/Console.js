@@ -32,7 +32,7 @@ Module(function M() {
               S.addStyle("", {"font-size":theme.font_size__px,display:"inline-block","padding":"0.5em 0",position:"absolute","font-family":"monospace serif","white-space":theme.wrap?"normal":"nowrap"})
               S.addStyle(".trans",{display: "block",width:"100%",position: "relative",'box-sizing': "border-box"});
               S.addStyle(".trans","padding:0 0.5em; display:inline-block;float:left;clear:both;");
-              S.addStyle(".trans p", "padding:0;margin:0;font-family:monospace;white-space:")
+              S.addStyle(".trans p", "white-space:pre;padding:0;margin:0;font-family:monospace;white-space:")
               S.addStyle(".input", "font-family:monospace;")
               S.addStyle(".input::before", "content:\"> \";")
             });
