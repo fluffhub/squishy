@@ -52,7 +52,7 @@ Module(function M() {
                 box_sizing: "border-box"
               });
               S.addStyle(".trans",{ padding:"0 0.5em", display:"inline-block"});
-              S.addStyle(".trans p", {white_space:pre,padding:0,margin:0,
+              S.addStyle(".trans p", {white_space:"pre",padding:0,margin:0,
                 font_family:theme.font})
               S.addStyle(".input", {font_family:theme.font});
               S.addStyle(".input::before", {content__string:">"});
