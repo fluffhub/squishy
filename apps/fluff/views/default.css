@@ -93,10 +93,10 @@ span.EX.Import {
     float: left;
     box-sizing: border-box;
 }
-.EX>.arglist:before {
+.EX>.arglist::before {
   content:"("
 }
-.EX>.aglist:after {
+.EX>.aglist::after {
  content:")"
 }
 
