@@ -1,7 +1,7 @@
 Module(function M() {
   M.Import(
-    "fluffy/JSeditor",
-           "apps/spoon",
+    "/app/fluffy/JSeditor",
+           "/app/spoon",
     "squishy/basic","squishy/system",
     "squishy/live","squishy/form",
     "spoon/windowing","squishy/interactive",

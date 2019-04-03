@@ -260,7 +260,9 @@ Module(function M() {
           }
           var scroller=commander.output;
           var cursor=commander.output.scrollcursor;
-          commander.onresize=function(e) {
+          parent_onresize = commander.onresize;
+          commander.onresize=function(handle) {
+            parent_onresize.call(this, handle);
             scroller.scrollTo("bottom");
           }
           Import("squishy/live","squishy/form",function(live,form) {

@@ -287,14 +287,10 @@ Module(function M() {
                       lib.cd(dirloc);
                     });
                     lib.dirs[path]=newDir;
-
-
                     lib.add(newDir);
                     //if(
                     newDir.load();
                     newDir.hide();
-
-
                   } else {
                     //TRY TO FIND AN APP TO OPEN THE THING WITH
                     var matches=spoon.match(instance,fn);

@@ -6,12 +6,13 @@ Module(function M() {
     "squishy/svg","squishy/styles",
 
     "spoon/Models", "squishy/cookies","squishy/membrane",
-    "squishy/live","apps/spoon/conf",
+    "squishy/live","/app/spoon/conf","spoon/alignment",
+    "squishy/transform",
     function(
     DOM,basic,layout,
      interactive,kb,events,svg,styles,
      Ms,cookies,membrane,
-     live,conf) {
+     live,conf, alignment,transform) {
 
       Import("spoon/default.css");
       M.Style(function S()  {
@@ -81,7 +82,7 @@ Module(function M() {
 
           this.header=new Tile(app.name,onclick);
           this.adder=new interactive.MomentaryButton("+","app_adder",function(e) {
-            Import("apps/spoon","squishy/system",function(spoon,system) {
+            Import("/app/spoon","squishy/system",function(spoon,system) {
               spoon.main.run(deck.app);
             });
             e.stopPropagation();
@@ -202,10 +203,8 @@ Module(function M() {
           this.decks.forEach(function (t) {
             if (t.task===task) { found=true; }
             if (t.name==appname && t instanceof Deck) {
-
               t.addTask(path,task);
               found=true;
-
             }
           });
           if(found) {
@@ -231,16 +230,30 @@ Module(function M() {
 
         });
       });
+      var AppWindow=M.Class(function C() {
+        C.Super(Frame);
+        C.Mixin(hasEvents);
+        C.Init(function AppWindow(win,doc) {
+
+        });
+      });
+
+      var svg_end_cap = "M2186.8-35.4c-111.7,0-202.2,90.5-202.2,202.2S2075.1,369,2186.8,369H2389V-35.4H2186.8z";
+
       var HomeWindow=M.Class(function C() {
         C.Super(Frame);
         C.Mixin(hasEvents);
+        C.Mixin(transform.Resizable);
         C.Init(function HomeWindow(win,doc) {
           Frame.call(this,win,doc);
           var W=this;
           var EW=this;
           this.apps={};
+          var Title=M.Def("Title", new DOM.Tag({type:"title","content":""}));
+          this.head.add(Title);
+          Object.defineProperty(this, "title", {get:function getTitle() { return Title.element.textContent; }, set: function setTitle(v) { Title.element.textContent=v; }})
 
-          this.tasks={};
+          this.tasks={spoon:[this]};
 
           //this.tasks=new TabbedPane()
           //this.tasks.header.removeClass("header-bar");
@@ -248,26 +261,16 @@ Module(function M() {
           this.hud.Mixin(events.hasEvents);
           this.add(this.hud)
           this.tm=new TaskManager(this);
-          
+
+          this.am=new alignment.AlignmentManager(this);
 
           var SpoonLogo=new svg.SVG(50,50);
           //.Def("homebutton",SpoonLogo);
           this.homebutton=SpoonLogo;
           SpoonLogo.addClass("sitemenu");
-
-          var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
-
-            var logo=svg.query("#CLICKER")[0];
-            logo.NSattrs({style:""});
-            var bbox=logo.bounds();
-            console.debug({squishylogo:logo,svg:svg});
-            //logo.remove();
-            SpoonLogo.add(logo);
-            //var bbox=logo.element.getBBox();
-            //SquishyLogo.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
-            SpoonLogo.fit(logo.bounds());
-
-          }});
+          logo = new svg.Path(svg_end_cap);
+          SpoonLogo.add(logo);
+          SpoonLogo.fit(logo.bounds());
           var SpoonButton=new interactive.MomentaryButton("","spoon",function() {
             W.hud.toggleClass("collapsed");
           });
@@ -278,7 +281,9 @@ Module(function M() {
           this.editors=[];
 
           var H = new EditorHome(EW);
-
+          this.enableresize("n,e,s,w", function() {});
+          this.doResize=function() { }
+          
           Object.defineProperty(this,"cursor",{value:{x:0,y:0},writable:true});
           this.addEvent("cursorpos","mousedown mousemove touchmove touchstart",function oncursorpos(e) {
             if(e) {
@@ -326,7 +331,13 @@ Module(function M() {
           this.enableEvents("cursorpos","context","closeContext");
         });
         C.Def(function addTask(path,task) {
-          this.tasks[path.split(":")[0]]=task;
+          var appname = path.split(":")[0]
+
+          if(this.tasks[appname] instanceof Array) {
+            this.tasks[appname].push(task);
+          } else {
+            this.tasks[appname]=[task];
+          }
           this.add(task);
           var hw=this;
           task.addEvent("activate","mousedown touchstart",function onactivate(e) {
@@ -394,7 +405,6 @@ Module(function M() {
               EW.open(obj);
             });
           } catch(e) {
-            //////console.debug("can't create "+type);
             throw e;
           }
 
@@ -418,9 +428,6 @@ Module(function M() {
         C.Def(function Context(ContextMenu) {
           var EW=this;
           return function addContext() {
-            ////console.debug(ContextMenu);
-            // if(!(EW.contextmenu.element.contains(ContextMenu.element)))
-            //  contextitems[contextitems.length]=ContextMenu;
             EW.contextmenu.add(ContextMenu);
             return false;
           };
@@ -430,18 +437,17 @@ Module(function M() {
           //check all editor windows for droppables
           //enable mouseup drop action
           //LI.window.Drag(
-
-
           for (var name in this.tasks) {
-            var editor=this.tasks[name];
-            ////console.debug(editor);
+            for(var i in this.tasks[name]) {
+            var editor=this.tasks[name][i];
             if(editor.events) {
               if(editor.events.drop)
                 editor.enableEvents('drop');
-              if(editor.events.dragenter)
+             if(editor.events.dragenter)
                 editor.enableEvents('dragenter');
             }
           }
+        }
           var ghost=new DOM.LayoutItem('div');
           ghost.addClass('ghost');
           ghost.element.style.position="fixed";
@@ -459,7 +465,6 @@ Module(function M() {
           this.add(ghost);
           this.ghost=ghost;
           var EW=this;
-          //this.element.style.cursor="no-drop";
           this.addEvent('carry',"mousemove touchmove",function(ev) {
             var P;
             if(ev.touches)
@@ -516,17 +521,13 @@ Module(function M() {
           else {
             try{
               type=value.constructor.modelname;
-
             } catch(e) {
-              //////console.debug(value);
               try {
                 type=value.__proto__.constructor.name;
               } catch(e) {
-                //////console.debug('full erroring');
               }
             }
           }
-          //if(type in editors)  PE=new editors[type](value, EW);
           this.editors[this.editors.length]=PE;
           var name='Unnamed';
           var iid=type+value.id;
@@ -534,32 +535,16 @@ Module(function M() {
             PE=this.DB.panes[iid];
           }
           else {
-            //var that=PE;
             if(value.name!='')  name=value.name;
 
             this.DB.addTab(iid,name,PE,'',function() {
-              //this.draw_overlay();
-              //open('program',{id:PE.program.id});
               EW.select(iid,PE);
               PE.redraw();
-              //////console.debug('changing');
             });
           }
-
-          //select(iid,PE);
-          //this.DB.tabset.change(iid);
         });
         C.Def(function select(name,item) {
-          //this.TP.panes['PB'].remove();
-          // this.TP.panes['NP'].remove();
-          //this.TP.panes['PB']=item.editor;
 
-          //this.TP.add(this.TP.panes['PB']);
-          //item.editor.draw();
-          //this.TP.panes['PB'].hide();
-
-          //this.TP.tabset.change('PB');
-          //		DB.tabset.change(name);
         });
         C.Def(function addApp(name, mod) {
           if(mod.open instanceof Function) {
@@ -567,31 +552,6 @@ Module(function M() {
           }
           this.apps[name]=mod;
         });
-
-        /*   C.Def(function activate(item) {
-                 var browser=this;
-                 Import("app/codebrowser",function(codebrowser) {
-                   browser.absolutefiles[path]=item;
-                   new Request("URI","TEXT").Get(item.filename,{},function(raw) {
-                     browser.tasks[path]=new codebrowser.CodeBrowser(raw,browser);
-                     browser.tasks[path].addBefore(new basic.Span(path));
-                     browser.parent.add(browser.tasks[path]);
-                   });
-                 });
-               });
-               C.Def(function change(path,item) {
-                 var browser=this;
-                 for(var windowid in browser.tasks) {
-                   browser.tasks[windowid].hide();
-                 }
-                 if(browser.tasks[path]) {
-                   browser.tasks[path].show();
-
-                 } else {
-                   browser.load(path,item);
-
-                 }
-               });*/
         C.Def(function Import(path1,callback) {
           var item;
           var browser=this;

@@ -1,0 +1,286 @@
+<html><head>
+        <script src="/lib/squishy/index.js" data-root="/lib/squishy" data-name="squishy"></script><script src="/lib/squishy/DOM.js" type="text/javascript" data-root="/lib/squishy" data-name="DOM"></script><script src="/lib/squishy/live.js" type="text/javascript" data-root="/lib/squishy" data-name="live" data-e-main="NDUxNTMyMTMyODQ0OTM0MjAw" data-j-devicemanager="{&quot;devices&quot;:{&quot;localhost&quot;:{}}}"></script><script src="/lib/squishy/system.js" type="text/javascript" data-root="/lib/squishy" data-name="system" data-f-device="function Device(path,name) {
+      var device=this;
+      if(typeof name==&quot;string&quot;) {
+        device.name=name
+      }
+      C.Def(&quot;Dir&quot;,M.Self.Dir);
+      Import(&quot;squishy/live&quot;,function(live) {
+        var url
+        if(typeof path == &quot;string&quot;) {
+          url=uri(path)
+        } else {
+          url=uri(&quot;/&quot;);
+        }
+        live.DeviceManager.init(url.path,device);
+      });
+
+      // if(typeof name==&quot;string&quot;)
+      //   this.name=name;
+      // if(root instanceof M.Self.Dir) {
+      //   this.root=root;
+      // } else {
+      // }
+
+    }" data-f-file="function File(name,value) {
+      this.name=null
+      this.value=null
+      if(typeof name==&quot;string&quot;) this.name=name;
+      if(value!==undefined) this.value=value;
+    }" data-f-devicemanager="function DeviceManager() {
+      this.devices={};
+
+    }" data-f-dir="function Dir(name,contents) {
+      if(typeof name==&quot;string&quot;) {
+        this.name=name
+      }
+      if(contents!==undefined) {
+        this.contents=contents
+      } else {
+        this.contents={}
+      }
+      this.parent=null;
+    }" data-id="MTAzNjgyNDcyMTYzODI5NjUw"></script>
+    <script src="/lib/squishy/basic.js" type="text/javascript" data-root="/lib/squishy" data-name="basic" data-id="MTExNTEzNjM5NTQ3MzU4ODIw"></script><script src="/lib/squishy/interactive.js" type="text/javascript" data-root="/lib/squishy" data-name="interactive" data-id="MTQ5MTE3NzA0MjY4MTYwMTgg"></script><script src="/lib/squishy/form.js" type="text/javascript" data-root="/lib/squishy" data-name="form" data-id="NTg2MTk3Mjk4MDcyOTczMzAw"></script><script src="/lib/squishy/layout.js" type="text/javascript" data-root="/lib/squishy" data-name="layout" data-id="Njc0NDA3MjQ4OTgxNTQwOTAw"></script><script src="/lib/squishy/request.js" type="text/javascript" data-root="/lib/squishy" data-name="request" data-f-request="function Request(requesttype,responsetype) {
+      this.requesttype=requesttype || 'URI';
+      this.responsetype=responsetype || 'TEXT';
+      this.request=new XMLHttpRequest();
+    }" data-id="ODQ2NTE5MDgzODI3MDg5MzAw"></script><script src="/lib/squishy/membrane.js" type="text/javascript" data-root="/lib/squishy" data-name="membrane" data-f-device="function Device(path, name) {
+          if(typeof name==&quot;string&quot;) {
+            this.name=name;
+          } else {
+            name=this.name=&quot;membrane&quot;;
+          }
+
+
+          system.Device.call(this,path,name);
+          this.request=new Req.Request(&quot;URI&quot;,&quot;TEXT&quot;);
+          this.request.request.timeout=60000;
+
+          var env=this;
+
+          this.pwd=&quot;&quot;
+          var home=system.uri(&quot;&quot;).pathname;
+          function assign(pwd) {
+            env.pwd=pwd;
+            env.home=pwd;
+            env.root=new M.Self.Dir(&quot;&quot;,&quot;&quot;);
+
+            env.root.env=env;
+            var dirs=pwd.split(&quot;/&quot;);
+            var dirname,dir;
+            var cursor=env.root.contents;
+            var i;
+            if(dirs[0]==&quot;&quot;) i=1;
+            else i=0;
+            for (;i<dirs.length;i++) {
+              dirname=dirs[i];
+              dir=new M.Self.Dir(dirname,dirs.slice(0,i).join('/'));
+              dir.env=env;
+
+              cursor[dirname]=dir;
+              cursor=dir.contents;
+            }
+            //dir.list(function (ls) {
+            //},true);
+          }
+          this.status(function(status) {
+            var home=status.home;
+
+            // env.exec(&quot;pwd&quot;,function(pwd) {
+
+            var dirs=home.split('/');
+            var dirname=dirs[dirs.length-1];
+
+            if(dirname==env.id) {
+              home=dirs.slice(0,-2).join(&quot;/&quot;)
+              //  env.cd(&quot;..&quot;,function(pwd) {
+              //    assign(pwd);
+              //  })
+
+            } else {
+
+
+            }
+            assign(home);
+            //});
+          });
+
+        }" data-f-file="function File(name,loc,env) {
+          this.name=null
+          this.value=null
+          // this.env=env;
+          this.loc=loc;
+
+          Object.defineProperty(this,&quot;env&quot;,{writable:true,enumerable:false,configurable:false,value:env });
+          Object.defineProperty(this,&quot;loaded&quot;,{writable:true,value:false,enumerable:false,configurable:false});
+          if(typeof name==&quot;string&quot;)this.name=name;
+          //if(value!==undefined) this.value=value;
+        }" data-f-dir="function Dir(name,loc) {
+          if(typeof name==&quot;string&quot;) {
+            this.name=name
+          }
+
+          this.loc=&quot;/&quot;+loc.match(/[/]*(.*)/)[1];
+
+          this.contents={};
+          Object.defineProperty(this,&quot;loaded&quot;,{value:false,writable:true,configurable:false,enumerable:false});
+          Object.defineProperty(this,&quot;env&quot;,{writable:true,enumerable:false,configurable:false });
+        }" data-f-anonymous="function anonymous(
+) {
+
+}" data-id="MzAwNzA1NTk2NjQzNzk2MTYw"></script><script src="/lib/squishy/remote.js" type="text/javascript" data-root="/lib/squishy" data-name="remote" data-f-device="function Device(path,name) {
+        system.Device.call(this,path,name);
+        this.root=new system.Dir(&quot;/&quot;,{});
+
+      }" data-f-file="function File(loc) {
+
+
+      }" data-id="MTcwMTY3MzE1NzQ5OTkxMDAw"></script><script src="/lib/squishy/events.js" type="text/javascript" data-root="/lib/squishy" data-name="events" data-id="MTk5MDIxMzcxNTAzNDI3OTAw"></script><script src="/lib/squishy/styles.js" type="text/javascript" data-root="/lib/squishy" data-name="styles" data-j-font_types="{&quot;eot&quot;:&quot;embedded-opentype&quot;,&quot;woff&quot;:&quot;woff&quot;,&quot;ttf&quot;:&quot;truetype&quot;,&quot;svg&quot;:&quot;svg&quot;}" data-j-media_type_properties="[&quot;min-width&quot;,&quot;max-width&quot;,&quot;max-height&quot;,&quot;min-height&quot;]" data-f-style="function Style(item,v){
+        
+        if(this instanceof Style) {
+          if(item instanceof Element) {
+            Object.defineProperty(this, &quot;element&quot;, {value:item})
+            Object.defineProperty(this, &quot;style&quot;, {value:item.style})
+          }
+        }else{
+          if(item.Style){
+            if(v)
+              item.Style.Style(v);
+            else
+              return item.Style;
+          } else {
+            if(item.element){
+              if(item.element.style){
+                item.Style=new Style(item.element);
+                if(v) item.Style.Style(v);
+                return item.Style;
+              }
+            }
+          }
+        }
+      }" data-f-stylesheet="function () { [native code] }" data-id="NTIwMzc5NTUyMDY5ODA5NjAg"></script><title>Squishy</title><script src="/app/spoon/index.js" type="text/javascript" data-root="/app/spoon" data-name="spoon" data-j-dir="&quot;/app/spoon&quot;" data-id="ODQ2ODYwNDYyMDA5ODQxNDAw" data-j-library="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;ODQ2ODYwNDYyMDA5ODQxNDAw&quot;}}" data-j-models="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;ODQ2ODYwNDYyMDA5ODQxNDAw&quot;}}" data-j-userbrowser="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;ODQ2ODYwNDYyMDA5ODQxNDAw&quot;}}" data-e-models="NjM0NzY4NTcyNTg2OTczODAw" data-e-alignment="NDU5NzM5MTg0MzI1NzY2MTAw" data-j-stylesheets="[{&quot;__element__&quot;:&quot;NjgyMDcyOTEwMzIxMDU3NzAw&quot;}]" data-f-tile="function () { [native code] }" data-f-deck="function () { [native code] }" data-f-editorhome="function () { [native code] }" data-f-taskpane="function () { [native code] }" data-f-taskmanager="function () { [native code] }" data-f-task="function Task() {
+
+        }" data-f-subwindow="function () { [native code] }" data-f-homewindow="function () { [native code] }" data-e-main="NDUxNTMyMTMyODQ0OTM0MjAw" data-f-listitem="function ListItem(path) {
+            basic.Div.call(this,&quot;FSListItem&quot;)
+            this.content(path);
+          }" data-f-icon="function Icon() {
+            basic.Div.call(this,&quot;FSIcon&quot;)
+            this.content(&quot;?&quot;)
+          }" data-f-editor="function Editor() {
+            basic.Div.call(this,&quot;FSWindow&quot;)
+          }" data-f-viewer="function Viewer() {
+            basic.Div.call(this,&quot;FSWindow&quot;)
+          }" data-e-windowing="NDg5NTkzNzEzMTc0MTc5NjUw"></script><script src="/lib/squishy/keyboard.js" type="text/javascript" data-root="/lib/squishy" data-name="keyboard" data-id="OTI5MTk2NzE3NDI1ODg0NzAw"></script><script src="/lib/squishy/svg.js" type="text/javascript" data-root="/lib/squishy" data-name="svg" data-id="NDc1Njg1NTM4OTMzNzA0MDAw"></script><script src="/app/spoon/Models.js" type="text/javascript" data-root="/app/spoon" data-name="Models" data-j-dir="&quot;/app/spoon&quot;" data-id="NjM0NzY4NTcyNTg2OTczODAw"></script><script src="/lib/squishy/cookies.js" type="text/javascript" data-root="/lib/squishy" data-name="cookies" data-f-cookie="function Cookie(name,value,days) {
+      this.name=name;
+      if(days!==undefined) {
+       this.days=days;
+      } else {
+       this.days=365;
+      }
+      if(value!==undefined) {
+        this.value=value;
+        create(name,value,this.days)
+      } else {
+        this.value=read(name)
+      }
+
+    }" data-id="OTgxNTk0OTkxODk3MTU4OTAg"></script><script src="/app/spoon/conf.js" type="text/javascript" data-root="/app/spoon" data-name="conf" data-j-apps="{&quot;dir&quot;:&quot;/app&quot;,&quot;spoon&quot;:{&quot;__element__&quot;:&quot;ODQ2ODYwNDYyMDA5ODQxNDAw&quot;},&quot;layout&quot;:{&quot;__element__&quot;:&quot;OTQyNjAxNTY4MzA0MTE2MDAw&quot;},&quot;graphics&quot;:{&quot;__element__&quot;:&quot;NTIxNDIwNzQxMTA3NTQzMTAw&quot;},&quot;object&quot;:{&quot;__element__&quot;:&quot;NjcyNDIyOTkyODA4Mjk5MDAw&quot;},&quot;fluffbase&quot;:{&quot;__element__&quot;:&quot;NjEzOTY1MDkxNjAxMTI1OTAw&quot;},&quot;fork&quot;:{&quot;__element__&quot;:&quot;NDQxMjcwNjI4NDQ1OTcwNDAw&quot;},&quot;ticker&quot;:{&quot;__element__&quot;:&quot;MzEyMzM5NDc1MjIzMDE3MzAw&quot;},&quot;console&quot;:{&quot;__element__&quot;:&quot;ODYwOTU1NzY4MTk0MTkxNzAw&quot;},&quot;text&quot;:{&quot;__element__&quot;:&quot;MTY0OTU0MTYzNzQ4MjYxNDQw&quot;}}"></script><script src="/app/spoon/alignment.js" type="text/javascript" data-root="/app/spoon" data-name="alignment" data-f-alignmentmanager="function AlignmentManager(main) {
+        Object.defineProperty(this, &quot;main&quot;,{value:main, configurable:false, writable:false}); 
+      this.groups=[];
+    }" data-f-aligner="function () { [native code] }" data-j-dir="&quot;/app/spoon&quot;" data-id="NDU5NzM5MTg0MzI1NzY2MTAw"></script><script src="/app/index.js" type="text/javascript" data-root="/app" data-name="app" data-j-dir="&quot;/app&quot;" data-id="NDMzMDU4Njc0OTQxNjk3MTUw" data-j-spoon="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-fork="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-ticker="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-layout="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-rpi="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-graphics="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-users="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-reader="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-fluffbase="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-console="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-text="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-fluff="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-object="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-j-index="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NDMzMDU4Njc0OTQxNjk3MTUw&quot;}}" data-e-spoon="ODQ2ODYwNDYyMDA5ODQxNDAw" data-e-layout="OTQyNjAxNTY4MzA0MTE2MDAw" data-e-graphics="NTIxNDIwNzQxMTA3NTQzMTAw" data-e-object="NjcyNDIyOTkyODA4Mjk5MDAw" data-e-fluffbase="NjEzOTY1MDkxNjAxMTI1OTAw" data-e-fork="NDQxMjcwNjI4NDQ1OTcwNDAw" data-e-ticker="MzEyMzM5NDc1MjIzMDE3MzAw" data-e-console="ODYwOTU1NzY4MTk0MTkxNzAw" data-e-text="MTY0OTU0MTYzNzQ4MjYxNDQw"></script><script src="/app/fork/index.js" type="text/javascript" data-root="/app/fork" data-name="fork" data-e-wrappers="NjkxODg4ODM5MTcwMzIyNjAw" data-f-appselector="function () { [native code] }" data-f-filelistitem="function () { [native code] }" data-f-filelist="function () { [native code] }" data-f-filebrowser="function () { [native code] }" data-j-dir="&quot;/app/fork&quot;" data-id="NDQxMjcwNjI4NDQ1OTcwNDAw" data-f-module="function () { [native code] }"></script><script src="/app/ticker/index.js" type="text/javascript" data-root="/app/ticker" data-name="ticker" data-j-stylesheets="[{&quot;__element__&quot;:&quot;MjI4MzkxODAwMjU1OTE5Nzgw&quot;}]" data-j-dir="&quot;/app/ticker&quot;" data-id="MzEyMzM5NDc1MjIzMDE3MzAw" data-j-fake="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;MzEyMzM5NDc1MjIzMDE3MzAw&quot;},&quot;dir&quot;:&quot;/app/ticker&quot;}" data-e-fake="OTYwMjU3NDQ2OTUyOTgzOTAw" data-f-minichart="function () { [native code] }" data-f-="function () { [native code] }" data-f-ticker="function () { [native code] }"></script><script src="/app/layout/index.js" type="text/javascript" data-root="/app/layout" data-name="layout" data-f-tile="function Tile() {
+          C.Super(spoon.Tile)
+        }" data-f-listitem="function ListItem() {
+
+        }" data-f-icon="function Icon() {
+
+        }" data-f-editor="function Editor() {
+
+        }" data-f-viewer="function Viewer() {
+
+        }" data-id="OTQyNjAxNTY4MzA0MTE2MDAw"></script><script src="/app/rpi/index.js" type="text/javascript"></script><script src="/app/graphics/index.js" type="text/javascript" data-root="/app/graphics" data-name="graphics" data-id="NTIxNDIwNzQxMTA3NTQzMTAw"></script><script src="/app/users/index.js" type="text/javascript"></script><script src="/app/reader/index.js" type="text/javascript"></script><script src="/app/fluffbase/index.js" type="text/javascript" data-root="/app/fluffbase" data-name="fluffbase" data-j-dir="&quot;/app/fluffbase&quot;" data-id="NjEzOTY1MDkxNjAxMTI1OTAw" data-j-api="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NjEzOTY1MDkxNjAxMTI1OTAw&quot;},&quot;dir&quot;:&quot;/app/fluffbase&quot;}" data-j-forms="{&quot;parent&quot;:{&quot;__element__&quot;:&quot;NjEzOTY1MDkxNjAxMTI1OTAw&quot;},&quot;dir&quot;:&quot;/app/fluffbase&quot;}" data-e-api="NDgwMDg0OTE0NjM5MDk5OTcw" data-e-forms="Mzc3MTAwMDM4OTk2NzE5NDAw" data-f-fluffbase="function () { [native code] }"></script><script src="/app/console/index.js" type="text/javascript" data-root="/app/console" data-name="console" data-j-stylesheets="[{&quot;__element__&quot;:&quot;NTkyOTIwOTUzMTI2Nzk0ODAw&quot;}]" data-f-scrollcontainer="function () { [native code] }" data-f-commander="function () { [native code] }" data-j-dir="&quot;/app/console&quot;" data-id="ODYwOTU1NzY4MTk0MTkxNzAw"></script><script src="/app/text/index.js" type="text/javascript" data-root="/app/text" data-name="text" data-j-stylesheets="[{&quot;__element__&quot;:&quot;NTY3OTEwMDMwNTkxNjkyNzAw&quot;}]" data-f-texteditor="function () { [native code] }" data-f-tile="function () { [native code] }" data-j-live="[]" data-f-listitem="function ListItem() {
+
+        }" data-f-icon="function Icon() {
+
+        }" data-f-editor="function Editor() {
+
+        }" data-f-viewer="function Viewer() {
+
+        }" data-j-dir="&quot;/app/text&quot;" data-id="MTY0OTU0MTYzNzQ4MjYxNDQw"></script><script src="/app/fluff/index.js" type="text/javascript" data-root="/app/fluff" data-name="fluff"></script><script src="/app/object/index.js" type="text/javascript" data-root="/app/object" data-name="object" data-f-stringeditor="function () { [native code] }" data-f-texteditor="function () { [native code] }" data-f-numericeditor="function () { [native code] }" data-f-editoritem="function () { [native code] }" data-f-objecteditor="function () { [native code] }" data-f-arrayeditor="function () { [native code] }" data-id="NjcyNDIyOTkyODA4Mjk5MDAw"></script><script src="/app/index/index.js" type="text/javascript"></script><link rel="stylesheet" href="/app/spoon/default.css"><style data-j-prefix="&quot;&quot;" data-id="NjgyMDcyOTEwMzIxMDU3NzAw"></style><script src="/app/fluffbase.js" type="text/javascript"></script><script src="/app/fork/wrappers.js" type="text/javascript" data-root="/app/fork" data-name="wrappers" data-f-filelistitemwrapper="function FileListItemWrapper(match,wrap,open) {
+          if(wrap instanceof Function) { this.wrap=wrap; }
+          if(match instanceof Function) { this.match=match; }
+          if(open instanceof Function) { this.open=open;  } else this.open=null;
+        }" data-j-filelistitemwrappers="{}" data-j-dir="&quot;/app/fork&quot;" data-id="NjkxODg4ODM5MTcwMzIyNjAw"></script><script src="/app/spoon/windowing.js" type="text/javascript" data-root="/app/spoon" data-name="windowing" data-j-stylesheets="[{&quot;__element__&quot;:&quot;Mjc4MDgyMjkwOTA2MjcwODAw&quot;}]" data-f-appconfig="function () { [native code] }" data-f-appcontainer="function () { [native code] }" data-j-dir="&quot;/app/spoon&quot;" data-id="NDg5NTkzNzEzMTc0MTc5NjUw"></script><script src="/lib/squishy/realtime.js" type="text/javascript" data-root="/lib/squishy" data-name="realtime" data-f-remote="function Remote(url) {
+      this.url=url;
+      if(url)
+        this.socket=new WebSocket(url);
+      this.queue=[]
+      this.subscriptions=[];
+      this.ready=false;
+
+    }" data-id="NzI5OTIwODUwNzIxNjY5MDAw"></script><style data-j-prefix="&quot;&quot;" data-id="MjI4MzkxODAwMjU1OTE5Nzgw"></style><link rel="stylesheet" href="/app/object/default.css"><script src="/app/fluffy/JSeditor.js" type="text/javascript"></script><script src="/app/fluffbase/api.js" type="text/javascript" data-root="/app/fluffbase" data-name="api" data-id="NDgwMDg0OTE0NjM5MDk5OTcw"></script><script src="/app/fluffbase/forms.js" type="text/javascript" data-root="/app/fluffbase" data-name="forms" data-id="Mzc3MTAwMDM4OTk2NzE5NDAw"></script><script src="/lib/squishy/transform.js" type="text/javascript" data-root="/lib/squishy" data-name="transform" data-id="MzY4ODA0MjQ5NTgxMDIxMzAw"></script><style data-j-theme="{&quot;corner_handle_size__px&quot;:&quot;30px&quot;,&quot;side_handle_size__px&quot;:&quot;10px&quot;,&quot;handle_offset__px&quot;:&quot;5px&quot;,&quot;frame_bg_color__color&quot;:&quot;rgba(128,128,128,0.5)&quot;,&quot;frame_fg_color__color&quot;:&quot;rgba(205,205,205,0.5)&quot;,&quot;bar_height__px&quot;:&quot;25px&quot;,&quot;bar_font_size__px&quot;:&quot;12.5px&quot;,&quot;in_common__color&quot;:&quot;rgba(26,26,26,0.5)&quot;,&quot;available__color&quot;:&quot;rgba(128,192,256,0.7)&quot;}" data-j-prefix="&quot;&quot;" data-id="Mjc4MDgyMjkwOTA2MjcwODAw"></style><link rel="stylesheet" href="/app/fork/filebrowser.css"><script src="/app/ticker/fake.js" type="text/javascript" data-root="/app/ticker" data-name="fake" data-id="OTYwMjU3NDQ2OTUyOTgzOTAw"></script><style data-j-theme="{&quot;font&quot;:&quot;monospace&quot;,&quot;wrap&quot;:false,&quot;font_size__px&quot;:&quot;13px&quot;}" data-j-prefix="&quot;&quot;" data-id="NTkyOTIwOTUzMTI2Nzk0ODAw"></style><style data-j-prefix="&quot;&quot;" data-id="NTY3OTEwMDMwNTkxNjkyNzAw"></style></head>
+    <body data-id="NDUxNTMyMTMyODQ0OTM0MjAw" data-j-apps="{&quot;fork&quot;:{&quot;__element__&quot;:&quot;NDQxMjcwNjI4NDQ1OTcwNDAw&quot;},&quot;console&quot;:{&quot;__element__&quot;:&quot;ODYwOTU1NzY4MTk0MTkxNzAw&quot;},&quot;text&quot;:{&quot;__element__&quot;:&quot;MTY0OTU0MTYzNzQ4MjYxNDQw&quot;}}" data-j-tasks="{&quot;console&quot;:[{&quot;__element__&quot;:&quot;NzQyMzI2MDkzNTIwODIxNDAw&quot;},{&quot;__element__&quot;:&quot;OTYzMjExNTAwNDEwNzEzMDAw&quot;}],&quot;text&quot;:[{&quot;__element__&quot;:&quot;OTIyNTA2MjcyNzc2MDEyNTAw&quot;}]}" data-e-hud="MzgxOTUxNDc4NDcyMzEyNDAw" data-e-tm="OTAyNjQzOTY2Njk0MTE4OTAg" data-j-am="{&quot;groups&quot;:[[{&quot;__element__&quot;:&quot;MTk4MzMxMjA5NDQ5MTQ3NjIw&quot;},{&quot;__element__&quot;:&quot;NzgzNDE5MjU5NTYyNzU1NjAw&quot;},{&quot;__element__&quot;:&quot;NjQ1NTI1ODY5NDk5MzE4MDAw&quot;}],[{&quot;__element__&quot;:&quot;OTAwMzgzNDM1MjA4MTMyNDAw&quot;},{&quot;__element__&quot;:&quot;OTI2NzM3OTI5Mzk0NjQ5NjAw&quot;}],[{&quot;__element__&quot;:&quot;NDY0NDgzMzg4NjU4NjA5NzAw&quot;},{&quot;__element__&quot;:&quot;OTAwMzgzNDM1MjA4MTMyNDAw&quot;}]],&quot;currently_dragging&quot;:{&quot;__element__&quot;:&quot;OTAwMzgzNDM1MjA4MTMyNDAw&quot;}}" data-e-homebutton="ODE2MDIyNTMxNjM3Mjk0MDAw" data-j-editors="[]" class="EditorWindow" data-e-contextmenu="MzQ5ODI1NDA4NTY0MzYwNDAw">
+<header>
+Fluffbase
+</header>
+    
+    <script src="init.js" data-root="" data-name="init"></script>
+
+
+<div class="Content"></div><div class="hud" data-id="MzgxOTUxNDc4NDcyMzEyNDAw"><div class=" spoon enabled"><svg data-j-position="{&quot;x&quot;:0,&quot;y&quot;:0}" xmlns="http://www.w3.org/2000/svg" data-j-paths="[]" version="1.1" data-id="ODE2MDIyNTMxNjM3Mjk0MDAw" class="sitemenu"></svg></div><div class="tmg TaskList" data-id="OTAyNjQzOTY2Njk0MTE4OTAg" data-j-decks="[{&quot;__element__&quot;:&quot;MTAyMjA2MzEyMzk2MDM5NTAw&quot;},{&quot;__element__&quot;:&quot;NDY3MzU1MDkwMzc1MjcwMzQw&quot;},{&quot;__element__&quot;:&quot;MjE4ODc5MzY4NDE0ODE4MDIw&quot;}]"><div class="deck" data-j-tasks="[]" data-j-name="&quot;fork&quot;" data-e-app="NDQxMjcwNjI4NDQ1OTcwNDAw" data-e-header="OTIwMzA2NTE2MDQxMDk2MjAg" data-e-adder="NTcxNjMyNDg1MDk2NDYxMTAw" data-e-wrapper="MzYzNjI5NTc4MjIwMTQ0MjAw" data-id="MTAyMjA2MzEyMzk2MDM5NTAw"><div class="button task enabled tile" data-j-name="&quot;fork&quot;" data-id="OTIwMzA2NTE2MDQxMDk2MjAg" data-j-clicking="false">fork<div class="button app_adder enabled" data-id="NTcxNjMyNDg1MDk2NDYxMTAw">+</div></div><div data-id="MzYzNjI5NTc4MjIwMTQ0MjAw"></div></div><div class="deck" data-j-tasks="[{&quot;__element__&quot;:&quot;NzQyMzI2MDkzNTIwODIxNDAw&quot;},{&quot;__element__&quot;:&quot;OTYzMjExNTAwNDEwNzEzMDAw&quot;}]" data-j-name="&quot;console&quot;" data-e-app="ODYwOTU1NzY4MTk0MTkxNzAw" data-e-header="MzE1ODE4MTg1MzM2MDc4ODUw" data-e-adder="NDc5ODYwMTY4NDU1OTc4MjQw" data-e-wrapper="MjgwMTIxMzEwMjYzNjgxOTIw" data-id="NDY3MzU1MDkwMzc1MjcwMzQw" data-j-open="true" style="height: 228px;"><div class="button task enabled tile" data-j-name="&quot;console&quot;" data-id="MzE1ODE4MTg1MzM2MDc4ODUw" data-j-clicking="false">console<div class="button app_adder enabled" data-id="NDc5ODYwMTY4NDU1OTc4MjQw" data-j-clicking="false">+</div></div><div data-id="MjgwMTIxMzEwMjYzNjgxOTIw"><div class="button task enabled tile" data-j-name="&quot;console&quot;" data-j-clicking="false">console</div><div class="button task enabled tile" data-j-name="&quot;console&quot;" data-j-clicking="false">console</div></div></div><div class="deck" data-j-tasks="[{&quot;__element__&quot;:&quot;OTIyNTA2MjcyNzc2MDEyNTAw&quot;}]" data-j-name="&quot;text&quot;" data-e-app="MTY0OTU0MTYzNzQ4MjYxNDQw" data-e-header="NjI4ODIwNTI5OTg5NzExOTAw" data-e-adder="OTYyMzI3NjYwOTE5MjIwNDAw" data-e-wrapper="NDc3ODQ0MTA0OTczNjM2MTYw" data-id="MjE4ODc5MzY4NDE0ODE4MDIw" data-j-open="true" style="height: 152px;"><div class="button task enabled tile" data-j-name="&quot;text&quot;" data-id="NjI4ODIwNTI5OTg5NzExOTAw" data-j-clicking="false">text<div class="button app_adder enabled" data-id="OTYyMzI3NjYwOTE5MjIwNDAw" data-j-clicking="false">+</div></div><div data-id="NDc3ODQ0MTA0OTczNjM2MTYw"><div class="button task enabled tile" data-j-name="&quot;text&quot;" data-j-clicking="false">text</div></div></div></div><div class=" horizontal align_button align_button_n enabled " data-e-handle="MTk4MzMxMjA5NDQ5MTQ3NjIw" data-id="OTE3NTkwMzE4NzY4NDU3MzAw" data-j-clicking="false" style="top: 107px; left: 62px; width: 378px; height: 10px;"> </div><div class=" horizontal align_button align_button_s enabled " data-e-handle="OTAwMzgzNDM1MjA4MTMyNDAw" data-id="NDIxNTkyODg3NTQ4NDg1MTAw" data-j-clicking="false" style="top: 404px; left: 62px; width: 378px; height: 10px;"> </div><div class=" horizontal align_button align_button_n enabled " data-e-handle="NzgzNDE5MjU5NTYyNzU1NjAw" data-id="ODM1MDQyMzAzMjM3MjQyMjAw" data-j-clicking="false" style="top: 97px; left: 134px; width: 310px; height: 10px;"> </div><div class=" horizontal align_button align_button_s enabled " data-e-handle="NDY0NDgzMzg4NjU4NjA5NzAw" data-id="NTAxNDYyMjM4MTA2NjgzMTQw" data-j-clicking="false" style="top: 502px; left: 134px; width: 310px; height: 10px;"> </div><div class=" vertical align_button align_button_e enabled " data-e-handle="MTE3MTM4NjY0MTEwMDY1ODAw" data-id="MjUwNjA2OTYyMDE4ODg1NTQw" style="top: 112px; left: 435px; width: 10px; height: 300px;"> </div><div class=" vertical align_button align_button_w enabled " data-e-handle="NTEyMjIzMTM4NjI1MjUxNjAw" data-id="OTY0NDg0MTI3MjY3Mjk2NDAw" style="top: 112px; left: 57px; width: 10px; height: 300px;"> </div><div class=" vertical align_button align_button_e enabled " data-e-handle="NTIxOTE0MzUyODU3MTkyNjAw" data-id="NzExMjY0NTY2NzA2NzY1NzAw" style="top: 102px; left: 439px; width: 10px; height: 373px;"> </div><div class=" vertical align_button align_button_w enabled " data-e-handle="NzIyOTE5Njg5ODg5OTg3MDAg" data-id="MTA3MTA1NzM3NzY5NTEyNTkw" data-j-clicking="false" style="top: 102px; left: 134px; width: 10px; height: 373px;"> </div><div class=" horizontal align_button align_button_n enabled " data-e-handle="NjQ1NTI1ODY5NDk5MzE4MDAw" data-id="NjEwMjEzMjM3NTEzOTkzNTAw" style="top: 170px; left: 65px; width: 400px; height: 10px;"> </div><div class=" horizontal align_button align_button_s enabled " data-e-handle="OTI2NzM3OTI5Mzk0NjQ5NjAw" data-id="ODIxNzcwMDI3ODgwMjExMzAw" style="top: 398px; left: 65px; width: 400px; height: 10px;"> </div></div><div data-j-position="{&quot;x&quot;:62,&quot;y&quot;:112}" data-j-windowsize="{&quot;width&quot;:640,&quot;height&quot;:480}" data-j-size="{&quot;width&quot;:378,&quot;height&quot;:331}" data-j-tempscale="1" data-j-imgrotate="0" data-j-imgscale="1" data-j-min="1" data-j-max="null" class="acw draggable Console visible " data-e-titlebar="MzIxNjAwODYxOTc3MDIwMzAw" data-e-contents="NDUwMzk1MTY2ODUxNjQzNzAw" data-id="NzQyMzI2MDkzNTIwODIxNDAw" data-e-style="NzQyMzI2MDkzNTIwODIxNDAw" data-j-delta="{&quot;x&quot;:0,&quot;y&quot;:2}" data-j-dirs="[&quot;n&quot;,&quot;e&quot;,&quot;s&quot;,&quot;w&quot;,&quot;nw&quot;,&quot;ne&quot;,&quot;se&quot;,&quot;sw&quot;]" data-f-onresize="function(handle) {
+            parent_onresize.call(this, handle);
+            scroller.scrollTo(&quot;bottom&quot;);
+          }" data-f-onresizestart="function onresizestart(handle) {
+            if(&quot;enws&quot;.indexOf(handle.dir)>-1) {
+              this.parent.am.show_alignment_groups(handle)
+            }
+          }" data-f-onresizestop="function onresizestop(handle, e) {
+            this.parent.am.hide_edges();
+          }" data-j-request="{&quot;requesttype&quot;:&quot;URI&quot;,&quot;responsetype&quot;:&quot;TEXT&quot;,&quot;request&quot;:{}}" data-j-id="&quot;pool&quot;" data-e-output="ODE5NDI2MjM0MzkzMTYyMjAw" data-e-form="ODIyNTgyNTcyNDAxNDIzNzAw" data-j-moving="false" data-j-dragorigin="{&quot;x&quot;:212,&quot;y&quot;:131}" data-j-dist="2" style="left: 62px; top: 112px; width: 378px; height: 331px;"><div class="acb" data-id="MzIxNjAwODYxOTc3MDIwMzAw">Membrane Console</div><div class="acc" data-id="NDUwMzk1MTY2ODUxNjQzNzAw"><div class="ScrollContainer tty" data-id="ODE5NDI2MjM0MzkzMTYyMjAw" data-j-scrollcursor="{&quot;x&quot;:0,&quot;y&quot;:312}" data-j-scroll_sense="-1" data-j-scrolling="false" data-f-onscroll="function(e) {
+      
+          }" style="top: 312px; left: 0px;"><form data-j-values="{}" data-f-callback="function(e) {
+              e.preventDefault();
+              var command=input.value();
+              input.element.focus();
+              input.element.select();
+              var update=commander.addTransaction(command);
+              commander.send(command,function(result) {
+                update(result);
+                commander.contents.element.scrollTop=commander.contents.element.scrollHeight;
+              });
+            }" data-j-fields="{}" action="#" data-id="ODIyNTgyNTcyNDAxNDIzNzAw"><input data-f-onchange="function() { 
+
+            }" class="console_input"><input type="submit"></form></div></div><div class="ui-resizable-handle ui-resizable-n draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" style="" data-id="MTk4MzMxMjA5NDQ5MTQ3NjIw" data-e-align_button="OTE3NTkwMzE4NzY4NDU3MzAw" data-j-imgscale="1"></div><div class="ui-resizable-handle ui-resizable-e draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" style="" data-id="MTE3MTM4NjY0MTEwMDY1ODAw" data-e-align_button="MjUwNjA2OTYyMDE4ODg1NTQw" data-j-imgscale="1"></div><div class="ui-resizable-handle ui-resizable-s draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:34,&quot;x&quot;:34}" data-j-delta="{&quot;x&quot;:0,&quot;y&quot;:1}" data-j-hidden="false" data-j-moving="false" style="" data-id="OTAwMzgzNDM1MjA4MTMyNDAw" data-e-align_button="NDIxNTkyODg3NTQ4NDg1MTAw" data-j-imgscale="1" data-j-dragorigin="{&quot;x&quot;:109,&quot;y&quot;:482}" data-j-dist="2"></div><div class="ui-resizable-handle ui-resizable-w draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:null,&quot;x&quot;:null}" data-j-delta="{&quot;x&quot;:-1,&quot;y&quot;:0}" data-j-hidden="false" data-j-moving="false" style="" data-id="NTEyMjIzMTM4NjI1MjUxNjAw" data-e-align_button="OTY0NDg0MTI3MjY3Mjk2NDAw" data-j-dragorigin="{&quot;x&quot;:59,&quot;y&quot;:327}" data-j-dist="1" data-j-imgscale="1"></div><div class="ui-resizable-handle ui-resizable-nw draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" style="" data-j-imgscale="1"></div><div class="ui-resizable-handle ui-resizable-ne draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" style="" data-j-imgscale="1"></div><div class="ui-resizable-handle ui-resizable-se draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" style="" data-j-imgscale="1"></div><div class="ui-resizable-handle ui-resizable-sw draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" style="" data-j-imgscale="1"></div></div><div data-j-position="{&quot;x&quot;:121,&quot;y&quot;:102}" data-j-windowsize="{&quot;width&quot;:640,&quot;height&quot;:480}" data-j-size="{&quot;width&quot;:323,&quot;height&quot;:370}" data-j-tempscale="1" data-j-imgrotate="0" data-j-imgscale="1" data-j-min="1" data-j-max="null" class="acw draggable Console visible " data-e-titlebar="NjU4NTY1OTg5MzIwMjU4MDAw" data-e-contents="OTE3NDE0MDAyOTcxODk0MzAw" data-id="OTYzMjExNTAwNDEwNzEzMDAw" data-e-style="OTYzMjExNTAwNDEwNzEzMDAw" data-j-delta="{&quot;x&quot;:0,&quot;y&quot;:2}" data-j-dirs="[&quot;n&quot;,&quot;e&quot;,&quot;s&quot;,&quot;w&quot;,&quot;nw&quot;,&quot;ne&quot;,&quot;se&quot;,&quot;sw&quot;]" data-f-onresize="function(handle) {
+            parent_onresize.call(this, handle);
+            scroller.scrollTo(&quot;bottom&quot;);
+          }" data-f-onresizestart="function onresizestart(handle) {
+            if(&quot;enws&quot;.indexOf(handle.dir)>-1) {
+              this.parent.am.show_alignment_groups(handle)
+            }
+          }" data-f-onresizestop="function onresizestop(handle, e) {
+            this.parent.am.hide_edges();
+          }" data-j-request="{&quot;requesttype&quot;:&quot;URI&quot;,&quot;responsetype&quot;:&quot;TEXT&quot;,&quot;request&quot;:{}}" data-j-id="&quot;pool&quot;" data-e-output="NTU3ODI5MTg5OTgzMjg5OTAg" data-e-form="MzQ3NTg5NDkwNzQ2OTM5NDYw" data-j-moving="false" data-j-dragorigin="{&quot;x&quot;:180,&quot;y&quot;:75}" data-j-dist="2" style="left: 121px; top: 102px; width: 323px; height: 370px;"><div class="acb" data-id="NjU4NTY1OTg5MzIwMjU4MDAw">Membrane Console</div><div class="acc" data-id="OTE3NDE0MDAyOTcxODk0MzAw"><div class="ScrollContainer tty" data-id="NTU3ODI5MTg5OTgzMjg5OTAg" data-j-scrollcursor="{&quot;x&quot;:0,&quot;y&quot;:316}" data-j-scroll_sense="-1" data-j-scrolling="false" data-f-onscroll="function(e) {
+      
+          }" style="top: 316px; left: 0px;"><form data-j-values="{}" data-f-callback="function(e) {
+              e.preventDefault();
+              var command=input.value();
+              input.element.focus();
+              input.element.select();
+              var update=commander.addTransaction(command);
+              commander.send(command,function(result) {
+                update(result);
+                commander.contents.element.scrollTop=commander.contents.element.scrollHeight;
+              });
+            }" data-j-fields="{}" action="#" data-id="MzQ3NTg5NDkwNzQ2OTM5NDYw"><input data-f-onchange="function() { 
+
+            }" class="console_input"><input type="submit"></form></div></div><div class="ui-resizable-handle ui-resizable-n draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:null,&quot;x&quot;:null}" data-j-delta="{&quot;x&quot;:0,&quot;y&quot;:2}" data-j-hidden="false" data-j-moving="false" data-j-dragorigin="{&quot;x&quot;:182,&quot;y&quot;:97}" data-id="NzgzNDE5MjU5NTYyNzU1NjAw" data-e-align_button="ODM1MDQyMzAzMjM3MjQyMjAw" data-j-dist="2" data-j-imgscale="1" style=""></div><div class="ui-resizable-handle ui-resizable-e draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" data-id="NTIxOTE0MzUyODU3MTkyNjAw" data-e-align_button="NzExMjY0NTY2NzA2NzY1NzAw" style=""></div><div class="ui-resizable-handle ui-resizable-s draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:109,&quot;x&quot;:-3}" data-j-delta="{&quot;x&quot;:0,&quot;y&quot;:1}" data-j-hidden="false" data-j-moving="false" data-id="NDY0NDgzMzg4NjU4NjA5NzAw" data-e-align_button="NTAxNDYyMjM4MTA2NjgzMTQw" data-j-imgscale="1" data-j-dragorigin="{&quot;x&quot;:166,&quot;y&quot;:477}" data-j-dist="1" style=""></div><div class="ui-resizable-handle ui-resizable-w draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:-67,&quot;x&quot;:88}" data-j-delta="{&quot;x&quot;:0,&quot;y&quot;:0}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" data-j-dragorigin="{&quot;x&quot;:136,&quot;y&quot;:377}" data-id="NzIyOTE5Njg5ODg5OTg3MDAg" data-e-align_button="MTA3MTA1NzM3NzY5NTEyNTkw" data-j-dist="1" style=""></div><div class="ui-resizable-handle ui-resizable-nw draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" style=""></div><div class="ui-resizable-handle ui-resizable-ne draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" style=""></div><div class="ui-resizable-handle ui-resizable-se draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" style=""></div><div class="ui-resizable-handle ui-resizable-sw draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:-3,&quot;x&quot;:-11}" data-j-delta="{&quot;x&quot;:0,&quot;y&quot;:1}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" style="" data-j-dragorigin="{&quot;x&quot;:129,&quot;y&quot;:472}" data-j-dist="1"></div></div><div data-j-position="{&quot;x&quot;:84,&quot;y&quot;:175}" data-j-windowsize="{&quot;width&quot;:640,&quot;height&quot;:480}" data-j-size="{&quot;width&quot;:381,&quot;height&quot;:193}" data-j-tempscale="1" data-j-imgrotate="0" data-j-imgscale="1" data-j-min="1" data-j-max="null" class="acw draggable TextEditor visible active" data-e-titlebar="MjI4MjIwODEwODM2MzU4Mzcw" data-e-contents="Njc1MjEyMDE4NjI5NTUzNDAw" data-id="OTIyNTA2MjcyNzc2MDEyNTAw" data-e-style="OTIyNTA2MjcyNzc2MDEyNTAw" data-j-delta="{&quot;x&quot;:1,&quot;y&quot;:1}" data-j-dirs="[&quot;n&quot;,&quot;e&quot;,&quot;s&quot;,&quot;w&quot;,&quot;nw&quot;,&quot;ne&quot;,&quot;se&quot;,&quot;sw&quot;]" data-f-onresize="function onresize(handle) {
+            if(this.parent.am) {
+              this.parent.am.realign(handle);
+            }
+          }" data-f-onresizestart="function onresizestart(handle) {
+            if(&quot;enws&quot;.indexOf(handle.dir)>-1) {
+              this.parent.am.show_alignment_groups(handle)
+            }
+          }" data-f-onresizestop="function onresizestop(handle, e) {
+            this.parent.am.hide_edges();
+          }" data-j-value="&quot;&quot;" data-j-moving="false" data-j-dragorigin="{&quot;x&quot;:227,&quot;y&quot;:102}" data-j-dist="1.4142135623730951" style="left: 84px; top: 175px; width: 381px; height: 193px;"><div class="acb" data-id="MjI4MjIwODEwODM2MzU4Mzcw">http://localhost/undefined</div><div class="acc" data-id="Njc1MjEyMDE4NjI5NTUzNDAw"><textarea></textarea></div><div class="ui-resizable-handle ui-resizable-n draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:null,&quot;x&quot;:null}" data-j-delta="{&quot;x&quot;:0,&quot;y&quot;:1}" data-j-hidden="false" data-j-moving="false" data-j-dragorigin="{&quot;x&quot;:117,&quot;y&quot;:173}" data-id="NjQ1NTI1ODY5NDk5MzE4MDAw" data-j-dist="1" data-j-imgscale="1" data-e-align_button="NjEwMjEzMjM3NTEzOTkzNTAw" style=""></div><div class="ui-resizable-handle ui-resizable-e draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" style=""></div><div class="ui-resizable-handle ui-resizable-s draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:-23,&quot;x&quot;:-3}" data-j-delta="{&quot;x&quot;:0,&quot;y&quot;:-1}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" data-j-dragorigin="{&quot;x&quot;:98,&quot;y&quot;:370}" data-id="OTI2NzM3OTI5Mzk0NjQ5NjAw" data-j-dist="3" data-e-align_button="ODIxNzcwMDI3ODgwMjExMzAw" style=""></div><div class="ui-resizable-handle ui-resizable-w draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:-1}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" style=""></div><div class="ui-resizable-handle ui-resizable-nw draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" style=""></div><div class="ui-resizable-handle ui-resizable-ne draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" style=""></div><div class="ui-resizable-handle ui-resizable-se draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-delta="{&quot;y&quot;:0,&quot;x&quot;:0}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" style=""></div><div class="ui-resizable-handle ui-resizable-sw draggable" data-j-size="{&quot;width&quot;:0,&quot;height&quot;:0}" data-j-position="{&quot;y&quot;:-35,&quot;x&quot;:19}" data-j-delta="{&quot;x&quot;:-1,&quot;y&quot;:-1}" data-j-hidden="false" data-j-moving="false" data-j-imgscale="1" data-j-dragorigin="{&quot;x&quot;:87,&quot;y&quot;:367}" data-j-dist="1.4142135623730951" style=""></div></div></body></html>

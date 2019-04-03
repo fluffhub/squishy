@@ -1,6 +1,6 @@
   .FileBrowser { }
 .pwddir { line-height: 32px; }
-.FileBrowser { right: 0px; height: 100%; width: 300px; top: 0px; overflow-y: scroll; }
+.FileBrowser { right: 0px; height: 100%; width: 300px; top: 0px;  }
 .pwddir { display: inline; padding: 0px; margin: 0px; }
 .dirlink.button:hover { text-decoration: underline; color: black; }
 .pwdbar { padding: 0px 0.25em; float: right; }

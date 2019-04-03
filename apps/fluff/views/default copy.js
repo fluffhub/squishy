@@ -1,5 +1,5 @@
 Module(function M() {
-  M.Import("squishy/basic","squishy/interactive","squishy/transform","apps/spoon",function(basic,interactive,transform,spoon) {
+  M.Import("squishy/basic","squishy/interactive","squishy/transform","/app/spoon",function(basic,interactive,transform,spoon) {
     Import("fluffy/themes/default.css");
 
 
