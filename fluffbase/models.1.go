@@ -106,6 +106,8 @@ type Session struct {
   Domain string `gorm:"type:varchar(255);not null;index"`
   Token string `gorm:"type:varchar(255);not null;index"`
   Expires time.Time
+
+
 }
 
 type Profile struct {
@@ -308,6 +310,7 @@ var Fixtures=[]interface{} {
   &ContactStatus{Name:"Unverified"},
   &ContactStatus{Name:"Verified"},
   &ContactStatus{Name:"Disabled"},
+
 
   &PaymentType{Name:"Echeck"},
   &PaymentType{Name:"Stripe"},

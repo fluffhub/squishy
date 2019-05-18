@@ -55,8 +55,6 @@ func main() {
   logue,err:=os.Create("logue")
   dump(err)
 
-
-
   if err:= cgi.Serve(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
     header:=w.Header()
     header.Set("Content-Type", "text/plain; charset=utf-8")
