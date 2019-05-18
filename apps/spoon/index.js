@@ -7,11 +7,12 @@ Module(function M() {
 
     "spoon/Models", "squishy/cookies","squishy/membrane",
     "squishy/live","/app/spoon/conf","spoon/alignment",
+    "squishy/transform",
     function(
     DOM,basic,layout,
      interactive,kb,events,svg,styles,
      Ms,cookies,membrane,
-     live,conf, alignment) {
+     live,conf, alignment,transform) {
 
       Import("spoon/default.css");
       M.Style(function S()  {
@@ -236,16 +237,30 @@ Module(function M() {
 
         });
       });
+      var AppWindow=M.Class(function C() {
+        C.Super(Frame);
+        C.Mixin(hasEvents);
+        C.Init(function AppWindow(win,doc) {
+
+        });
+      });
+
+      var svg_end_cap = "M2186.8-35.4c-111.7,0-202.2,90.5-202.2,202.2S2075.1,369,2186.8,369H2389V-35.4H2186.8z";
+
       var HomeWindow=M.Class(function C() {
         C.Super(Frame);
         C.Mixin(hasEvents);
+        C.Mixin(transform.Resizable);
         C.Init(function HomeWindow(win,doc) {
           Frame.call(this,win,doc);
           var W=this;
           var EW=this;
           this.apps={};
+          var Title=M.Def("Title", new DOM.Tag({type:"title","content":""}));
+          this.head.add(Title);
+          Object.defineProperty(this, "title", {get:function getTitle() { return Title.element.textContent; }, set: function setTitle(v) { Title.element.textContent=v; }})
 
-          this.tasks={};
+          this.tasks={spoon:[this]};
 
           //this.tasks=new TabbedPane()
           //this.tasks.header.removeClass("header-bar");
@@ -260,20 +275,9 @@ Module(function M() {
           //.Def("homebutton",SpoonLogo);
           this.homebutton=SpoonLogo;
           SpoonLogo.addClass("sitemenu");
-
-          var svglogo=new svg.SVG({src:"img/squishy2.svg",onload:function(svg) {
-
-            var logo=svg.query("#CLICKER")[0];
-            logo.NSattrs({style:""});
-            var bbox=logo.bounds();
-            console.debug({squishylogo:logo,svg:svg});
-            //logo.remove();
-            SpoonLogo.add(logo);
-            //var bbox=logo.element.getBBox();
-            //SquishyLogo.NSattrs({viewbox:bbox.x+" "+bbox.y+" "+bbox.x+bbox.width+" "+bbox.y+bbox.height});
-            SpoonLogo.fit(logo.bounds());
-
-          }});
+          logo = new svg.Path(svg_end_cap);
+          SpoonLogo.add(logo);
+          SpoonLogo.fit(logo.bounds());
           var SpoonButton=new interactive.MomentaryButton("","spoon",function() {
             W.hud.toggleClass("collapsed");
           });
@@ -284,7 +288,9 @@ Module(function M() {
           this.editors=[];
 
           var H = new EditorHome(EW);
-
+          this.enableresize("n,e,s,w", function() {});
+          this.doResize=function() { }
+          
           Object.defineProperty(this,"cursor",{value:{x:0,y:0},writable:true});
           this.addEvent("cursorpos","mousedown mousemove touchmove touchstart",function oncursorpos(e) {
             if(e) {
@@ -438,12 +444,8 @@ Module(function M() {
           //check all editor windows for droppables
           //enable mouseup drop action
           //LI.window.Drag(
-
-
           for (var name in this.tasks) {
             for(var i in this.tasks[name]) {
-
-            
             var editor=this.tasks[name][i];
             if(editor.events) {
               if(editor.events.drop)

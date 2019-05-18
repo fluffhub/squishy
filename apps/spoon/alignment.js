@@ -14,6 +14,13 @@ var AlignmentManager=M.Class(function C() {
       var target_groups = [];
       var already_grouped = false;
       var result_group = [];
+<<<<<<< HEAD
+=======
+
+      var target_offset=target.offset();
+      var handle_offset=handle.offset();
+
+>>>>>>> 4fb662ae4e9e1be8c512f3d6abc0596fd275d9f0
       alignment_groups.forEach(function(alignment_group, l) {
       // for(var l=0;l<alignment_groups.length;l++) {
         // var alignment_group = alignment_groups[l];
@@ -36,17 +43,27 @@ var AlignmentManager=M.Class(function C() {
           //the target item is already in this group
           target_groups.push(l)
         } 
+<<<<<<< HEAD
         
+=======
+>>>>>>> 4fb662ae4e9e1be8c512f3d6abc0596fd275d9f0
       });
       if(!already_grouped) {
         if(source_groups.length==0) {
           //the source is not currently in a group 
           if(target_groups.length==0) {
             //neither item is in a group, create a new group with both
+<<<<<<< HEAD
 
             result_group.push(handle);
             result_group.push(target);
           } else {
+=======
+            result_group.push(handle);
+            result_group.push(target);
+          } else {
+            //The target item is already in a group but not the source.  
+>>>>>>> 4fb662ae4e9e1be8c512f3d6abc0596fd275d9f0
             for(var m=0;m<target_groups.length;m++) {
               var n = target_groups[m];
               result_group = result_group.concat(alignment_groups[n]);
@@ -56,6 +73,10 @@ var AlignmentManager=M.Class(function C() {
           }
         } else {
           if(target_groups.length==0) {
+<<<<<<< HEAD
+=======
+            //The source item is in a group but not the target
+>>>>>>> 4fb662ae4e9e1be8c512f3d6abc0596fd275d9f0
             for(var m=0;m<source_groups.length;m++) {
               var n = source_groups[m]
               result_group = result_group.concat(alignment_groups[n]);
@@ -78,14 +99,30 @@ var AlignmentManager=M.Class(function C() {
             }
           }
         }
+<<<<<<< HEAD
       console.debug({adding_result:result_group});
         alignment_groups.push(result_group);
       }
+=======
+        console.debug({adding_result:result_group});
+        alignment_groups.push(result_group);
+        
+        if("ew".indexOf(target.dir)>-1) {
+          target.delta.x=handle_offset.x-target_offset.x;
+          target.parent.doResize(handle, true);
+        } else {
+          target.delta.y=handle_offset.y-target_offset.y;
+          target.parent.doResize(handle, true);
+        }
+      }
+
+>>>>>>> 4fb662ae4e9e1be8c512f3d6abc0596fd275d9f0
     });
     C.Def(function contains(handle) {
 
     });
     C.Def(function find_in_groups(handle) {
+<<<<<<< HEAD
         for(var i=0;i<this.groups.length;i++) {
             var group = this.groups[i];
             for(var j=0;j<group.length;j++) {
@@ -93,6 +130,15 @@ var AlignmentManager=M.Class(function C() {
                 if(item===handle) return i;
             }
         }
+=======
+      for(var i=0;i<this.groups.length;i++) {
+        var group = this.groups[i];
+        for(var j=0;j<group.length;j++) {
+            var item = group[j];
+            if(item===handle) return i;
+        }
+      }
+>>>>>>> 4fb662ae4e9e1be8c512f3d6abc0596fd275d9f0
     });
     C.Def(function show_alignment_groups(handle) {
       var dir=handle.dir;
@@ -102,6 +148,10 @@ var AlignmentManager=M.Class(function C() {
       var am = this;
 
       am.currently_dragging = handle;
+<<<<<<< HEAD
+=======
+      var in_group = am.find_in_groups(am.currently_dragging);
+>>>>>>> 4fb662ae4e9e1be8c512f3d6abc0596fd275d9f0
       var app_names = Object.keys(wm.tasks);
       var dirs;
       if(horizontal) dirs=["n","s"];
@@ -131,6 +181,7 @@ var AlignmentManager=M.Class(function C() {
 
                 spoon.main.hud.add(align_button);
               }
+<<<<<<< HEAD
               var styler=this_handle.align_button.element.style;
               var offset=this_handle.offset();
 
@@ -138,12 +189,19 @@ var AlignmentManager=M.Class(function C() {
               styler.left=offset.x+"px";
               styler.width=this_handle.width()+"px";
               styler.height=this_handle.height()+"px";
+=======
+              align_button.doResize();
+>>>>>>> 4fb662ae4e9e1be8c512f3d6abc0596fd275d9f0
 
               align_button.enableEvents("join_alignment_group");
               
               align_button.addClass("visible");
               align_button.addClass("available");
+<<<<<<< HEAD
               var in_group = am.find_in_groups(am.currently_dragging);
+=======
+
+>>>>>>> 4fb662ae4e9e1be8c512f3d6abc0596fd275d9f0
               if(in_group!==undefined) {
               am.groups[in_group].forEach(function(other_handle) {
                 other_handle.align_button.removeClass("available");
@@ -249,6 +307,18 @@ var AlignmentManager=M.Class(function C() {
       this.handle=handle;
       handle.align_button=this;
     });
+<<<<<<< HEAD
+=======
+    C.Def(function doResize() {
+      var styler=this.element.style;
+      var offset=this.handle.offset();
+
+      styler.top=offset.y+"px";
+      styler.left=offset.x+"px";
+      styler.width=this.handle.width()+"px";
+      styler.height=this.handle.height()+"px";
+    })
+>>>>>>> 4fb662ae4e9e1be8c512f3d6abc0596fd275d9f0
   });
 });
 });

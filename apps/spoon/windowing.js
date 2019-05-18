@@ -7,9 +7,26 @@ Module(function M() {
     "squishy/events",
     "spoon",
     "spoon/alignment",
-    function(basic,interactive,transform,conf,events,spoon, alignment) {
-
+    "squishy/styles",
+    function(basic,interactive,transform,conf,events,spoon, alignment, styles) {
+      
+      var cardinal_directions = ["e","s","w","n"];
+      var pos = ["top","right","bottom","left"];
+      var dim = ["height","width"]
+      var dirs = ["n","e","s","w","nw","ne","se","sw"]
+      var configs=[
+        [[0], [0]], //n
+        [[1], [1]], //e
+        [[2], [0]], //s
+        [[3], [1]], //w
+        [[0,2],[0,1]],
+        [[0,1],[0,1]],
+        [[1,2],[0,1]],
+        [[2,3],[0,1]]
+      ];
       M.Style(function S() {
+        var Gradient=styles.Gradient;
+        var Color=styles.Color;
         var S=this;
         var theme = S.Theme({
           corner_handle_size__px:30,
@@ -22,19 +39,6 @@ Module(function M() {
           in_common__color:[0.1,0.1,0.1,0.5],
           available__color:[0.5,0.75,1.0,0.7]
         });
-        var pos = ["top","right","bottom","left"];
-        var dim = ["height","width"]
-        var dirs = ["n","e","s","w","nw","ne","se","sw"]
-        var configs=[
-          [[0], [0]], //n
-          [[1], [1]], //e
-          [[2], [0]], //s
-          [[3], [1]], //w
-          [[0,2],[0,1]],
-          [[0,1],[0,1]],
-          [[1,2],[0,1]],
-          [[2,3],[0,1]]
-        ];
         S.Init(function() {
           for (var i=0;i<dirs.length;i++) {
             var config = configs[i];
@@ -52,7 +56,7 @@ Module(function M() {
             for(var y=0;y<c1.length;y++) {
               style[dim[c1[y]]]=size;
             }
-            S.addStyle(".acw .ui-resizable-"+dir, style)
+            S.addStyle(".ui-resizable-"+dir, style)
           }
           S.addStyle(".acw .ui-resizable-e, .acw .ui-resizable-w", {
             top__px:0
@@ -68,20 +72,21 @@ Module(function M() {
             pointer_events:"none",
           });
           S.addStyle(".align_button.visible", {
-            opacity:1.0,pointer_events:"all",box_shadow:"0 0 5px 0 rgba(255,255,255,0.5)"
+            opacity:1.0,pointer_events:"all",box_shadow:"0 0 5px 0 "+Color([1,0.5])
           });
           S.addStyle(".horizontal.align_button.available", { 
-            background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%,"+theme.available__color+" 50%,rgba(125,185,232,0) 100%)",
+            background: Gradient("to bottom", Color([0,0]), "0%",theme.available__color, "50%",Color([0,0]), "100%"),
           });
           S.addStyle(".vertical.align_button.available", {
-            background: "linear-gradient(to right, rgba(0,0,0,0) 0%,"+theme.available__color+" 50%,rgba(125,185,232,0) 100%)",
+            background: Gradient("to right", Color([0,0]), "0%",theme.available__color, "50%",Color([0,0]), "100%"),
           });
           S.addStyle(".horizontal.align_button.in_common", {
-            background: "linear-gradient(to right, rgba(0,0,0,0) 0%,"+theme.in_common__color+" 50%,rgba(125,185,232,0) 100%)",
+            background: Gradient("to right", Color([0,0]), "0%",theme.in_common__color, "50%",Color([0,0]), "100%"),
           });
           S.addStyle(".vertical.align_button.in_common", {
-            background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%,"+theme.in_common__color+" 50%,rgba(125,185,232,0) 100%)",
+            background: Gradient("to bottom", Color([0,0]), "0%",theme.in_common__color, "50%",Color([0,0]), "100%"),
           });
+
           S.addStyle(".align_button_e", { });
           S.addStyle(".align_button_n", { });
           S.addStyle(".align_button_s", { });
@@ -92,10 +97,10 @@ Module(function M() {
              transition: "opacity 0.2s ease-out, box-shadow 0.1s ease-out",border_radius:"1px", opacity: 0, "z-index":0 
             });
             S.addStyle(".visible", {  opacity: 1, z_index: 1000,
-              box_shadow:"0px 0px 3px 0px rgba(0,0,0,0.7)" 
+              box_shadow:"0px 0px 3px 0px "+Color([0,0.7]) 
             });
             S.addStyle(".active", {  transition:"opacity 0.1s, box-shadow 0.2s ease-in", 
-            box_shadow:"1px 1px 6px 1px rgba(0,0,0,0.5)",z_index:1000000
+            box_shadow:"1px 1px 6px 1px "+Color([0,0.5]) ,z_index:1000000
           });
             S.addStyle(" .acc", { overflow:"hidden",left: 0, right: 0, 
             top:theme.bar_height__px, bottom: 0, position: "absolute"        
@@ -118,7 +123,7 @@ Module(function M() {
           });
         });
       });
-
+      
       var AppContainer=M.Class(function C() {
         C.Super(transform.HTMLPositionBox);
         C.Mixin(transform.Resizable);
@@ -139,7 +144,6 @@ Module(function M() {
           this.contents=new basic.Div("acc");
           this.add(this.contents);
           var acw=this;
-
           this.titlebar.addEvent("context","contextmenu",function() {
             
           });
@@ -150,10 +154,19 @@ Module(function M() {
           //draggable
           var acw=this;
           var wm=acw.parent;
-            
-            
+          
           this.enabledrag(function ondrag(i,v) {
             acw.drawTransform();
+            for(var i=0;i<cardinal_directions.length;i++){ 
+              var dir=cardinal_directions[i];
+              var handle = acw.handles[cardinal_directions[i]];
+              if("ew".indexOf(dir)>-1) {
+                handle.delta.x=acw.delta.x;
+              } else {
+                handle.delta.y=acw.delta.y;
+              }
+              acw.parent.am.realign(handle);
+            }
           },this.titlebar.element);
 
           this.enableresize("n,e,s,w,nw,ne,se,sw",function onresize(handle) {
