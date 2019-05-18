@@ -230,6 +230,13 @@ Module(function M() {
 
         });
       });
+      var SubWindow=M.Class(function C() {
+        C.Super(Frame);
+        C.Mixin(hasEvents);
+        C.Init(function SubWindow(win,doc) {
+
+        });
+      });
       var AppWindow=M.Class(function C() {
         C.Super(Frame);
         C.Mixin(hasEvents);

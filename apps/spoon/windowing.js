@@ -58,16 +58,16 @@ Module(function M() {
             }
             S.addStyle(".ui-resizable-"+dir, style)
           }
-          S.addStyle(".ui-resizable-e, .ui-resizable-w", {
+          S.addStyle(".acw .ui-resizable-e, .acw .ui-resizable-w", {
             top__px:0
           });
-          S.addStyle(".ui-resizable-n, .ui-resizable-s", {
+          S.addStyle(".acw .ui-resizable-n, .acw .ui-resizable-s", {
             left__px:0
           });
           S.addStyle(".align_button", { position:"absolute",
             margin:"auto",//border_style:"dashed",border_color:"blue",
             box_sizing:"border-box",width:"auto",height:"auto",
-            opacity:0.0, box_shadow:"0 0 20px 0 "+Color([1,0.5]),
+            opacity:0.0, box_shadow:"0 0 20px 0 rgba(255,255,255,0.5)",
             transition:"opacity 0.1s ease-out, box-shadow 0.2s ease-out 0.1s",
             pointer_events:"none",
           });
