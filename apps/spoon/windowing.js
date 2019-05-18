@@ -6,14 +6,8 @@ Module(function M() {
     "spoon/conf",
     "squishy/events",
     "spoon",
-    function(basic,interactive,transform,conf,events,spoon) {
-      var AppConfig=M.Class(function C() {
-        C.Super(interactive.MomentaryButton);
-        C.Init(function AppConfig() {
-          interactive.MomentaryButton.call(this,"o");
-
-        });
-      });
+    "spoon/alignment",
+    function(basic,interactive,transform,conf,events,spoon, alignment) {
 
       M.Style(function S() {
         var S=this;
@@ -25,15 +19,17 @@ Module(function M() {
           frame_fg_color__color:[0.8,0.8,0.8,0.5],
           bar_height__px:25,
           bar_font_size__px:12.5,
+          in_common__color:[0.1,0.1,0.1,0.5],
+          available__color:[0.5,0.75,1.0,0.7]
         });
         var pos = ["top","right","bottom","left"];
         var dim = ["height","width"]
         var dirs = ["n","e","s","w","nw","ne","se","sw"]
         var configs=[
-          [[0], [0]],
-          [[1], [1]],
-          [[2], [0]],
-          [[3], [1]],
+          [[0], [0]], //n
+          [[1], [1]], //e
+          [[2], [0]], //s
+          [[3], [1]], //w
           [[0,2],[0,1]],
           [[0,1],[0,1]],
           [[1,2],[0,1]],
@@ -58,10 +54,39 @@ Module(function M() {
             }
             S.addStyle(".acw .ui-resizable-"+dir, style)
           }
-          S.addStyle(".align_button", { position:"absolute",top:0,bottom:0,
-            margin:"auto",height:"20px",width:"20px",left:0,right:0,
-            background_color:"blue",
-          })
+          S.addStyle(".acw .ui-resizable-e, .acw .ui-resizable-w", {
+            top__px:0
+          });
+          S.addStyle(".acw .ui-resizable-n, .acw .ui-resizable-s", {
+            left__px:0
+          });
+          S.addStyle(".align_button", { position:"absolute",
+            margin:"auto",//border_style:"dashed",border_color:"blue",
+            box_sizing:"border-box",width:"auto",height:"auto",
+            opacity:0.0, box_shadow:"0 0 20px 0 rgba(255,255,255,0.5)",
+            transition:"opacity 0.1s ease-out, box-shadow 0.2s ease-out 0.1s",
+            pointer_events:"none",
+          });
+          S.addStyle(".align_button.visible", {
+            opacity:1.0,pointer_events:"all",box_shadow:"0 0 5px 0 rgba(255,255,255,0.5)"
+          });
+          S.addStyle(".horizontal.align_button.available", { 
+            background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%,"+theme.available__color+" 50%,rgba(125,185,232,0) 100%)",
+          });
+          S.addStyle(".vertical.align_button.available", {
+            background: "linear-gradient(to right, rgba(0,0,0,0) 0%,"+theme.available__color+" 50%,rgba(125,185,232,0) 100%)",
+          });
+          S.addStyle(".horizontal.align_button.in_common", {
+            background: "linear-gradient(to right, rgba(0,0,0,0) 0%,"+theme.in_common__color+" 50%,rgba(125,185,232,0) 100%)",
+          });
+          S.addStyle(".vertical.align_button.in_common", {
+            background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%,"+theme.in_common__color+" 50%,rgba(125,185,232,0) 100%)",
+          });
+          S.addStyle(".align_button_e", { });
+          S.addStyle(".align_button_n", { });
+          S.addStyle(".align_button_s", { });
+          S.addStyle(".align_button_w", { });
+
           S.Prefix(".acw", function() {
             S.addStyle("", { position: "absolute", display: "inline-block", background_color__color: [239, 239, 239],
              transition: "opacity 0.2s ease-out, box-shadow 0.1s ease-out",border_radius:"1px", opacity: 0, "z-index":0 
@@ -81,8 +106,17 @@ Module(function M() {
             });
           });
         });
-              
+      });
 
+      var AppConfig=M.Class(function C() {
+        C.Super(interactive.MomentaryButton);
+        C.Init(function AppConfig() {
+          var config=this;
+          this.hidden=true;
+          interactive.MomentaryButton.call(this,"o", function() {
+            config.hidden=!config.hidden; 
+          });
+        });
       });
 
       var AppContainer=M.Class(function C() {
@@ -90,13 +124,8 @@ Module(function M() {
         C.Mixin(transform.Resizable);
         C.Mixin(transform.Draggable);
         C.Mixin(events.HasEvents);
-        //C.Mixin(transform.Draggable);
-        C.Init(function AppContainer(parent) {
+        C.Init(function AppContainer() {
           transform.HTMLPositionBox.call(this);
-          //this.Mixin(transform.Resizable);
-          //this.Mixin(events.HasEvents);
-          this.parent=parent;
-
           this.addClass("acw");
 
           //titlebar
@@ -106,14 +135,13 @@ Module(function M() {
           this.position={x:0,y:0};
           this.size={width:400,height:300};
           
-
           //content
           this.contents=new basic.Div("acc");
           this.add(this.contents);
           var acw=this;
 
           this.titlebar.addEvent("context","contextmenu",function() {
-
+            
           });
           this.titlebar.enableEvents("context");
           this.drawTransform();
@@ -121,76 +149,28 @@ Module(function M() {
 
           //draggable
           var acw=this;
+          var wm=acw.parent;
+            
+            
           this.enabledrag(function ondrag(i,v) {
-
-            //// acw.element.style.top=v.position.y+"px";
-            // acw.element.style.left=v.position.x+"px";/
-          ///  i.parent.position.x=i.parent.position.x+i.delta.x
-          //  i.parent.position.y=i.parent.position.y+i.delta.y
             acw.drawTransform();
-          //  i.parent.drawTransform();
-            //console.debug({x:v.position.x,y:v.position.y});
           },this.titlebar.element);
-          //resizable
-          ///console.debug(this);
-          this.enableresize("n,e,s,w,nw,ne,se,sw",function onresize(item) {
-           
+
+          this.enableresize("n,e,s,w,nw,ne,se,sw",function onresize(handle) {
+            if(this.parent.am) {
+              this.parent.am.realign(handle);
+            }
           });
 
           this.onresizestart=function onresizestart(handle) {
-            var dir=handle.dir;
-            if(dir=="n" || dir=="s") {
-              acw.find_edges(true, handle);
-            } 
-            if(dir=="e" || dir=="w") {
-              acw.find_edges(false, handle);
+            if("enws".indexOf(handle.dir)>-1) {
+              this.parent.am.show_alignment_groups(handle)
             }
-
           };
 
-          this.onresizestop=function onresizestop(handle) {
-            acw.hide_edges();
+          this.onresizestop=function onresizestop(handle, e) {
+            this.parent.am.hide_edges();
           };
-
-        });
-        C.Def(function hide_edges() {
-          var task_names = Object.keys(this.parent.tasks)
-          var parent=this.parent;
-          task_names.forEach(function(task_name) {
-            var task=parent.tasks[task_name];
-            Object.keys(task.handles).forEach(function(handlename) {
-              var handle=task.handles[handlename];
-              if(handle.align_button) handle.align_button.hide();
-
-            });
-          });
-        });
-        C.Def(function find_edges(horizontal) {
-          var task_names = Object.keys(this.parent.tasks)
-          var dirs=["e","w"];
-          if(horizontal) dirs=["n","s"];
-          task_names.forEach(function(task_name) {
-            var task=this.parent.tasks[task_name];
-            var handles = [task.handles[dirs[0]],task.handles[dirs[1]]];
-            handles.forEach(function(handle) {
-              if(handle.align_button) { 
-                handle.align_button.onclick=function() {
-
-                }
-              } else {
-                var classname;
-                if(horizontal) classname="horizontal "
-                else classname="vertical "
-                var align_button=new interactive.MomentaryButton(" ", classname+"align_button", function(e) {
-                  console.debug({"alignment":handle});
-                });
-                Object.defineProperty(handle,"align_button", {value:align_button})
-                handle.add(align_button);
-              }
-              handle.align_button.show();
-            });
-          
-          });
         });
       });
     });

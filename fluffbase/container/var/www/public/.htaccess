@@ -1,0 +1,4 @@
+Options +FollowSymLinks +ExecCGI
+<Files index.js.cgi>
+SetHandler cgi-script
+</Files>

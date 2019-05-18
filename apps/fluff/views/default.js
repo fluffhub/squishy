@@ -1,6 +1,6 @@
 Module(function M() {
-  M.Import("squishy/basic","squishy/interactive","squishy/transform","apps/spoon",function(basic,interactive,transform,spoon) {
-    Import("fluffy/views/default.css");
+  M.Import("squishy/basic","squishy/interactive","squishy/transform","/app/spoon",function(basic,interactive,transform,spoon) {
+    Import("/app/fluff/views/default.css");
 
 
 

@@ -1,7 +1,7 @@
 Module(function M() {
   M.Def("apps",{});
   M.Import(
-    "apps/",
+    "/app/",
     "squishy/membrane",
     function(apps,membrane) {
       Object.keys(apps).forEach(function (name) {

@@ -1,6 +1,6 @@
 Module(function M() {
   M.Import(
-    "apps/spoon","squishy/realtime","squishy/basic",
+    "/app/spoon","squishy/realtime","squishy/basic",
     "squishy/svg","squishy/form","spoon/windowing",
     "squishy/interactive",
     function(spoon,rt,basic,
